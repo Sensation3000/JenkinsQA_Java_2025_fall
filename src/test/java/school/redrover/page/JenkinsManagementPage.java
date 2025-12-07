@@ -26,6 +26,8 @@ public class JenkinsManagementPage extends BasePage {
     @FindBy(xpath = "//a[@href = 'credentials']")
     private WebElement credentialsLink;
 
+    @FindBy(xpath = "//a[@href='configure']")
+    private WebElement clickConfigurationSystem;
 
     private final By searchResults = By.cssSelector(".jenkins-dropdown__item:nth-of-type(1)");
 
@@ -47,7 +49,11 @@ public class JenkinsManagementPage extends BasePage {
     }
 
     public SystemConfigurationPage clickConfigurationSystem() {
-        getDriver().findElement(By.xpath("//a[@href='configure']")).click();
+        clickConfigurationSystem.click();
+
+        new Actions(getDriver())
+                .scrollByAmount(0, 1500)
+                .perform();
 
         return new SystemConfigurationPage(getDriver());
     }
