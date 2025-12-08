@@ -19,7 +19,6 @@ public class JenkinsManagementTest extends BaseTest {
     private final String TITLE_TEXT = "Dashboard - Jenkins";
     private static final String SETTING_TITLE = "System";
 
-
     @DataProvider
     public Object[][] systemConfigurationItems() {
         return new String[][]{
@@ -32,58 +31,29 @@ public class JenkinsManagementTest extends BaseTest {
         };
     }
 
-    private void openGlobalProperties() {
-        getDriver().findElement(By.id("root-action-ManageJenkinsAction")).click();
-        getDriver().findElement(By.xpath("//a[@href='configure']")).click();
-
-        new Actions(getDriver())
-                .scrollByAmount(0, 1500)
-                .perform();
-    }
-
     @Test
     public void testDeferredWipeoutSettingIsSaved() {
-        openGlobalProperties();
+        Boolean checboxGlobal = new HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .clickCheckboxGlobalProperties()
+                .clickSaveButton()
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .checkCheckboxSelected();
 
-        WebElement checkbox = getDriver().findElement(By.cssSelector("[id='cb3'] + label"));
-        checkbox.click();
-
-        getDriver().findElement(By.name("Submit")).click();
-
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
-        wait.until(ExpectedConditions.textToBe(By.tagName("h1"), "Welcome to Jenkins!"));
-
-        openGlobalProperties();
-
-        Assert.assertTrue(getDriver().findElement(By.cssSelector("[id='cb3']")).isSelected(), "Checkbox is not selected");
-
-        checkbox = getDriver().findElement(By.cssSelector("[id='cb3'] + label"));
-        checkbox.click();
-        getDriver().findElement(By.name("Apply")).click();
+        Assert.assertTrue(checboxGlobal);
     }
 
     @Test
     public void testDeferredWipeoutTooltip() {
         final String expectedTooltipText = "Help for feature: Disable deferred wipeout on this node";
 
-        openGlobalProperties();
+        String actualTooltipText = new HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .getCheckboxTooltipTextOnHover();
 
-        WebElement tooltipButton = getDriver().findElement(By.xpath("//a[contains(@tooltip,'Disable deferred wipeout on this node')]"));
-
-        Actions actions = new Actions(getDriver());
-        actions
-                .moveToElement(tooltipButton)
-                .perform();
-
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(3));
-        wait.until(ExpectedConditions.attributeToBeNotEmpty(tooltipButton, "aria-describedby"));
-
-        String tooltipId = tooltipButton.getAttribute("aria-describedby");
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(tooltipId)));
-        String actualTooltipText = getDriver().findElement(By.id(tooltipId)).getText().trim();
-
-        Assert.assertNotNull(tooltipId, "Tooltip id is null");
         Assert.assertEquals(actualTooltipText, expectedTooltipText, "Unexpected tooltip");
     }
 
@@ -93,17 +63,11 @@ public class JenkinsManagementTest extends BaseTest {
                 "During the workspace cleanup disable improved deferred wipeout method. " +
                         "By default deferred wipeout is used if desired.";
 
-        openGlobalProperties();
-        getDriver().findElement(By.xpath("//a[contains(@tooltip,'Disable deferred wipeout on this node')]")).click();
-
-        By hintLocator = By.xpath("//div[@nameref='cb3']//div[@class='help']/div[1]");
-
-        new WebDriverWait(getDriver(), Duration.ofSeconds(3))
-                .until(ExpectedConditions.visibilityOfElementLocated(hintLocator));
-
-        String actualHintText = getDriver()
-                .findElement(hintLocator)
-                .getText();
+        String actualHintText = new HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .clickCheckboxTooltip()
+                .getHintText();
 
         Assert.assertEquals(actualHintText, expectedHintText, "Unexpected tooltip");
     }

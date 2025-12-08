@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
@@ -12,6 +13,18 @@ public class SystemConfigurationPage extends BasePage {
 
     @FindBy(tagName = "h1")
     private WebElement headingText;
+
+    @FindBy(name = "Submit")
+    private WebElement clickSaveButton;
+
+    @FindBy(css = "[id='cb3'] + label")
+    private WebElement globalProperties;
+
+    @FindBy(xpath = "//a[contains(@tooltip,'Disable deferred wipeout on this node')]")
+    private WebElement checkboxTooltip;
+
+    @FindBy(xpath = "//div[@nameref='cb3']//div[@class='help']/div[1]")
+    private WebElement hintText;
 
     public SystemConfigurationPage(WebDriver driver) {
         super(driver);
@@ -65,5 +78,39 @@ public class SystemConfigurationPage extends BasePage {
 
     public String getHeadingText() {
         return headingText.getText().trim();
+    }
+
+    public SystemConfigurationPage clickCheckboxGlobalProperties() {
+        globalProperties.click();
+
+        return this;
+    }
+
+    public HomePage clickSaveButton() {
+        clickSaveButton.click();
+
+        getWait2().until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
+        return new HomePage(getDriver());
+    }
+
+    public boolean checkCheckboxSelected() {
+        return getDriver().findElement(By.cssSelector("[id='cb3']")).isSelected();
+    }
+
+    public String getCheckboxTooltipTextOnHover() {
+        new Actions(getDriver()).moveToElement(checkboxTooltip).perform();
+
+        return getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.className("tippy-content")))
+                .getText();
+    }
+
+    public SystemConfigurationPage clickCheckboxTooltip() {
+        checkboxTooltip.click();
+
+        return this;
+    }
+
+    public String getHintText() {
+        return hintText.getText().trim();
     }
 }
