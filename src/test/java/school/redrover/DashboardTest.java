@@ -1,24 +1,51 @@
 package school.redrover;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
+import school.redrover.page.ArchitectingforScalePage;
+import school.redrover.page.CloudsPage;
+import school.redrover.page.EditViewPage;
+import school.redrover.page.HomePage;
+import school.redrover.page.NewNodePage;
 
 import java.util.List;
 
 public class DashboardTest extends BaseTest {
 
+    private static final List<String> CREATED_JOBS_NAME = List.of(
+            "FreestyleName1",
+            "FreestyleName2"
+    );
+
+    @DataProvider
+    public Object[][] projectsName() {
+        return new String[][]{
+                {"FreestyleName1"},
+                {"FreestyleName2"},
+                {"FreestyleName3"},
+                {"FreestyleName4"},
+                {"FreestyleName5"}
+        };
+    }
+
+    private static final String PIPELINE_NAME = "Pipeline_01";
+
+
+    public void createProject(String name) {
+        new HomePage(getDriver())
+                .clickNewItemOnLeftMenu()
+                .sendName(name)
+                .selectFreestyleProjectAndSubmit()
+                .gotoHomePage();
+    }
+
     @Test
     public void testHomePageHeading() {
-        WebElement actualHeading = getWait5()
-                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".empty-state-block > h1")));
-
-        Assert.assertEquals(actualHeading.getText(), "Welcome to Jenkins!");
+        Assert.assertEquals(
+                new HomePage(getDriver()).getHeadingText(),
+                "Welcome to Jenkins!");
     }
 
     @Test
@@ -26,46 +53,176 @@ public class DashboardTest extends BaseTest {
         final String expectedParagraphText = "This page is where your Jenkins jobs will be displayed. " +
                 "To get started, you can set up distributed builds or start building a software project.";
 
-        WebElement actualParagraph = getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.tagName("p")));
-
-        Assert.assertEquals(actualParagraph.getText(), expectedParagraphText);
+        Assert.assertEquals(
+                new HomePage(getDriver()).getParagraghText(),
+                expectedParagraphText);
     }
 
     @Test
-    public void testContentBlockLinks() {
-        final List<String> expectedUrlEndpoints = List.of(
-                "/newJob",
-                "/computer/new",
-                "/cloud/",
-                "/#distributed-builds-architecture"
+    public void testLearnMoreAboutDistributedBuildsLink() {
+        ArchitectingforScalePage resultPage = new HomePage(getDriver())
+                .clickLearnMoreAboutDistributedBuildsLink();
+
+        Assert.assertTrue(resultPage.getCurrentUrl().contains("architecting-for-scale"));
+    }
+
+    @Test(dataProvider = "projectsName")
+    public void testCheckCreatedJobsOnDashboard(String projectName) {
+        String actualJobs = new HomePage(getDriver())
+                .clickNewItemOnLeftMenu()
+                .sendName(projectName)
+                .selectFreestyleProjectAndSubmit()
+                .gotoHomePage()
+                .getProjectName();
+
+        Assert.assertEquals(actualJobs, projectName, "Имена созданных проектов не совпадают!");
+    }
+
+    @Test
+    public void testSearchCreatedJobs() {
+        createProject(CREATED_JOBS_NAME.get(0));
+
+        String searchResults = new HomePage(getDriver())
+                .clickSearchButton()
+                .searchFor(CREATED_JOBS_NAME.get(0))
+                .moveAndClickResult()
+                .getHeadingText();
+
+        Assert.assertEquals(searchResults, CREATED_JOBS_NAME.get(0));
+    }
+
+    @Test
+    public void testCheckDeleteViewOnDashboard() {
+        final String viewName = "myView";
+
+        int viewListSize = new HomePage(getDriver())
+                .clickNewItemOnLeftMenu()
+                .sendName(CREATED_JOBS_NAME.get(0))
+                .selectFreestyleProjectAndSubmit()
+                .gotoHomePage()
+                .clickPlusToCreateView()
+                .sendViewName(viewName)
+                .clickMyViewName()
+                .clickCreateButtonForNewView()
+                .clickDeleteViewOnSidebar()
+                .clickYesToConfirmDelete()
+                .getSizeOfViewNameList();
+
+        Assert.assertEquals(viewListSize, 2, "Есть созданный пользователем View на Dashboard");
+    }
+
+    @Test
+    public void testStatusProjectIconHasTooltip() {
+        final String tooltipEnableText = "Not built";
+
+        String actualStatusTooltip = new HomePage(getDriver())
+                .clickNewItemOnLeftMenu()
+                .sendName(CREATED_JOBS_NAME.get(0))
+                .selectFreestyleProjectAndSubmit()
+                .gotoHomePage()
+                .getStatusProjectIconTooltipTextOnHover();
+
+        Assert.assertEquals(actualStatusTooltip, tooltipEnableText, "Проект отключен или не создан!");
+    }
+
+    @Test
+    public void testLogo() {
+        String logoText = new HomePage(getDriver())
+                .getLogoText();
+
+        Assert.assertEquals(logoText, "Jenkins", "Надпись рядом с логотипом должна быть 'Jenkins'");
+    }
+
+    @Test
+    public void testGoToManageJenkinsPage() {
+        final String expectedTitle = "Manage Jenkins";
+
+        String actualTitle = new HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .getHeadingText();
+
+        Assert.assertEquals(actualTitle, expectedTitle);
+    }
+
+    @Test
+    public void testAddColumnsInListViewOnDashboard() {
+        final String listViewName = "ListView_01";
+        final List<String> expectedColumnList = List.of(
+                "Status",
+                "Weather",
+                "Name",
+                "Last Success",
+                "Last Failure",
+                "Last Duration",
+                "Build Button",
+                "Last Stable",
+                "Git Branches",
+                "Project description"
         );
 
-        List<WebElement> contentBlockLinks = getWait5()
-                .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".content-block > a")));
+        HomePage homePage = new HomePage(getDriver());
+        homePage
+                .clickCreateJob()
+                .sendName(PIPELINE_NAME)
+                .selectItemTypeAndSubmitAndGoHome("Pipeline")
+                .clickPlusToCreateView()
+                .sendViewName(listViewName)
+                .selectListViewRadioAndCreate()
+                .selectJobCheckbox(PIPELINE_NAME)
+                .clickAddColumnDropDownButton();
 
-        Assert.assertFalse(contentBlockLinks.isEmpty());
+        EditViewPage editViewPage = new EditViewPage(getDriver());
+        List<String> actualColumnList = editViewPage
+                .addColumnInListView()
+                .getCurrentColumnList();
 
-        for (int i = 0; i < contentBlockLinks.size(); i++) {
-            WebElement currentLink = contentBlockLinks.get(i);
+        Assert.assertNotEquals(actualColumnList.size(), 0);
+        Assert.assertEquals(actualColumnList, expectedColumnList);
 
-            new Actions(getDriver())
-                    .keyDown(Keys.CONTROL)
-                    .click(currentLink)
-                    .keyUp(Keys.CONTROL)
-                    .perform();
+        editViewPage.clickSubmitButton();
+        int actualCountDisplayedColumns = homePage.getCountOfDisplayedColumnsOnDashboard();
+        Assert.assertEquals(actualCountDisplayedColumns, actualColumnList.size());
+    }
 
-            getWait5().until(ExpectedConditions.numberOfWindowsToBe(2));
+    @Test(dependsOnMethods = "testAddColumnsInListViewOnDashboard")
+    public void testRemoveColumnsInListView() {
+        final String listViewName = "ListView_01";
+        final String columnName = "Last Success";
 
-            Object[] windowHandles = getDriver().getWindowHandles().toArray();
-            getDriver().switchTo().window((String) windowHandles[1]);
+        HomePage homePage = new HomePage(getDriver());
+        int initialCountDisplayedColumns = homePage
+                .clickViewName(listViewName)
+                .getCountOfDisplayedColumnsOnDashboard();
 
-            String currentUrl = getDriver().getCurrentUrl();
-            String expectedUrlEndpoint = expectedUrlEndpoints.get(i);
+        List<String> actualColumnListAfterDelete = homePage
+                .clickViewName(listViewName)
+                .clickEditViewButton(listViewName)
+                .clickDeleteButton(columnName)
+                .getCurrentColumnList();
 
-            Assert.assertTrue(currentUrl.contains(expectedUrlEndpoint));
+        Assert.assertFalse(actualColumnListAfterDelete.contains(columnName));
 
-            getDriver().close();
-            getDriver().switchTo().window((String) windowHandles[0]);
-        }
+        new EditViewPage(getDriver()).clickSubmitButton();
+
+        int actualCountDisplayedColumns = homePage.getCountOfDisplayedColumnsOnDashboard();
+        Assert.assertEquals(actualCountDisplayedColumns, initialCountDisplayedColumns - 1);
+    }
+
+    @Test
+    public void testSetUpAgent() {
+        NewNodePage newNodePage = new HomePage(getDriver())
+                .openPage("Set up an agent", new NewNodePage(getDriver()));
+
+        Assert.assertEquals(newNodePage.getHeadingText(), "New node");
+        Assert.assertTrue(newNodePage.isFormDisplayed(), "New Node form is not visible");
+    }
+
+    @Test
+    public void testConfigureCloudIntegration() {
+        CloudsPage cloudsPage = new HomePage(getDriver())
+                .openPage("Configure a cloud", new CloudsPage(getDriver()));
+
+        Assert.assertEquals(cloudsPage.getHeadingText(), "Clouds");
+        Assert.assertEquals(cloudsPage.getParagraphText(), "There is no plugin installed that supports clouds.");
     }
 }

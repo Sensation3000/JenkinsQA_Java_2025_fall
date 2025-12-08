@@ -1,104 +1,159 @@
 package school.redrover;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
-
-import java.time.Duration;
+import school.redrover.common.TestUtils;
+import school.redrover.page.HomePage;
 import java.util.List;
+
 
 public class FooterTest extends BaseTest {
 
+ final String namePage = "REST API";
+
     @Test
-    public void testRestApiPage() {
-        getDriver().findElement(By.xpath("//a[@href='api/']")).click();
+    public void testRestApiLink() {
+        String linkText = new HomePage(getDriver())
+                .getRestApiLinkText();
 
-        String actualTitle = getDriver().getTitle();
-
-        Assert.assertEquals(actualTitle, "Remote API - Jenkins");
+        Assert.assertEquals(
+                linkText,
+                namePage);
     }
 
     @Test
-    public void testRestApiPageHeadings() {
-        final String expectedHeading = "REST API";
-        final List<String> expectedSubHeadings = List.of(
-                "Controlling the amount of data you fetch",
-                "Create Job",
-                "Copy Job",
-                "Create View",
-                "Copy View",
-                "Build Queue",
-                "Load Statistics",
-                "Restarting Jenkins"
+    public void testApiPageHeading() {
+        String actualHeading = new HomePage(getDriver())
+                .clickRestApiLink()
+                .getHeadingText();
+
+        Assert.assertEquals(
+                actualHeading,
+                namePage);
+    }
+
+    @Test
+    public void testApiPageContentLinks() {
+        final List<String> expectedLinks = List.of(
+                "XML API",
+                "JSON API",
+                "Python API"
         );
 
-        getDriver().findElement(By.xpath("//a[@href='api/']")).click();
+        List<String> actualLinks = new HomePage(getDriver())
+                .clickRestApiLink()
+                .getXmlJsonPythonApiLinksText();
 
-        new WebDriverWait(getDriver(), Duration.ofMillis(2000))
-                .until(ExpectedConditions.urlContains("api/"));
-
-        String actualHeading = getDriver().findElement(By.tagName("h1")).getText();
-
-        List<String> actualSubHeadings = getDriver()
-                .findElements(By.tagName("h2"))
-                .stream()
-                .map(WebElement::getText)
-                .toList();
-
-        Assert.assertEquals(actualHeading, expectedHeading);
-        Assert.assertEquals(actualSubHeadings, expectedSubHeadings);
+        Assert.assertEquals(
+                actualLinks,
+                expectedLinks);
     }
 
     @Test
-    public void testJenkinsDropdown() {
-        getDriver().findElement(By.cssSelector("button.jenkins_ver")).click();
+    public void testRestApiLinkByTabAndEnter() {
+        new HomePage(getDriver())
+                .pressTabAndEnter(new HomePage(getDriver()).getRestApiLink());
 
-        List<String> expectedDropdownItems = List.of(
+        Assert.assertEquals(
+                getDriver().getTitle(),
+                "Remote API - Jenkins");
+    }
+
+    @Test
+    public void testRestApiLinkByFocusAndEnter() {
+        TestUtils.focusAndEnterByKeyboard(getDriver(), new HomePage(getDriver()).getRestApiLink());
+
+        Assert.assertEquals(
+                getDriver().getTitle(),
+                "Remote API - Jenkins");
+    }
+
+    @Test
+    public void testJenkinsVersion() {
+        String version = new HomePage(getDriver())
+                .getJenkinsVersion();
+
+        Assert.assertEquals(
+                version,
+                "Jenkins 2.516.3");
+    }
+
+    @Test
+    public void testJenkinsDropdownMenu() {
+        final List<String> expectedDropdownItems = List.of(
                 "About Jenkins",
                 "Get involved",
                 "Website"
         );
 
-        List<WebElement> dropdownItems = new WebDriverWait(getDriver(), Duration.ofMillis(2000))
-                .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                        By.xpath("//a[contains(@class, 'jenkins-dropdown__item')]")));
+        List<String> actualDropdownItems = new HomePage(getDriver())
+                .clickJenkinsVersion()
+                .getDropdownList();
 
-        List<String> actualDropdownItems = dropdownItems
-                .stream()
-                .map(WebElement::getText)
-                .toList();
-
-        Assert.assertEquals(actualDropdownItems, expectedDropdownItems);
+        Assert.assertEquals(
+                actualDropdownItems,
+                expectedDropdownItems);
     }
 
     @Test
-    public void testJenkinsVersionOptions() {
-        getDriver().findElement(By.cssSelector("button.jenkins_ver")).click();
-        getDriver().findElement(By.xpath("//a[@href='/manage/about']")).click();
-        String breadсrumbName = getDriver().findElement(By.xpath("//*[@id='breadcrumbs']/li[2]")).getText();
+    public void testRestApiUserPage() {
+        String actualHeading = new HomePage(getDriver())
+                .clickUserAccountIcon()
+                .clickRestApiLink()
+                .getNamePage();
 
-        Assert.assertEquals(breadсrumbName, "About Jenkins");
+       Assert.assertEquals(
+                actualHeading,
+                namePage);
+    }
+@Ignore
+    @Test
+    public void testRestApiNewItemPage() {
+        String actualHeading = new HomePage(getDriver())
+                .clickNewItemOnLeftMenu()
+                .clickRestApiLink()
+                .getNamePage();
 
-        WebElement jenkinsLogo = getDriver().findElement(By.className("jenkins-mobile-hide"));
-        jenkinsLogo.click();
+        Assert.assertEquals(
+                actualHeading,
+                namePage);
+    }
 
-        getDriver().findElement(By.cssSelector("button.jenkins_ver")).click();
-        getDriver().findElement(By.xpath("//a[contains(@href, '/participate')]")).click();
+    @Test
+    public void testRestApiNewNodesPage() {
+        String actualHeading = new HomePage(getDriver())
+                .clickSetUpAnAgent()
+                .clickRestApiLink()
+                .getNamePage();
 
-        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), "Participate and Contribute");
-        getDriver().navigate().back();
+        Assert.assertEquals(
+                actualHeading,
+                namePage);
+    }
 
-        getDriver().findElement(By.cssSelector("button.jenkins_ver")).click();
-        getDriver().findElement(By.xpath("//a[text()='\n" +
-                "          Website\n" +
-                "                    \n" +
-                "          \n" +
-                "      ']")).click();
+    @Test
+    public void testRestApiNodesPage() {
+        String actualHeading = new HomePage(getDriver())
+               .clickBuildExecutorStatus()
+               .clickRestApiLink()
+               .getNamePage();
 
-        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), "Jenkins");
+        Assert.assertEquals(
+                actualHeading,
+                namePage);
+    }
+
+    @Test
+    public void testRestApiBuildHistoryOfJenkinsPage() {
+        String actualHeading = new HomePage(getDriver())
+                .clickBuildHistory()
+                .clickRestApiLink()
+                .getNamePage();
+
+        Assert.assertEquals(
+                actualHeading,
+                namePage);
     }
 }

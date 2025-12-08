@@ -2,24 +2,74 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
+import school.redrover.common.TestUtils;
+import school.redrover.page.FreestyleProjectConfigurationPage;
+import school.redrover.page.HomePage;
+
+import java.util.List;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
+
 
 public class ConfigurationMatrixTest extends BaseTest {
 
-    @Test (testName = "TC_04.006.01 | Configuration Matrix > Section visibility")
+    private static final String PROJECT_NAME = "Multiconfiguration project name";
+
+    private void createConfigurationMatrix() {
+        new HomePage(getDriver())
+                .clickSidebarNewItem()
+                .sendName(PROJECT_NAME)
+                .selectMultiConfigurationProjectAndSubmit();
+    }
+
+    @Test
     public void testSectionDisplayed() {
+        String configurationMatrixText = new HomePage(getDriver())
+                .clickSidebarNewItem()
+                .sendName(PROJECT_NAME)
+                .selectMultiConfigurationProjectAndSubmit()
+                .getConfigurationMatrixText();
 
-        getDriver().findElement(By.xpath("//a[@href='newJob']")).click();
-        getDriver().findElement(By.id("name")).sendKeys("nameProject");
-        getDriver().findElement(By.className("hudson_matrix_MatrixProject")).click();
-        getDriver().findElement(By.id("ok-button")).click();
+        Assert.assertEquals(configurationMatrixText, "Configuration Matrix",
+                "Configuration Matrix header is not visible");
+    }
 
-        WebElement matrixHeader = getDriver().findElement(By.id("configuration-matrix"));
-        new Actions(getDriver()).moveToElement(matrixHeader).perform();
+    @Test
+    public void testAddAxisMenuOnlyUserDefined() {
 
-        Assert.assertTrue(matrixHeader.isDisplayed(), "Configuration Matrix header is not visible");
+        createConfigurationMatrix();
+
+        By addAxisLocator = By.cssSelector("[suffix=axis]");
+        getWait10().until(ExpectedConditions.visibilityOfElementLocated(addAxisLocator));
+        TestUtils.clickJS(getDriver(), addAxisLocator);
+
+        By itemMenu = By.cssSelector(".jenkins-dropdown__item");
+        List<WebElement> items = getWait10().until(visibilityOfAllElementsLocatedBy(itemMenu));
+
+        Assert.assertEquals(items.size(), 1, "Dropdown should contain exactly one item");
+        Assert.assertEquals(items.get(0).getText().trim(), "User-defined Axis",
+                "The only option must be 'User-defined Axis'");
+    }
+
+    @Test
+    public void testSetUpEnvironmentAfterRefresh() {
+        new HomePage(getDriver())
+                .clickCreateJob()
+                .sendName(PROJECT_NAME)
+                .selectFreestyleProjectAndSubmit()
+                .clickEnvironmentMenuOption();
+
+        String urlBeforeRefresh = new FreestyleProjectConfigurationPage(getDriver())
+                .getConfigUrl();
+
+        String urlAfterRefresh = new FreestyleProjectConfigurationPage(getDriver())
+                .refreshPage()
+                .getConfigUrl();
+
+        Assert.assertEquals(urlAfterRefresh, urlBeforeRefresh);
     }
 }
