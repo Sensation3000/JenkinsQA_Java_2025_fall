@@ -38,6 +38,8 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[2]/span/a")
     private WebElement buildHistoryButton;
 
+    @FindBy(css = "[initialsortdir='down'] [class='sortheader']")
+    private WebElement nameColumnHeading;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -349,5 +351,9 @@ public class HomePage extends BasePage {
     public JobPage clickJob (String projectName) {
         getDriver().findElement(By.cssSelector("#job_%s > td:nth-child(3) > a".formatted(projectName))).click();
         return new JobPage(getDriver());
+    }
+
+    public String getNameColumnText() {
+        return nameColumnHeading.getText().replace("\n ", "");
     }
 }

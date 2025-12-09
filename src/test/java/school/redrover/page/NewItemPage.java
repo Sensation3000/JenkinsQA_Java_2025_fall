@@ -100,8 +100,22 @@ public class NewItemPage extends BaseSideMenuItemPage {
         return errorMessage.getText();
     }
 
-    public FreestyleProjectConfigurationPage selectFreestyleProjectAndSubmit() {
+    // дизайн сделан так, что нельзя использовать <T extends BaseConfigurationPage>
+    public <T> T clickSubmit(T configurationPage) {
+        getWait2().until(ExpectedConditions.elementToBeClickable(okButton)).click();
+        getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(), 'General')]")));
+
+        return configurationPage;
+    }
+
+    public NewItemPage selectFreestyleProject() {
         freestyleProjectOption.click();
+
+        return this;
+    }
+
+    public FreestyleProjectConfigurationPage selectFreestyleProjectAndSubmit() {
+        selectFreestyleProject();
 
         getWait2().until(ExpectedConditions.elementToBeClickable(okButton)).click();
         getWait2().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[@id = 'general']")));

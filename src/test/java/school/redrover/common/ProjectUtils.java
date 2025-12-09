@@ -69,10 +69,6 @@ public final class ProjectUtils {
         return driver;
     }
 
-    static void get(WebDriver driver) {
-        driver.get(getUrl());
-    }
-
     static String getUrl() {
         return String.format("http://%s:%s/",
                 getValue(PREFIX_JENKINS_PROP + "host"),
@@ -99,6 +95,10 @@ public final class ProjectUtils {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void get(WebDriver driver) {
+        driver.get(getUrl());
     }
 
     public static String getUserName() {
