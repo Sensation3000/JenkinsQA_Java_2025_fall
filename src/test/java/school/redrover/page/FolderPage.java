@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.TestUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -36,6 +37,9 @@ public class FolderPage extends BaseProjectPage {
 
     @FindBy(name = "Submit")
     private WebElement submitButton;
+
+    @FindBy(css = "[tooltip='New View']")
+    private WebElement newView;
 
     public FolderPage(WebDriver driver) {
         super(driver);
@@ -266,7 +270,7 @@ public class FolderPage extends BaseProjectPage {
 
     public FolderPage openItemDropdownMenu(String itemName) {
         WebElement dropdownButton = getWait5().until(ExpectedConditions.visibilityOfElementLocated(By
-                        .xpath("//a[contains(@href, '/%s')]/button[@class='jenkins-menu-dropdown-chevron']"
+                .xpath("//a[contains(@href, '/%s')]/button[@class='jenkins-menu-dropdown-chevron']"
                         .formatted(itemName))));
 
         TestUtils.mouseEnterJS(getDriver(), dropdownButton);
@@ -277,7 +281,7 @@ public class FolderPage extends BaseProjectPage {
 
     public boolean isMenuItemInDropdownDisplayed(String menuItem) {
         return getWait5().until(ExpectedConditions.visibilityOfElementLocated(By
-                .xpath("//a[contains(@class, 'jenkins-dropdown__item') and contains(., '%s')]".formatted(menuItem))))
+                        .xpath("//a[contains(@class, 'jenkins-dropdown__item') and contains(., '%s')]".formatted(menuItem))))
                 .isDisplayed();
     }
 
@@ -309,5 +313,11 @@ public class FolderPage extends BaseProjectPage {
             default:
                 throw new IllegalArgumentException("Unknown item type: " + menuItemName);
         }
+    }
+
+    public FolderCreateViewPage clickNewView() {
+        newView.click();
+
+        return new FolderCreateViewPage(getDriver());
     }
 }

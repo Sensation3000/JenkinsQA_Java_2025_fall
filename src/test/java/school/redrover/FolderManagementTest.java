@@ -1,5 +1,6 @@
 package school.redrover;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -10,6 +11,7 @@ import school.redrover.testdata.ProjectPage;
 public class FolderManagementTest extends BaseTest {
 
     private static final String FOLDER_NAME = "MyFolder";
+    private static final String VIEW_NAME = "MyView";
 
     @DataProvider
     public Object[][] itemsData() {
@@ -110,7 +112,7 @@ public class FolderManagementTest extends BaseTest {
     }
 
     @Test(dataProvider = "sideMenuItemsData")
-    public void testNavigateToPageOfSideMenuItemOfFolder(String menuItemName, String expectedHeading){
+    public void testNavigateToPageOfSideMenuItemOfFolder(String menuItemName, String expectedHeading) {
         createFolder();
 
         String actualHeading = new HomePage(getDriver())
@@ -119,5 +121,19 @@ public class FolderManagementTest extends BaseTest {
                 .getHeadingText();
 
         Assert.assertEquals(actualHeading, expectedHeading);
+    }
+
+    @Test()
+    public void testViewCreationForm() {
+        createFolder();
+
+        new HomePage(getDriver())
+                .clickFolder(FOLDER_NAME)
+                .clickNewView()
+                .sendName(VIEW_NAME)
+                .selectTypeGlobalView()
+                .selectTypeListView()
+                .selectTypeMyView()
+                .clickCreate();
     }
 }
