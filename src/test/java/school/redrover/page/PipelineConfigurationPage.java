@@ -8,10 +8,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import school.redrover.common.BasePage;
+import school.redrover.type.BasePageWithHeading;
 
 import java.util.List;
 
-public class PipelineConfigurationPage extends BaseSideMenuItemPage {
+public class PipelineConfigurationPage extends BasePage implements BasePageWithHeading {
 
     @FindBy(id = "advanced")
     private WebElement advancedTitle;
@@ -66,11 +68,6 @@ public class PipelineConfigurationPage extends BaseSideMenuItemPage {
 
     public PipelineConfigurationPage(WebDriver driver) {
         super(driver);
-    }
-
-    @Override
-    protected void waitUntilPageLoad() {
-        getWait5().until(ExpectedConditions.visibilityOf(submitButton));
     }
 
     public PipelinePage clickSubmitButton() {

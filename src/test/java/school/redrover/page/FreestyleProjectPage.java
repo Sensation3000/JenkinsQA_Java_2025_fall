@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class FreestyleProjectPage extends BaseProjectPage {
+public class FreestyleProjectPage extends BaseProjectPage<FreestyleProjectConfigurationPage> {
 
     @FindBy(xpath = "//a[contains(@href, '/configure')]")
     private WebElement configureMenuItem;
@@ -29,6 +29,7 @@ public class FreestyleProjectPage extends BaseProjectPage {
         getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
     }
 
+    @Override
     public FreestyleProjectConfigurationPage clickConfigureLinkInSideMenu() {
         configureMenuItem.click();
 

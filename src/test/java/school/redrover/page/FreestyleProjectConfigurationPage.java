@@ -9,15 +9,16 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import school.redrover.common.BasePage;
 import school.redrover.common.TestUtils;
+import school.redrover.type.BasePageWithHeading;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class FreestyleProjectConfigurationPage extends BaseSideMenuItemPage {
+public class FreestyleProjectConfigurationPage extends BasePage implements BasePageWithHeading {
 
     @FindBy(name = "description")
     private WebElement descriptionInput;
@@ -63,11 +64,6 @@ public class FreestyleProjectConfigurationPage extends BaseSideMenuItemPage {
 
     public FreestyleProjectConfigurationPage(WebDriver driver) {
         super(driver);
-    }
-
-    @Override
-    protected void waitUntilPageLoad() {
-        getWait5().until(ExpectedConditions.visibilityOf(submitButton));
     }
 
     public FreestyleProjectConfigurationPage setDescription(String description) {

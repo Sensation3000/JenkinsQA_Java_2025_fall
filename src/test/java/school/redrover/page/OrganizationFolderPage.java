@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class OrganizationFolderPage extends BaseProjectPage {
+public class OrganizationFolderPage extends BaseProjectPage<OrganizationFolderConfigurationPage> {
 
     @FindBy(xpath = "//span[text()='Delete Organization Folder']/ancestor::a")
     private WebElement deleteMenuItem;
@@ -21,6 +21,15 @@ public class OrganizationFolderPage extends BaseProjectPage {
     @Override
     protected void waitUntilPageLoad() {
         getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
+    }
+
+    @Override
+    public OrganizationFolderConfigurationPage clickConfigureLinkInSideMenu() {
+        getWait5().until(ExpectedConditions.visibilityOfElementLocated(By
+                .xpath("//a[contains(@href, '/configure')]"))).click();
+
+        getWait10().until(ExpectedConditions.visibilityOf(submitButton));
+        return new OrganizationFolderConfigurationPage(getDriver());
     }
 
     public String getDisplayNameOrganizationFolder() {
@@ -43,13 +52,5 @@ public class OrganizationFolderPage extends BaseProjectPage {
         getWait2().until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[data-id='ok']"))).click();
 
         return new HomePage(getDriver());
-    }
-
-    public OrganizationFolderConfigurationPage clickConfigureLinkInSideMenu() {
-        getWait5().until(ExpectedConditions.visibilityOfElementLocated(By
-                .xpath("//a[contains(@href, '/configure')]"))).click();
-
-        getWait10().until(ExpectedConditions.visibilityOf(submitButton));
-        return new OrganizationFolderConfigurationPage(getDriver());
     }
 }

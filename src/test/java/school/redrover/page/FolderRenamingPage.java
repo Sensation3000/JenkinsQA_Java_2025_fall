@@ -4,8 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import school.redrover.common.BasePage;
+import school.redrover.type.BasePageWithHeading;
 
-public class FolderRenamingPage extends BaseSideMenuItemPage {
+public class FolderRenamingPage extends BasePage {
 
     @FindBy(name = "newName")
     private WebElement newNameField;
@@ -15,11 +17,6 @@ public class FolderRenamingPage extends BaseSideMenuItemPage {
 
     public FolderRenamingPage(WebDriver driver) {
         super(driver);
-    }
-
-    @Override
-    protected void waitUntilPageLoad() {
-        getWait10().until(ExpectedConditions.visibilityOf(renameButton));
     }
 
     public FolderRenamingPage sendNewName (String name) {

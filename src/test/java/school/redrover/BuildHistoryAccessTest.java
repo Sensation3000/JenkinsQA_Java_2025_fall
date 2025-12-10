@@ -14,7 +14,7 @@ public class BuildHistoryAccessTest extends BaseTest {
     @Test
     public void testQuickAccessBuildHistory() {
         String actualHeading = new HomePage(getDriver())
-                .openPage("Build History", new BuildHistoryOfJenkinsPage(getDriver()))
+                .clickBuildHistory()
                 .getHeadingText();
 
         Assert.assertEquals(actualHeading, "Build History of Jenkins");
@@ -25,7 +25,7 @@ public class BuildHistoryAccessTest extends BaseTest {
         final List<String> expectedHeaders = Arrays.asList("S", "Build", "Time Since", "Status");
 
         BuildHistoryOfJenkinsPage buildHistoryOfJenkinsPage = new HomePage(getDriver())
-                .openPage("Build History", new BuildHistoryOfJenkinsPage(getDriver()));
+                .clickBuildHistory();
 
         Assert.assertTrue(buildHistoryOfJenkinsPage.isBuildHistoryEmpty());
         Assert.assertEquals(buildHistoryOfJenkinsPage.getTableHeadersText(), expectedHeaders);

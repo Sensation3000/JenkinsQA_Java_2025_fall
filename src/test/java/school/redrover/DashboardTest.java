@@ -211,7 +211,7 @@ public class DashboardTest extends BaseTest {
     @Test
     public void testSetUpAgent() {
         NewNodePage newNodePage = new HomePage(getDriver())
-                .openPage("Set up an agent", new NewNodePage(getDriver()));
+                .clickSetUpAnAgent();
 
         Assert.assertEquals(newNodePage.getHeadingText(), "New node");
         Assert.assertTrue(newNodePage.isFormDisplayed(), "New Node form is not visible");
@@ -220,7 +220,7 @@ public class DashboardTest extends BaseTest {
     @Test
     public void testConfigureCloudIntegration() {
         CloudsPage cloudsPage = new HomePage(getDriver())
-                .openPage("Configure a cloud", new CloudsPage(getDriver()));
+                .clickConfigureCloud();
 
         Assert.assertEquals(cloudsPage.getHeadingText(), "Clouds");
         Assert.assertEquals(cloudsPage.getParagraphText(), "There is no plugin installed that supports clouds.");
