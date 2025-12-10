@@ -9,11 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 import school.redrover.common.TestUtils;
-
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
-
 
 public class HomePage extends BasePage {
 
@@ -40,6 +37,9 @@ public class HomePage extends BasePage {
 
     @FindBy(css = "[initialsortdir='down'] [class='sortheader']")
     private WebElement nameColumnHeading;
+
+    @FindBy(xpath = "//span[text()='Configure a cloud']")
+    private WebElement configureCloudLink;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -71,18 +71,18 @@ public class HomePage extends BasePage {
         return new FolderPage(getDriver());
     }
 
-    public <T extends BaseProjectPage> T openProject(String jobName, T resultPage) {
+    public <T extends BaseProjectPage<?>> T openProject(String jobName, T resultPage) {
         TestUtils.clickJS(getDriver(), By.xpath("//span[text()='%s']".formatted(jobName.trim())));
 
         resultPage.waitUntilPageLoad();
         return resultPage;
     }
 
-    public <T extends BasePage> T openPage(String pageName, T resultPage) {
-        TestUtils.clickJS(getDriver(), By.xpath("//span[text()='%s']".formatted(pageName.trim())));
+    public CloudsPage clickConfigureCloud() {
+        TestUtils.clickJS(getDriver(),configureCloudLink);
 
         getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
-        return resultPage;
+        return new CloudsPage(getDriver());
     }
 
     public NewItemPage clickSidebarNewItem() {
@@ -168,10 +168,6 @@ public class HomePage extends BasePage {
         getWait5().until(ExpectedConditions.stalenessOf(yesButton));
 
         return this;
-    }
-
-    public String getActiveViewName() {
-        return getDriver().findElement(By.cssSelector(".tab.active a")).getText();
     }
 
     public CreateViewPage clickPlusToCreateView() {

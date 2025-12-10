@@ -8,7 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class MultiConfigurationProjectPage extends BaseProjectPage {
+public class MultiConfigurationProjectPage extends BaseProjectPage<MultiConfigurationProjectConfigurationPage> {
 
     @FindBy(name = "Submit")
     private WebElement submitButton;
@@ -46,6 +46,7 @@ public class MultiConfigurationProjectPage extends BaseProjectPage {
         getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
     }
 
+    @Override
     public MultiConfigurationProjectConfigurationPage clickConfigureLinkInSideMenu() {
         getWait5().until(ExpectedConditions.visibilityOfElementLocated(By
                 .xpath("//a[contains(@href, '/configure')]"))).click();

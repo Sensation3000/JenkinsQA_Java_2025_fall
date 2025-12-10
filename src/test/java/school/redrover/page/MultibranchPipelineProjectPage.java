@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class MultibranchPipelineProjectPage extends BaseProjectPage {
+public class MultibranchPipelineProjectPage extends BaseProjectPage<MultibranchPipelineConfigurationPage> {
 
     @FindBy(id = "view-message")
     private WebElement description;
@@ -38,6 +38,7 @@ public class MultibranchPipelineProjectPage extends BaseProjectPage {
         getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
     }
 
+    @Override
     public MultibranchPipelineConfigurationPage clickConfigureLinkInSideMenu() {
         getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[href='./configure']")))
                 .click();

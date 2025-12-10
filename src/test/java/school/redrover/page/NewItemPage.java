@@ -5,11 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import school.redrover.common.BasePage;
 import school.redrover.common.TestUtils;
+import school.redrover.type.BasePageWithHeading;
 
 import java.util.Objects;
 
-public class NewItemPage extends BaseSideMenuItemPage {
+public class NewItemPage extends BasePage implements BasePageWithHeading {
 
     @FindBy(id = "name")
     private WebElement nameField;
@@ -34,11 +36,6 @@ public class NewItemPage extends BaseSideMenuItemPage {
 
     public NewItemPage(WebDriver driver) {
         super(driver);
-    }
-
-    @Override
-    protected void waitUntilPageLoad() {
-        getWait10().until(ExpectedConditions.visibilityOf(nameField));
     }
 
     public NewItemPage sendName(String name) {

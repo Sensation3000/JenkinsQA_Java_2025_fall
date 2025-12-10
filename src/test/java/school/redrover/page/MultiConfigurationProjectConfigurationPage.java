@@ -5,8 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import school.redrover.common.BasePage;
+import school.redrover.type.BasePageWithHeading;
 
-public class MultiConfigurationProjectConfigurationPage extends BaseSideMenuItemPage{
+public class MultiConfigurationProjectConfigurationPage extends BasePage implements BasePageWithHeading {
 
     @FindBy(name = "Submit")
     private WebElement submitButton;
@@ -16,11 +18,6 @@ public class MultiConfigurationProjectConfigurationPage extends BaseSideMenuItem
 
     public MultiConfigurationProjectConfigurationPage(WebDriver driver) {
         super(driver);
-    }
-
-    @Override
-    protected void waitUntilPageLoad() {
-        getWait5().until(ExpectedConditions.visibilityOf(submitButton));
     }
 
     public MultiConfigurationProjectPage clickSubmit() {

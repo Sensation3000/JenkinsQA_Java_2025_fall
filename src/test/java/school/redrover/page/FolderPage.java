@@ -12,28 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class FolderPage extends BaseProjectPage {
+public class FolderPage extends BaseProjectPage<FolderConfigurationPage> {
 
     @FindBy(xpath = "//a[contains(@href, '/configure')]")
     private WebElement configureMenuItem;
-
-    @FindBy(xpath = "//span[text()='Status']/ancestor::a")
-    private WebElement statusMenuItem;
 
     @FindBy(xpath = "//a[contains(@href, '/newJob')]")
     private WebElement newItemOfMenuItem;
 
     @FindBy(xpath = "//span[text()='Delete Folder']/ancestor::a")
     private WebElement deleteMenuItem;
-
-    @FindBy(xpath = "//span[text()='Build History']/ancestor::a")
-    private WebElement buildHistoryMenuItem;
-
-    @FindBy(xpath = "//span[text()='Rename']/ancestor::a")
-    private WebElement renameMenuItem;
-
-    @FindBy(xpath = "//span[text()='Credentials']/ancestor::a")
-    private WebElement credentialsMenuItem;
 
     @FindBy(name = "Submit")
     private WebElement submitButton;
@@ -50,6 +38,7 @@ public class FolderPage extends BaseProjectPage {
         getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
     }
 
+    @Override
     public FolderConfigurationPage clickConfigureLinkInSideMenu() {
         configureMenuItem.click();
 
@@ -285,34 +274,10 @@ public class FolderPage extends BaseProjectPage {
                 .isDisplayed();
     }
 
-    public <T extends BaseProjectPage> T openSubItemPage(String itemName, T itemPage) {
+    public <T extends BaseProjectPage<?>> T openSubItemPage(String itemName, T itemPage) {
         TestUtils.clickJS(getDriver(), By.xpath("//span[text()='%s']".formatted(itemName.trim())));
 
         return itemPage;
-    }
-
-    public <T extends BaseSideMenuItemPage> T openSideMenuItemPage(WebElement menuItem, T resultPage) {
-        TestUtils.clickJS(getDriver(), menuItem);
-
-        resultPage.waitUntilPageLoad();
-        return resultPage;
-    }
-
-    public BaseSideMenuItemPage goToSideMenuItemPage(String menuItemName) {
-        switch (menuItemName) {
-            case "Configure":
-                return openSideMenuItemPage(configureMenuItem, new FolderConfigurationPage(getDriver()));
-            case "New Item":
-                return openSideMenuItemPage(newItemOfMenuItem, new NewItemPage(getDriver()));
-            case "Build History":
-                return openSideMenuItemPage(buildHistoryMenuItem, new BuildHistoryOfJenkinsPage(getDriver()));
-            case "Rename":
-                return openSideMenuItemPage(renameMenuItem, new FolderRenamingPage(getDriver()));
-            case "Credentials":
-                return openSideMenuItemPage(credentialsMenuItem, new FolderCredentialsPage(getDriver()));
-            default:
-                throw new IllegalArgumentException("Unknown item type: " + menuItemName);
-        }
     }
 
     public FolderCreateViewPage clickNewView() {

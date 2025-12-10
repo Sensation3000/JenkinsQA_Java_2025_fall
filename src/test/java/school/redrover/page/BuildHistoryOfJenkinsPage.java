@@ -1,14 +1,14 @@
 package school.redrover.page;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import school.redrover.common.BasePage;
+import school.redrover.type.BasePageWithHeading;
 
 import java.util.List;
 
-public class BuildHistoryOfJenkinsPage extends BaseSideMenuItemPage {
+public class BuildHistoryOfJenkinsPage extends BasePage implements BasePageWithHeading {
 
     @FindBy(xpath = "//table[@id='projectStatus']/tbody/tr")
     private List<WebElement> buildHistoryTableRows;
@@ -18,11 +18,6 @@ public class BuildHistoryOfJenkinsPage extends BaseSideMenuItemPage {
 
     public BuildHistoryOfJenkinsPage(WebDriver driver) {
         super(driver);
-    }
-
-    @Override
-    protected void waitUntilPageLoad() {
-        getWait10().until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
     }
 
     public boolean isBuildHistoryEmpty() {

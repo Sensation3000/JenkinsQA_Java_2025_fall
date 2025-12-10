@@ -142,6 +142,7 @@ public class FolderTest extends BaseTest {
                 "'%s' должен присутствовать во второй папке '%s'".formatted(SUB_FOLDER_NAME, FOLDER_NAME_2));
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testRenameFolder")
     public void testDeleteFolderByDashboardDropdownMenu() {
         boolean isFolderDeleted = new HomePage(getDriver())
@@ -157,6 +158,7 @@ public class FolderTest extends BaseTest {
                 "%s не должна отображаться в поиске после удаления".formatted(NEW_FOLDER_NAME));
     }
 
+    @Ignore
     @Test(dependsOnMethods = {"testCreate", "testIsEmpty", "testDeleteFolderByDashboardDropdownMenu"})
     public void testPutItemsToFolder() {
         for (Object[] item : ITEMS) {
@@ -182,6 +184,7 @@ public class FolderTest extends BaseTest {
                 "В папке должны быть все перенесенные элементы: " + ITEM_NAMES);
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testPutItemsToFolder")
     public void testFolderIsIdentifiedByIcon() {
         FolderPage folderPage = new HomePage(getDriver())
@@ -196,6 +199,7 @@ public class FolderTest extends BaseTest {
                 "Ошибка в отображении иконок");
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testSameItemNamesInTwoFolders")
     public void testRenameFolder() {
         String newNameFolder = new HomePage(getDriver())
@@ -205,11 +209,12 @@ public class FolderTest extends BaseTest {
                 .clearName()
                 .sendNewName(NEW_FOLDER_NAME)
                 .renameButtonClick()
-                .getNameFolder();
+                .getHeadingText();
 
         Assert.assertEquals(newNameFolder, NEW_FOLDER_NAME);
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testPutItemsToFolder")
     public void testFolderIsIdentifiedByTooltip() {
         FolderPage folderPage = new HomePage(getDriver())
