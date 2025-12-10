@@ -10,12 +10,10 @@ public class CheckSidePanelFolderTest extends BaseTest {
 
     @Test
     public void checkSidePanelJobs_Configure() {
-        WebDriver driver = getDriver();
-        //подготовка
         String dirName = "newFolder";
 
-        HomePage homePage = new HomePage(driver);
-        homePage.clickCreateJob()
+        new HomePage(getDriver())
+                .clickCreateJob()
                 .sendName(dirName)
                 .selectFolder()
                 .clickOkButton()
