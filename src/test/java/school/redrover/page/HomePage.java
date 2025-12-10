@@ -78,13 +78,6 @@ public class HomePage extends BasePage {
         return resultPage;
     }
 
-/*    public <T extends BasePage> T openPage(String pageName, T resultPage) {
-        TestUtils.clickJS(getDriver(), By.xpath("//span[text()='%s']".formatted(pageName.trim())));
-
-        getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
-        return resultPage;
-    }*/
-
     public CloudsPage clickConfigureCloud() {
         TestUtils.clickJS(getDriver(),configureCloudLink);
 

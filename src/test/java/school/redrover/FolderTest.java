@@ -142,7 +142,6 @@ public class FolderTest extends BaseTest {
                 "'%s' должен присутствовать во второй папке '%s'".formatted(SUB_FOLDER_NAME, FOLDER_NAME_2));
     }
 
-    @Ignore
     @Test(dependsOnMethods = "testRenameFolder")
     public void testDeleteFolderByDashboardDropdownMenu() {
         boolean isFolderDeleted = new HomePage(getDriver())
@@ -158,7 +157,7 @@ public class FolderTest extends BaseTest {
                 "%s не должна отображаться в поиске после удаления".formatted(NEW_FOLDER_NAME));
     }
 
-    @Test(dependsOnMethods = {"testCreate", "testIsEmpty"})
+    @Test(dependsOnMethods = {"testCreate", "testIsEmpty", "testDeleteFolderByDashboardDropdownMenu"})
     public void testPutItemsToFolder() {
         for (Object[] item : ITEMS) {
             String itemName = (String) item[0];
@@ -197,7 +196,6 @@ public class FolderTest extends BaseTest {
                 "Ошибка в отображении иконок");
     }
 
-    @Ignore //test failed on CI
     @Test(dependsOnMethods = "testSameItemNamesInTwoFolders")
     public void testRenameFolder() {
         String newNameFolder = new HomePage(getDriver())
