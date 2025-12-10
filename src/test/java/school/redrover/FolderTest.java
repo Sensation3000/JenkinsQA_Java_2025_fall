@@ -205,7 +205,7 @@ public class FolderTest extends BaseTest {
                 .clearName()
                 .sendNewName(NEW_FOLDER_NAME)
                 .renameButtonClick()
-                .getNameFolder();
+                .getHeadingText();
 
         Assert.assertEquals(newNameFolder, NEW_FOLDER_NAME);
     }
