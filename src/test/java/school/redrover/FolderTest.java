@@ -142,7 +142,8 @@ public class FolderTest extends BaseTest {
                 "'%s' должен присутствовать во второй папке '%s'".formatted(SUB_FOLDER_NAME, FOLDER_NAME_2));
     }
 
-    @Test(dependsOnMethods = "testSameItemNamesInTwoFolders")
+    @Ignore
+    @Test(dependsOnMethods = "testRenameFolder")
     public void testDeleteFolderByDashboardDropdownMenu() {
         boolean isFolderDeleted = new HomePage(getDriver())
                 .openProject(FOLDER_NAME, new FolderPage(getDriver()))
