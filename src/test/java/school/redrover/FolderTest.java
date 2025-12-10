@@ -158,7 +158,7 @@ public class FolderTest extends BaseTest {
                 "%s не должна отображаться в поиске после удаления".formatted(NEW_FOLDER_NAME));
     }
 
-    @Test(dependsOnMethods = {"testCreate", "testIsEmpty", "testDeleteFolderByDashboardDropdownMenu"})
+    @Test(dependsOnMethods = {"testCreate", "testIsEmpty"})
     public void testPutItemsToFolder() {
         for (Object[] item : ITEMS) {
             String itemName = (String) item[0];
