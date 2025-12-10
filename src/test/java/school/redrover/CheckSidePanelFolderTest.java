@@ -1,6 +1,5 @@
 package school.redrover;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
@@ -21,7 +20,8 @@ public class CheckSidePanelFolderTest extends BaseTest {
                 .clickFolder(dirName)
                 .clickConfigureLinkInSideMenu();
 
-        String configureURL = getDriver().getCurrentUrl();
-        Assert.assertTrue(configureURL.endsWith("/configure"));
+        Assert.assertTrue(getDriver().getCurrentUrl()
+                .endsWith("/configure")
+        );
     }
 }
