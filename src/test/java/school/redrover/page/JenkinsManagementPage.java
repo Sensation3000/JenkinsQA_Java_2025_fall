@@ -121,4 +121,14 @@ public class JenkinsManagementPage extends BasePage {
 
         return new NodesPage(getDriver());
     }
+
+    public List<String> checkSystemConfiguration() {
+        List<WebElement> checksOf = getWait5().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                By.cssSelector("#main-panel > section > h2")));
+
+        return checksOf
+                .stream()
+                .map(WebElement::getText)
+                .toList();
+    }
 }

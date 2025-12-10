@@ -12,12 +12,21 @@ import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.HomePage;
 
+import java.util.Collections;
 import java.util.List;
 import java.time.Duration;
 
 public class JenkinsManagementTest extends BaseTest {
     private final String TITLE_TEXT = "Dashboard - Jenkins";
     private static final String SETTING_TITLE = "System";
+
+    public List<String> checking = List.of("System Configuration",
+            "Security",
+            "Status Information",
+            "Troubleshooting",
+            "Tools and Actions"
+    );
+
 
     @DataProvider
     public Object[][] systemConfigurationItems() {
@@ -93,7 +102,7 @@ public class JenkinsManagementTest extends BaseTest {
     }
 
     @Test(dataProvider = "systemConfigurationItems")
-    public void testSearchDropdownItemsSystemConfiguration(String itemName){
+    public void testSearchDropdownItemsSystemConfiguration(String itemName) {
         String dropdownResult = new HomePage(getDriver())
                 .clickManageJenkinsGear()
                 .sendTitle(itemName)
@@ -113,4 +122,13 @@ public class JenkinsManagementTest extends BaseTest {
 
         Assert.assertEquals(searchHeading, "System");
     }
+
+    @Test
+    public void checkManageJenkins() {
+            List<String> checks = new HomePage(getDriver())
+                    .clickManageJenkinsGear()
+                    .checkSystemConfiguration();
+
+            Assert.assertEquals(checks, checking);
+        }
 }
