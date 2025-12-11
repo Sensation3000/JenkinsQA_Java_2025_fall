@@ -11,17 +11,16 @@ public class CheckSidePanelFolderTest extends BaseTest {
     public void checkSidePanelJobs_Configure() {
         String dirName = "newFolder";
 
-        new HomePage(getDriver())
+        String breadcrumbItem = new HomePage(getDriver())
                 .clickCreateJob()
                 .sendName(dirName)
                 .selectFolder()
                 .clickOkButton()
                 .gotoHomePage()
                 .clickFolder(dirName)
-                .clickConfigureLinkInSideMenu();
+                .clickConfigureLinkInSideMenu()
+                .getBreadcrumbItem();
 
-        Assert.assertTrue(getDriver().getCurrentUrl()
-                .endsWith("/configure")
-        );
+        Assert.assertEquals(breadcrumbItem, "Configuration");
     }
 }
