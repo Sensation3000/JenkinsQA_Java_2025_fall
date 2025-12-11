@@ -12,7 +12,7 @@ import school.redrover.common.BasePage;
 import java.util.List;
 
 
-public class JenkinsManagementPage extends BasePage {
+public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
 
     @FindBy(id = "settings-search-bar")
     private WebElement sendTitle;
@@ -29,10 +29,18 @@ public class JenkinsManagementPage extends BasePage {
     @FindBy(xpath = "//a[@href='configure']")
     private WebElement clickConfigurationSystem;
 
+
     private final By searchResults = By.cssSelector(".jenkins-dropdown__item:nth-of-type(1)");
 
     public JenkinsManagementPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public JenkinsManagementPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.elementToBeClickable(usersLink));
+
+        return this;
     }
 
     public UsersPage clickUserButton() {

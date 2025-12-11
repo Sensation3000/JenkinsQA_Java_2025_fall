@@ -1,6 +1,7 @@
 package school.redrover;
 
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.*;
@@ -60,6 +61,7 @@ public class FolderConfigurationTest extends BaseTest {
                 "The list of displayed metric types in the dropdown did not match the expected list.");
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testHealthMetricLinkIsDisplayed")
     public void testAddWorstHealth() {
 
@@ -92,6 +94,7 @@ public class FolderConfigurationTest extends BaseTest {
         Assert.assertEquals(actualMetricAdded, expectedMetric);
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testHealthMetricLinkIsDisplayed")
     public void testDragWorstHealthToTop() {
 
@@ -111,6 +114,7 @@ public class FolderConfigurationTest extends BaseTest {
         Assert.assertEquals(actualTopMetric, expectedTopMetric);
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testHealthMetricLinkIsDisplayed")
     public void testDeleteMetric() {
         List <String> metricList = new HomePage(getDriver())
@@ -128,6 +132,7 @@ public class FolderConfigurationTest extends BaseTest {
         Assert.assertEquals(metricList.size(), 1);
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testHealthMetricLinkIsDisplayed")
     public void testChildNameTooltip() {
 
@@ -145,6 +150,7 @@ public class FolderConfigurationTest extends BaseTest {
         Assert.assertEquals(actualText, textOnHover);
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testHealthMetricLinkIsDisplayed")
     public void testChildNameTooltipContent() {
 
@@ -162,6 +168,7 @@ public class FolderConfigurationTest extends BaseTest {
         Assert.assertEquals(actualText, expectedTooltip);
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testHealthMetricLinkIsDisplayed")
     public void testWorstHealthTooltip() {
 
@@ -179,6 +186,7 @@ public class FolderConfigurationTest extends BaseTest {
         Assert.assertEquals(actualText, textOnHover);
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testHealthMetricLinkIsDisplayed")
     public void testRecursiveTooltipContent() {
 

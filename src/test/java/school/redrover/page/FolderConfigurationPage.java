@@ -12,7 +12,8 @@ import school.redrover.type.BasePageWithHeading;
 
 import java.util.List;
 
-public class FolderConfigurationPage extends BasePage implements BasePageWithHeading {
+
+public class FolderConfigurationPage extends BasePage<FolderConfigurationPage> implements BasePageWithHeading {
 
     @FindBy(css = "button[data-section-id='health-metrics']")
     private WebElement healthMetricSidebarLink;
@@ -71,8 +72,16 @@ public class FolderConfigurationPage extends BasePage implements BasePageWithHea
     @FindBy(name = "Submit")
     private WebElement submitButton;
 
+
     public FolderConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public FolderConfigurationPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.elementToBeClickable(addMetricButton));
+
+        return this;
     }
 
     public FolderConfigurationPage setDisplayName(String name) {

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+
 public class MultibranchPipelineProjectPage extends BaseProjectPage<MultibranchPipelineConfigurationPage> {
 
     @FindBy(id = "view-message")
@@ -29,13 +30,16 @@ public class MultibranchPipelineProjectPage extends BaseProjectPage<MultibranchP
     @FindBy(name = "Submit")
     private WebElement submitButton;
 
+
     public MultibranchPipelineProjectPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    protected void waitUntilPageLoad() {
-        getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
+    public MultibranchPipelineProjectPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.visibilityOf(deleteMenuItem));
+
+        return this;
     }
 
     @Override

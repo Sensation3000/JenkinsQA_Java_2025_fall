@@ -11,7 +11,7 @@ import school.redrover.common.BasePage;
 import java.time.Duration;
 
 
-public class UsersPage extends BasePage {
+public class UsersPage extends BasePage<UsersPage> {
 
     @FindBy(xpath = "//a[contains(., 'Account')]")
     private WebElement accountMenuItem;
@@ -22,28 +22,22 @@ public class UsersPage extends BasePage {
     @FindBy(xpath = "(//button[@class='jenkins-menu-dropdown-chevron'])[2]")
     private WebElement chevronButton;
 
-    /***
-     * WebElements from different Pages to wait before Page return
-     */
-
-    @FindBy(xpath = "//h1[text()='Create User']")
-    private WebElement userCreatingPageHeader;
-
-    @FindBy(xpath = "//h1[text()='Account']")
-    private WebElement userAccountPageHeader;
-
-    @FindBy(id = "description-link")
-    private WebElement userStatusPageEditDescriptionButton;
 
     public UsersPage(WebDriver driver) {
         super(driver);
     }
 
+    @Override
+    public UsersPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.elementToBeClickable(createUserButton));
+
+        return this;
+    }
+
     public UserCreatingPage clickCreateUserButton() {
         createUserButton.click();
-        getWait5().until(ExpectedConditions.visibilityOf(userCreatingPageHeader));
-        
-        return new UserCreatingPage(getDriver());
+
+        return new UserCreatingPage(getDriver()).waitUntilPageLoad();
     }
 
     public String getUserName(String userName) {
@@ -60,16 +54,12 @@ public class UsersPage extends BasePage {
         chevronButton.sendKeys(Keys.ENTER);
         getWait5().until(ExpectedConditions.elementToBeClickable(accountMenuItem)).click();
 
-        getWait5().until(ExpectedConditions.visibilityOf(userAccountPageHeader));
-
-        return new UserAccountPage(getDriver());
+        return new UserAccountPage(getDriver()).waitUntilPageLoad();
     }
 
     public UserStatusPage clickUserLink(String userName) {
         getDriver().findElement(By.xpath("//a[text()='%s']".formatted(userName))).click();
 
-        getWait5().until(ExpectedConditions.visibilityOf(userStatusPageEditDescriptionButton));
-
-        return new UserStatusPage(getDriver());
+        return new UserStatusPage(getDriver()).waitUntilPageLoad();
     }
 }

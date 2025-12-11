@@ -13,7 +13,8 @@ import school.redrover.type.BasePageWithHeading;
 
 import java.util.List;
 
-public class PipelineConfigurationPage extends BasePage implements BasePageWithHeading {
+
+public class PipelineConfigurationPage extends BasePage<PipelineConfigurationPage> implements BasePageWithHeading {
 
     @FindBy(id = "advanced")
     private WebElement advancedTitle;
@@ -66,8 +67,16 @@ public class PipelineConfigurationPage extends BasePage implements BasePageWithH
     @FindBy(xpath = "//div[contains(text(), 'Schedule')]/following-sibling::div" + "//div[@class = 'error']")
     private WebElement textErrorMessage;
 
+
     public PipelineConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public PipelineConfigurationPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.elementToBeClickable(buildPeriodicallyLabel));
+
+        return this;
     }
 
     public PipelinePage clickSubmitButton() {

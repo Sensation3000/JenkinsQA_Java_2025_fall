@@ -4,12 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
 import java.util.List;
 
-public class CreateViewPage extends BasePage {
+
+public class CreateViewPage extends BasePage<CreateViewPage> {
 
     @FindBy(id = "name")
     private WebElement nameField;
@@ -17,8 +19,19 @@ public class CreateViewPage extends BasePage {
     @FindBy(xpath = "//label[text() = 'My View']")
     private WebElement clickMyView;
 
+    @FindBy(tagName = "h1")
+    private WebElement header;
+
+
     public CreateViewPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public CreateViewPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.textToBePresentInElement(header, "New view"));
+
+        return this;
     }
 
     public CreateViewPage sendViewName(String name){

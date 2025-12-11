@@ -9,7 +9,7 @@ import school.redrover.common.BasePage;
 import java.util.function.Consumer;
 
 
-public class UserStatusPage extends BasePage {
+public class UserStatusPage extends BasePage<UserStatusPage> {
 
     @FindBy(xpath = "//div//h1")
     private WebElement userName;
@@ -19,7 +19,6 @@ public class UserStatusPage extends BasePage {
 
     @FindBy(xpath = "//a[@href='/user/admin/']")
     private WebElement adminNameInBreadcrumbs;
-
 
     @FindBy(id = "description-link")
     private WebElement editDescriptionButton;
@@ -36,6 +35,13 @@ public class UserStatusPage extends BasePage {
 
     public UserStatusPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public UserStatusPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.elementToBeClickable(editDescriptionButton));
+
+        return this;
     }
 
     public String getUserName() {

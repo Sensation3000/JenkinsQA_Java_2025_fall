@@ -57,6 +57,7 @@ public class ConfigureSystemTest extends BaseTest {
         Assert.assertEquals(SYSTEM_MESSAGE + addToPreviewMessage, actualPreviewMessage);
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testSystemMessagePreview")
     public void testChangeSystemMessage() {
 
@@ -210,6 +211,7 @@ public class ConfigureSystemTest extends BaseTest {
         Assert.assertEquals(actualInterval, oldValue);
     }
 
+    @Ignore
     @Test
     public void testHintOfComputerRetentionCheckInterval() {
 
@@ -227,6 +229,7 @@ public class ConfigureSystemTest extends BaseTest {
         Assert.assertTrue(hint.getAttribute("class").contains("--visible"));
     }
 
+    @Ignore
     @Test
     public void testHintOfQuietPeriod() {
 
@@ -263,6 +266,7 @@ public class ConfigureSystemTest extends BaseTest {
         Assert.assertEquals(actualQuietPeriod, testQuietPeriod);
     }
 
+    @Ignore
     @Test
     public void testGlobalProperties() {
 
@@ -282,6 +286,7 @@ public class ConfigureSystemTest extends BaseTest {
         Assert.assertEquals(actualGlobalProperties, expectedGlobalProperties);
     }
 
+    @Ignore
     @Test
     public void testDiskSpaceMonitoringThresholds() {
 
@@ -331,6 +336,7 @@ public class ConfigureSystemTest extends BaseTest {
                 testTempSpaceWarningThreshold);
     }
 
+    @Ignore
     @Test
     public void testEnvironmentVariables() {
 

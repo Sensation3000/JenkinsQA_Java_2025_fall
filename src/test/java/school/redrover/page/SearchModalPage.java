@@ -4,18 +4,25 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BaseModel;
+import school.redrover.common.BasePage;
 import school.redrover.common.TestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchModalPage extends BaseModel {
+
+public class SearchModalPage extends BasePage<SearchModalPage> {
 
     private final By inputField = By.id("command-bar");
     private final By searchResults = By.xpath("//div[@id='search-results']//a");
 
     public SearchModalPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public SearchModalPage waitUntilPageLoad() {
+        return null;
     }
 
     public SearchModalPage searchFor(String jobName) {

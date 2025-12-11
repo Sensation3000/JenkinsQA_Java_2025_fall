@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
 public class FolderPage extends BaseProjectPage<FolderConfigurationPage> {
 
     @FindBy(xpath = "//a[contains(@href, '/configure')]")
@@ -29,13 +30,16 @@ public class FolderPage extends BaseProjectPage<FolderConfigurationPage> {
     @FindBy(css = "[tooltip='New View']")
     private WebElement newView;
 
+
     public FolderPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    protected void waitUntilPageLoad() {
-        getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
+    public FolderPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.visibilityOf(deleteMenuItem));
+
+        return this;
     }
 
     @Override

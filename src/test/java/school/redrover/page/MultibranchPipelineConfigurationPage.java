@@ -9,7 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 import school.redrover.type.BasePageWithHeading;
 
-public class MultibranchPipelineConfigurationPage extends BasePage implements BasePageWithHeading {
+
+public class MultibranchPipelineConfigurationPage extends BasePage<MultibranchPipelineConfigurationPage> implements BasePageWithHeading {
 
     @FindBy(name = "_.description")
     private WebElement descriptionField;
@@ -23,8 +24,16 @@ public class MultibranchPipelineConfigurationPage extends BasePage implements Ba
     @FindBy(id = "toggle-switch-enable-disable-project")
     private WebElement toggleTooltipOnHover;
 
+
     public MultibranchPipelineConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public MultibranchPipelineConfigurationPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.elementToBeClickable(toggleSwitcher));
+
+        return this;
     }
 
     public MultibranchPipelineConfigurationPage sendDisplayName(String name) {

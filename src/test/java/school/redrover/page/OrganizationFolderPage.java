@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+
 public class OrganizationFolderPage extends BaseProjectPage<OrganizationFolderConfigurationPage> {
 
     @FindBy(xpath = "//span[text()='Delete Organization Folder']/ancestor::a")
@@ -14,13 +15,16 @@ public class OrganizationFolderPage extends BaseProjectPage<OrganizationFolderCo
     @FindBy(name = "Submit")
     private WebElement submitButton;
 
+
     public OrganizationFolderPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    protected void waitUntilPageLoad() {
+    public OrganizationFolderPage waitUntilPageLoad() {
         getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
+
+        return this;
     }
 
     @Override

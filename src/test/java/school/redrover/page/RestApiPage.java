@@ -8,9 +8,15 @@ import school.redrover.common.BasePage;
 
 import java.util.List;
 
-public class RestApiPage extends BasePage {
+
+public class RestApiPage extends BasePage<RestApiPage> {
 
     public RestApiPage(WebDriver driver) { super(driver); }
+
+    @Override
+    public RestApiPage waitUntilPageLoad() {
+        return null;
+    }
 
     public String getHeadingText(){
 

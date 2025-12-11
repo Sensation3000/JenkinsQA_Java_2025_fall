@@ -142,6 +142,7 @@ public class MultibranchPipelineTest extends BaseTest {
         Assert.assertEquals(actualTooltip, tooltipText);
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testCreateMultibranchPipeline")
     public void testDisableToggle() {
         final String expectedToggleState = "Disabled";

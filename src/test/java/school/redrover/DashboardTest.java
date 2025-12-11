@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
-import school.redrover.page.ArchitectingforScalePage;
+import school.redrover.page.ArchitectingForScalePage;
 import school.redrover.page.CloudsPage;
 import school.redrover.page.EditViewPage;
 import school.redrover.page.HomePage;
@@ -60,7 +60,7 @@ public class DashboardTest extends BaseTest {
 
     @Test
     public void testLearnMoreAboutDistributedBuildsLink() {
-        ArchitectingforScalePage resultPage = new HomePage(getDriver())
+        ArchitectingForScalePage resultPage = new HomePage(getDriver())
                 .clickLearnMoreAboutDistributedBuildsLink();
 
         Assert.assertTrue(resultPage.getCurrentUrl().contains("architecting-for-scale"));

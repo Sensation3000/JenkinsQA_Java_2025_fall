@@ -4,13 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
-public class NewNodePage extends BasePage {
 
-    public NewNodePage(WebDriver driver) {
-        super(driver);
-    }
+public class NewNodePage extends BasePage<NewNodePage> {
 
     @FindBy(id = "name")
     WebElement nodeName;
@@ -20,6 +18,18 @@ public class NewNodePage extends BasePage {
 
     @FindBy(name = "Submit")
     WebElement buttonCreate;
+
+
+    public NewNodePage(WebDriver driver) {
+        super(driver);
+    }
+
+    @Override
+    public NewNodePage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.elementToBeClickable(typeModePermanentAgent));
+
+        return this;
+    }
 
     public String getHeadingText() {
         return getDriver().findElement(By.xpath("//h1")).getText();
@@ -46,6 +56,4 @@ public class NewNodePage extends BasePage {
 
         return new NodesPage(getDriver());
     }
-
-
 }

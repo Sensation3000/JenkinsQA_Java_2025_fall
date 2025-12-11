@@ -8,13 +8,20 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
-public class MultibranchPipelineConfirmRenamePage extends BasePage {
+
+public class MultibranchPipelineConfirmRenamePage extends BasePage<MultibranchPipelineConfirmRenamePage> {
 
     @FindBy(name = "newName")
     private WebElement renameField;
 
+
     public MultibranchPipelineConfirmRenamePage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public MultibranchPipelineConfirmRenamePage waitUntilPageLoad() {
+        return null;
     }
 
     public MultibranchPipelineConfirmRenamePage renameJob(String jobName) {

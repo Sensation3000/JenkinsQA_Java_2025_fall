@@ -12,13 +12,20 @@ import school.redrover.common.BasePage;
 import school.redrover.common.TestUtils;
 import java.util.List;
 
-public class EditViewPage extends BasePage {
+
+public class EditViewPage extends BasePage<EditViewPage> {
 
     @FindBy(xpath = "//button[@class='jenkins-dropdown__item ']")
     private List<WebElement> columnListForAdd;
 
+
     public EditViewPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public EditViewPage waitUntilPageLoad() {
+        return null;
     }
 
     public EditViewPage clickAddColumnDropDownButton() {

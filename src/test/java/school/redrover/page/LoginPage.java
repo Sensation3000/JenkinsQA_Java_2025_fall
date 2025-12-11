@@ -5,10 +5,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
-public class LoginPage extends BasePage {
+
+public class LoginPage extends BasePage<LoginPage> {
 
     public LoginPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public LoginPage waitUntilPageLoad() {
+        return null;
     }
 
     public String getTitle() {

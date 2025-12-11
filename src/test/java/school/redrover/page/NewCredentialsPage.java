@@ -4,10 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import school.redrover.common.BasePage;
 
-public class NewCredentialsPage extends BasePage {
+
+public class NewCredentialsPage extends BasePage<NewCredentialsPage> {
 
     public NewCredentialsPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public NewCredentialsPage waitUntilPageLoad() {
+        return null;
     }
 
     public NewCredentialsPage enterUsername(String username) {

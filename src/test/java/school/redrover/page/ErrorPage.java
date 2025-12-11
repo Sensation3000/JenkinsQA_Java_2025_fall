@@ -5,10 +5,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
-public class ErrorPage extends BasePage {
+
+public class ErrorPage extends BasePage<ErrorPage> {
 
     public ErrorPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public ErrorPage waitUntilPageLoad() {
+        return null;
     }
 
     public String getErrorMessage() {

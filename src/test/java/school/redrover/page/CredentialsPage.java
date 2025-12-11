@@ -5,10 +5,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import school.redrover.common.BasePage;
 
-public class CredentialsPage extends BasePage {
+
+public class CredentialsPage extends BasePage<CredentialsPage> {
 
     public CredentialsPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public CredentialsPage waitUntilPageLoad() {
+        return null;
     }
 
     public GlobalCredentialsPage clickGlobalLink() {

@@ -1,21 +1,15 @@
 package school.redrover.page;
 
-import com.google.common.collect.RangeMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.w3c.dom.ranges.Range;
 import school.redrover.common.BasePage;
 
-import java.util.stream.IntStream;
 
-public class NodesPage  extends BasePage {
-
-    public NodesPage(WebDriver driver) {
-        super(driver);
-    }
+public class NodesPage  extends BasePage<NodesPage> {
 
     @FindBy(xpath = "//a[@href ='new']")
     WebElement newNode;
@@ -40,6 +34,18 @@ public class NodesPage  extends BasePage {
 
     @FindBy(xpath = "(//select[@class='jenkins-select__input dropdownList'])[3]")
     WebElement selectAvailability;
+
+
+    public NodesPage(WebDriver driver) {
+        super(driver);
+    }
+
+    @Override
+    public NodesPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.elementToBeClickable(newNode));
+
+        return this;
+    }
 
     public NewNodePage goToNewNodePage() {
         newNode.click();

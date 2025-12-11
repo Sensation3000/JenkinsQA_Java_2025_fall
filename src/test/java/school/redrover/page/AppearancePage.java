@@ -8,7 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
-public class AppearancePage extends BasePage {
+
+public class AppearancePage extends BasePage<AppearancePage> {
 
     @FindBy(xpath = "//label[span[text() = 'Light']]")
     private WebElement lightTheme;
@@ -28,8 +29,14 @@ public class AppearancePage extends BasePage {
     @FindBy(css = "button.jenkins-submit-button")
     private WebElement saveButton;
 
+
     public AppearancePage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public AppearancePage waitUntilPageLoad() {
+        return null;
     }
 
     public AppearancePage clickLightTheme() {

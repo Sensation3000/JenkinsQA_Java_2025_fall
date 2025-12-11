@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.page.*;
 
 
-public abstract class BasePage extends BaseModel {
+public abstract class BasePage<Page> extends BaseModel {
 
     @FindBy(id = "root-action-ManageJenkinsAction")
     private WebElement manageJenkinsButton;
@@ -32,6 +32,8 @@ public abstract class BasePage extends BaseModel {
         super(driver);
         PageFactory.initElements(driver, this);
     }
+
+    public abstract Page waitUntilPageLoad();
 
     public HomePage gotoHomePage() {
         getWait5().until(ExpectedConditions.elementToBeClickable(By.className("app-jenkins-logo"))).click();

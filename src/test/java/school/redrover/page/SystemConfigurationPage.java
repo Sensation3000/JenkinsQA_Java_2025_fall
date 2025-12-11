@@ -9,7 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
-public class SystemConfigurationPage extends BasePage {
+
+public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
 
     @FindBy(tagName = "h1")
     private WebElement headingText;
@@ -26,8 +27,16 @@ public class SystemConfigurationPage extends BasePage {
     @FindBy(xpath = "//div[@nameref='cb3']//div[@class='help']/div[1]")
     private WebElement hintText;
 
+
     public SystemConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public SystemConfigurationPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.elementToBeClickable(checkboxTooltip));
+
+        return this;
     }
 
     public SystemConfigurationPage setSystemMessage(String systemMessage) {

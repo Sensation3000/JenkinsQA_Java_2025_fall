@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+
 public class PipelinePage extends BaseProjectPage<PipelineConfigurationPage> {
 
     @FindBy(xpath = "//a[contains(@href, '/configure')]")
@@ -38,13 +39,16 @@ public class PipelinePage extends BaseProjectPage<PipelineConfigurationPage> {
     @FindBy(name = "Submit")
     private WebElement submitButton;
 
+
     public PipelinePage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    protected void waitUntilPageLoad() {
-        getWait10().until(ExpectedConditions.visibilityOf(deletePipeline));
+    public PipelinePage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.visibilityOf(deletePipeline));
+
+        return this;
     }
 
     @Override

@@ -8,7 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 import school.redrover.type.BasePageWithHeading;
 
-public class MultiConfigurationProjectConfigurationPage extends BasePage implements BasePageWithHeading {
+
+public class MultiConfigurationProjectConfigurationPage extends BasePage<MultiConfigurationProjectConfigurationPage> implements BasePageWithHeading {
 
     @FindBy(name = "Submit")
     private WebElement submitButton;
@@ -16,8 +17,16 @@ public class MultiConfigurationProjectConfigurationPage extends BasePage impleme
     @FindBy(id = "configuration-matrix")
     private WebElement configurationMatrix;
 
+
     public MultiConfigurationProjectConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public MultiConfigurationProjectConfigurationPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.visibilityOf(configurationMatrix));
+
+        return this;
     }
 
     public MultiConfigurationProjectPage clickSubmit() {

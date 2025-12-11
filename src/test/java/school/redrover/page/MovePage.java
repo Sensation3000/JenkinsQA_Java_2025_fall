@@ -6,10 +6,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import school.redrover.common.BasePage;
 
-public class MovePage extends BasePage {
+
+public class MovePage extends BasePage<MovePage> {
 
     public MovePage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public MovePage waitUntilPageLoad() {
+        return null;
     }
 
     public MovePage selectDestinationFolder(String folderName) {

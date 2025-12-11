@@ -11,7 +11,8 @@ import school.redrover.type.BasePageWithHeading;
 
 import java.util.Objects;
 
-public class NewItemPage extends BasePage implements BasePageWithHeading {
+
+public class NewItemPage extends BasePage<NewItemPage> implements BasePageWithHeading {
 
     @FindBy(id = "name")
     private WebElement nameField;
@@ -34,8 +35,16 @@ public class NewItemPage extends BasePage implements BasePageWithHeading {
     @FindBy(xpath = "//*[contains(@class, 'WorkflowJob')]")
     private WebElement pipelineTypeCheck;
 
+
     public NewItemPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public NewItemPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.elementToBeClickable(multibranchPipelineOption));
+
+        return this;
     }
 
     public NewItemPage sendName(String name) {

@@ -8,10 +8,16 @@ import school.redrover.common.BasePage;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class GlobalCredentialsPage extends BasePage {
+
+public class GlobalCredentialsPage extends BasePage<GlobalCredentialsPage> {
 
     public GlobalCredentialsPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public GlobalCredentialsPage waitUntilPageLoad() {
+        return null;
     }
 
     public NewCredentialsPage clickAddCredentialsButton() {

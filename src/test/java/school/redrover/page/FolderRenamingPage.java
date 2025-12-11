@@ -7,7 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 import school.redrover.type.BasePageWithHeading;
 
-public class FolderRenamingPage extends BasePage {
+
+public class FolderRenamingPage extends BasePage<FolderRenamingPage> {
 
     @FindBy(name = "newName")
     private WebElement newNameField;
@@ -15,8 +16,16 @@ public class FolderRenamingPage extends BasePage {
     @FindBy(name = "Submit")
     private WebElement renameButton;
 
+
     public FolderRenamingPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public FolderRenamingPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.visibilityOf(newNameField));
+
+        return this;
     }
 
     public FolderRenamingPage sendNewName (String name) {

@@ -7,7 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
-public class FolderCreateViewPage extends BasePage {
+
+public class FolderCreateViewPage extends BasePage<FolderCreateViewPage> {
 
     @FindBy(id = "name")
     private WebElement inputViewName;
@@ -21,8 +22,16 @@ public class FolderCreateViewPage extends BasePage {
     @FindBy(css = "[for='hudson.model.MyView']")
     private WebElement inputMyView;
 
+
     public FolderCreateViewPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public FolderCreateViewPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.visibilityOf(inputGlobalView));
+
+        return this;
     }
 
     public FolderCreateViewPage sendName(String name) {

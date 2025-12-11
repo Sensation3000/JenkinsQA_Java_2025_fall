@@ -4,10 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import school.redrover.common.BasePage;
 
-public class CloudsPage extends BasePage {
+
+public class CloudsPage extends BasePage<CloudsPage> {
 
     public CloudsPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public CloudsPage waitUntilPageLoad() {
+        return null;
     }
 
     public String getHeadingText() {

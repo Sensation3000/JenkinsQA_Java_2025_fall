@@ -10,7 +10,8 @@ import school.redrover.type.BasePageWithHeading;
 
 import java.util.List;
 
-public class OrganizationFolderConfigurationPage extends BasePage implements BasePageWithHeading {
+
+public class OrganizationFolderConfigurationPage extends BasePage<OrganizationFolderConfigurationPage> implements BasePageWithHeading {
 
     @FindBy(name = "Submit")
     private WebElement submitButton;
@@ -18,8 +19,16 @@ public class OrganizationFolderConfigurationPage extends BasePage implements Bas
     @FindBy(xpath = "//span[text()='Delete Organization Folder']/ancestor::a")
     private WebElement deleteMenuItem;
 
+
     public OrganizationFolderConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public OrganizationFolderConfigurationPage waitUntilPageLoad() {
+        getWait10().until(ExpectedConditions.elementToBeClickable(deleteMenuItem));
+
+        return this;
     }
 
     public OrganizationFolderPage clickSave() {

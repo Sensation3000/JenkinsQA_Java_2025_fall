@@ -18,7 +18,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class FreestyleProjectConfigurationPage extends BasePage implements BasePageWithHeading {
+
+public class FreestyleProjectConfigurationPage extends BasePage<FreestyleProjectConfigurationPage> implements BasePageWithHeading {
 
     @FindBy(name = "description")
     private WebElement descriptionInput;
@@ -62,8 +63,16 @@ public class FreestyleProjectConfigurationPage extends BasePage implements BaseP
     @FindBy(name = "Submit")
     private WebElement submitButton;
 
+
     public FreestyleProjectConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public FreestyleProjectConfigurationPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.visibilityOf(oldBuildsCheck));
+
+        return this;
     }
 
     public FreestyleProjectConfigurationPage setDescription(String description) {

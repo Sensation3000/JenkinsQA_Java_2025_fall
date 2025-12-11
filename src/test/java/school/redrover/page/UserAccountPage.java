@@ -7,7 +7,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
 
-public class UserAccountPage extends BasePage {
+public class UserAccountPage extends BasePage<UserAccountPage> {
+
+    @FindBy(xpath = "//h1[text()='Account']")
+    private WebElement header;
 
     @FindBy(name = "_.fullName")
     private WebElement fullNameField;
@@ -21,16 +24,16 @@ public class UserAccountPage extends BasePage {
     @FindBy(name = "Submit")
     private WebElement saveButton;
 
-    /***
-     * WebElements from different Pages to wait before Page return
-     */
-
-    @FindBy(id = "description-link")
-    private WebElement userStatusPageEditDescriptionButton;
-
 
     public UserAccountPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public UserAccountPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.visibilityOf(header));
+
+        return this;
     }
 
     public UserAccountPage sendFullName(String fullName) {
@@ -43,9 +46,7 @@ public class UserAccountPage extends BasePage {
     public UserStatusPage clickSave() {
         saveButton.click();
 
-        getWait5().until(ExpectedConditions.visibilityOf(userStatusPageEditDescriptionButton));
-
-        return new UserStatusPage(getDriver());
+        return new UserStatusPage(getDriver()).waitUntilPageLoad();
     }
 
     public UserAccountPage sendEmail(String email) {

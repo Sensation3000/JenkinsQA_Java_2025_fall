@@ -12,7 +12,8 @@ import school.redrover.common.TestUtils;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomePage extends BasePage {
+
+public class HomePage extends BasePage<HomePage> {
 
     @FindBy(xpath = "//a[@href='/view/all/newJob']")
     private WebElement sidebarNewItem;
@@ -41,8 +42,16 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//span[text()='Configure a cloud']")
     private WebElement configureCloudLink;
 
+
     public HomePage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public HomePage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.elementToBeClickable(sidebarNewItem));
+
+        return this;
     }
 
     public NewItemPage clickCreateJob() {
@@ -324,7 +333,7 @@ public class HomePage extends BasePage {
         return new BuildHistoryOfJenkinsPage(getDriver());
     }
 
-    public ArchitectingforScalePage clickLearnMoreAboutDistributedBuildsLink() {
+    public ArchitectingForScalePage clickLearnMoreAboutDistributedBuildsLink() {
         getDriver().findElement(By.xpath(".//a[span[text()='Learn more about distributed builds']]"))
                 .click();
         Object[] windowHandles = getDriver().getWindowHandles().toArray();
@@ -332,7 +341,7 @@ public class HomePage extends BasePage {
 
         getWait2().until(ExpectedConditions.urlContains("architecting-for-scale"));
 
-        return new ArchitectingforScalePage(getDriver());
+        return new ArchitectingForScalePage(getDriver());
     }
 
     public boolean isBuildButtonVisible(String projectName) {

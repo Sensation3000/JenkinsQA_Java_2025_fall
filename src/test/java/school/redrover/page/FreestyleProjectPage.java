@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+
 public class FreestyleProjectPage extends BaseProjectPage<FreestyleProjectConfigurationPage> {
 
     @FindBy(xpath = "//a[contains(@href, '/configure')]")
@@ -20,13 +21,16 @@ public class FreestyleProjectPage extends BaseProjectPage<FreestyleProjectConfig
     @FindBy(name = "Submit")
     private WebElement submitButton;
 
+
     public FreestyleProjectPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    protected void waitUntilPageLoad() {
-        getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
+    public FreestyleProjectPage waitUntilPageLoad() {
+        getWait5().until(ExpectedConditions.visibilityOf(deleteMenuItem));
+
+        return this;
     }
 
     @Override

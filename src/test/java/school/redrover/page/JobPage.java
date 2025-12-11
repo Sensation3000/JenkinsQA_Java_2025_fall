@@ -4,9 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import school.redrover.common.BasePage;
 
-public class JobPage extends BasePage {
+
+public class JobPage extends BasePage<JobPage> {
+
     public JobPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public JobPage waitUntilPageLoad() {
+        return null;
     }
 
     public String checkUrlContains(String projectName) {

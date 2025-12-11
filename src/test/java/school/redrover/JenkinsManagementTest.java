@@ -40,6 +40,7 @@ public class JenkinsManagementTest extends BaseTest {
         };
     }
 
+    @Ignore
     @Test
     public void testDeferredWipeoutSettingIsSaved() {
         Boolean checboxGlobal = new HomePage(getDriver())

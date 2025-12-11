@@ -8,10 +8,16 @@ import school.redrover.common.BasePage;
 
 import java.util.List;
 
-public class FooterDropdownPage extends BasePage {
+
+public class FooterDropdownPage extends BasePage<FooterDropdownPage> {
 
     public FooterDropdownPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public FooterDropdownPage waitUntilPageLoad() {
+        return null;
     }
 
     public List<String> getDropdownList() {
