@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
+
 import java.util.function.Consumer;
 
 
@@ -39,7 +40,7 @@ public class UserStatusPage extends BasePage<UserStatusPage> {
 
     @Override
     public UserStatusPage waitUntilPageLoad() {
-        getWait5().until(ExpectedConditions.elementToBeClickable(editDescriptionButton));
+        getWait5().until(ExpectedConditions.visibilityOf(userId));
 
         return this;
     }

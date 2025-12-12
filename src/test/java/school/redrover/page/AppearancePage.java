@@ -29,6 +29,8 @@ public class AppearancePage extends BasePage<AppearancePage> {
     @FindBy(css = "button.jenkins-submit-button")
     private WebElement saveButton;
 
+    @FindBy(xpath = "//a[contains(text(), 'Find plugins')]")
+    private WebElement FindPluginsButton;
 
     public AppearancePage(WebDriver driver) {
         super(driver);
@@ -36,7 +38,8 @@ public class AppearancePage extends BasePage<AppearancePage> {
 
     @Override
     public AppearancePage waitUntilPageLoad() {
-        return null;
+        getWait5().until(ExpectedConditions.elementToBeClickable(FindPluginsButton));
+        return this;
     }
 
     public AppearancePage clickLightTheme() {
@@ -85,12 +88,7 @@ public class AppearancePage extends BasePage<AppearancePage> {
     public JenkinsManagementPage clickSaveButton() {
         saveButton.click();
 
-        getWait5().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                By.xpath("//*[@id='main-panel']/section[2]/h2[text() = 'System Configuration']")));
-        getWait5().until(webDriver ->
-                ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
-
-        return new JenkinsManagementPage(getDriver());
+        return new JenkinsManagementPage(getDriver()).waitUntilPageLoad();
     }
 
     public AppearancePage changeTheme(String theme) {
