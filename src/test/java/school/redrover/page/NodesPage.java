@@ -35,6 +35,9 @@ public class NodesPage  extends BasePage<NodesPage> {
     @FindBy(xpath = "(//select[@class='jenkins-select__input dropdownList'])[3]")
     WebElement selectAvailability;
 
+    @FindBy(css = "a[data-title='Delete Agent']")
+    private WebElement deleteAgent;
+
 
     public NodesPage(WebDriver driver) {
         super(driver);
@@ -108,9 +111,23 @@ public class NodesPage  extends BasePage<NodesPage> {
     }
 
     public String findNodesInList(String name) {
-       WebElement  item = getDriver().findElement(By.xpath("//a[@href='../computer/" + name + "/']"));
+        String item;
+        try {
+           item = getDriver().findElement(By.xpath("//a[@href='../computer/" + name + "/']")).getText();
+        }
+        catch (Exception e) {
+            item = "Nodes : " + name + " not exist in list of nodes";
+        }
 
-       return item.getText();
+       return item;
+    }
+
+    public NodesPage deleteNode(String name) {
+        getDriver().findElement(By.cssSelector("a[href='../computer/" + name + "/']")).click();
+        deleteAgent.click();
+        getWait5().until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[data-id='ok']"))).click();
+
+        return this;
     }
 }
 

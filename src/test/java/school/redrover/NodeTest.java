@@ -28,12 +28,31 @@ public class NodeTest extends BaseTest {
             "Bring this agent online when in demand, and take offline when idle"};
 
     private static final Integer[] NODE_PROPERTIES = {
-            0,1,2,3
+            0, 1, 2, 3
     };
+
+    public void createNode(String name) {
+        new HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .clickNodeConfigurationSystem()
+                .goToNewNodePage()
+                .enterNodeName(name)
+                .selectTypeNode()
+                .createFormNode()
+                .addDescription(NODE_DESCRIPTION)
+                .enterNumberExecutors(3)
+                .addLabels(LABELS_ARRAY)
+                .selectUsageOption(USAGE_VALUE_EXCLUSIVE)
+                .selectLaunchOption(LAUNCH_METHOD_JNLPLauncher)
+                .selectAvailabilityOption(AVAILABILITY_OPTION[1])
+                .checkNodeProperties(NODE_PROPERTIES[1])
+                .checkNodeProperties(NODE_PROPERTIES[2])
+                .submitNodeForm();
+    }
 
     @Test
     public void testAddNode() {
-       String nodeName=  new HomePage(getDriver())
+        String nodeName = new HomePage(getDriver())
                 .clickManageJenkinsGear()
                 .clickNodeConfigurationSystem()
                 .goToNewNodePage()
@@ -51,6 +70,19 @@ public class NodeTest extends BaseTest {
                 .submitNodeForm()
                 .findNodesInList(NODE_NAME);
 
-        Assert.assertEquals(nodeName,  NODE_NAME);
+        Assert.assertEquals(nodeName, NODE_NAME);
+    }
+
+    @Test
+    public void testDeleteNode() {
+        String localName = "TemporaryNode";
+        createNode(localName);
+        String node = new  HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .clickNodeConfigurationSystem()
+                .deleteNode(localName)
+                .findNodesInList(localName);
+
+        Assert.assertNotEquals(node, localName);
     }
 }
