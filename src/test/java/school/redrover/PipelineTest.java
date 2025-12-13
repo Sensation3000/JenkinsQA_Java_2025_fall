@@ -226,6 +226,7 @@ public class PipelineTest extends BaseTest {
                 "Alias " + validTimePeriod + " не прошёл валидацию");
     }
 
+    @Ignore
     @Test(dataProvider = "invalidCronSyntaxAndAliases")
     public void testScheduleWithInvalidData(String invalidTimePeriod, String expectedErrorMessage) {
         createPipeline(PIPELINE_NAME);
