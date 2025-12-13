@@ -152,10 +152,8 @@ public class HomePage extends BasePage<HomePage> {
     }
 
     public HomePage confirmDelete() {
-        WebElement yesButton = getWait2().until(
-                ExpectedConditions.elementToBeClickable(
-                        By.xpath("//dialog[@open]//button[@data-id='ok']"))
-        );
+        WebElement yesButton = getWait2().until(ExpectedConditions.elementToBeClickable(
+                        By.xpath("//dialog[@open]//button[@data-id='ok']")));
         yesButton.click();
         getWait5().until(ExpectedConditions.stalenessOf(yesButton));
 
