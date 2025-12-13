@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 
-public class FreestyleProjectConfigurationPage extends BasePage<FreestyleProjectConfigurationPage> {
+public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationPage {
 
     @FindBy(name = "description")
     private WebElement descriptionInput;

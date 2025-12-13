@@ -12,7 +12,7 @@ import school.redrover.common.BasePage;
 import java.util.List;
 
 
-public class FolderConfigurationPage extends BasePage<FolderConfigurationPage> {
+public class FolderConfigurationPage extends BaseProjectConfigurationPage {
 
     @FindBy(css = "button[data-section-id='health-metrics']")
     private WebElement healthMetricSidebarLink;

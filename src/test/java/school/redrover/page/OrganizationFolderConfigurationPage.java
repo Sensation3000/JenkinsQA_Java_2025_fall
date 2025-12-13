@@ -10,7 +10,7 @@ import school.redrover.common.BasePage;
 import java.util.List;
 
 
-public class OrganizationFolderConfigurationPage extends BasePage<OrganizationFolderConfigurationPage> {
+public class OrganizationFolderConfigurationPage extends BaseProjectConfigurationPage {
 
     @FindBy(name = "Submit")
     private WebElement submitButton;

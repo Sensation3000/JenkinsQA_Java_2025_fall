@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
 
-public class MultiConfigurationProjectConfigurationPage extends BasePage<MultiConfigurationProjectConfigurationPage> {
+public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfigurationPage {
 
     @FindBy(name = "Submit")
     private WebElement submitButton;

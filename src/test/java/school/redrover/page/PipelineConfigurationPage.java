@@ -13,7 +13,7 @@ import school.redrover.common.BasePage;
 import java.util.List;
 
 
-public class PipelineConfigurationPage extends BasePage<PipelineConfigurationPage> {
+public class PipelineConfigurationPage extends BaseProjectConfigurationPage {
 
     @FindBy(id = "advanced")
     private WebElement advancedTitle;
