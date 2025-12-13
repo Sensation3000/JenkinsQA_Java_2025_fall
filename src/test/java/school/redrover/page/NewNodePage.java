@@ -31,10 +31,6 @@ public class NewNodePage extends BasePage<NewNodePage> {
         return this;
     }
 
-    public String getHeadingText() {
-        return getDriver().findElement(By.xpath("//h1")).getText();
-    }
-
     public boolean isFormDisplayed() {
         return getDriver().findElement(By.xpath("//form")).isDisplayed();
     }

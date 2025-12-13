@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.HomePage;
 import school.redrover.page.MultibranchPipelineProjectPage;
-import school.redrover.page.NewItemPage;
 
 import java.util.List;
 
@@ -214,7 +213,7 @@ public class MultibranchPipelineTest extends BaseTest {
                 .clickSaveButton()
                 .clickRenameLinkInSideMenu()
                 .renameMultibranchPipeline(RENAMED_MULTIBRANCH_PIPELINE)
-                .getHeadingText();
+                .getHeaderText();
 
         Assert.assertEquals(actualRenamedMultibranchPipeline, RENAMED_MULTIBRANCH_PIPELINE);
     }

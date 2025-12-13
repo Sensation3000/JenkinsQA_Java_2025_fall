@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import school.redrover.common.BasePage;
 import school.redrover.common.TestUtils;
-import school.redrover.type.BasePageWithHeading;
 
 import java.time.Duration;
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 
-public class FreestyleProjectConfigurationPage extends BasePage<FreestyleProjectConfigurationPage> implements BasePageWithHeading {
+public class FreestyleProjectConfigurationPage extends BasePage<FreestyleProjectConfigurationPage> {
 
     @FindBy(name = "description")
     private WebElement descriptionInput;

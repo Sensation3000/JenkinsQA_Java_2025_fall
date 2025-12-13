@@ -17,6 +17,9 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
     @FindBy(id = "settings-search-bar")
     private WebElement sendTitle;
 
+    @FindBy(xpath = "//h1[contains(text(),'Manage Jenkins')]")
+    private WebElement header;
+
     @FindBy(xpath = "//a[@href = 'appearance']")
     private WebElement appearanceLink;
 
@@ -38,7 +41,7 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
 
     @Override
     public JenkinsManagementPage waitUntilPageLoad() {
-        getWait5().until(ExpectedConditions.elementToBeClickable(usersLink));
+        getWait5().until(ExpectedConditions.visibilityOf(header));
 
         return this;
     }
@@ -64,11 +67,6 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
                 .perform();
 
         return new SystemConfigurationPage(getDriver());
-    }
-
-    public String getHeadingText() {
-        return getWait5().until(ExpectedConditions.presenceOfElementLocated(By.
-                tagName("h1"))).getText().trim();
     }
 
     public String getHTMLAttributeThemeText() {

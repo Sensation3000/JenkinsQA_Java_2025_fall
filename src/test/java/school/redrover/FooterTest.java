@@ -27,7 +27,7 @@ public class FooterTest extends BaseTest {
     public void testApiPageHeading() {
         String actualHeading = new HomePage(getDriver())
                 .clickRestApiLink()
-                .getHeadingText();
+                .getHeaderText();
 
         Assert.assertEquals(
                 actualHeading,
