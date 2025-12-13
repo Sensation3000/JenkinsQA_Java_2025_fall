@@ -96,10 +96,11 @@ public class HomePage extends BasePage<HomePage> {
         return new CloudsPage(getDriver());
     }
 
-    public String getHeadingText() {
+    @Override
+    public String getHeaderText() {
         return getWait2()
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".empty-state-block > h1")))
-                .getText();
+                .getText().trim();
     }
 
     public String getProjectName() {

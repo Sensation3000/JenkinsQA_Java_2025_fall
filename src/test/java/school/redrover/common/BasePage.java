@@ -35,6 +35,14 @@ public abstract class BasePage<Page> extends BaseModel {
 
     public abstract Page waitUntilPageLoad();
 
+    public WebElement getHeader() {
+        return getWait5().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.tagName("h1"))));
+    }
+
+    public String getHeaderText() {
+        return getHeader().getText().trim();
+    }
+
     public HomePage gotoHomePage() {
         getWait5().until(ExpectedConditions.elementToBeClickable(By.className("app-jenkins-logo"))).click();
 

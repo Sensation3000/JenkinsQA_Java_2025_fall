@@ -6,7 +6,7 @@ import school.redrover.common.BaseTest;
 import school.redrover.page.HomePage;
 
 public class NodeTest extends BaseTest {
-    private static final String NODE_NAME = "SecondNode";
+    private static final String EXP_NODE_NAME = "SecondNode";
     private static final String NODE_DESCRIPTION = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " +
             "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud " +
             "exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in " +
@@ -31,32 +31,13 @@ public class NodeTest extends BaseTest {
             0, 1, 2, 3
     };
 
-    public void createNode(String name) {
-        new HomePage(getDriver())
-                .clickManageJenkinsGear()
-                .clickNodeConfigurationSystem()
-                .goToNewNodePage()
-                .enterNodeName(name)
-                .selectTypeNode()
-                .createFormNode()
-                .addDescription(NODE_DESCRIPTION)
-                .enterNumberExecutors(3)
-                .addLabels(LABELS_ARRAY)
-                .selectUsageOption(USAGE_VALUE_EXCLUSIVE)
-                .selectLaunchOption(LAUNCH_METHOD_JNLPLauncher)
-                .selectAvailabilityOption(AVAILABILITY_OPTION[1])
-                .checkNodeProperties(NODE_PROPERTIES[1])
-                .checkNodeProperties(NODE_PROPERTIES[2])
-                .submitNodeForm();
-    }
-
     @Test
     public void testAddNode() {
         String nodeName = new HomePage(getDriver())
                 .clickManageJenkinsGear()
                 .clickNodeConfigurationSystem()
                 .goToNewNodePage()
-                .enterNodeName(NODE_NAME)
+                .enterNodeName(EXP_NODE_NAME)
                 .selectTypeNode()
                 .createFormNode()
                 .addDescription(NODE_DESCRIPTION)
@@ -68,21 +49,20 @@ public class NodeTest extends BaseTest {
                 .checkNodeProperties(NODE_PROPERTIES[1])
                 .checkNodeProperties(NODE_PROPERTIES[2])
                 .submitNodeForm()
-                .findNodesInList(NODE_NAME);
+                .findNodesInList(EXP_NODE_NAME);
 
-        Assert.assertEquals(nodeName, NODE_NAME);
+        Assert.assertEquals(nodeName, EXP_NODE_NAME);
     }
 
-    @Test
+    @Test(dependsOnMethods = "testAddNode")
     public void testDeleteNode() {
-        String localName = "TemporaryNode";
-        createNode(localName);
-        String node = new  HomePage(getDriver())
+
+        String actNodeName = new  HomePage(getDriver())
                 .clickManageJenkinsGear()
                 .clickNodeConfigurationSystem()
-                .deleteNode(localName)
-                .findNodesInList(localName);
+                .deleteNode(EXP_NODE_NAME)
+                .findNodesInList(EXP_NODE_NAME);
 
-        Assert.assertNotEquals(node, localName);
+        Assert.assertNotEquals(actNodeName, EXP_NODE_NAME);
     }
 }

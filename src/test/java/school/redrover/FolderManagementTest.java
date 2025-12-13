@@ -64,7 +64,7 @@ public class FolderManagementTest extends BaseTest {
                 .clickFolder(FOLDER_NAME)
                 .openSubItemPage(itemName, new PipelinePage(getDriver()))
                 .clickConfigureLinkInSideMenu()
-                .getHeadingText();
+                .getHeaderText();
 
         Assert.assertEquals(actualHeadingText, "Configure");
     }

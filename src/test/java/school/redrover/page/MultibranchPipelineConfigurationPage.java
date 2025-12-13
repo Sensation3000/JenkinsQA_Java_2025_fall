@@ -7,10 +7,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
-import school.redrover.type.BasePageWithHeading;
 
 
-public class MultibranchPipelineConfigurationPage extends BasePage<MultibranchPipelineConfigurationPage> implements BasePageWithHeading {
+public class MultibranchPipelineConfigurationPage extends BasePage<MultibranchPipelineConfigurationPage> {
 
     @FindBy(name = "_.description")
     private WebElement descriptionField;

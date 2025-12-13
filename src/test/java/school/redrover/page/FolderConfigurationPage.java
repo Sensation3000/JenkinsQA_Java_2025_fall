@@ -8,12 +8,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
-import school.redrover.type.BasePageWithHeading;
 
 import java.util.List;
 
 
-public class FolderConfigurationPage extends BasePage<FolderConfigurationPage> implements BasePageWithHeading {
+public class FolderConfigurationPage extends BasePage<FolderConfigurationPage> {
 
     @FindBy(css = "button[data-section-id='health-metrics']")
     private WebElement healthMetricSidebarLink;

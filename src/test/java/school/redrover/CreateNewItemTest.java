@@ -23,7 +23,7 @@ public class CreateNewItemTest extends BaseTest {
     public void testNewItemPageByClickingCreateAJobLink() {
         String result = new HomePage(getDriver())
                 .clickCreateJob()
-                .getHeadingText();
+                .getHeaderText();
 
         Assert.assertEquals(result, "New Item");
     }
@@ -32,7 +32,7 @@ public class CreateNewItemTest extends BaseTest {
     public void testNewItemPageByClickingNewItemLink() {
         String result = new HomePage(getDriver())
                 .clickNewItemOnLeftMenu()
-                .getHeadingText();
+                .getHeaderText();
 
         Assert.assertEquals(result, "New Item");
     }

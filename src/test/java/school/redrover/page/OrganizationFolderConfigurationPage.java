@@ -6,12 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
-import school.redrover.type.BasePageWithHeading;
 
 import java.util.List;
 
 
-public class OrganizationFolderConfigurationPage extends BasePage<OrganizationFolderConfigurationPage> implements BasePageWithHeading {
+public class OrganizationFolderConfigurationPage extends BasePage<OrganizationFolderConfigurationPage> {
 
     @FindBy(name = "Submit")
     private WebElement submitButton;
