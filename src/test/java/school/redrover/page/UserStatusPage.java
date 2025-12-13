@@ -40,7 +40,7 @@ public class UserStatusPage extends BasePage<UserStatusPage> {
 
     @Override
     public UserStatusPage waitUntilPageLoad() {
-        getWait5().until(ExpectedConditions.visibilityOf(userId));
+        getWait5().until(ExpectedConditions.elementToBeClickable(editDescriptionButton));
 
         return this;
     }
