@@ -21,7 +21,7 @@ public class ConfigurationMatrixTest extends BaseTest {
 
     private void createConfigurationMatrix() {
         new HomePage(getDriver())
-                .clickSidebarNewItem()
+                .clickNewItemOnLeftMenu()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit();
     }
@@ -29,7 +29,7 @@ public class ConfigurationMatrixTest extends BaseTest {
     @Test
     public void testSectionDisplayed() {
         String configurationMatrixText = new HomePage(getDriver())
-                .clickSidebarNewItem()
+                .clickNewItemOnLeftMenu()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
                 .getConfigurationMatrixText();
