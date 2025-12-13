@@ -71,7 +71,7 @@ public class FreestyleSteps {
 
     @Then("Freestyle job name is {string}")
     public void assertFreestyleJobName(String jobName) {
-        Assert.assertEquals(freestyleProjectPage.getHeadingText(), jobName);
+        Assert.assertEquals(freestyleProjectPage.getHeaderText(), jobName);
     }
 
     @When("Click Freestyle job {string}")

@@ -16,10 +16,6 @@ public class CloudsPage extends BasePage<CloudsPage> {
         return null;
     }
 
-    public String getHeadingText() {
-        return getDriver().findElement(By.xpath("//h1")).getText();
-    }
-
     public String getParagraphText() {
         return getDriver().findElement(By.xpath("//p")).getText();
     }

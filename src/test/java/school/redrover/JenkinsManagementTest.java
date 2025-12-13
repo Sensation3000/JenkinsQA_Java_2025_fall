@@ -1,10 +1,5 @@
 package school.redrover;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Ignore;
@@ -12,9 +7,7 @@ import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.HomePage;
 
-import java.util.Collections;
 import java.util.List;
-import java.time.Duration;
 
 public class JenkinsManagementTest extends BaseTest {
     private final String TITLE_TEXT = "Dashboard - Jenkins";
@@ -119,7 +112,7 @@ public class JenkinsManagementTest extends BaseTest {
                 .clickManageJenkinsGear()
                 .sendTitle(SETTING_TITLE)
                 .clickSearchResult()
-                .getHeadingText();
+                .getHeaderText();
 
         Assert.assertEquals(searchHeading, "System");
     }

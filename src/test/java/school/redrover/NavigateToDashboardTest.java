@@ -39,7 +39,7 @@ public class NavigateToDashboardTest extends BaseTest {
                     .gotoHomePage()
                     .clickJob(checks)
                     .checkUrlContains(checks);
-            String check2 = new HomePage(getDriver()).gotoHomePage().clickNewItemOnLeftMenu().getHeadingText();
+            String check2 = new HomePage(getDriver()).gotoHomePage().clickNewItemOnLeftMenu().getHeaderText();
             Assert.assertEquals(check, checks);
             Assert.assertEquals(check2, "New Item");
         }

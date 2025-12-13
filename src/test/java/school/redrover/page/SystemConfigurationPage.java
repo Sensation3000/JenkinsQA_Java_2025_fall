@@ -12,9 +12,6 @@ import school.redrover.common.BasePage;
 
 public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
 
-    @FindBy(tagName = "h1")
-    private WebElement headingText;
-
     @FindBy(name = "Submit")
     private WebElement clickSaveButton;
 
@@ -83,10 +80,6 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
     public void clickSave() {
         WebElement saveButton = getDriver().findElement(By.name("Submit"));
         saveButton.click();
-    }
-
-    public String getHeadingText() {
-        return headingText.getText().trim();
     }
 
     public SystemConfigurationPage clickCheckboxGlobalProperties() {

@@ -18,11 +18,6 @@ public class RestApiPage extends BasePage<RestApiPage> {
         return null;
     }
 
-    public String getHeadingText(){
-
-        return getDriver().findElement(By.tagName("h1")).getText();
-    }
-
     public List<String> getXmlJsonPythonApiLinksText(){
         return getDriver()
                 .findElements(By.xpath("//dt/a[@href]"))
