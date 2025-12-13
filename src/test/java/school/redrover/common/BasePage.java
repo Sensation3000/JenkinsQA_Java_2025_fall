@@ -113,9 +113,8 @@ public abstract class BasePage<Page> extends BaseModel {
 
     public UserStatusPage clickUserAccountIcon() {
         userAccountIcon.click();
-        getWait10().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
 
-        return new UserStatusPage(getDriver());
+        return new UserStatusPage(getDriver()).waitUntilPageLoad();
     }
 
     public String getUserNameFromDropDownMenu() {

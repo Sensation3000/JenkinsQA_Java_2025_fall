@@ -23,7 +23,7 @@ public class FreestyleSteps {
 
     @When("Go to NewJob")
     public void goToNewJob() {
-        newItemPage = new HomePage(CucumberDriver.getDriver()).clickSidebarNewItem();
+        newItemPage = new HomePage(CucumberDriver.getDriver()).clickNewItemOnLeftMenu();
     }
 
     @And("Choose job type as {string}")

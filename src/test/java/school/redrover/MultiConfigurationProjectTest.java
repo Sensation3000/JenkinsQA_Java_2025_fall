@@ -14,7 +14,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
     @Test
     public void testCreateProject() {
         String actualProjectName = new HomePage(getDriver())
-                .clickSidebarNewItem()
+                .clickNewItemOnLeftMenu()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
                 .clickSubmit()
@@ -27,7 +27,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
     @Test()
     public void testAddDescriptionToProject() {
         String actualDescription = new HomePage(getDriver())
-                .clickSidebarNewItem()
+                .clickNewItemOnLeftMenu()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
                 .clickSubmit()
@@ -41,7 +41,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
     @Test
     public void testRenameViaSidebar() {
         String actualProjectName = new HomePage(getDriver())
-                .clickSidebarNewItem()
+                .clickNewItemOnLeftMenu()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
                 .clickSubmit()
@@ -56,7 +56,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
     @Test
     public void testRenameViaDashboardDropdownMenu() {
         String actualProjectName = new HomePage(getDriver())
-                .clickSidebarNewItem()
+                .clickNewItemOnLeftMenu()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
                 .clickSubmit()

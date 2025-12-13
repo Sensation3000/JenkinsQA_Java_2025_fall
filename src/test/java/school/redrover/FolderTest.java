@@ -49,7 +49,7 @@ public class FolderTest extends BaseTest {
     @Test(dependsOnMethods = "testIsEmpty")
     public void testNewItemDefaultAddedToExistingFolder() {
         new HomePage(getDriver())
-                .clickSidebarNewItem()
+                .clickNewItemOnLeftMenu()
                 .sendName(FOLDER_NAME_2)
                 .selectFolderAndSubmit()
                 .clickSave()
@@ -165,7 +165,7 @@ public class FolderTest extends BaseTest {
             String itemName = (String) item[0];
             String itemType = (String) item[1];
             new HomePage(getDriver())
-                    .clickSidebarNewItem()
+                    .clickNewItemOnLeftMenu()
                     .sendName(itemName)
                     .selectItemTypeAndSubmitAndGoHome(itemType)
                     .openDropdownMenu(itemName)

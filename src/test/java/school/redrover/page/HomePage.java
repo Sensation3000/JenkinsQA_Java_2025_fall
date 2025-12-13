@@ -18,8 +18,11 @@ public class HomePage extends BasePage<HomePage> {
     @FindBy(xpath = "//a[@href='/view/all/newJob']")
     private WebElement sidebarNewItem;
 
+    @FindBy(xpath = "//a[@href='newJob']")
+    private WebElement createJobButton;
+
     @FindBy(css = "[href='/newView']")
-    private WebElement createNewItem;
+    private WebElement createNewItemOnPageWithJob;
 
     @FindBy(css = "[class*=\"job-status\"] td:first-child svg")
     private WebElement statusTooltipProjectIcon;
@@ -55,16 +58,15 @@ public class HomePage extends BasePage<HomePage> {
     }
 
     public NewItemPage clickCreateJob() {
-        getDriver().findElement(By.xpath("//a[@href='newJob']")).click();
+        createJobButton.click();
 
-        return new NewItemPage(getDriver());
+        return new NewItemPage(getDriver()).waitUntilPageLoad();
     }
 
     public NewItemPage clickNewItemOnLeftMenu() {
         sidebarNewItem.click();
 
-        getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.id("name")));
-        return new NewItemPage(getDriver());
+        return new NewItemPage(getDriver()).waitUntilPageLoad();
     }
 
     public List<String> getProjectList() {
@@ -92,13 +94,6 @@ public class HomePage extends BasePage<HomePage> {
 
         getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
         return new CloudsPage(getDriver());
-    }
-
-    public NewItemPage clickSidebarNewItem() {
-        sidebarNewItem.click();
-
-        getWait2().until(ExpectedConditions.visibilityOfElementLocated(By.id("name")));
-        return new NewItemPage(getDriver());
     }
 
     @Override
@@ -145,7 +140,6 @@ public class HomePage extends BasePage<HomePage> {
         return new PipelineSyntaxPage(getDriver());
     }
 
-
     public HomePage clickDeleteItemInDropdownMenu() {
         getWait2().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class, 'jenkins-dropdown__item') and contains(., 'Delete')]"))).click();
 
@@ -159,10 +153,8 @@ public class HomePage extends BasePage<HomePage> {
     }
 
     public HomePage confirmDelete() {
-        WebElement yesButton = getWait2().until(
-                ExpectedConditions.elementToBeClickable(
-                        By.xpath("//dialog[@open]//button[@data-id='ok']"))
-        );
+        WebElement yesButton = getWait2().until(ExpectedConditions.elementToBeClickable(
+                        By.xpath("//dialog[@open]//button[@data-id='ok']")));
         yesButton.click();
         getWait5().until(ExpectedConditions.stalenessOf(yesButton));
 
@@ -181,9 +173,9 @@ public class HomePage extends BasePage<HomePage> {
     }
 
     public CreateViewPage clickPlusToCreateView() {
-        createNewItem.click();
+        createNewItemOnPageWithJob.click();
 
-        return new CreateViewPage(getDriver());
+        return new CreateViewPage(getDriver()).waitUntilPageLoad();
     }
 
     public HomePage clickViewName(String viewName) {

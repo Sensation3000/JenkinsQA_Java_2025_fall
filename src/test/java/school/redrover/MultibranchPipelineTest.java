@@ -46,7 +46,7 @@ public class MultibranchPipelineTest extends BaseTest {
         final String expectedDescription = "AddedDescription";
 
         String actualDescription = new HomePage(getDriver())
-                .clickSidebarNewItem()
+                .clickNewItemOnLeftMenu()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .sendDescription(expectedDescription)
@@ -207,7 +207,7 @@ public class MultibranchPipelineTest extends BaseTest {
     @Test
     public void testRenameViaSidebar() {
         String actualRenamedMultibranchPipeline = new HomePage(getDriver())
-                .clickSidebarNewItem()
+                .clickNewItemOnLeftMenu()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .clickSaveButton()

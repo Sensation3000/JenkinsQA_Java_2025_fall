@@ -119,7 +119,7 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
 
     public AppearancePage clickAppearanceLink() {
         appearanceLink.click();
-        return new AppearancePage(getDriver());
+        return new AppearancePage(getDriver()).waitUntilPageLoad();
     }
 
     public NodesPage clickNodeConfigurationSystem() {
