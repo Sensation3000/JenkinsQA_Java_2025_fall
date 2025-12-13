@@ -45,9 +45,6 @@ public class HomePage extends BasePage<HomePage> {
     @FindBy(xpath = "//span[text()='Configure a cloud']")
     private WebElement configureCloudLink;
 
-    @FindBy(xpath = "//a[@href='api/']")
-    private WebElement getRestApiLink;
-
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -243,7 +240,7 @@ public class HomePage extends BasePage<HomePage> {
 
     public WebElement getRestApiLink() {
 
-        return getRestApiLink;
+        return getDriver().findElement(By.xpath("//a[@href='api/']"));
     }
 
     public void pressTabAndEnter(WebElement element) {
