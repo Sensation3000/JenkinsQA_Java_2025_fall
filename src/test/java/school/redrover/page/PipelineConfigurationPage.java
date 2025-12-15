@@ -8,12 +8,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import school.redrover.common.BasePage;
 
 import java.util.List;
 
 
-public class PipelineConfigurationPage extends BaseProjectConfigurationPage {
+public class PipelineConfigurationPage extends BaseProjectConfigurationPage<PipelineConfigurationPage> {
 
     @FindBy(id = "advanced")
     private WebElement advancedTitle;
@@ -78,11 +77,11 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage {
         return this;
     }
 
-    public PipelinePage clickSubmitButton() {
+    public PipelineStatusPage clickSubmitButton() {
         submitButton.click();
 
         getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
-        return new PipelinePage(getDriver());
+        return new PipelineStatusPage(getDriver());
     }
 
     public PipelineConfigurationPage clickApplyButton() {

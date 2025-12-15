@@ -5,10 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import school.redrover.common.BasePage;
 
 
-public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfigurationPage {
+public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfigurationPage<MultiConfigurationProjectConfigurationPage> {
 
     @FindBy(name = "Submit")
     private WebElement submitButton;
@@ -28,12 +27,12 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
         return this;
     }
 
-    public MultiConfigurationProjectPage clickSubmit() {
+    public MultiConfigurationProjectStatusPage clickSubmit() {
         submitButton.click();
         getWait5().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                 By.className("permalinks-header")));
 
-        return new MultiConfigurationProjectPage(getDriver());
+        return new MultiConfigurationProjectStatusPage(getDriver()).waitUntilPageLoad();
     }
 
     public String getConfigurationMatrixText() {

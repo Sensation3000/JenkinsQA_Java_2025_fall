@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.FreestyleProjectConfigurationPage;
-import school.redrover.page.FreestyleProjectPage;
+import school.redrover.page.FreestyleProjectStatusPage;
 import school.redrover.page.HomePage;
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class FreestyleProjectTest extends BaseTest {
     @Test(dependsOnMethods = "testCreate")
     public void testScheduleBuild() {
         String actualNotificationBuildScheduled = new HomePage(getDriver())
-                .openProject(PROJECT_NAME, new FreestyleProjectPage(getDriver()))
+                .openProject(PROJECT_NAME, new FreestyleProjectStatusPage(getDriver()))
                 .clickBuildNow()
                 .getNotificationBuildScheduled();
 
@@ -64,8 +64,8 @@ public class FreestyleProjectTest extends BaseTest {
     @Test(dependsOnMethods = "testScheduleBuild")
     public void testAddDescription() {
         String actualDescriptionText = new HomePage(getDriver())
-                .openProject(PROJECT_NAME, new FreestyleProjectPage(getDriver()))
-                .clickConfigureLinkInSideMenu()
+                .openProject(PROJECT_NAME, new FreestyleProjectStatusPage(getDriver()))
+                .clickConfigureInSideMenu(new FreestyleProjectConfigurationPage(getDriver()))
                 .setDescription(PROJECT_DESCRIPTION_EXPECTED)
                 .clickSave()
                 .getDescription();
@@ -88,8 +88,8 @@ public class FreestyleProjectTest extends BaseTest {
     @Test(dependsOnMethods = "testDisableProjectViaConfigureDropdownMenu")
     public void testEnableProjectViaMainMenuConfigure() {
         boolean visibleBuildButtonForEnabledProject = new HomePage(getDriver())
-                .openProject(PROJECT_NAME, new FreestyleProjectPage(getDriver()))
-                .clickConfigureLinkInSideMenu()
+                .openProject(PROJECT_NAME, new FreestyleProjectStatusPage(getDriver()))
+                .clickConfigureInSideMenu(new FreestyleProjectConfigurationPage(getDriver()))
                 .clickEnableDisableProject()
                 .clickSave()
                 .gotoHomePage()
@@ -102,8 +102,8 @@ public class FreestyleProjectTest extends BaseTest {
     public void testBuildStepsFilterNames() {
 
         FreestyleProjectConfigurationPage configPage = new HomePage(getDriver())
-                .openProject(PROJECT_NAME, new FreestyleProjectPage(getDriver()))
-                .clickConfigureLinkInSideMenu()
+                .openProject(PROJECT_NAME, new FreestyleProjectStatusPage(getDriver()))
+                .clickConfigureInSideMenu(new FreestyleProjectConfigurationPage(getDriver()))
                 .clickBuildStepMenuOption();
 
         for (String buildStep : BUILD_STEPS) {
@@ -167,8 +167,8 @@ public class FreestyleProjectTest extends BaseTest {
                 .sendName(PROJECT_NAME)
                 .selectFreestyleProjectAndSubmit()
                 .gotoHomePage()
-                .openProject(PROJECT_NAME, new FreestyleProjectPage(getDriver()))
-                .clickConfigureLinkInSideMenu()
+                .openProject(PROJECT_NAME, new FreestyleProjectStatusPage(getDriver()))
+                .clickConfigureInSideMenu(new FreestyleProjectConfigurationPage(getDriver()))
                 .getSCMTitleText();
 
         Assert.assertEquals(scmTitleText, SCM_TITLE_EXPECTED);
@@ -215,8 +215,8 @@ public class FreestyleProjectTest extends BaseTest {
         final String expectedDescription = "Set up automated actions that start your build based on specific events, like code changes or scheduled times.";
 
         String triggersDescription = new HomePage(getDriver())
-                .openProject(PROJECT_NAME, new FreestyleProjectPage(getDriver()))
-                .clickConfigureLinkInSideMenu()
+                .openProject(PROJECT_NAME, new FreestyleProjectStatusPage(getDriver()))
+                .clickConfigureInSideMenu(new FreestyleProjectConfigurationPage(getDriver()))
                 .clickTriggersLinkInSideMenu()
                 .getTriggersDescriptionText();
 

@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.HomePage;
-import school.redrover.page.OrganizationFolderPage;
+import school.redrover.page.OrganizationFolderStatusPage;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class OrganizationFolderConfigurationTest extends BaseTest {
         String expectedDisplayName = "New folder name";
         String expectedDescription = "New Description";
 
-        OrganizationFolderPage organizationFolderPage = new HomePage(getDriver())
+        OrganizationFolderStatusPage organizationFolderPage = new HomePage(getDriver())
                 .clickNewItemOnLeftMenu()
                 .sendName(FOLDER_NAME)
                 .selectOrganizationFolderAndSubmit()

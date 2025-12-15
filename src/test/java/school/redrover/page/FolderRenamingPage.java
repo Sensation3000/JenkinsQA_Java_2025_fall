@@ -33,10 +33,10 @@ public class FolderRenamingPage extends BasePage<FolderRenamingPage> {
         return this;
     }
 
-    public FolderPage renameButtonClick () {
+    public FolderStatusPage renameButtonClick () {
         renameButton.click();
 
-        return new FolderPage(getDriver());
+        return new FolderStatusPage(getDriver());
     }
 
     public FolderRenamingPage clearName () {

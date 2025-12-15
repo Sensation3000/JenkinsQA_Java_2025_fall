@@ -6,7 +6,9 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.HomePage;
-import school.redrover.page.MultibranchPipelineProjectPage;
+import school.redrover.page.MultibranchPipelineConfigurationPage;
+import school.redrover.page.MultibranchPipelineProjectStatusPage;
+import school.redrover.page.MultibranchPipelineRenamingPage;
 
 import java.util.List;
 
@@ -59,8 +61,8 @@ public class MultibranchPipelineTest extends BaseTest {
     @Test(dependsOnMethods = "testCreateMultibranchPipeline")
     public void testJobDescriptionPreview() {
         String jobDescriptionPreviewText = new HomePage(getDriver())
-                .openProject(MULTIBRANCH_PIPELINE_NAME, new MultibranchPipelineProjectPage(getDriver()))
-                .clickConfigureLinkInSideMenu()
+                .openProject(MULTIBRANCH_PIPELINE_NAME, new MultibranchPipelineProjectStatusPage(getDriver()))
+                .clickConfigureInSideMenu(new MultibranchPipelineConfigurationPage(getDriver()))
                 .sendDescription(MULTIBRANCH_JOB_DESCRIPTION)
                 .getJobDescriptionPreviewText();
 
@@ -72,11 +74,11 @@ public class MultibranchPipelineTest extends BaseTest {
         final String updatedJobDescription = "This is a new project description";
 
         String actualJobDescription = new HomePage(getDriver())
-                .openProject(MULTIBRANCH_PIPELINE_NAME, new MultibranchPipelineProjectPage(getDriver()))
-                .clickConfigureLinkInSideMenu()
+                .openProject(MULTIBRANCH_PIPELINE_NAME, new MultibranchPipelineProjectStatusPage(getDriver()))
+                .clickConfigureInSideMenu(new MultibranchPipelineConfigurationPage(getDriver()))
                 .sendDescription(MULTIBRANCH_JOB_DESCRIPTION)
                 .clickSaveButton()
-                .clickConfigureLinkInSideMenu()
+                .clickConfigureInSideMenu(new MultibranchPipelineConfigurationPage(getDriver()))
                 .sendDescription(updatedJobDescription)
                 .clickSaveButton()
                 .getDescription();
@@ -147,8 +149,8 @@ public class MultibranchPipelineTest extends BaseTest {
         final String expectedToggleState = "Disabled";
 
         String actualToggleState = new HomePage(getDriver())
-                .openProject(MULTIBRANCH_PIPELINE_NAME, new MultibranchPipelineProjectPage(getDriver()))
-                .clickConfigureLinkInSideMenu()
+                .openProject(MULTIBRANCH_PIPELINE_NAME, new MultibranchPipelineProjectStatusPage(getDriver()))
+                .clickConfigureInSideMenu(new MultibranchPipelineConfigurationPage(getDriver()))
                 .clickToggle()
                 .getToggleState();
 
@@ -196,7 +198,7 @@ public class MultibranchPipelineTest extends BaseTest {
     @Test(dependsOnMethods = "testCreateMultibranchPipeline")
     public void testDescriptionField() {
         String descriptionFieldText = new HomePage(getDriver())
-                .openProject(MULTIBRANCH_PIPELINE_NAME, new MultibranchPipelineProjectPage(getDriver()))
+                .openProject(MULTIBRANCH_PIPELINE_NAME, new MultibranchPipelineProjectStatusPage(getDriver()))
                 .clickAddDescriptionLink()
                 .sendDescription(MULTIBRANCH_JOB_DESCRIPTION)
                 .getDescriptionFieldText();
@@ -211,7 +213,7 @@ public class MultibranchPipelineTest extends BaseTest {
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .clickSaveButton()
-                .clickRenameLinkInSideMenu()
+                .clickRenameInSideMenu(new MultibranchPipelineRenamingPage(getDriver()))
                 .renameMultibranchPipeline(RENAMED_MULTIBRANCH_PIPELINE)
                 .getHeaderText();
 
@@ -223,8 +225,8 @@ public class MultibranchPipelineTest extends BaseTest {
         final String expectedErrorMessage = "A name cannot end with ‘.’";
 
         String actualErrorMessage = new HomePage(getDriver())
-                .openProject(MULTIBRANCH_PIPELINE_NAME, new MultibranchPipelineProjectPage(getDriver()))
-                .clickRenameLinkInSideMenu()
+                .openProject(MULTIBRANCH_PIPELINE_NAME, new MultibranchPipelineProjectStatusPage(getDriver()))
+                .clickRenameInSideMenu(new MultibranchPipelineRenamingPage(getDriver()))
                 .renameJob(MULTIBRANCH_PIPELINE_NAME + ".")
                 .submitForm()
                 .getErrorMessage();

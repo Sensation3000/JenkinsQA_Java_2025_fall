@@ -76,17 +76,18 @@ public class HomePage extends BasePage<HomePage> {
                 .toList();
     }
 
-    public FolderPage clickFolder(String folderName) {
+    public FolderStatusPage clickFolder(String folderName) {
         getDriver().findElement(By.xpath("//span[text()='%s']".formatted(folderName))).click();
 
-        return new FolderPage(getDriver());
+        return new FolderStatusPage(getDriver());
     }
 
-    public <T extends BaseProjectPage<?>> T openProject(String jobName, T resultPage) {
+    public <ProjectStatusPage extends BaseProjectStatusPage<ProjectStatusPage>>
+        ProjectStatusPage openProject(String jobName, ProjectStatusPage projectStatusPage) {
+
         TestUtils.clickJS(getDriver(), By.xpath("//span[text()='%s']".formatted(jobName.trim())));
 
-        resultPage.waitUntilPageLoad();
-        return resultPage;
+        return projectStatusPage.waitUntilPageLoad();
     }
 
     public CloudsPage clickConfigureCloud() {
@@ -94,6 +95,13 @@ public class HomePage extends BasePage<HomePage> {
 
         getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
         return new CloudsPage(getDriver());
+    }
+
+    public NewItemPage clickSidebarNewItem() {
+        sidebarNewItem.click();
+
+        getWait2().until(ExpectedConditions.visibilityOfElementLocated(By.id("name")));
+        return new NewItemPage(getDriver());
     }
 
     @Override
@@ -261,7 +269,8 @@ public class HomePage extends BasePage<HomePage> {
         new Actions(getDriver())
                 .moveToElement(getDriver().findElement(By.xpath("//*[@id='job_%s']/td[1]/div".formatted(projectName))))
                 .perform();
-        return getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-tippy-root]")))
+
+        return getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[data-tippy-root]")))
                 .getText();
     }
 

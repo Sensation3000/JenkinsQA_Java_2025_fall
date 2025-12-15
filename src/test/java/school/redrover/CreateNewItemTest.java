@@ -8,7 +8,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import school.redrover.common.BaseTest;
-import school.redrover.page.FreestyleProjectPage;
+import school.redrover.page.FreestyleProjectConfigurationPage;
+import school.redrover.page.FreestyleProjectStatusPage;
 import school.redrover.page.HomePage;
 import school.redrover.page.NewItemPage;
 
@@ -235,8 +236,8 @@ public class CreateNewItemTest extends BaseTest {
                 .sendName(newName)
                 .sendNameToCopyFromAndSubmit(originalName)
                 .gotoHomePage()
-                .openProject(newName, new FreestyleProjectPage(getDriver()))
-                .clickConfigureLinkInSideMenu()
+                .openProject(newName, new FreestyleProjectStatusPage(getDriver()))
+                .clickConfigureInSideMenu(new FreestyleProjectConfigurationPage(getDriver()))
                 .getSettingsToList();
 
         Assert.assertEquals(originalItemSettingsList, copiedItemSettingsList);

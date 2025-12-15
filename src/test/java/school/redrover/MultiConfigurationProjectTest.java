@@ -5,6 +5,7 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.HomePage;
+import school.redrover.page.MultiConfigurationProjectRenamingPage;
 
 public class MultiConfigurationProjectTest extends BaseTest {
     private static final String PROJECT_NAME = "Multiconfiguration project name";
@@ -45,7 +46,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
                 .clickSubmit()
-                .clickRenameLinkInSideMenu()
+                .clickRenameInSideMenu(new MultiConfigurationProjectRenamingPage(getDriver()))
                 .clearNameField()
                 .setNewProjectName(RENAMED_PROJECT)
                 .getHeaderText();

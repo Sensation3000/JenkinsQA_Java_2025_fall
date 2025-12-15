@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.HomePage;
 import school.redrover.page.PipelineConfigurationPage;
-import school.redrover.page.PipelinePage;
+import school.redrover.page.PipelineStatusPage;
 
 import java.util.List;
 
@@ -52,7 +52,7 @@ public class PipelineTest extends BaseTest {
     @Test
     public void testCreateNewPipeline() {
         createPipeline(PIPELINE_NAME);
-        List<String> actualProjectList = new PipelinePage(getDriver())
+        List<String> actualProjectList = new PipelineStatusPage(getDriver())
                 .gotoHomePage()
                 .getProjectList();
 
@@ -75,7 +75,7 @@ public class PipelineTest extends BaseTest {
         );
 
         List<String> actualSideMenu = new HomePage(getDriver())
-                .openProject(PIPELINE_NAME, new PipelinePage(getDriver()))
+                .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickPipelineSyntax()
                 .getListOfButtonsInSideMenu();
 
@@ -107,7 +107,7 @@ public class PipelineTest extends BaseTest {
     @Test(dependsOnMethods = "testCreateNewPipeline")
     public void testCancelDeletePipelineViaSideMenu() {
         List<String> actualProjectList = new HomePage(getDriver())
-                .openProject(PIPELINE_NAME, new PipelinePage(getDriver()))
+                .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickDeletePipeline()
                 .cancelDelete()
                 .gotoHomePage()
@@ -120,7 +120,7 @@ public class PipelineTest extends BaseTest {
     public void testBuildPipeline() {
 
         String consoleOutput = new HomePage(getDriver())
-                .openProject(PIPELINE_NAME, new PipelinePage(getDriver()))
+                .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickBuildNow()
                 .clickBuildHistory()
                 .clickConsoleOutput()
@@ -138,7 +138,7 @@ public class PipelineTest extends BaseTest {
 
         String descriptionText = new HomePage(getDriver())
                 .gotoHomePage()
-                .openProject(PIPELINE_NAME, new PipelinePage(getDriver()))
+                .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickAddDescriptionButton()
                 .addDescriptionAndSave(textDescription)
                 .getDescription();
@@ -152,7 +152,7 @@ public class PipelineTest extends BaseTest {
         final String textDescription = "D0XVcGo8k(=D7myr/.YC6umm>]\"gY)?X_E|#HPku6T5im[oYHD-\\|B`";
 
         String descriptionText = new HomePage(getDriver())
-                .openProject(PIPELINE_NAME, new PipelinePage(getDriver()))
+                .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickEditDescriptionButton()
                 .clearDescription()
                 .addDescriptionAndSave(textDescription)
@@ -198,7 +198,7 @@ public class PipelineTest extends BaseTest {
 
         createPipeline(PIPELINE_NAME);
 
-        String actualHomePageHeading = new PipelinePage(getDriver())
+        String actualHomePageHeading = new PipelineStatusPage(getDriver())
                 .clickDeletePipeline()
                 .confirmDeleteAtJobPage()
                 .getHeaderText();
@@ -211,8 +211,8 @@ public class PipelineTest extends BaseTest {
     public void testScheduleWithValidData(String validTimePeriod) {
         createPipeline(PIPELINE_NAME);
 
-        String textAreaValidationMessage = new PipelinePage(getDriver())
-                .clickConfigureLinkInSideMenu()
+        String textAreaValidationMessage = new PipelineStatusPage(getDriver())
+                .clickConfigureInSideMenu(new PipelineConfigurationPage(getDriver()))
                 .clickTriggersSectionButton()
                 .selectBuildPeriodicallyCheckbox()
                 .sendScheduleText(validTimePeriod)
@@ -231,8 +231,8 @@ public class PipelineTest extends BaseTest {
     public void testScheduleWithInvalidData(String invalidTimePeriod, String expectedErrorMessage) {
         createPipeline(PIPELINE_NAME);
 
-        String actualTextErrorMessage = new PipelinePage(getDriver())
-                .clickConfigureLinkInSideMenu()
+        String actualTextErrorMessage = new PipelineStatusPage(getDriver())
+                .clickConfigureInSideMenu(new PipelineConfigurationPage(getDriver()))
                 .clickTriggersSectionButton()
                 .selectBuildPeriodicallyCheckbox()
                 .sendScheduleText(invalidTimePeriod)

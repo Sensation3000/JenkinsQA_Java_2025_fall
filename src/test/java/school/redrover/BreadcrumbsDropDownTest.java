@@ -3,7 +3,7 @@ package school.redrover;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
-import school.redrover.page.FolderPage;
+import school.redrover.page.FolderStatusPage;
 import school.redrover.page.HomePage;
 
 import java.util.List;
@@ -15,12 +15,13 @@ public class BreadcrumbsDropDownTest extends BaseTest {
 
     @Test
     public void testDisplayBreadcrumbsDropDownMenu() {
-        List<String> breadcrumbTexts = new HomePage(getDriver())
+        List<String> breadcrumbTexts =
+                new HomePage(getDriver())
                 .clickCreateJob()
                 .sendName(PARENT_FOLDER)
                 .selectFolderAndSubmit()
                 .gotoHomePage()
-                .openProject(PARENT_FOLDER, new FolderPage(getDriver()))
+                .openProject(PARENT_FOLDER, new FolderStatusPage(getDriver()))
                 .clickNewItem()
                 .sendName(CHILD_FOLDER)
                 .selectFolderAndSubmit()
@@ -34,7 +35,7 @@ public class BreadcrumbsDropDownTest extends BaseTest {
     @Test (dependsOnMethods = {"testDisplayBreadcrumbsDropDownMenu"})
     public void clickableBreadcrumbsDropDownMenu() {
         String title = new HomePage(getDriver())
-                .openProject(PARENT_FOLDER, new FolderPage(getDriver()))
+                .openProject(PARENT_FOLDER, new FolderStatusPage(getDriver()))
                 .openFolderPage(CHILD_FOLDER)
                 .clickBreadcrumbsItem(PARENT_FOLDER)
                 .getInfo()

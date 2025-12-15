@@ -18,15 +18,15 @@ public class ViewSteps {
 
     private FreestyleProjectConfigurationPage freestyleProjectConfigurationPage;
 
-    private FreestyleProjectPage freestyleProjectPage;
+    private FreestyleProjectStatusPage freestyleProjectPage;
 
     private PipelineConfigurationPage pipelineConfigurationPage;
 
-    private PipelinePage pipelinePage;
+    private PipelineStatusPage pipelinePage;
 
     private OrganizationFolderConfigurationPage organizationFolderConfigurationPage;
 
-    private OrganizationFolderPage organizationFolderPage;
+    private OrganizationFolderStatusPage organizationFolderPage;
 
     private CreateViewPage createViewPage;
 

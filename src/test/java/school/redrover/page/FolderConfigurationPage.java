@@ -7,12 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import school.redrover.common.BasePage;
 
 import java.util.List;
 
 
-public class FolderConfigurationPage extends BaseProjectConfigurationPage {
+public class FolderConfigurationPage extends BaseProjectConfigurationPage<FolderConfigurationPage> {
 
     @FindBy(css = "button[data-section-id='health-metrics']")
     private WebElement healthMetricSidebarLink;
@@ -78,7 +77,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage {
 
     @Override
     public FolderConfigurationPage waitUntilPageLoad() {
-        getWait5().until(ExpectedConditions.elementToBeClickable(addMetricButton));
+        getWait5().until(ExpectedConditions.elementToBeClickable(healthMetricsSection));
 
         return this;
     }
@@ -95,13 +94,13 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage {
         return this;
     }
 
-    public FolderPage clickSave() {
+    public FolderStatusPage clickSave() {
         WebElement submitButton = getWait5().until(
                 ExpectedConditions.elementToBeClickable(By.name("Submit")));
         submitButton.click();
         getWait5().until(ExpectedConditions.not(
                 ExpectedConditions.urlContains("configure")));
-        return new FolderPage(getDriver());
+        return new FolderStatusPage(getDriver());
     }
 
     public String getHealthMetricsSidebarLink() {

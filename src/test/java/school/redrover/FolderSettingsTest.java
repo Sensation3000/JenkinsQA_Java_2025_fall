@@ -3,7 +3,8 @@ package school.redrover;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
-import school.redrover.page.FolderPage;
+import school.redrover.page.FolderConfigurationPage;
+import school.redrover.page.FolderStatusPage;
 import school.redrover.page.HomePage;
 
 
@@ -35,9 +36,9 @@ public class FolderSettingsTest extends BaseTest {
         final String description = "This is lorem text... or not.";
         final List<String> expectedInfo = List.of(DISPLAY_NAME, description);
 
-        FolderPage.FolderInfo actualInfo = new HomePage(getDriver())
+        FolderStatusPage.FolderInfo actualInfo = new HomePage(getDriver())
                 .clickFolder(DISPLAY_NAME)
-                .clickConfigureLinkInSideMenu()
+                .clickConfigureInSideMenu(new FolderConfigurationPage(getDriver()))
                 .setDescription(description)
                 .clickSave()
                 .getInfo();

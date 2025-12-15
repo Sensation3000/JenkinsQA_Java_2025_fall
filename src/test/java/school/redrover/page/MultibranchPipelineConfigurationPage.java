@@ -6,10 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import school.redrover.common.BasePage;
 
 
-public class MultibranchPipelineConfigurationPage extends BasePage<MultibranchPipelineConfigurationPage> {
+public class MultibranchPipelineConfigurationPage extends BaseProjectConfigurationPage<MultibranchPipelineConfigurationPage> {
 
     @FindBy(name = "_.description")
     private WebElement descriptionField;
@@ -41,12 +40,12 @@ public class MultibranchPipelineConfigurationPage extends BasePage<MultibranchPi
         return this;
     }
 
-    public MultibranchPipelineProjectPage clickSaveButton() {
+    public MultibranchPipelineProjectStatusPage clickSaveButton() {
         submitButton.click();
         getWait5().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                 By.cssSelector(".empty-state-section h2")));
 
-        return new MultibranchPipelineProjectPage(getDriver());
+        return new MultibranchPipelineProjectStatusPage(getDriver());
     }
 
     public MultibranchPipelineConfigurationPage clickApply() {

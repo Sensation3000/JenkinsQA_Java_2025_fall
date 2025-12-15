@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
-public class PipelinePage extends BaseProjectPage<PipelineConfigurationPage> {
+public class PipelineStatusPage extends BaseProjectStatusPage<PipelineStatusPage> {
 
     @FindBy(xpath = "//a[contains(@href, '/configure')]")
     private WebElement configureMenuItem;
@@ -40,23 +40,15 @@ public class PipelinePage extends BaseProjectPage<PipelineConfigurationPage> {
     private WebElement submitButton;
 
 
-    public PipelinePage(WebDriver driver) {
+    public PipelineStatusPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public PipelinePage waitUntilPageLoad() {
+    public PipelineStatusPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(deletePipeline));
 
         return this;
-    }
-
-    @Override
-    public PipelineConfigurationPage clickConfigureLinkInSideMenu() {
-        configureMenuItem.click();
-
-        getWait10().until(ExpectedConditions.visibilityOf(submitButton));
-        return new PipelineConfigurationPage(getDriver());
     }
 
     public String getDisplayNameInStatus() {
@@ -69,7 +61,7 @@ public class PipelinePage extends BaseProjectPage<PipelineConfigurationPage> {
                 .xpath(".//a[text()='%s']".formatted(displayName)))).getText();
     }
 
-    public PipelinePage addDescriptionAndSave(String description) {
+    public PipelineStatusPage addDescriptionAndSave(String description) {
         descriptionTextarea.sendKeys(description);
         descriptionSubmitButton.click();
         getWait5().until(ExpectedConditions.elementToBeClickable(By.id("description-link")));
@@ -81,7 +73,7 @@ public class PipelinePage extends BaseProjectPage<PipelineConfigurationPage> {
         return getWait5().until(ExpectedConditions.visibilityOf(descriptionContent)).getText();
     }
 
-    public PipelinePage clearDescription() {
+    public PipelineStatusPage clearDescription() {
         getDriver().findElement(By.name("description")).clear();
         return this;
     }
@@ -91,22 +83,22 @@ public class PipelinePage extends BaseProjectPage<PipelineConfigurationPage> {
                 .getText();
     }
 
-    public PipelinePage clickAddDescriptionButton() {
+    public PipelineStatusPage clickAddDescriptionButton() {
         descriptionButton.click();
         return this;
     }
 
-    public PipelinePage clickEditDescriptionButton() {
+    public PipelineStatusPage clickEditDescriptionButton() {
         editDescriptionButton.click();
         return this;
     }
 
-    public PipelinePage clickBuildNow() {
+    public PipelineStatusPage clickBuildNow() {
         buildNow.click();
         return this;
     }
 
-    public PipelinePage clickDeletePipeline() {
+    public PipelineStatusPage clickDeletePipeline() {
         deletePipeline.click();
         return this;
     }
@@ -131,7 +123,7 @@ public class PipelinePage extends BaseProjectPage<PipelineConfigurationPage> {
         return new HomePage(getDriver());
     }
 
-    public PipelinePage cancelDelete() {
+    public PipelineStatusPage cancelDelete() {
         WebElement yesButton = getWait2().until(
                 ExpectedConditions.elementToBeClickable(
                         By.xpath("//dialog[@open]//button[@data-id='cancel']"))

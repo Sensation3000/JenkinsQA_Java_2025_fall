@@ -3,6 +3,7 @@ package school.redrover;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
+import school.redrover.page.FolderConfigurationPage;
 import school.redrover.page.HomePage;
 
 public class CheckSidePanelFolderTest extends BaseTest {
@@ -18,7 +19,7 @@ public class CheckSidePanelFolderTest extends BaseTest {
                 .clickOkButton()
                 .gotoHomePage()
                 .clickFolder(dirName)
-                .clickConfigureLinkInSideMenu()
+                .clickConfigureInSideMenu(new FolderConfigurationPage(getDriver()))
                 .getBreadcrumbItem();
 
         Assert.assertEquals(breadcrumbItem, "Configuration");

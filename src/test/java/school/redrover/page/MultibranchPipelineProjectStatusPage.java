@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
-public class MultibranchPipelineProjectPage extends BaseProjectPage<MultibranchPipelineConfigurationPage> {
+public class MultibranchPipelineProjectStatusPage extends BaseProjectStatusPage<MultibranchPipelineProjectStatusPage> {
 
     @FindBy(id = "view-message")
     private WebElement description;
@@ -31,24 +31,15 @@ public class MultibranchPipelineProjectPage extends BaseProjectPage<MultibranchP
     private WebElement submitButton;
 
 
-    public MultibranchPipelineProjectPage(WebDriver driver) {
+    public MultibranchPipelineProjectStatusPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public MultibranchPipelineProjectPage waitUntilPageLoad() {
+    public MultibranchPipelineProjectStatusPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(deleteMenuItem));
 
         return this;
-    }
-
-    @Override
-    public MultibranchPipelineConfigurationPage clickConfigureLinkInSideMenu() {
-        getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[href='./configure']")))
-                .click();
-
-        getWait10().until(ExpectedConditions.visibilityOf(submitButton));
-        return new MultibranchPipelineConfigurationPage(getDriver());
     }
 
     public String getDescription() {
@@ -59,19 +50,13 @@ public class MultibranchPipelineProjectPage extends BaseProjectPage<MultibranchP
         return disabledMessage.getText();
     }
 
-    public MultibranchPipelineConfirmRenamePage clickRenameLinkInSideMenu() {
-        sidebarRenameLink.click();
-
-        return new MultibranchPipelineConfirmRenamePage(getDriver());
-    }
-
-    public MultibranchPipelineProjectPage clickAddDescriptionLink() {
+    public MultibranchPipelineProjectStatusPage clickAddDescriptionLink() {
         getWait2().until(ExpectedConditions.elementToBeClickable(addDescriptionLink)).click();
 
         return this;
     }
 
-    public MultibranchPipelineProjectPage sendDescription(String description) {
+    public MultibranchPipelineProjectStatusPage sendDescription(String description) {
         descriptionField.clear();
         descriptionField.sendKeys(description);
 

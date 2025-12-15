@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
-public class FreestyleProjectPage extends BaseProjectPage<FreestyleProjectConfigurationPage> {
+public class FreestyleProjectStatusPage extends BaseProjectStatusPage<FreestyleProjectStatusPage> {
 
     @FindBy(xpath = "//a[contains(@href, '/configure')]")
     private WebElement configureMenuItem;
@@ -22,26 +22,18 @@ public class FreestyleProjectPage extends BaseProjectPage<FreestyleProjectConfig
     private WebElement submitButton;
 
 
-    public FreestyleProjectPage(WebDriver driver) {
+    public FreestyleProjectStatusPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public FreestyleProjectPage waitUntilPageLoad() {
+    public FreestyleProjectStatusPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(deleteMenuItem));
 
         return this;
     }
 
-    @Override
-    public FreestyleProjectConfigurationPage clickConfigureLinkInSideMenu() {
-        configureMenuItem.click();
-
-        getWait10().until(ExpectedConditions.visibilityOf(submitButton));
-        return new FreestyleProjectConfigurationPage(getDriver());
-    }
-
-    public FreestyleProjectPage clickBuildNow() {
+    public FreestyleProjectStatusPage clickBuildNow() {
         getDriver().findElement(By.xpath("//div[@id='tasks']/div[4]/span/a")).click();
 
         return this;

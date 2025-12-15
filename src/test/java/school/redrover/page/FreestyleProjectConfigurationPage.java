@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import school.redrover.common.BasePage;
 import school.redrover.common.TestUtils;
 
 import java.time.Duration;
@@ -18,7 +17,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 
-public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationPage {
+public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationPage<FreestyleProjectConfigurationPage> {
 
     @FindBy(name = "description")
     private WebElement descriptionInput;
@@ -114,11 +113,11 @@ public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationP
         return this;
     }
 
-    public FreestyleProjectPage clickSave() {
+    public FreestyleProjectStatusPage clickSave() {
         submitButton.click();
 
         getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
-        return new FreestyleProjectPage(getDriver());
+        return new FreestyleProjectStatusPage(getDriver());
     }
 
     public boolean isSaveButtonDisplayed() {

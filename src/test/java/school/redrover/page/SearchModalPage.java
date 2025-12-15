@@ -3,7 +3,6 @@ package school.redrover.page;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import school.redrover.common.BaseModel;
 import school.redrover.common.BasePage;
 import school.redrover.common.TestUtils;
 
@@ -83,13 +82,13 @@ public class SearchModalPage extends BasePage<SearchModalPage> {
         return textOfResults;
     }
 
-    public FreestyleProjectPage moveAndClickResult(){
+    public FreestyleProjectStatusPage moveAndClickResult(){
         getWait5().until(ExpectedConditions.presenceOfElementLocated(By.className("jenkins-command-palette__results__heading")));
 
         TestUtils.clickJS(getDriver(), getDriver().findElement(searchResults));
 
         getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
-        return new FreestyleProjectPage(getDriver());
+        return new FreestyleProjectStatusPage(getDriver());
     }
 
     public SearchModalPage waitForTextOfResults() {

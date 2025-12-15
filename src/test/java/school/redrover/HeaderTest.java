@@ -5,7 +5,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
-import school.redrover.page.FolderPage;
+import school.redrover.page.FolderStatusPage;
 import school.redrover.page.HomePage;
 
 import java.util.List;
@@ -38,6 +38,6 @@ public class HeaderTest extends BaseTest {
         actions.sendKeys(Keys.ARROW_UP).perform();
         actions.sendKeys(Keys.ENTER).perform();
 
-        Assert.assertTrue(new FolderPage(getDriver()).checkURLContains("/job/Folder/"));
+        Assert.assertTrue(new FolderStatusPage(getDriver()).checkURLContains("/job/Folder/"));
     }
 }

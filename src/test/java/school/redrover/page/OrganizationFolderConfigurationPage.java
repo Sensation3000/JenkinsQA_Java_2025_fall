@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import school.redrover.common.BasePage;
 
 import java.util.List;
 
@@ -30,11 +29,11 @@ public class OrganizationFolderConfigurationPage extends BaseProjectConfiguratio
         return this;
     }
 
-    public OrganizationFolderPage clickSave() {
+    public OrganizationFolderStatusPage clickSave() {
         submitButton.click();
         getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
 
-        return new OrganizationFolderPage(getDriver());
+        return new OrganizationFolderStatusPage(getDriver());
     }
 
     public OrganizationFolderConfigurationPage inputDisplayName(String name) {

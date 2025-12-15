@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
-public class MultiConfigurationProjectPage extends BaseProjectPage<MultiConfigurationProjectConfigurationPage> {
+public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<MultiConfigurationProjectStatusPage> {
 
     @FindBy(name = "Submit")
     private WebElement submitButton;
@@ -35,37 +35,26 @@ public class MultiConfigurationProjectPage extends BaseProjectPage<MultiConfigur
     @FindBy(css = "[href$='confirm-rename']")
     private WebElement dropdownMenuRenameLink;
 
-    @FindBy(name = "newName")
-    private WebElement nameField;
 
 
-    public MultiConfigurationProjectPage(WebDriver driver) {
+    public MultiConfigurationProjectStatusPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public MultiConfigurationProjectPage waitUntilPageLoad() {
+    public MultiConfigurationProjectStatusPage waitUntilPageLoad() {
         getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
 
         return this;
     }
 
-    @Override
-    public MultiConfigurationProjectConfigurationPage clickConfigureLinkInSideMenu() {
-        getWait5().until(ExpectedConditions.visibilityOfElementLocated(By
-                .xpath("//a[contains(@href, '/configure')]"))).click();
-
-        getWait10().until(ExpectedConditions.visibilityOf(submitButton));
-        return new MultiConfigurationProjectConfigurationPage(getDriver());
-    }
-
-    public MultiConfigurationProjectPage clearDescriptionField() {
+    public MultiConfigurationProjectStatusPage clearDescriptionField() {
         editDescriptionLink.click();
         descriptionField.clear();
         return this;
     }
 
-    public MultiConfigurationProjectPage sendDescription(String description) {
+    public MultiConfigurationProjectStatusPage sendDescription(String description) {
         descriptionField.sendKeys(description);
         submitButton.click();
 
@@ -78,29 +67,12 @@ public class MultiConfigurationProjectPage extends BaseProjectPage<MultiConfigur
         return projectDescription.getText();
     }
 
-    public MultiConfigurationProjectPage clickRenameLinkInSideMenu() {
-        sidebarRenameLink.click();
-        return this;
-    }
-
-    public MultiConfigurationProjectPage clickRenameViaDashboardDropDownMenu() {
+    public MultiConfigurationProjectRenamingPage clickRenameViaDashboardDropDownMenu() {
         Actions actions = new Actions(getDriver());
         actions.moveToElement(hoverElement, 10, 10).perform();
         dropdownMenuRenameLink.click();
 
-        return this;
-    }
-
-    public MultiConfigurationProjectPage clearNameField() {
-        nameField.clear();
-        return this;
-    }
-
-    public MultiConfigurationProjectPage setNewProjectName(String jobName) {
-        nameField.sendKeys(jobName + Keys.ENTER);
-
-        getWait5().until(ExpectedConditions.not(ExpectedConditions.urlContains("confirm-rename")));
-        return this;
+        return new MultiConfigurationProjectRenamingPage(getDriver());
     }
 
     public String getBreadcrumbItem() {

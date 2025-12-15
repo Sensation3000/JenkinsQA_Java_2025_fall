@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
-public class OrganizationFolderPage extends BaseProjectPage<OrganizationFolderConfigurationPage> {
+public class OrganizationFolderStatusPage extends BaseProjectStatusPage {
 
     @FindBy(xpath = "//span[text()='Delete Organization Folder']/ancestor::a")
     private WebElement deleteMenuItem;
@@ -16,24 +16,15 @@ public class OrganizationFolderPage extends BaseProjectPage<OrganizationFolderCo
     private WebElement submitButton;
 
 
-    public OrganizationFolderPage(WebDriver driver) {
+    public OrganizationFolderStatusPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public OrganizationFolderPage waitUntilPageLoad() {
+    public OrganizationFolderStatusPage waitUntilPageLoad() {
         getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
 
         return this;
-    }
-
-    @Override
-    public OrganizationFolderConfigurationPage clickConfigureLinkInSideMenu() {
-        getWait5().until(ExpectedConditions.visibilityOfElementLocated(By
-                .xpath("//a[contains(@href, '/configure')]"))).click();
-
-        getWait10().until(ExpectedConditions.visibilityOf(submitButton));
-        return new OrganizationFolderConfigurationPage(getDriver());
     }
 
     public String getDisplayNameOrganizationFolder() {
@@ -46,7 +37,7 @@ public class OrganizationFolderPage extends BaseProjectPage<OrganizationFolderCo
                 By.id("view-message"))).getText();
     }
 
-    public OrganizationFolderPage clickDelete() {
+    public OrganizationFolderStatusPage clickDelete() {
          getWait2().until(ExpectedConditions.elementToBeClickable(By.className("icon-edit-delete"))).click();
 
          return this;

@@ -7,7 +7,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import school.redrover.page.NewItemPage;
 import school.redrover.page.FreestyleProjectConfigurationPage;
-import school.redrover.page.FreestyleProjectPage;
+import school.redrover.page.FreestyleProjectStatusPage;
 import school.redrover.page.HomePage;
 import school.redrover.common.CucumberDriver;
 import school.redrover.common.ProjectUtils;
@@ -18,7 +18,7 @@ public class FreestyleSteps {
     private HomePage homePage;
     private NewItemPage newItemPage;
 
-    private FreestyleProjectPage freestyleProjectPage;
+    private FreestyleProjectStatusPage freestyleProjectPage;
     private FreestyleProjectConfigurationPage freestyleProjectConfigurationPage;
 
     @When("Go to NewJob")
@@ -77,12 +77,13 @@ public class FreestyleSteps {
     @When("Click Freestyle job {string}")
     public void clickFreestyleJob(String jobName) {
         freestyleProjectPage = new HomePage(CucumberDriver.getDriver())
-                .openProject(jobName, new FreestyleProjectPage(CucumberDriver.getDriver()));
+                .openProject(jobName, new FreestyleProjectStatusPage(CucumberDriver.getDriver()));
     }
 
     @And("Click Freestyle configure")
     public void clickFreestyleConfigure() {
-        freestyleProjectConfigurationPage = freestyleProjectPage.clickConfigureLinkInSideMenu();
+        freestyleProjectConfigurationPage = freestyleProjectPage
+                .clickConfigureInSideMenu(new FreestyleProjectConfigurationPage(CucumberDriver.getDriver()));
     }
 
     @And("Type Freestyle job description as {string}")
