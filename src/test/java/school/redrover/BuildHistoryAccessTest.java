@@ -30,4 +30,24 @@ public class BuildHistoryAccessTest extends BaseTest {
         Assert.assertTrue(buildHistoryOfJenkinsPage.isBuildHistoryEmpty());
         Assert.assertEquals(buildHistoryOfJenkinsPage.getTableHeadersText(), expectedHeaders);
     }
+
+
+    final String nameJob = "NewJob";
+    final String newSize = "Small";
+
+    @Test
+    public void testChangeIconSize() {
+
+        new HomePage(getDriver())
+                .clickCreateJob()
+                .sendName(nameJob)
+                .selectFolder()
+                .clickOkButton()
+                .gotoHomePage();
+
+        String checks = new HomePage(getDriver())
+                .changeIconSize(newSize)
+                .checkIconSize();
+        Assert.assertEquals(checks, newSize);
+    }
 }

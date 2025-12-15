@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 import school.redrover.common.TestUtils;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -91,7 +92,7 @@ public class HomePage extends BasePage<HomePage> {
     }
 
     public CloudsPage clickConfigureCloud() {
-        TestUtils.clickJS(getDriver(),configureCloudLink);
+        TestUtils.clickJS(getDriver(), configureCloudLink);
 
         getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
         return new CloudsPage(getDriver());
@@ -113,7 +114,7 @@ public class HomePage extends BasePage<HomePage> {
 
     public String getProjectName() {
         return getWait2().until(ExpectedConditions.presenceOfElementLocated(
-                        By.cssSelector(".jenkins-table__link >span:first-child"))).getText();
+                By.cssSelector(".jenkins-table__link >span:first-child"))).getText();
     }
 
     public WebElement findItem(String itemName) {
@@ -162,7 +163,7 @@ public class HomePage extends BasePage<HomePage> {
 
     public HomePage confirmDelete() {
         WebElement yesButton = getWait2().until(ExpectedConditions.elementToBeClickable(
-                        By.xpath("//dialog[@open]//button[@data-id='ok']")));
+                By.xpath("//dialog[@open]//button[@data-id='ok']")));
         yesButton.click();
         getWait5().until(ExpectedConditions.stalenessOf(yesButton));
 
@@ -351,16 +352,33 @@ public class HomePage extends BasePage<HomePage> {
                 By.xpath("(//a[@title='Schedule a Build for %s'])[1]".formatted(projectName)))).isDisplayed();
     }
 
-    public boolean isIconTableVisible (String projectName) {
+    public boolean isIconTableVisible(String projectName) {
         return getWait5().until((ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#job_%s > td:nth-child(1)".formatted(projectName))))).isDisplayed();
     }
 
-    public JobPage clickJob (String projectName) {
+    public JobPage clickJob(String projectName) {
         getDriver().findElement(By.cssSelector("#job_%s > td:nth-child(3) > a".formatted(projectName))).click();
         return new JobPage(getDriver());
     }
 
     public String getNameColumnText() {
         return nameColumnHeading.getText().replace("\n ", "");
+    }
+
+    public HomePage changeIconSize(String size) {
+        int z = 0;
+        if (size.equals("Small")) {
+            z = 1;
+        } else if (size.equals("Medium")) {
+            z = 2;
+        } else z = 3;
+
+        getDriver().findElement(By.cssSelector("#main-panel > div.dashboard > div.jenkins-mobile-hide > div.jenkins-icon-size > div.jenkins-icon-size__items.jenkins-buttons-row > ol > li:nth-child(%s) > a".formatted(z))).click();
+        return new HomePage(getDriver());
+    }
+
+    public String checkIconSize() {
+        String result = getDriver().findElement(By.cssSelector(".jenkins-icon-size > :nth-child(1) > ol > li[tooltip]")).getAttribute("title");
+        return result;
     }
 }
