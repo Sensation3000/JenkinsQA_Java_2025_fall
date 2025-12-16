@@ -32,22 +32,18 @@ public class BuildHistoryAccessTest extends BaseTest {
     }
 
 
-    final String nameJob = "NewJob";
-    final String newSize = "Small";
+    final List<String> allSizes = List.of("Small", "Medium", "Large");
 
     @Test
     public void testChangeIconSize() {
 
-        new HomePage(getDriver())
-                .clickCreateJob()
-                .sendName(nameJob)
-                .selectFolder()
-                .clickOkButton()
-                .gotoHomePage();
+        for (int i = 0; i < allSizes.size(); i++) {
+            String checks = new HomePage(getDriver())
+                    .clickBuildHistory()
+                    .changeIconSize(allSizes.get(i))
+                    .checkIconSize();
 
-        String checks = new HomePage(getDriver())
-                .changeIconSize(newSize)
-                .checkIconSize();
-        Assert.assertEquals(checks, newSize);
+            Assert.assertEquals(checks, allSizes.get(i));
+        }
     }
 }
