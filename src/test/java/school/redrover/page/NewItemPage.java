@@ -84,9 +84,8 @@ public class NewItemPage extends BasePage<NewItemPage> {
         TestUtils.clickJS(getDriver(), multibranchPipelineOption);
 
         getWait2().until(ExpectedConditions.elementToBeClickable(okButton)).click();
-        getWait2().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text() = 'General']")));
 
-        return new MultibranchPipelineConfigurationPage(getDriver());
+        return new MultibranchPipelineConfigurationPage(getDriver()).waitUntilPageLoad();
     }
 
     public PipelineConfigurationPage selectPipelineAndSubmit() {
@@ -123,9 +122,8 @@ public class NewItemPage extends BasePage<NewItemPage> {
         selectFreestyleProject();
 
         getWait2().until(ExpectedConditions.elementToBeClickable(okButton)).click();
-        getWait2().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[@id = 'general']")));
 
-        return new FreestyleProjectConfigurationPage(getDriver());
+        return new FreestyleProjectConfigurationPage(getDriver()).waitUntilPageLoad();
     }
 
     public NewItemPage sendNameToCopyFromAndSubmit(String name) {

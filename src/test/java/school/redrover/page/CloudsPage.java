@@ -2,6 +2,7 @@ package school.redrover.page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
 
@@ -13,7 +14,9 @@ public class CloudsPage extends BasePage<CloudsPage> {
 
     @Override
     public CloudsPage waitUntilPageLoad() {
-        return null;
+        getWait5().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.tagName("h1"))));
+
+        return this;
     }
 
     public String getParagraphText() {

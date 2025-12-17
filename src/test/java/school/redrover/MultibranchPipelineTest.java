@@ -86,7 +86,6 @@ public class MultibranchPipelineTest extends BaseTest {
         Assert.assertEquals(actualJobDescription, updatedJobDescription);
     }
 
-    @Ignore
     @Test(dependsOnMethods = "testCreateMultibranchPipeline")
     public void testTryCreateProjectExistName() {
         final String errorMessage = "» A job already exists with the name ‘%s’".formatted(MULTIBRANCH_PIPELINE_NAME);
@@ -143,7 +142,6 @@ public class MultibranchPipelineTest extends BaseTest {
         Assert.assertEquals(actualTooltip, tooltipText);
     }
 
-    @Ignore
     @Test(dependsOnMethods = "testCreateMultibranchPipeline")
     public void testDisableToggle() {
         final String expectedToggleState = "Disabled";

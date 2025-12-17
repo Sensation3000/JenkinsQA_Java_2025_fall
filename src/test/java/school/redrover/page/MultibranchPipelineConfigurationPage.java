@@ -42,10 +42,8 @@ public class MultibranchPipelineConfigurationPage extends BaseProjectConfigurati
 
     public MultibranchPipelineProjectStatusPage clickSaveButton() {
         submitButton.click();
-        getWait5().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                By.cssSelector(".empty-state-section h2")));
 
-        return new MultibranchPipelineProjectStatusPage(getDriver());
+        return new MultibranchPipelineProjectStatusPage(getDriver()).waitUntilPageLoad();
     }
 
     public MultibranchPipelineConfigurationPage clickApply() {

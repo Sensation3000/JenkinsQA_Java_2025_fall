@@ -91,8 +91,7 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
     public HomePage clickSaveButton() {
         clickSaveButton.click();
 
-        getWait2().until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
-        return new HomePage(getDriver());
+        return new HomePage(getDriver()).waitUntilPageLoad();
     }
 
     public boolean checkCheckboxSelected() {

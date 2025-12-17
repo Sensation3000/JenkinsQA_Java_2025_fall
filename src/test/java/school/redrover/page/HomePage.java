@@ -94,8 +94,7 @@ public class HomePage extends BasePage<HomePage> {
     public CloudsPage clickConfigureCloud() {
         TestUtils.clickJS(getDriver(), configureCloudLink);
 
-        getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
-        return new CloudsPage(getDriver());
+        return new CloudsPage(getDriver()).waitUntilPageLoad();
     }
 
     public NewItemPage clickSidebarNewItem() {
@@ -318,8 +317,7 @@ public class HomePage extends BasePage<HomePage> {
     public NewNodePage clickSetUpAnAgent() {
         setUpAnAgentButton.click();
 
-        getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
-        return new NewNodePage(getDriver());
+        return new NewNodePage(getDriver()).waitUntilPageLoad() ;
     }
 
     public NodesPage clickBuildExecutorStatus() {

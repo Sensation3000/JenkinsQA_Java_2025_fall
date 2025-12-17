@@ -98,8 +98,7 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
                 .click()
                 .perform();
 
-        getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
-        return new SystemConfigurationPage(getDriver());
+        return new SystemConfigurationPage(getDriver()).waitUntilPageLoad();
     }
 
     public List<String> getSearchResults() {
