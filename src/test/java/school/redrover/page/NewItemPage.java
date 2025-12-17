@@ -220,9 +220,7 @@ public class NewItemPage extends BasePage<NewItemPage> {
         multiConfigurationProject.click();
         getWait2().until(ExpectedConditions.elementToBeClickable(okButton)).click();
 
-        getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.id("general")));
-
-        return new MultiConfigurationProjectConfigurationPage(getDriver());
+        return new MultiConfigurationProjectConfigurationPage(getDriver()).waitUntilPageLoad();
     }
 
     public NewItemPage clickOkButton() {
