@@ -24,6 +24,9 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage> {
     @FindBy(xpath = "//span[text()='Delete Folder']/ancestor::a")
     private WebElement deleteMenuItem;
 
+    @FindBy(xpath = "//a[contains(@href, '/credentials')]")
+    private WebElement credentialsLink;
+
     @FindBy(xpath = "//a[contains(., 'Rename')]")
     private WebElement renameMenuItem;
 
@@ -74,6 +77,12 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage> {
     public NewItemPage clickSidebarNewItem() {
         newItemOfMenuItem.click();
         return new NewItemPage(getDriver());
+    }
+
+    public CredentialsPage clickCredentialsLink() {
+        credentialsLink.click();
+
+        return new CredentialsPage(getDriver());
     }
 
     public List<String> getBreadcrumbTexts() {

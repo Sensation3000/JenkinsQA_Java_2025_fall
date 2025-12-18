@@ -3,6 +3,7 @@ package school.redrover.page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import school.redrover.common.BasePage;
 
 import java.util.List;
@@ -11,6 +12,9 @@ import java.util.function.Consumer;
 
 public class GlobalCredentialsPage extends BasePage<GlobalCredentialsPage> {
 
+    @FindBy(xpath = "//a[text()='Credentials']")
+    private WebElement credentialsMenuItem;
+
     public GlobalCredentialsPage(WebDriver driver) {
         super(driver);
     }
@@ -18,6 +22,11 @@ public class GlobalCredentialsPage extends BasePage<GlobalCredentialsPage> {
     @Override
     public GlobalCredentialsPage waitUntilPageLoad() {
         return null;
+    }
+
+    public CredentialsPage clickCredentials() {
+        credentialsMenuItem.click();
+        return new CredentialsPage(getDriver());
     }
 
     public NewCredentialsPage clickAddCredentialsButton() {
