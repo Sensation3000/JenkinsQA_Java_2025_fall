@@ -87,8 +87,7 @@ public class SearchModalPage extends BasePage<SearchModalPage> {
 
         TestUtils.clickJS(getDriver(), getDriver().findElement(searchResults));
 
-        getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
-        return new FreestyleProjectStatusPage(getDriver());
+        return new FreestyleProjectStatusPage(getDriver()).waitUntilPageLoad();
     }
 
     public SearchModalPage waitForTextOfResults() {

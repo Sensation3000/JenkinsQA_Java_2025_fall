@@ -33,7 +33,6 @@ public class JenkinsManagementTest extends BaseTest {
         };
     }
 
-    @Ignore
     @Test
     public void testDeferredWipeoutSettingIsSaved() {
         Boolean checboxGlobal = new HomePage(getDriver())
@@ -105,7 +104,6 @@ public class JenkinsManagementTest extends BaseTest {
         Assert.assertEquals(dropdownResult, itemName, "Названия пунктов настроек не совпадают");
     }
 
-    @Ignore
     @Test
     public void testSearchAndOpenSetting() {
         String searchHeading = new HomePage(getDriver())
