@@ -6,10 +6,13 @@ import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.*;
 
+import java.util.List;
+
 public class FolderManagementTest extends BaseTest {
 
     private static final String FOLDER_NAME = "MyFolder";
     private static final String VIEW_NAME = "MyView";
+    private static final String CREDENTIAL_NAME = "MyCredential";
 
     @DataProvider
     public Object[][] itemsData() {
@@ -67,6 +70,25 @@ public class FolderManagementTest extends BaseTest {
                 .getHeaderText();
 
         Assert.assertEquals(actualHeadingText, "Configure");
+    }
+
+    @Test()
+    public void addNewCredentials() {
+
+        createFolder();
+
+        String actualCredentialName = new HomePage(getDriver())
+                .clickFolder(FOLDER_NAME)
+                .clickCredentialsLink()
+                .clickGlobalLink()
+                .clickAddCredentialsButton()
+                .enterUsername(CREDENTIAL_NAME)
+                .clickCreateButton()
+                .clickCredentials()
+                .getCredentialsName(CREDENTIAL_NAME)
+                .getText();
+
+        Assert.assertTrue(actualCredentialName.contains(CREDENTIAL_NAME), "Credential name is not found in text: " + actualCredentialName);
     }
 
     @Test()
