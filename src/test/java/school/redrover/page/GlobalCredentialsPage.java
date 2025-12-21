@@ -16,7 +16,7 @@ public class GlobalCredentialsPage extends BasePage<GlobalCredentialsPage> {
     @FindBy(xpath = "//a[@href='/job/MyFolder/credentials/']")
     private WebElement credentialsMenuItem;
 
-    @FindBy(xpath = "newCredentials")
+    @FindBy(xpath = "//a[@href='newCredentials']")
     private WebElement addCredentials;
 
     public GlobalCredentialsPage(WebDriver driver) {
