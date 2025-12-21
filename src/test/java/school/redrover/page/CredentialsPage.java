@@ -15,7 +15,7 @@ public class CredentialsPage extends BasePage<CredentialsPage> {
     private  WebElement addCredentialsButton;
 
     @FindBy(xpath = "//a[@href = '/manage/credentials/store/system/domain/_/']")
-    private  WebElement StoresFromParentGlobal;
+    private  WebElement storesFromParentGlobal;
 
     public CredentialsPage(WebDriver driver) {
         super(driver);
@@ -23,7 +23,7 @@ public class CredentialsPage extends BasePage<CredentialsPage> {
 
     @Override
     public CredentialsPage waitUntilPageLoad() {
-        getWait5().until(ExpectedConditions.visibilityOf(StoresFromParentGlobal));
+        getWait5().until(ExpectedConditions.visibilityOf(storesFromParentGlobal));
         return this;
     }
 

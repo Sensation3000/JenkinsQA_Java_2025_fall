@@ -11,7 +11,7 @@ import school.redrover.common.BasePage;
 public class NewCredentialsPage extends BasePage<NewCredentialsPage> {
 
     @FindBy(name = "Submit")
-    private WebElement ButtonCreate;
+    private WebElement buttonCreate;
 
     public NewCredentialsPage(WebDriver driver) {
         super(driver);
