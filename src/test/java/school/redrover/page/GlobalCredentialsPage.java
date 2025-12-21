@@ -16,13 +16,16 @@ public class GlobalCredentialsPage extends BasePage<GlobalCredentialsPage> {
     @FindBy(xpath = "//a[@href='/job/MyFolder/credentials/']")
     private WebElement credentialsMenuItem;
 
+    @FindBy(xpath = "newCredentials")
+    private WebElement addCredentials;
+
     public GlobalCredentialsPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
     public GlobalCredentialsPage waitUntilPageLoad() {
-        getWait10().until(ExpectedConditions.visibilityOf(credentialsMenuItem));
+        getWait10().until(ExpectedConditions.visibilityOf(addCredentials));
         return this;
     }
 
@@ -32,7 +35,7 @@ public class GlobalCredentialsPage extends BasePage<GlobalCredentialsPage> {
     }
 
     public NewCredentialsPage clickAddCredentialsButton() {
-        getDriver().findElement(By.xpath("//a[@href = 'newCredentials']")).click();
+        addCredentials.click();
 
         return new NewCredentialsPage(getDriver()).waitUntilPageLoad();
     }
