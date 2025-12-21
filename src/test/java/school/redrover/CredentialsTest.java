@@ -12,7 +12,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class CredentialsTest extends BaseTest {
 
-    @Ignore
     @Test
     public void testCreateUsernameWithPassword() {
         final String username = "Admin";

@@ -42,7 +42,7 @@ public class NewCredentialsPage extends BasePage<NewCredentialsPage> {
     }
 
     public GlobalCredentialsPage clickCreateButton() {
-        ButtonCreate.click();
+        getDriver().findElement(By.name("Submit")).click();
 
         return new GlobalCredentialsPage(getDriver()).waitUntilPageLoad();
     }
