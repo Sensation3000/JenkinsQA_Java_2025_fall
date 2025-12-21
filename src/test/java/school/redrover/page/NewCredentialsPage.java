@@ -19,7 +19,7 @@ public class NewCredentialsPage extends BasePage<NewCredentialsPage> {
 
     @Override
     public NewCredentialsPage waitUntilPageLoad() {
-        getWait5().until(ExpectedConditions.elementToBeClickable(ButtonCreate));
+        getWait5().until(ExpectedConditions.visibilityOf(ButtonCreate));
         return this;
     }
 

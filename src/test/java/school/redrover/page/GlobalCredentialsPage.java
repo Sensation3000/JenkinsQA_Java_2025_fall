@@ -22,7 +22,7 @@ public class GlobalCredentialsPage extends BasePage<GlobalCredentialsPage> {
 
     @Override
     public GlobalCredentialsPage waitUntilPageLoad() {
-        getWait5().until(ExpectedConditions.elementToBeClickable(credentialsMenuItem));
+        getWait5().until(ExpectedConditions.visibilityOf(credentialsMenuItem));
         return this;
     }
 
