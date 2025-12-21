@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
 import java.util.List;
@@ -21,18 +22,19 @@ public class GlobalCredentialsPage extends BasePage<GlobalCredentialsPage> {
 
     @Override
     public GlobalCredentialsPage waitUntilPageLoad() {
-        return null;
+        getWait5().until(ExpectedConditions.elementToBeClickable(credentialsMenuItem));
+        return this;
     }
 
     public CredentialsPage clickCredentials() {
         credentialsMenuItem.click();
-        return new CredentialsPage(getDriver());
+        return new CredentialsPage(getDriver()).waitUntilPageLoad();
     }
 
     public NewCredentialsPage clickAddCredentialsButton() {
         getDriver().findElement(By.xpath("//a[@href = 'newCredentials']")).click();
 
-        return new NewCredentialsPage(getDriver());
+        return new NewCredentialsPage(getDriver()).waitUntilPageLoad();
     }
 
     public List<WebElement> getGlobalCredentialsList() {
