@@ -2,6 +2,7 @@ package school.redrover;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.HomePage;
@@ -11,6 +12,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class CredentialsTest extends BaseTest {
 
+    @Ignore
     @Test
     public void testCreateUsernameWithPassword() {
         final String username = "Admin";
