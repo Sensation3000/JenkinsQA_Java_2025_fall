@@ -72,9 +72,8 @@ public class FolderManagementTest extends BaseTest {
         Assert.assertEquals(actualHeadingText, "Configure");
     }
 
-    @Test()
+    @Test
     public void addNewCredentials() {
-
         createFolder();
 
         String actualCredentialName = new HomePage(getDriver())
@@ -85,13 +84,12 @@ public class FolderManagementTest extends BaseTest {
                 .enterUsername(CREDENTIAL_NAME)
                 .clickCreateButton()
                 .clickCredentials()
-                .getCredentialsName(CREDENTIAL_NAME)
-                .getText();
+                .getCredentialsName(CREDENTIAL_NAME);
 
         Assert.assertTrue(actualCredentialName.contains(CREDENTIAL_NAME), "Credential name is not found in text: " + actualCredentialName);
     }
 
-    @Test()
+    @Test
     public void testViewCreationForm() {
         createFolder();
 

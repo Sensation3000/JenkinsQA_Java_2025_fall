@@ -82,7 +82,7 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage> {
     public CredentialsPage clickCredentialsLink() {
         credentialsLink.click();
 
-        return new CredentialsPage(getDriver());
+        return new CredentialsPage(getDriver()).waitUntilPageLoad();
     }
 
     public List<String> getBreadcrumbTexts() {

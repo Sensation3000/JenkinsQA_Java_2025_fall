@@ -5,10 +5,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
 
 public class CredentialsPage extends BasePage<CredentialsPage> {
+
+    @FindBy(xpath = "//a[contains(text(), 'global')]")
+    private  WebElement addCredentialsButton;
+
+    @FindBy(xpath = "//a[@href = '/manage/credentials/store/system/domain/_/']")
+    private  WebElement storesFromParentGlobal;
 
     public CredentialsPage(WebDriver driver) {
         super(driver);
@@ -16,21 +23,22 @@ public class CredentialsPage extends BasePage<CredentialsPage> {
 
     @Override
     public CredentialsPage waitUntilPageLoad() {
-        return null;
+        getWait5().until(ExpectedConditions.visibilityOf(storesFromParentGlobal));
+        return this;
     }
 
-    public WebElement getCredentialsName(String name) {
+    public String getCredentialsName(String name) {
 
-        return getDriver().findElement(By.xpath("//a[contains(., '" + name + "')]"));
+        return getDriver().findElement(By.xpath("//a[contains(., '" + name + "')]")).getText();
     }
 
 
     public GlobalCredentialsPage clickGlobalLink() {
 
         new Actions(getDriver())
-                .doubleClick(getDriver().findElement(By.xpath("//a[contains(text(), 'global')]")))
+                .doubleClick(addCredentialsButton)
                 .perform();
 
-        return new GlobalCredentialsPage(getDriver());
+        return new GlobalCredentialsPage(getDriver()).waitUntilPageLoad();
     }
 }
