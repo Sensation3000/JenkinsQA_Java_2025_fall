@@ -74,7 +74,6 @@ public class FolderManagementTest extends BaseTest {
 
     @Test
     public void addNewCredentials() {
-
         createFolder();
 
         String actualCredentialName = new HomePage(getDriver())
