@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 
 public class GlobalCredentialsPage extends BasePage<GlobalCredentialsPage> {
 
-    @FindBy(xpath = "//a[text()='Credentials']")
+    @FindBy(xpath = "//a[@href='/job/MyFolder/credentials/']")
     private WebElement credentialsMenuItem;
 
     public GlobalCredentialsPage(WebDriver driver) {
@@ -22,7 +22,7 @@ public class GlobalCredentialsPage extends BasePage<GlobalCredentialsPage> {
 
     @Override
     public GlobalCredentialsPage waitUntilPageLoad() {
-        getWait5().until(ExpectedConditions.visibilityOf(credentialsMenuItem));
+        getWait10().until(ExpectedConditions.visibilityOf(credentialsMenuItem));
         return this;
     }
 
