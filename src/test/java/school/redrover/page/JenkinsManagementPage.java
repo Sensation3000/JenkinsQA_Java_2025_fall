@@ -56,7 +56,7 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
     public CredentialsPage clickCredentialsLink() {
         credentialsLink.click();
 
-        return new CredentialsPage(getDriver());
+        return new CredentialsPage(getDriver()).waitUntilPageLoad();
     }
 
     public SystemConfigurationPage clickConfigurationSystem() {
