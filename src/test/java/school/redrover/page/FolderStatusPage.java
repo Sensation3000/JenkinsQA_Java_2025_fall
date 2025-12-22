@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.annotations.Test;
 import school.redrover.common.TestUtils;
 
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage> {
         return new FolderInfo(displayName, description);
     }
 
+
     public static class FolderInfo {
         private final String displayName;
         private final String description;
@@ -76,13 +78,14 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage> {
 
     public NewItemPage clickSidebarNewItem() {
         newItemOfMenuItem.click();
-        return new NewItemPage(getDriver());
+
+        return TestUtils.waitUntilPageLoad(new NewItemPage(getDriver()));
     }
 
     public CredentialsPage clickCredentialsLink() {
         credentialsLink.click();
 
-        return new CredentialsPage(getDriver()).waitUntilPageLoad();
+        return TestUtils.waitUntilPageLoad(new CredentialsPage(getDriver()));
     }
 
     public List<String> getBreadcrumbTexts() {
@@ -101,44 +104,25 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage> {
     public FolderStatusPage openFolderPage(String folderName) {
         getDriver().findElement(By.linkText(folderName)).click();
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public FolderStatusPage clickDeleteFolder() {
-        WebElement deleteButton = getWait2().until(
-                ExpectedConditions.elementToBeClickable(
-                        By.xpath("//a[@data-title='Delete Folder']"))
-        );
-        deleteButton.click();
+        getDriver().findElement(By.xpath("//a[@data-title='Delete Folder']")).click();
 
-        getWait2().until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//dialog[@open]")));
-
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public HomePage confirmDeleteFolder() {
-        String urlBeforeDelete = getDriver().getCurrentUrl();
+        getDriver().findElement(By.xpath("//dialog[@open]//button[@data-id='ok']")).click();
 
-        WebElement yesButton = getWait2().until(
-                ExpectedConditions.elementToBeClickable(
-                        By.xpath("//dialog[@open]//button[@data-id='ok']"))
-        );
-        yesButton.click();
-
-        getWait5().until(ExpectedConditions.not(ExpectedConditions.urlToBe(urlBeforeDelete)));
-        return new HomePage(getDriver());
+        return TestUtils.waitUntilPageLoad(new HomePage(getDriver()));
     }
 
     public FolderStatusPage confirmDeleteChildFolder() {
-        WebElement yesButton = getWait2().until(
-                ExpectedConditions.elementToBeClickable(
-                        By.xpath("//dialog[@open]//button[@data-id='ok']"))
-        );
-        yesButton.click();
-        getWait5().until(ExpectedConditions.stalenessOf(yesButton));
+        getDriver().findElement(By.xpath("//dialog[@open]//button[@data-id='ok']")).click();
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public FolderStatusPage openDropdownMenu(String itemName) {
@@ -149,31 +133,36 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage> {
         TestUtils.mouseEnterJS(getDriver(), dropdownButton);
         TestUtils.clickJS(getDriver(), dropdownButton);
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public FolderRenamingPage clickRenameItemInDropdownMenu() {
-        getWait5().until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='tippy-content']//div[@class='jenkins-dropdown']//a[normalize-space()='Rename']"))).click();
+        getWait5().until(ExpectedConditions.elementToBeClickable(By
+                .xpath("//div[@class='tippy-content']//div[@class='jenkins-dropdown']//a[normalize-space()='Rename']")))
+                .click();
 
-        return new FolderRenamingPage(getDriver());
+        return TestUtils.waitUntilPageLoad(new FolderRenamingPage(getDriver()));
     }
 
     public FolderStatusPage clickDeleteItemInDropdownMenu() {
-        getWait2().until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class, 'jenkins-dropdown__item') and contains(., 'Delete')]"))).click();
+        getWait2().until(ExpectedConditions.elementToBeClickable(By
+                .xpath("//button[contains(@class, 'jenkins-dropdown__item') and contains(., 'Delete')]")))
+                .click();
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public FolderStatusPage clickAddDescriptionButton() {
         getDriver().findElement(By.id("description-link")).click();
-        return this;
+
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public FolderStatusPage addDescriptionAndSave(String description) {
         getDriver().findElement(By.xpath("//textarea[@name='description']")).sendKeys(description);
         getDriver().findElement(By.name("Submit")).click();
-        getWait5().until(ExpectedConditions.textToBe(By.id("description-content"), description));
-        return this;
+
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public String getDescription() {
@@ -191,7 +180,7 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage> {
         getWait2().until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
         getDriver().findElement(By.xpath("//span[text()='New Item']/..")).click();
 
-        return new NewItemPage(getDriver());
+        return TestUtils.waitUntilPageLoad(new NewItemPage(getDriver()));
     }
 
     public WebElement getElement(String name) {
@@ -213,7 +202,7 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage> {
     public FolderStatusPage clickBreadcrumbsItem(String folderName) {
         getDriver().findElement(By.xpath("//a[text()='%s']".formatted(folderName))).click();
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public String getFolderIconAttribute(String folderName) {
@@ -273,7 +262,7 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage> {
         TestUtils.mouseEnterJS(getDriver(), dropdownButton);
         TestUtils.clickJS(getDriver(), dropdownButton);
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public boolean isMenuItemInDropdownDisplayed(String menuItem) {
@@ -287,12 +276,12 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage> {
 
         TestUtils.clickJS(getDriver(), By.xpath("//span[text()='%s']".formatted(itemName.trim())));
 
-        return projectStatusPage.waitUntilPageLoad();
+        return TestUtils.waitUntilPageLoad(projectStatusPage);
     }
 
     public FolderCreateViewPage clickNewView() {
         newView.click();
 
-        return new FolderCreateViewPage(getDriver());
+        return TestUtils.waitUntilPageLoad(new FolderCreateViewPage(getDriver()));
     }
 }

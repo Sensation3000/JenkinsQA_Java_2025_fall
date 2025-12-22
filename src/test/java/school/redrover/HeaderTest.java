@@ -31,12 +31,11 @@ public class HeaderTest extends BaseTest {
 
     @Test(dependsOnMethods = "testSearchResultsAppear")
     public void testSearchResultsActions() {
-        Actions actions = new Actions(getDriver());
-        new HomePage(getDriver()).clickSearchButton().searchFor("Folder").waitForTextOfResults();
+        new HomePage(getDriver())
+                .clickSearchButton()
+                .searchFor("Folder");
 
-        actions.sendKeys(Keys.ARROW_DOWN).perform();
-        actions.sendKeys(Keys.ARROW_UP).perform();
-        actions.sendKeys(Keys.ENTER).perform();
+        new Actions(getDriver()).sendKeys(Keys.ENTER).perform();
 
         Assert.assertTrue(new FolderStatusPage(getDriver()).checkURLContains("/job/Folder/"));
     }

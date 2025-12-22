@@ -68,9 +68,9 @@ public abstract class BasePage<Page> extends BaseModel {
     }
 
     public SearchModalPage clickSearchButton() {
-        getWait5().until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.id("root-action-SearchAction")))).click();
+        getDriver().findElement(By.id("root-action-SearchAction")).click();
 
-        return new SearchModalPage(getDriver());
+        return TestUtils.waitUntilPageLoad(new SearchModalPage(getDriver()));
     }
 
     public LoginPage clickSignOut() {

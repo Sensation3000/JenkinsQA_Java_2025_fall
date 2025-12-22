@@ -8,6 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
+import school.redrover.common.TestUtils;
+
 import java.time.Duration;
 
 
@@ -37,7 +39,7 @@ public class UsersPage extends BasePage<UsersPage> {
     public UserCreatingPage clickCreateUserButton() {
         createUserButton.click();
 
-        return new UserCreatingPage(getDriver()).waitUntilPageLoad();
+        return TestUtils.waitUntilPageLoad(new UserCreatingPage(getDriver()));
     }
 
     public String getUserName(String userName) {
@@ -54,12 +56,12 @@ public class UsersPage extends BasePage<UsersPage> {
         chevronButton.sendKeys(Keys.ENTER);
         getWait5().until(ExpectedConditions.elementToBeClickable(accountMenuItem)).click();
 
-        return new UserAccountPage(getDriver()).waitUntilPageLoad();
+        return TestUtils.waitUntilPageLoad(new UserAccountPage(getDriver()));
     }
 
     public UserStatusPage clickUserLink(String userName) {
         getDriver().findElement(By.xpath("//a[text()='%s']".formatted(userName))).click();
 
-        return new UserStatusPage(getDriver()).waitUntilPageLoad();
+        return TestUtils.waitUntilPageLoad(new UserStatusPage(getDriver()));
     }
 }

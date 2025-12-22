@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
+import school.redrover.common.TestUtils;
 
 
 public class FolderRenamingPage extends BasePage<FolderRenamingPage> {
@@ -36,7 +37,7 @@ public class FolderRenamingPage extends BasePage<FolderRenamingPage> {
     public FolderStatusPage renameButtonClick () {
         renameButton.click();
 
-        return new FolderStatusPage(getDriver());
+        return TestUtils.waitUntilPageLoad(new FolderStatusPage(getDriver()));
     }
 
     public FolderRenamingPage clearName () {

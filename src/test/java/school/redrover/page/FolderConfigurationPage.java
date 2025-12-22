@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import school.redrover.common.TestUtils;
 
 import java.util.List;
 
@@ -98,9 +99,8 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
         WebElement submitButton = getWait5().until(
                 ExpectedConditions.elementToBeClickable(By.name("Submit")));
         submitButton.click();
-        getWait5().until(ExpectedConditions.not(
-                ExpectedConditions.urlContains("configure")));
-        return new FolderStatusPage(getDriver());
+
+        return TestUtils.waitUntilPageLoad(new FolderStatusPage(getDriver()));
     }
 
     public String getHealthMetricsSidebarLink() {
@@ -112,7 +112,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     public FolderConfigurationPage clickHealthMetricsSidebarLink() {
         healthMetricSidebarLink.click();
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public String getSectionName() {
@@ -121,7 +121,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     public FolderConfigurationPage clickHealthMetricsButton() {
         healthMetricButton.click();
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public FolderConfigurationPage clickAddMetricButton() {
@@ -129,17 +129,11 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
                 "arguments[0].scrollIntoView(true);", addMetricButton);
         addMetricButton.click();
 
-        getWait2().until(ExpectedConditions.visibilityOfElementLocated(By
-                .xpath("//input[@class='jenkins-dropdown__filter-input']")));
-
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public List<String> getAllMetricTypeNames() {
         By metricTypesList = By.xpath("//div[@class='jenkins-dropdown jenkins-dropdown--compact']//button");
-
-        clickAddMetricButton();
-        getWait2().until(ExpectedConditions.presenceOfAllElementsLocatedBy(metricTypesList));
 
         return getDriver().findElements(metricTypesList)
                 .stream()
@@ -148,12 +142,9 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     }
 
     public FolderConfigurationPage clickWorstHealthButton() {
-       By worstHealthMetricRow = By.xpath("//div[@descriptorid='com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric']");
-
         worstHealthButton.click();
-        getWait2().until(ExpectedConditions.visibilityOfElementLocated(worstHealthMetricRow));
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public String getMetricRowName() {
@@ -161,12 +152,9 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     }
 
     public FolderConfigurationPage clickGivenNameButton() {
-        By givenNameMetricRow = By.xpath("//div[@descriptorid='com.cloudbees.hudson.plugins.folder.health.NamedChildHealthMetric']");
-
         getDriver().findElement(By.xpath("//button[@class='jenkins-dropdown__item '][1]")).click();
-        getWait2().until(ExpectedConditions.visibilityOfElementLocated(givenNameMetricRow));
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public FolderConfigurationPage dragWorstHealthRowToTop() {
@@ -183,7 +171,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     public FolderConfigurationPage deleteMetric() {
         deleteMetric.click();
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public List<String> getMetricList() {
@@ -206,7 +194,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     public FolderConfigurationPage clickChildNameTooltip() {
         childNameTooltip.click();
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public String getChildNameTooltipText() {
@@ -226,7 +214,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     public FolderConfigurationPage clickRecursiveTooltip() {
         recursiveTooltip.click();
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public String getRecursiveTooltipText() {

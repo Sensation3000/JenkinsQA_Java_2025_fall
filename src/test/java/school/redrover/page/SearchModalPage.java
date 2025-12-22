@@ -27,7 +27,8 @@ public class SearchModalPage extends BasePage<SearchModalPage> {
     public SearchModalPage searchFor(String jobName) {
         WebElement input = getWait2().until(ExpectedConditions.elementToBeClickable(inputField));
         input.sendKeys(jobName);
-        return this;
+
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public SearchModalPage searchFor(String jobName, String previousItemName) {
@@ -67,11 +68,12 @@ public class SearchModalPage extends BasePage<SearchModalPage> {
     }
 
     public UserStatusPage searchForUser(String userName) {
-        getWait2().until(ExpectedConditions.elementToBeClickable(inputField));
         getDriver().findElement(By.id("command-bar")).sendKeys(userName);
-        getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#search-results [href='/user/%s']".formatted(userName).toLowerCase())));
+
+        TestUtils.waitUntilPageLoad(this);
         getDriver().findElement(By.id("command-bar")).sendKeys(Keys.ENTER);
-        return new UserStatusPage(getDriver());
+
+        return TestUtils.waitUntilPageLoad(new UserStatusPage(getDriver()));
     }
 
     public List<String> searchResults() {
@@ -83,15 +85,8 @@ public class SearchModalPage extends BasePage<SearchModalPage> {
     }
 
     public FreestyleProjectStatusPage moveAndClickResult(){
-        getWait5().until(ExpectedConditions.presenceOfElementLocated(By.className("jenkins-command-palette__results__heading")));
-
         TestUtils.clickJS(getDriver(), getDriver().findElement(searchResults));
 
-        return new FreestyleProjectStatusPage(getDriver()).waitUntilPageLoad();
-    }
-
-    public SearchModalPage waitForTextOfResults() {
-        getWait5().until(ExpectedConditions.presenceOfElementLocated(By.className("jenkins-command-palette__results__heading")));
-        return this;
+        return TestUtils.waitUntilPageLoad(new FreestyleProjectStatusPage(getDriver()));
     }
 }

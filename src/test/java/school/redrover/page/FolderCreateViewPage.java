@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
+import school.redrover.common.TestUtils;
 
 
 public class FolderCreateViewPage extends BasePage<FolderCreateViewPage> {
@@ -35,33 +36,30 @@ public class FolderCreateViewPage extends BasePage<FolderCreateViewPage> {
     }
 
     public FolderCreateViewPage sendName(String name) {
-        getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.className("help-sibling")));
-
         inputViewName.sendKeys(name);
+
         return this;
     }
 
     public FolderCreateViewPage selectTypeGlobalView() {
         inputGlobalView.click();
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public FolderCreateViewPage selectTypeListView() {
         inputListView.click();
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public FolderCreateViewPage selectTypeMyView() {
         inputMyView.click();
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
-    public FolderViewPage clickCreate() {
+    public void clickCreate() {
         getDriver().findElement(By.id("ok")).click();
-
-        return new FolderViewPage(getDriver());
     }
 }

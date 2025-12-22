@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
+import school.redrover.common.TestUtils;
 
 import java.util.List;
 
@@ -87,18 +88,16 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
     public JenkinsManagementPage sendTitle(String settingTitle) {
         sendTitle.sendKeys(settingTitle);
 
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public SystemConfigurationPage clickSearchResult() {
-        getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.className("jenkins-dropdown__item")));
-
         new Actions(getDriver())
                 .moveToElement(getDriver().findElement(searchResults), 0, 0)
                 .click()
                 .perform();
 
-        return new SystemConfigurationPage(getDriver()).waitUntilPageLoad();
+        return TestUtils.waitUntilPageLoad(new SystemConfigurationPage(getDriver()));
     }
 
     public List<String> getSearchResults() {

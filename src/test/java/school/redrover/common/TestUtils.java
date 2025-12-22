@@ -5,6 +5,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Objects;
 
 public class TestUtils {
 
@@ -31,5 +34,20 @@ public class TestUtils {
     public static String getTextJS(WebDriver driver, WebElement element) {
         return (String) ((JavascriptExecutor) driver)
                 .executeScript("return arguments[0].innerText;", element);
+    }
+
+    public static  <Page extends BasePage<?>> Page waitUntilPageLoad(Page page) {
+
+        // delay to make sure the page starts to reload
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ignored) {
+        }
+
+        new WebDriverWait(page.getDriver(), java.time.Duration.ofSeconds(10)).until(
+                webDriver -> Objects.equals(((JavascriptExecutor) webDriver).executeScript("return document.readyState"), "complete")
+        );
+
+        return page;
     }
 }

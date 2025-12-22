@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
+import school.redrover.common.TestUtils;
 
 import java.util.function.Consumer;
 
@@ -70,9 +71,7 @@ public class UserStatusPage extends BasePage<UserStatusPage> {
     public UserStatusPage clickEditDescription() {
         editDescriptionButton.click();
 
-        getWait5().until(ExpectedConditions.elementToBeClickable(descriptionTextBox));
-
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public UserStatusPage sendDescriptionAndSave(String text) {
@@ -80,9 +79,7 @@ public class UserStatusPage extends BasePage<UserStatusPage> {
         descriptionTextBox.sendKeys(text);
         saveButton.click();
 
-        getWait2().until(ExpectedConditions.invisibilityOf(saveButton));
-
-        return this;
+        return TestUtils.waitUntilPageLoad(this);
     }
 
     public String getDescriptionText() {
