@@ -53,12 +53,12 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
         getWait10().until(ExpectedConditions.elementToBeClickable(addAxisButton));
         addAxisButton.click();
 
+        getWait10().until(ExpectedConditions.visibilityOf(addAxisDropdownList.get(0)));
+
         return this;
     }
 
     public List<String> getAddAxisDropdownItemTextList() {
-        getWait10().until(ExpectedConditions.visibilityOf(addAxisDropdownList.get(0)));
-
         return addAxisDropdownList.stream().map(WebElement::getText).toList();
     }
 }
