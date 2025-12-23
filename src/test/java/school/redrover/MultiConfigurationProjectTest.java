@@ -1,6 +1,7 @@
 package school.redrover;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.*;
@@ -11,6 +12,20 @@ public class MultiConfigurationProjectTest extends BaseTest {
     private static final String PROJECT_NAME = "Multiconfiguration project name";
     private static final String RENAMED_PROJECT = "Renamed multiconfiguration project";
     private static final String PROJECT_DESCRIPTION = "Project description...";
+
+    @DataProvider(name = "validQuietPeriodValues")
+    public Object[][] provideValidQuietPeriodValues() {
+        return new String[][]{
+                {"0"},
+                {"1"},
+                {"30"},
+                {"60"},
+                {"300"},
+                {"3600"},
+                {"86400"},
+                {""}
+        };
+    }
 
     @Test
     public void testCreateProject() {
@@ -64,5 +79,20 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .getHeaderText();
 
         Assert.assertEquals(actualProjectName, RENAMED_PROJECT);
+    }
+
+    @Test(dataProvider = "validQuietPeriodValues")
+    public void testValidQuietPeriodValues(String seconds) {
+        String configPage = new HomePage(getDriver())
+                .clickNewItemOnLeftMenu()
+                .sendName(PROJECT_NAME)
+                .selectMultiConfigurationProjectAndSubmit()
+                .clickAdvancedDropdownButton()
+                .clickQuietPeriodCheckbox()
+                .setQuietPeriodInput(seconds)
+                .clickSubmit()
+                .getHeaderText();
+
+        Assert.assertEquals(configPage, PROJECT_NAME);
     }
 }
