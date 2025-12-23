@@ -1,11 +1,11 @@
 package school.redrover.page;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import school.redrover.common.TestUtils;
 
 import java.util.List;
 
@@ -49,16 +49,16 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
     }
 
     public MultiConfigurationProjectConfigurationPage clickAddAxisButton() {
-        ((JavascriptExecutor) getDriver())
-                .executeScript("arguments[0].scrollIntoView({block: 'center'});", addAxisButton);
+        TestUtils.scrollToElement(getDriver(), addAxisButton);
         getWait10().until(ExpectedConditions.elementToBeClickable(addAxisButton));
         addAxisButton.click();
 
         return this;
     }
 
-    public List<String> getAddAxisDropdownItemText() {
+    public List<String> getAddAxisDropdownItemTextList() {
         getWait10().until(ExpectedConditions.visibilityOf(addAxisDropdownList.get(0)));
+
         return addAxisDropdownList.stream().map(WebElement::getText).toList();
     }
 }

@@ -32,7 +32,7 @@ public class ConfigurationMatrixTest extends BaseTest {
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
                 .clickAddAxisButton()
-                .getAddAxisDropdownItemText();
+                .getAddAxisDropdownItemTextList();
 
         Assert.assertEquals(configurationMatrixAddAxisList.size(), 1, "Dropdown should contain exactly one item");
         Assert.assertEquals(configurationMatrixAddAxisList.get(0).trim(), "User-defined Axis",
