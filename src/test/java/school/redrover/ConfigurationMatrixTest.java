@@ -1,30 +1,17 @@
 package school.redrover;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
-import school.redrover.common.TestUtils;
 import school.redrover.page.FreestyleProjectConfigurationPage;
 import school.redrover.page.HomePage;
 
 import java.util.List;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
-
 
 public class ConfigurationMatrixTest extends BaseTest {
 
     private static final String PROJECT_NAME = "Multiconfiguration project name";
-
-    private void createConfigurationMatrix() {
-        new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
-                .sendName(PROJECT_NAME)
-                .selectMultiConfigurationProjectAndSubmit();
-    }
 
     @Test
     public void testSectionDisplayed() {
@@ -40,18 +27,15 @@ public class ConfigurationMatrixTest extends BaseTest {
 
     @Test
     public void testAddAxisMenuOnlyUserDefined() {
+        List<String> configurationMatrixAddAxisList = new HomePage(getDriver())
+                .clickNewItemOnLeftMenu()
+                .sendName(PROJECT_NAME)
+                .selectMultiConfigurationProjectAndSubmit()
+                .clickAddAxisButton()
+                .getAddAxisDropdownItemTextList();
 
-        createConfigurationMatrix();
-
-        By addAxisLocator = By.cssSelector("[suffix=axis]");
-        getWait10().until(ExpectedConditions.visibilityOfElementLocated(addAxisLocator));
-        TestUtils.clickJS(getDriver(), addAxisLocator);
-
-        By itemMenu = By.cssSelector(".jenkins-dropdown__item");
-        List<WebElement> items = getWait10().until(visibilityOfAllElementsLocatedBy(itemMenu));
-
-        Assert.assertEquals(items.size(), 1, "Dropdown should contain exactly one item");
-        Assert.assertEquals(items.get(0).getText().trim(), "User-defined Axis",
+        Assert.assertEquals(configurationMatrixAddAxisList.size(), 1, "Dropdown should contain exactly one item");
+        Assert.assertEquals(configurationMatrixAddAxisList.get(0).trim(), "User-defined Axis",
                 "The only option must be 'User-defined Axis'");
     }
 

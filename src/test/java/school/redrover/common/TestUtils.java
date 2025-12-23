@@ -2,9 +2,9 @@ package school.redrover.common;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Objects;
@@ -25,7 +25,7 @@ public class TestUtils {
         executor.executeScript("arguments[0].dispatchEvent(new Event('mouseenter'));", element);
     }
 
-    public static void focusAndEnterByKeyboard(WebDriver driver, WebElement element){
+    public static void focusAndEnterByKeyboard(WebDriver driver, WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].focus();", element);
         WebElement activeElement = driver.switchTo().activeElement();
         activeElement.sendKeys(Keys.ENTER);
@@ -36,7 +36,7 @@ public class TestUtils {
                 .executeScript("return arguments[0].innerText;", element);
     }
 
-    public static  <Page extends BasePage<?>> Page waitUntilPageLoad(Page page) {
+    public static <Page extends BasePage<?>> Page waitUntilPageLoad(Page page) {
 
         // delay to make sure the page starts to reload
         try {
@@ -49,5 +49,11 @@ public class TestUtils {
         );
 
         return page;
+    }
+
+    public static void scrollToElement(WebDriver driver, WebElement element) {
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});",
+                element);
     }
 }

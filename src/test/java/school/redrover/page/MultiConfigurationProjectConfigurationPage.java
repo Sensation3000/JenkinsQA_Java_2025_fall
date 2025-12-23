@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import school.redrover.common.TestUtils;
+
+import java.util.List;
 
 
 public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfigurationPage<MultiConfigurationProjectConfigurationPage> {
@@ -14,6 +17,12 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
 
     @FindBy(id = "configuration-matrix")
     private WebElement configurationMatrix;
+
+    @FindBy(css = "[suffix=axis]")
+    private WebElement addAxisButton;
+
+    @FindBy(className = "jenkins-dropdown__item")
+    private List<WebElement> addAxisDropdownList;
 
 
     public MultiConfigurationProjectConfigurationPage(WebDriver driver) {
@@ -37,5 +46,19 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
 
     public String getConfigurationMatrixText() {
         return getWait5().until(ExpectedConditions.visibilityOf(configurationMatrix)).getText().trim();
+    }
+
+    public MultiConfigurationProjectConfigurationPage clickAddAxisButton() {
+        TestUtils.scrollToElement(getDriver(), addAxisButton);
+        getWait10().until(ExpectedConditions.elementToBeClickable(addAxisButton));
+        addAxisButton.click();
+
+        getWait10().until(ExpectedConditions.visibilityOf(addAxisDropdownList.get(0)));
+
+        return this;
+    }
+
+    public List<String> getAddAxisDropdownItemTextList() {
+        return addAxisDropdownList.stream().map(WebElement::getText).toList();
     }
 }
