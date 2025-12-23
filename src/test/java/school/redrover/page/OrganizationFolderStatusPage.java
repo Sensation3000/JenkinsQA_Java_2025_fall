@@ -5,9 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import school.redrover.project_status_page_interface.ClickableSidebarBuildHistory;
+import school.redrover.project_status_page_interface.ClickableSidebarCredentials;
+import school.redrover.project_status_page_interface.ClickableSidebarMove;
 
 
-public class OrganizationFolderStatusPage extends BaseProjectStatusPage {
+public class OrganizationFolderStatusPage extends BaseProjectStatusPage<OrganizationFolderStatusPage>
+        implements ClickableSidebarBuildHistory, ClickableSidebarMove, ClickableSidebarCredentials {
 
     @FindBy(xpath = "//span[text()='Delete Organization Folder']/ancestor::a")
     private WebElement deleteMenuItem;

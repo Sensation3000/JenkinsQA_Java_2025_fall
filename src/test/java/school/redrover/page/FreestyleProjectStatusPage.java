@@ -5,9 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import school.redrover.project_status_page_interface.*;
 
 
-public class FreestyleProjectStatusPage extends BaseProjectStatusPage<FreestyleProjectStatusPage> {
+public class FreestyleProjectStatusPage extends BaseProjectStatusPage<FreestyleProjectStatusPage>
+        implements ClickableSidebarChanges, ClickableSidebarWorkspace, ClickableSidebarBuildNow, ClickableSidebarMove, ClickableSidebarCredentials {
 
     @FindBy(xpath = "//a[contains(@href, '/configure')]")
     private WebElement configureMenuItem;

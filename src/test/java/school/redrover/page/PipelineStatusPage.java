@@ -5,9 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import school.redrover.project_status_page_interface.ClickableSidebarBuildNow;
+import school.redrover.project_status_page_interface.ClickableSidebarChanges;
+import school.redrover.project_status_page_interface.ClickableSidebarCredentials;
+import school.redrover.project_status_page_interface.ClickableSidebarMove;
 
 
-public class PipelineStatusPage extends BaseProjectStatusPage<PipelineStatusPage> {
+public class PipelineStatusPage extends BaseProjectStatusPage<PipelineStatusPage>
+        implements ClickableSidebarChanges, ClickableSidebarBuildNow, ClickableSidebarMove, ClickableSidebarCredentials {
 
     @FindBy(xpath = "//a[contains(@href, '/configure')]")
     private WebElement configureMenuItem;

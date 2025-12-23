@@ -6,15 +6,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.annotations.Test;
 import school.redrover.common.TestUtils;
+import school.redrover.project_status_page_interface.ClickableSidebarBuildHistory;
+import school.redrover.project_status_page_interface.ClickableSidebarCredentials;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 
-public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage> {
+public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage>
+        implements ClickableSidebarBuildHistory, ClickableSidebarCredentials {
 
     @FindBy(xpath = "//a[contains(@href, '/configure')]")
     private WebElement configureMenuItem;
