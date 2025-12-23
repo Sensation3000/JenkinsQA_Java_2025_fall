@@ -7,8 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 import school.redrover.common.TestUtils;
-
 import java.util.Objects;
+
 
 
 public class NewItemPage extends BasePage<NewItemPage> {
@@ -71,7 +71,6 @@ public class NewItemPage extends BasePage<NewItemPage> {
         getWait2().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text() = 'General']")));
 
         return new FolderConfigurationPage(getDriver());
-
     }
 
     public NewItemPage selectMultibranchPipeline() {
@@ -133,7 +132,6 @@ public class NewItemPage extends BasePage<NewItemPage> {
 
         return this;
     }
-
 
     public MultibranchPipelineConfigurationPage selectMultiConfigurationAndSubmit() {
         TestUtils.clickJS(getDriver(), By.xpath("//span[text()='Multi-configuration project']"));

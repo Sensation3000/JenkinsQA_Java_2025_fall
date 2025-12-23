@@ -1,11 +1,11 @@
 package school.redrover;
 
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
-import school.redrover.page.HomePage;
-import school.redrover.page.MultiConfigurationProjectRenamingPage;
+import school.redrover.page.*;
+
+
 
 public class MultiConfigurationProjectTest extends BaseTest {
     private static final String PROJECT_NAME = "Multiconfiguration project name";
@@ -24,19 +24,16 @@ public class MultiConfigurationProjectTest extends BaseTest {
         Assert.assertEquals(actualProjectName, PROJECT_NAME);
     }
 
-    @Ignore
-    @Test()
+    @Test(dependsOnMethods = "testCreateProject")
     public void testAddDescriptionToProject() {
-        String actualDescription = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
-                .sendName(PROJECT_NAME)
-                .selectMultiConfigurationProjectAndSubmit()
-                .clickSubmit()
+        String description = new HomePage(getDriver())
+                .openProject(PROJECT_NAME, new MultiConfigurationProjectStatusPage(getDriver()))
+                .waitUntilPageLoad()
                 .clearDescriptionField()
                 .sendDescription(PROJECT_DESCRIPTION)
                 .getDescription();
 
-        Assert.assertEquals(actualDescription, PROJECT_DESCRIPTION);
+        Assert.assertEquals(description, PROJECT_DESCRIPTION);
     }
 
     @Test

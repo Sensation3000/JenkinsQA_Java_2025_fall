@@ -46,7 +46,6 @@ public class HomePage extends BasePage<HomePage> {
     @FindBy(xpath = "//span[text()='Configure a cloud']")
     private WebElement configureCloudLink;
 
-
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -84,7 +83,7 @@ public class HomePage extends BasePage<HomePage> {
     }
 
     public <ProjectStatusPage extends BaseProjectStatusPage<ProjectStatusPage>>
-        ProjectStatusPage openProject(String jobName, ProjectStatusPage projectStatusPage) {
+    ProjectStatusPage openProject(String jobName, ProjectStatusPage projectStatusPage) {
 
         TestUtils.clickJS(getDriver(), By.xpath("//span[text()='%s']".formatted(jobName.trim())));
 
@@ -317,7 +316,7 @@ public class HomePage extends BasePage<HomePage> {
     public NewNodePage clickSetUpAnAgent() {
         setUpAnAgentButton.click();
 
-        return new NewNodePage(getDriver()).waitUntilPageLoad() ;
+        return new NewNodePage(getDriver()).waitUntilPageLoad();
     }
 
     public NodesPage clickBuildExecutorStatus() {
