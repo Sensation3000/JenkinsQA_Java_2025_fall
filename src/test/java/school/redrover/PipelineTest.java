@@ -245,4 +245,15 @@ public class PipelineTest extends BaseTest {
         Assert.assertEquals(new PipelineConfigurationPage(getDriver()).getErrorDescriptionModalWindow(),
                 "A problem occurred while processing the request");
     }
+
+    @Test(dependsOnMethods = "testCreateNewPipeline")
+    public void testTriggerNewBuildManually() {
+
+        int size = new HomePage(getDriver())
+                .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
+                .clickBuildNow()
+                .getSizeBuildsList();
+
+        Assert.assertEquals(size, 1);
+    }
 }

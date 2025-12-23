@@ -10,6 +10,8 @@ import school.redrover.project_status_page_interface.ClickableSidebarChanges;
 import school.redrover.project_status_page_interface.ClickableSidebarCredentials;
 import school.redrover.project_status_page_interface.ClickableSidebarMove;
 
+import java.util.List;
+
 
 public class PipelineStatusPage extends BaseProjectStatusPage<PipelineStatusPage>
         implements ClickableSidebarChanges, ClickableSidebarBuildNow, ClickableSidebarMove, ClickableSidebarCredentials {
@@ -43,6 +45,9 @@ public class PipelineStatusPage extends BaseProjectStatusPage<PipelineStatusPage
 
     @FindBy(name = "Submit")
     private WebElement submitButton;
+
+    @FindBy(css = "div[page-entry-id]")
+    private List<WebElement> buildsList;
 
 
     public PipelineStatusPage(WebDriver driver) {
@@ -137,5 +142,9 @@ public class PipelineStatusPage extends BaseProjectStatusPage<PipelineStatusPage
         getWait5().until(ExpectedConditions.stalenessOf(yesButton));
 
         return this;
+    }
+
+    public int getSizeBuildsList() {
+        return buildsList.size();
     }
 }
