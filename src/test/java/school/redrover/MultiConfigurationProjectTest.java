@@ -14,7 +14,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
     private static final String PROJECT_DESCRIPTION = "Project description...";
 
     @DataProvider(name = "validQuietPeriodValues")
-    public Object[][] provideValidQuietPeriodValues() {
+    public Object[][] validQuietPeriodValues() {
         return new String[][]{
                 {"0"},
                 {"1"},

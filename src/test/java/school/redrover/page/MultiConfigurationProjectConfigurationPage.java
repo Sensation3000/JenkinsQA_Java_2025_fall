@@ -83,9 +83,8 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
     }
 
     public MultiConfigurationProjectConfigurationPage setQuietPeriodInput(String seconds) {
-        WebElement input = quietPeriodInput;
-        input.clear();
-        input.sendKeys(seconds);
+        quietPeriodInput.clear();
+        quietPeriodInput.sendKeys(seconds);
 
         return this;
     }
