@@ -128,19 +128,16 @@ public class ConfigureSystemTest extends BaseTest {
 
     @Test
     public void testUsageVariants() {
-        final List<String> expectedVariants = List.of("Use this node as much as possible",
+        final List<String> expectedVariants = List.of(
+                "Use this node as much as possible",
                 "Only build jobs with label expressions matching this node");
 
-        moveToSystem();
+        List<String> actualVariants = new HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .getUsageModeOptions();
 
-        Select select = new Select(getDriver().findElement(By.name("builtin.mode")));
-        List<String> variants = select.getOptions()
-                .stream()
-                .map(WebElement::getText)
-                .toList();
-
-        Assert.assertEquals(variants, expectedVariants);
-
+        Assert.assertEquals(actualVariants, expectedVariants);
     }
 
     @Test

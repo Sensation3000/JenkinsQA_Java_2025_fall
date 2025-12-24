@@ -7,7 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import school.redrover.common.BasePage;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 
 public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
@@ -23,6 +27,9 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
 
     @FindBy(xpath = "//div[@nameref='cb3']//div[@class='help']/div[1]")
     private WebElement hintText;
+
+    @FindBy(name = "builtin.mode")
+    private WebElement usageModeDropdown;
 
 
     public SystemConfigurationPage(WebDriver driver) {
@@ -114,4 +121,15 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
     public String getHintText() {
         return hintText.getText().trim();
     }
+
+    public List<String> getUsageModeOptions() {
+        Select select = new Select(usageModeDropdown);
+
+        return select.getOptions()
+                .stream()
+                .map(WebElement::getText)
+                .toList();
+    }
 }
+
+
