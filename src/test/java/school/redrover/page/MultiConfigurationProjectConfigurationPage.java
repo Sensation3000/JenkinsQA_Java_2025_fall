@@ -24,6 +24,14 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
     @FindBy(className = "jenkins-dropdown__item")
     private List<WebElement> addAxisDropdownList;
 
+    @FindBy(xpath = "//section[2]//button[contains(@class, 'advanced-button')]")
+    private WebElement advancedDropdownButton;
+
+    @FindBy(xpath = "//label[text()='Quiet period']")
+    private WebElement quietPeriodCheckbox;
+
+    @FindBy(name = "quiet_period")
+    private WebElement quietPeriodInput;
 
     public MultiConfigurationProjectConfigurationPage(WebDriver driver) {
         super(driver);
@@ -60,5 +68,24 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
 
     public List<String> getAddAxisDropdownItemTextList() {
         return addAxisDropdownList.stream().map(WebElement::getText).toList();
+    }
+
+    public MultiConfigurationProjectConfigurationPage clickAdvancedDropdownButton() {
+        advancedDropdownButton.click();
+
+        return this;
+    }
+
+    public MultiConfigurationProjectConfigurationPage clickQuietPeriodCheckbox() {
+        quietPeriodCheckbox.click();
+
+        return this;
+    }
+
+    public MultiConfigurationProjectConfigurationPage setQuietPeriodInput(String seconds) {
+        quietPeriodInput.clear();
+        quietPeriodInput.sendKeys(seconds);
+
+        return this;
     }
 }
