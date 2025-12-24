@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import school.redrover.project_status_page_interface.*;
+import school.redrover.trait.project_sidebar.*;
 
 
 public class FreestyleProjectStatusPage extends BaseProjectStatusPage<FreestyleProjectStatusPage>
-        implements ClickableSidebarChanges, ClickableSidebarWorkspace, ClickableSidebarBuildNow, ClickableSidebarMove, ClickableSidebarCredentials {
+        implements SidebarChangesTrait, SidebarWorkspaceTrait, SidebarBuildNowTrait, SidebarMoveTrait, SidebarCredentialsTrait {
 
     @FindBy(xpath = "//a[contains(@href, '/configure')]")
     private WebElement configureMenuItem;

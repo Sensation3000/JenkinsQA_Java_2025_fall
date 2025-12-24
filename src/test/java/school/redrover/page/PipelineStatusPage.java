@@ -5,16 +5,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import school.redrover.project_status_page_interface.ClickableSidebarBuildNow;
-import school.redrover.project_status_page_interface.ClickableSidebarChanges;
-import school.redrover.project_status_page_interface.ClickableSidebarCredentials;
-import school.redrover.project_status_page_interface.ClickableSidebarMove;
+import school.redrover.trait.project_sidebar.SidebarBuildNowTrait;
+import school.redrover.trait.project_sidebar.SidebarChangesTrait;
+import school.redrover.trait.project_sidebar.SidebarCredentialsTrait;
+import school.redrover.trait.project_sidebar.SidebarMoveTrait;
 
 import java.util.List;
 
 
 public class PipelineStatusPage extends BaseProjectStatusPage<PipelineStatusPage>
-        implements ClickableSidebarChanges, ClickableSidebarBuildNow, ClickableSidebarMove, ClickableSidebarCredentials {
+        implements SidebarChangesTrait, SidebarBuildNowTrait, SidebarMoveTrait, SidebarCredentialsTrait {
 
     @FindBy(xpath = "//a[contains(@href, '/configure')]")
     private WebElement configureMenuItem;

@@ -1,13 +1,12 @@
-package school.redrover.project_status_page_interface;
+package school.redrover.trait.project_sidebar;
 
 import org.openqa.selenium.By;
 
 import school.redrover.common.BasePage;
-import school.redrover.common.IBaseModel;
-import school.redrover.common.TestUtils;
+import school.redrover.trait.BaseTrait;
 
 
-public interface ClickableSidebarBuildNow extends IBaseModel {
+public interface SidebarBuildNowTrait extends BaseTrait {
 
     default <ProjectStatusPage extends BasePage<ProjectStatusPage>> ProjectStatusPage clickSidebarBuildNow(ProjectStatusPage page) {
         getDriver().findElement(By.xpath("//a[contains(., 'Build Now')]")).click();

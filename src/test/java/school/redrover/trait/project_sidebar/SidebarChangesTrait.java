@@ -1,13 +1,12 @@
-package school.redrover.project_status_page_interface;
+package school.redrover.trait.project_sidebar;
 
 import org.openqa.selenium.By;
 
 import school.redrover.common.BasePage;
-import school.redrover.common.IBaseModel;
-import school.redrover.common.TestUtils;
+import school.redrover.trait.BaseTrait;
 
 
-public interface ClickableSidebarChanges extends IBaseModel {
+public interface SidebarChangesTrait extends BaseTrait {
 
     default <ProjectChangesPage extends BasePage<ProjectChangesPage>> ProjectChangesPage clickSidebarChanges(ProjectChangesPage page) {
         getDriver().findElement(By.xpath("//a[contains(., 'Changes')]")).click();

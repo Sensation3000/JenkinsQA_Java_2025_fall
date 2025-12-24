@@ -1,13 +1,12 @@
-package school.redrover.project_status_page_interface;
+package school.redrover.trait.project_sidebar;
 
 import org.openqa.selenium.By;
 
 import school.redrover.common.BasePage;
-import school.redrover.common.IBaseModel;
-import school.redrover.common.TestUtils;
+import school.redrover.trait.BaseTrait;
 
 
-public interface ClickableSidebarMove extends IBaseModel {
+public interface SidebarMoveTrait extends BaseTrait {
 
     default <ProjectMovePage extends BasePage<ProjectMovePage>> ProjectMovePage clickSidebarMove(ProjectMovePage page) {
         getDriver().findElement(By.xpath("//a[contains(., 'Move')]")).click();
