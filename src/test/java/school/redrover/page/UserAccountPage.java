@@ -30,6 +30,11 @@ public class UserAccountPage extends BasePage<UserAccountPage> {
     }
 
     @Override
+    public UserAccountPage getPage() {
+        return this;
+    }
+
+    @Override
     public UserAccountPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(header));
 
@@ -46,7 +51,7 @@ public class UserAccountPage extends BasePage<UserAccountPage> {
     public UserStatusPage clickSave() {
         saveButton.click();
 
-        return new UserStatusPage(getDriver()).waitUntilPageLoad();
+        return new UserStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public UserAccountPage sendEmail(String email) {

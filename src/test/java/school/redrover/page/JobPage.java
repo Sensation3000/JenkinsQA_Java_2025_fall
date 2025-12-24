@@ -12,6 +12,11 @@ public class JobPage extends BasePage<JobPage> {
     }
 
     @Override
+    public JobPage getPage() {
+        return this;
+    }
+
+    @Override
     public JobPage waitUntilPageLoad() {
         return null;
     }

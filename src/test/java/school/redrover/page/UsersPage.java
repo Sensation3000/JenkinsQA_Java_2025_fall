@@ -30,6 +30,11 @@ public class UsersPage extends BasePage<UsersPage> {
     }
 
     @Override
+    public UsersPage getPage() {
+        return this;
+    }
+
+    @Override
     public UsersPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.elementToBeClickable(createUserButton));
 
@@ -39,7 +44,7 @@ public class UsersPage extends BasePage<UsersPage> {
     public UserCreatingPage clickCreateUserButton() {
         createUserButton.click();
 
-        return TestUtils.waitUntilPageLoad(new UserCreatingPage(getDriver()));
+        return new UserCreatingPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public String getUserName(String userName) {
@@ -56,12 +61,12 @@ public class UsersPage extends BasePage<UsersPage> {
         chevronButton.sendKeys(Keys.ENTER);
         getWait5().until(ExpectedConditions.elementToBeClickable(accountMenuItem)).click();
 
-        return TestUtils.waitUntilPageLoad(new UserAccountPage(getDriver()));
+        return new UserAccountPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public UserStatusPage clickUserLink(String userName) {
         getDriver().findElement(By.xpath("//a[text()='%s']".formatted(userName))).click();
 
-        return TestUtils.waitUntilPageLoad(new UserStatusPage(getDriver()));
+        return new UserStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 }

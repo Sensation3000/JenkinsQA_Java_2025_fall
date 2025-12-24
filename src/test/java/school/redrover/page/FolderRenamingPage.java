@@ -22,6 +22,11 @@ public class FolderRenamingPage extends BasePage<FolderRenamingPage> {
     }
 
     @Override
+    public FolderRenamingPage getPage() {
+        return this;
+    }
+
+    @Override
     public FolderRenamingPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(newNameField));
 
@@ -37,7 +42,7 @@ public class FolderRenamingPage extends BasePage<FolderRenamingPage> {
     public FolderStatusPage renameButtonClick () {
         renameButton.click();
 
-        return TestUtils.waitUntilPageLoad(new FolderStatusPage(getDriver()));
+        return new FolderStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public FolderRenamingPage clearName () {

@@ -24,6 +24,11 @@ public class EditViewPage extends BasePage<EditViewPage> {
     }
 
     @Override
+    public EditViewPage getPage() {
+        return this;
+    }
+
+    @Override
     public EditViewPage waitUntilPageLoad() {
         return null;
     }

@@ -44,6 +44,11 @@ public class NodesPage  extends BasePage<NodesPage> {
     }
 
     @Override
+    public NodesPage getPage() {
+        return this;
+    }
+
+    @Override
     public NodesPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.elementToBeClickable(newNode));
 

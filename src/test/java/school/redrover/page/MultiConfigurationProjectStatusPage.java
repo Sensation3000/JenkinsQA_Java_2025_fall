@@ -43,6 +43,11 @@ public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<M
     }
 
     @Override
+    public MultiConfigurationProjectStatusPage getPage() {
+        return this;
+    }
+
+    @Override
     public MultiConfigurationProjectStatusPage waitUntilPageLoad() {
         getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
 

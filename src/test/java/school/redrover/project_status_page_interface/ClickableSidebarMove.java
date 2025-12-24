@@ -9,9 +9,9 @@ import school.redrover.common.TestUtils;
 
 public interface ClickableSidebarMove extends IBaseModel {
 
-    default <ProjectMovePage extends BasePage<?>> ProjectMovePage clickSidebarMove(ProjectMovePage page) {
+    default <ProjectMovePage extends BasePage<ProjectMovePage>> ProjectMovePage clickSidebarMove(ProjectMovePage page) {
         getDriver().findElement(By.xpath("//a[contains(., 'Move')]")).click();
 
-        return TestUtils.waitUntilPageLoad(page);
+        return page.waitUntilPageLoadJS();
     }
 }

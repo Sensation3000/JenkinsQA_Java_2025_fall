@@ -36,21 +36,6 @@ public class TestUtils {
                 .executeScript("return arguments[0].innerText;", element);
     }
 
-    public static <Page extends BasePage<?>> Page waitUntilPageLoad(Page page) {
-
-        // delay to make sure the page starts to reload
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException ignored) {
-        }
-
-        new WebDriverWait(page.getDriver(), java.time.Duration.ofSeconds(10)).until(
-                webDriver -> Objects.equals(((JavascriptExecutor) webDriver).executeScript("return document.readyState"), "complete")
-        );
-
-        return page;
-    }
-
     public static void scrollToElement(WebDriver driver, WebElement element) {
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});",

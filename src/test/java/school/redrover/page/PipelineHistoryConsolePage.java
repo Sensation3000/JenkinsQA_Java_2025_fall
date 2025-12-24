@@ -12,6 +12,11 @@ public class PipelineHistoryConsolePage extends BasePage<PipelineHistoryConsoleP
     }
 
     @Override
+    public PipelineHistoryConsolePage getPage() {
+        return this;
+    }
+
+    @Override
     public PipelineHistoryConsolePage waitUntilPageLoad() {
         return null;
     }

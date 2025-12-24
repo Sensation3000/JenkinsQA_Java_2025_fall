@@ -38,6 +38,11 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
     }
 
     @Override
+    public MultiConfigurationProjectConfigurationPage getPage() {
+        return this;
+    }
+
+    @Override
     public MultiConfigurationProjectConfigurationPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(configurationMatrix));
 

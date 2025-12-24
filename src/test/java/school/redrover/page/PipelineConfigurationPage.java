@@ -71,6 +71,11 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage<Pipe
     }
 
     @Override
+    public PipelineConfigurationPage getPage() {
+        return this;
+    }
+
+    @Override
     public PipelineConfigurationPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.elementToBeClickable(buildPeriodicallyLabel));
 

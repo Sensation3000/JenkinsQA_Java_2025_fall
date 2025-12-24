@@ -67,6 +67,11 @@ public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationP
     }
 
     @Override
+    public FreestyleProjectConfigurationPage getPage() {
+        return this;
+    }
+
+    @Override
     public FreestyleProjectConfigurationPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(oldBuildsCheck));
 

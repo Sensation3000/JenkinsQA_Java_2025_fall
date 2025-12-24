@@ -9,9 +9,9 @@ import school.redrover.common.TestUtils;
 
 public interface ClickableSidebarWorkspace extends IBaseModel {
 
-    default <ProjectWorkspacePage extends BasePage<?>> ProjectWorkspacePage clickSidebarWorkspace(ProjectWorkspacePage page) {
+    default <ProjectWorkspacePage extends BasePage<ProjectWorkspacePage>> ProjectWorkspacePage clickSidebarWorkspace(ProjectWorkspacePage page) {
         getDriver().findElement(By.xpath("//a[contains(., 'Changes')]")).click();
 
-        return TestUtils.waitUntilPageLoad(page);
+        return page.waitUntilPageLoadJS();
     }
 }

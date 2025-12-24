@@ -9,9 +9,9 @@ import school.redrover.common.TestUtils;
 
 public interface ClickableSidebarBuildHistory extends IBaseModel {
 
-    default <ProjectBuildHistoryPage extends BasePage<?>> ProjectBuildHistoryPage clickSidebarBuildHistory(ProjectBuildHistoryPage page) {
+    default <ProjectBuildHistoryPage extends BasePage<ProjectBuildHistoryPage>> ProjectBuildHistoryPage clickSidebarBuildHistory(ProjectBuildHistoryPage page) {
         getDriver().findElement(By.xpath("//a[contains(., 'Build History')]")).click();
 
-        return TestUtils.waitUntilPageLoad(page);
+        return page.waitUntilPageLoadJS();
     }
 }

@@ -40,6 +40,11 @@ public class MultibranchPipelineProjectStatusPage extends BaseProjectStatusPage<
     }
 
     @Override
+    public MultibranchPipelineProjectStatusPage getPage() {
+        return this;
+    }
+
+    @Override
     public MultibranchPipelineProjectStatusPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(deleteMenuItem));
 

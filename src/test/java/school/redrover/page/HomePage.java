@@ -51,6 +51,11 @@ public class HomePage extends BasePage<HomePage> {
     }
 
     @Override
+    public HomePage getPage() {
+        return this;
+    }
+
+    @Override
     public HomePage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.elementToBeClickable(sidebarNewItem));
 

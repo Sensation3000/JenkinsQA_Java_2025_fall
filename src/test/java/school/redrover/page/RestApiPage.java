@@ -14,6 +14,11 @@ public class RestApiPage extends BasePage<RestApiPage> {
     public RestApiPage(WebDriver driver) { super(driver); }
 
     @Override
+    public RestApiPage getPage() {
+        return this;
+    }
+
+    @Override
     public RestApiPage waitUntilPageLoad() {
         return null;
     }

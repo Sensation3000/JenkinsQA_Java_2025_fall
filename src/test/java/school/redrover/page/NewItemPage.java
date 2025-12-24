@@ -40,6 +40,11 @@ public class NewItemPage extends BasePage<NewItemPage> {
     }
 
     @Override
+    public NewItemPage getPage() {
+        return this;
+    }
+
+    @Override
     public NewItemPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.elementToBeClickable(multibranchPipelineOption));
 

@@ -13,6 +13,11 @@ public class CloudsPage extends BasePage<CloudsPage> {
     }
 
     @Override
+    public CloudsPage getPage() {
+        return this;
+    }
+
+    @Override
     public CloudsPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.tagName("h1"))));
 

@@ -24,6 +24,11 @@ public class GlobalCredentialsPage extends BasePage<GlobalCredentialsPage> {
     }
 
     @Override
+    public GlobalCredentialsPage getPage() {
+        return this;
+    }
+
+    @Override
     public GlobalCredentialsPage waitUntilPageLoad() {
         getWait10().until(ExpectedConditions.visibilityOf(addCredentials));
         return this;

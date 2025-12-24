@@ -55,6 +55,11 @@ public class PipelineStatusPage extends BaseProjectStatusPage<PipelineStatusPage
     }
 
     @Override
+    public PipelineStatusPage getPage() {
+        return this;
+    }
+
+    @Override
     public PipelineStatusPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(deletePipeline));
 

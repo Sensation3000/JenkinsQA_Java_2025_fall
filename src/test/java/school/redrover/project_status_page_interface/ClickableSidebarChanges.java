@@ -9,9 +9,9 @@ import school.redrover.common.TestUtils;
 
 public interface ClickableSidebarChanges extends IBaseModel {
 
-    default <ProjectChangesPage extends BasePage<?>> ProjectChangesPage clickSidebarChanges(ProjectChangesPage page) {
+    default <ProjectChangesPage extends BasePage<ProjectChangesPage>> ProjectChangesPage clickSidebarChanges(ProjectChangesPage page) {
         getDriver().findElement(By.xpath("//a[contains(., 'Changes')]")).click();
 
-        return TestUtils.waitUntilPageLoad(page);
+        return page.waitUntilPageLoadJS();
     }
 }

@@ -20,6 +20,11 @@ public class SearchModalPage extends BasePage<SearchModalPage> {
     }
 
     @Override
+    public SearchModalPage getPage() {
+        return this;
+    }
+
+    @Override
     public SearchModalPage waitUntilPageLoad() {
         return null;
     }
@@ -28,7 +33,7 @@ public class SearchModalPage extends BasePage<SearchModalPage> {
         WebElement input = getWait2().until(ExpectedConditions.elementToBeClickable(inputField));
         input.sendKeys(jobName);
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public SearchModalPage searchFor(String jobName, String previousItemName) {
@@ -70,10 +75,10 @@ public class SearchModalPage extends BasePage<SearchModalPage> {
     public UserStatusPage searchForUser(String userName) {
         getDriver().findElement(By.id("command-bar")).sendKeys(userName);
 
-        TestUtils.waitUntilPageLoad(this);
+        this.waitUntilPageLoadJS();
         getDriver().findElement(By.id("command-bar")).sendKeys(Keys.ENTER);
 
-        return TestUtils.waitUntilPageLoad(new UserStatusPage(getDriver()));
+        return new UserStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public List<String> searchResults() {
@@ -87,6 +92,6 @@ public class SearchModalPage extends BasePage<SearchModalPage> {
     public FreestyleProjectStatusPage moveAndClickResult(){
         TestUtils.clickJS(getDriver(), getDriver().findElement(searchResults));
 
-        return TestUtils.waitUntilPageLoad(new FreestyleProjectStatusPage(getDriver()));
+        return new FreestyleProjectStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 }

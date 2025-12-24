@@ -29,6 +29,11 @@ public class FreestyleProjectStatusPage extends BaseProjectStatusPage<FreestyleP
     }
 
     @Override
+    public FreestyleProjectStatusPage getPage() {
+        return this;
+    }
+
+    @Override
     public FreestyleProjectStatusPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(deleteMenuItem));
 

@@ -18,6 +18,11 @@ public class NewCredentialsPage extends BasePage<NewCredentialsPage> {
     }
 
     @Override
+    public NewCredentialsPage getPage() {
+        return this;
+    }
+
+    @Override
     public NewCredentialsPage waitUntilPageLoad() {
         getWait10().until(ExpectedConditions.visibilityOf(buttonCreate));
         return this;

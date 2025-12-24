@@ -20,6 +20,11 @@ public class MultibranchPipelineRenamingPage extends BasePage<MultibranchPipelin
     }
 
     @Override
+    public MultibranchPipelineRenamingPage getPage() {
+        return this;
+    }
+
+    @Override
     public MultibranchPipelineRenamingPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(renameField));
 

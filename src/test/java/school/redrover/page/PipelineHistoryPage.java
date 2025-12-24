@@ -10,6 +10,11 @@ public class PipelineHistoryPage extends BasePage<PipelineHistoryPage> {
     public PipelineHistoryPage(WebDriver driver) { super(driver); }
 
     @Override
+    public PipelineHistoryPage getPage() {
+        return this;
+    }
+
+    @Override
     public PipelineHistoryPage waitUntilPageLoad() {
         return null;
     }

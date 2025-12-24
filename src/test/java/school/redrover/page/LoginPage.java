@@ -13,6 +13,11 @@ public class LoginPage extends BasePage<LoginPage> {
     }
 
     @Override
+    public LoginPage getPage() {
+        return this;
+    }
+
+    @Override
     public LoginPage waitUntilPageLoad() {
         return null;
     }

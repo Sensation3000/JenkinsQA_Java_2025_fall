@@ -14,6 +14,11 @@ public class MovePage extends BasePage<MovePage> {
     }
 
     @Override
+    public MovePage getPage() {
+        return this;
+    }
+
+    @Override
     public MovePage waitUntilPageLoad() {
         return null;
     }

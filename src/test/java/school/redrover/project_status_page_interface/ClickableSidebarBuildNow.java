@@ -9,9 +9,9 @@ import school.redrover.common.TestUtils;
 
 public interface ClickableSidebarBuildNow extends IBaseModel {
 
-    default <ProjectStatusPage extends BasePage<?>> ProjectStatusPage clickSidebarBuildNow(ProjectStatusPage page) {
+    default <ProjectStatusPage extends BasePage<ProjectStatusPage>> ProjectStatusPage clickSidebarBuildNow(ProjectStatusPage page) {
         getDriver().findElement(By.xpath("//a[contains(., 'Build Now')]")).click();
 
-        return TestUtils.waitUntilPageLoad(page);
+        return page.waitUntilPageLoadJS();
     }
 }

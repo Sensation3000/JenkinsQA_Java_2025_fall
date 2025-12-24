@@ -23,6 +23,11 @@ public class OrganizationFolderConfigurationPage extends BaseProjectConfiguratio
     }
 
     @Override
+    public Object getPage() {
+        return this;
+    }
+
+    @Override
     public OrganizationFolderConfigurationPage waitUntilPageLoad() {
         getWait10().until(ExpectedConditions.elementToBeClickable(deleteMenuItem));
 
