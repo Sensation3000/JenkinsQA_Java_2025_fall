@@ -9,6 +9,11 @@ public class ArchitectingForScalePage extends BasePage<ArchitectingForScalePage>
     public ArchitectingForScalePage(WebDriver driver) { super(driver);}
 
     @Override
+    public ArchitectingForScalePage getPage() {
+        return this;
+    }
+
+    @Override
     public ArchitectingForScalePage waitUntilPageLoad() {
         return null;
     }

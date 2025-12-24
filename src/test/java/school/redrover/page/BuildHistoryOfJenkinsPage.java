@@ -26,6 +26,11 @@ public class BuildHistoryOfJenkinsPage extends BasePage<BuildHistoryOfJenkinsPag
     }
 
     @Override
+    public BuildHistoryOfJenkinsPage getPage() {
+        return this;
+    }
+
+    @Override
     public BuildHistoryOfJenkinsPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.textToBePresentInElement(header, "Build History of Jenkins"));
 

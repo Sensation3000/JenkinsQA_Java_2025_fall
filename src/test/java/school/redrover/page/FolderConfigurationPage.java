@@ -77,6 +77,11 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     }
 
     @Override
+    public FolderConfigurationPage getPage() {
+        return this;
+    }
+
+    @Override
     public FolderConfigurationPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.elementToBeClickable(healthMetricsSection));
 
@@ -100,7 +105,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
                 ExpectedConditions.elementToBeClickable(By.name("Submit")));
         submitButton.click();
 
-        return TestUtils.waitUntilPageLoad(new FolderStatusPage(getDriver()));
+        return new FolderStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public String getHealthMetricsSidebarLink() {
@@ -112,7 +117,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     public FolderConfigurationPage clickHealthMetricsSidebarLink() {
         healthMetricSidebarLink.click();
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public String getSectionName() {
@@ -121,7 +126,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     public FolderConfigurationPage clickHealthMetricsButton() {
         healthMetricButton.click();
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public FolderConfigurationPage clickAddMetricButton() {
@@ -129,7 +134,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
                 "arguments[0].scrollIntoView(true);", addMetricButton);
         addMetricButton.click();
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public List<String> getAllMetricTypeNames() {
@@ -144,7 +149,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     public FolderConfigurationPage clickWorstHealthButton() {
         worstHealthButton.click();
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public String getMetricRowName() {
@@ -154,7 +159,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     public FolderConfigurationPage clickGivenNameButton() {
         getDriver().findElement(By.xpath("//button[@class='jenkins-dropdown__item '][1]")).click();
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public FolderConfigurationPage dragWorstHealthRowToTop() {
@@ -171,7 +176,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     public FolderConfigurationPage deleteMetric() {
         deleteMetric.click();
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public List<String> getMetricList() {
@@ -194,7 +199,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     public FolderConfigurationPage clickChildNameTooltip() {
         childNameTooltip.click();
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public String getChildNameTooltipText() {
@@ -214,7 +219,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     public FolderConfigurationPage clickRecursiveTooltip() {
         recursiveTooltip.click();
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public String getRecursiveTooltipText() {

@@ -41,6 +41,11 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
     }
 
     @Override
+    public JenkinsManagementPage getPage() {
+        return this;
+    }
+
+    @Override
     public JenkinsManagementPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(header));
 
@@ -88,7 +93,7 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
     public JenkinsManagementPage sendTitle(String settingTitle) {
         sendTitle.sendKeys(settingTitle);
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public SystemConfigurationPage clickSearchResult() {
@@ -97,7 +102,7 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
                 .click()
                 .perform();
 
-        return TestUtils.waitUntilPageLoad(new SystemConfigurationPage(getDriver()));
+        return new SystemConfigurationPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public List<String> getSearchResults() {

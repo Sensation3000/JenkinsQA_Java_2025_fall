@@ -29,6 +29,11 @@ public class FolderCreateViewPage extends BasePage<FolderCreateViewPage> {
     }
 
     @Override
+    public FolderCreateViewPage getPage() {
+        return this;
+    }
+
+    @Override
     public FolderCreateViewPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(inputGlobalView));
 
@@ -44,19 +49,19 @@ public class FolderCreateViewPage extends BasePage<FolderCreateViewPage> {
     public FolderCreateViewPage selectTypeGlobalView() {
         inputGlobalView.click();
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public FolderCreateViewPage selectTypeListView() {
         inputListView.click();
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public FolderCreateViewPage selectTypeMyView() {
         inputMyView.click();
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public void clickCreate() {

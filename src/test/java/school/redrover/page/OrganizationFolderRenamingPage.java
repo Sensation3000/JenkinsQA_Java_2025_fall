@@ -11,6 +11,11 @@ public class OrganizationFolderRenamingPage extends BasePage<OrganizationFolderR
     }
 
     @Override
+    public OrganizationFolderRenamingPage getPage() {
+        return this;
+    }
+
+    @Override
     public OrganizationFolderRenamingPage waitUntilPageLoad() {
         return null;
     }

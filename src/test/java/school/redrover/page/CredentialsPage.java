@@ -22,6 +22,11 @@ public class CredentialsPage extends BasePage<CredentialsPage> {
     }
 
     @Override
+    public CredentialsPage getPage() {
+        return this;
+    }
+
+    @Override
     public CredentialsPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(storesFromParentGlobal));
         return this;

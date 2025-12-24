@@ -25,6 +25,11 @@ public class NewNodePage extends BasePage<NewNodePage> {
     }
 
     @Override
+    public NewNodePage getPage() {
+        return this;
+    }
+
+    @Override
     public NewNodePage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.elementToBeClickable(typeModePermanentAgent));
 

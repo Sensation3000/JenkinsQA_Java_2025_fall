@@ -37,6 +37,11 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
     }
 
     @Override
+    public SystemConfigurationPage getPage() {
+        return this;
+    }
+
+    @Override
     public SystemConfigurationPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.elementToBeClickable(checkboxTooltip));
 

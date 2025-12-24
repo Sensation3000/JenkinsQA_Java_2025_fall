@@ -27,6 +27,11 @@ public class CreateViewPage extends BasePage<CreateViewPage> {
     }
 
     @Override
+    public CreateViewPage getPage() {
+        return this;
+    }
+
+    @Override
     public CreateViewPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.textToBePresentInElement(header, "New view"));
 

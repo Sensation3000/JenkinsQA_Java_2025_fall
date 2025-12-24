@@ -16,6 +16,11 @@ public class FooterDropdownPage extends BasePage<FooterDropdownPage> {
     }
 
     @Override
+    public FooterDropdownPage getPage() {
+        return this;
+    }
+
+    @Override
     public FooterDropdownPage waitUntilPageLoad() {
         return null;
     }

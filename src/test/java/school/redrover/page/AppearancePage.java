@@ -37,6 +37,11 @@ public class AppearancePage extends BasePage<AppearancePage> {
     }
 
     @Override
+    public AppearancePage getPage() {
+        return this;
+    }
+
+    @Override
     public AppearancePage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.elementToBeClickable(FindPluginsButton));
         return this;

@@ -11,6 +11,11 @@ public class FreestyleProjectRenamingPage extends BasePage<FreestyleProjectRenam
     }
 
     @Override
+    public FreestyleProjectRenamingPage getPage() {
+        return this;
+    }
+
+    @Override
     public FreestyleProjectRenamingPage waitUntilPageLoad() {
         return null;
     }

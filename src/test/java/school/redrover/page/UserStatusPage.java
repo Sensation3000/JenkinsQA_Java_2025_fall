@@ -40,6 +40,11 @@ public class UserStatusPage extends BasePage<UserStatusPage> {
     }
 
     @Override
+    public UserStatusPage getPage() {
+        return this;
+    }
+
+    @Override
     public UserStatusPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.elementToBeClickable(editDescriptionButton));
 
@@ -56,6 +61,7 @@ public class UserStatusPage extends BasePage<UserStatusPage> {
 
     public UserStatusPage getUserNameFromDropDownMenu(Consumer<String> stringConsumer) {
         stringConsumer.accept(getUserNameFromDropDownMenu());
+
         return this;
     }
 
@@ -71,7 +77,7 @@ public class UserStatusPage extends BasePage<UserStatusPage> {
     public UserStatusPage clickEditDescription() {
         editDescriptionButton.click();
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public UserStatusPage sendDescriptionAndSave(String text) {
@@ -79,7 +85,7 @@ public class UserStatusPage extends BasePage<UserStatusPage> {
         descriptionTextBox.sendKeys(text);
         saveButton.click();
 
-        return TestUtils.waitUntilPageLoad(this);
+        return this.waitUntilPageLoadJS();
     }
 
     public String getDescriptionText() {

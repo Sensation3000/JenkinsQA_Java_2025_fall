@@ -19,6 +19,11 @@ public class MultiConfigurationProjectRenamingPage extends BasePage<MultiConfigu
     }
 
     @Override
+    public MultiConfigurationProjectRenamingPage getPage() {
+        return this;
+    }
+
+    @Override
     public MultiConfigurationProjectRenamingPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(nameField));
 

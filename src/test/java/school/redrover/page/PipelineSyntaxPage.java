@@ -19,6 +19,11 @@ public class PipelineSyntaxPage extends BasePage<PipelineSyntaxPage> {
     }
 
     @Override
+    public PipelineSyntaxPage getPage() {
+        return this;
+    }
+
+    @Override
     public PipelineSyntaxPage waitUntilPageLoad() {
         return null;
     }

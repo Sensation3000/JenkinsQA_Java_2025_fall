@@ -41,6 +41,11 @@ public class UserCreatingPage extends BasePage<UserCreatingPage> {
     }
 
     @Override
+    public UserCreatingPage getPage() {
+        return this;
+    }
+
+    @Override
     public UserCreatingPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(header));
 
@@ -74,14 +79,13 @@ public class UserCreatingPage extends BasePage<UserCreatingPage> {
     public UsersPage clickCreateAndGoToUsersPage() {
         createButton.click();
 
-        return new UsersPage(getDriver()).waitUntilPageLoad();
+        return new UsersPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public UserCreatingPage clickCreateAndKeepUserCreatingPage() {
         createButton.click();
-        getWait5().until(ExpectedConditions.visibilityOf(userCreatingPageError));
 
-        return this;
+        return this.waitUntilPageLoadJS();
     }
 
     public List<String> getAllErrors() {

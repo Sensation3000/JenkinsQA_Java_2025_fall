@@ -6,11 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import school.redrover.project_status_page_interface.*;
+import school.redrover.trait.project_sidebar.*;
 
 
 public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<MultiConfigurationProjectStatusPage>
-        implements ClickableSidebarChanges, ClickableSidebarWorkspace, ClickableSidebarBuildNow, ClickableSidebarMove, ClickableSidebarCredentials {
+        implements SidebarChangesTrait, SidebarWorkspaceTrait, SidebarBuildNowTrait, SidebarMoveTrait, SidebarCredentialsTrait {
 
     @FindBy(name = "Submit")
     private WebElement submitButton;
@@ -40,6 +40,11 @@ public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<M
 
     public MultiConfigurationProjectStatusPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public MultiConfigurationProjectStatusPage getPage() {
+        return this;
     }
 
     @Override

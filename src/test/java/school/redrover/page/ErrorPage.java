@@ -13,6 +13,11 @@ public class ErrorPage extends BasePage<ErrorPage> {
     }
 
     @Override
+    public ErrorPage getPage() {
+        return this;
+    }
+
+    @Override
     public ErrorPage waitUntilPageLoad() {
         return null;
     }

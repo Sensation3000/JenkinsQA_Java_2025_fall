@@ -1,13 +1,17 @@
 package school.redrover.common;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import school.redrover.page.*;
+
+import java.util.Objects;
 
 
 public abstract class BasePage<Page> extends BaseModel {
@@ -33,7 +37,24 @@ public abstract class BasePage<Page> extends BaseModel {
         PageFactory.initElements(driver, this);
     }
 
+    public abstract Page getPage();
+
     public abstract Page waitUntilPageLoad();
+
+    public Page waitUntilPageLoadJS() {
+
+        // delay to make sure the page starts to reload
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ignored) {
+        }
+
+        new WebDriverWait(getDriver(), java.time.Duration.ofSeconds(10)).until(
+                webDriver -> Objects.equals(((JavascriptExecutor) webDriver).executeScript("return document.readyState"), "complete")
+        );
+
+        return getPage();
+    }
 
     public WebElement getHeader() {
         return getWait5().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.tagName("h1"))));
@@ -70,7 +91,7 @@ public abstract class BasePage<Page> extends BaseModel {
     public SearchModalPage clickSearchButton() {
         getDriver().findElement(By.id("root-action-SearchAction")).click();
 
-        return TestUtils.waitUntilPageLoad(new SearchModalPage(getDriver()));
+        return new SearchModalPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public LoginPage clickSignOut() {

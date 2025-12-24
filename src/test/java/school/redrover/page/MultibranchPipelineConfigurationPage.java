@@ -28,6 +28,11 @@ public class MultibranchPipelineConfigurationPage extends BaseProjectConfigurati
     }
 
     @Override
+    public MultibranchPipelineConfigurationPage getPage() {
+        return this;
+    }
+
+    @Override
     public MultibranchPipelineConfigurationPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.elementToBeClickable(toggleSwitcher));
 
