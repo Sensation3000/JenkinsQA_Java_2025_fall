@@ -95,8 +95,9 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
     }
 
     public SystemConfigurationPage clickCheckboxGlobalProperties() {
-        globalProperties.click();
-
+        if (!getDriver().findElement(By.cssSelector("[id='cb3'] + label")).isSelected()) {
+            globalProperties.click();
+    }
         return this;
     }
 
