@@ -2,7 +2,6 @@ package school.redrover;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.HomePage;
@@ -97,20 +96,6 @@ public class MultibranchPipelineTest extends BaseTest {
                 .getDuplicateOrUnsafeCharacterErrorMessage();
 
         Assert.assertEquals(dublicateProject, errorMessage, "Incorrect error message");
-    }
-
-    @Ignore
-    @Test(dependsOnMethods = "testTryCreateProjectExistName")
-    public void testDeleteMultibranchPipeline() {
-
-        List<String> projectList = new HomePage(getDriver())
-                .openDropdownMenu(MULTIBRANCH_PIPELINE_NAME)
-                .clickDeleteItemInDropdownMenu()
-                .confirmDelete()
-                .gotoHomePage()
-                .getProjectList();
-
-        Assert.assertEquals(projectList.size(), 0);
     }
 
     @Test
@@ -247,8 +232,7 @@ public class MultibranchPipelineTest extends BaseTest {
         Assert.assertEquals(name, MULTIBRANCH_PIPELINE_DISPLAY_NAME);
     }
 
-    @Ignore
-    @Test(dependsOnMethods = "testCreateMultibranchPipeline")
+    @Test(dependsOnMethods = "testDisplayNameIsSetOnCreation")
     public void testChangeDescription() {
 
         String name = new HomePage(getDriver())
@@ -262,5 +246,23 @@ public class MultibranchPipelineTest extends BaseTest {
                 .getDescription();
 
         Assert.assertEquals(name, SECOND_DESCRIPTION);
+    }
+
+    @Test
+    public void testDeleteMultibranchPipeline() {
+
+        List<String> projectList = new HomePage(getDriver())
+                .clickNewItemOnLeftMenu()
+                .sendName(MULTIBRANCH_PIPELINE_NAME)
+                .selectMultibranchPipelineAndSubmit()
+                .clickSaveButton()
+                .gotoHomePage()
+                .openDropdownMenu(MULTIBRANCH_PIPELINE_NAME)
+                .clickDeleteItemInDropdownMenu()
+                .confirmDelete()
+                .gotoHomePage()
+                .getProjectList();
+
+        Assert.assertEquals(projectList.size(), 0);
     }
 }
