@@ -251,12 +251,8 @@ public class MultibranchPipelineTest extends BaseTest {
     @Test
     public void testDeleteMultibranchPipeline() {
 
+        createMultibranchPipeline();
         List<String> projectList = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
-                .sendName(MULTIBRANCH_PIPELINE_NAME)
-                .selectMultibranchPipelineAndSubmit()
-                .clickSaveButton()
-                .gotoHomePage()
                 .openDropdownMenu(MULTIBRANCH_PIPELINE_NAME)
                 .clickDeleteItemInDropdownMenu()
                 .confirmDelete()
@@ -264,5 +260,14 @@ public class MultibranchPipelineTest extends BaseTest {
                 .getProjectList();
 
         Assert.assertEquals(projectList.size(), 0);
+    }
+
+    private void createMultibranchPipeline() {
+        new HomePage(getDriver())
+                .clickNewItemOnLeftMenu()
+                .sendName(MULTIBRANCH_PIPELINE_NAME)
+                .selectMultibranchPipelineAndSubmit()
+                .clickSaveButton()
+                .gotoHomePage();
     }
 }
