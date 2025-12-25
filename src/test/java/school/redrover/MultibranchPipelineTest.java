@@ -250,8 +250,8 @@ public class MultibranchPipelineTest extends BaseTest {
 
     @Test
     public void testDeleteMultibranchPipeline() {
-
         createMultibranchPipeline();
+
         List<String> projectList = new HomePage(getDriver())
                 .openDropdownMenu(MULTIBRANCH_PIPELINE_NAME)
                 .clickDeleteItemInDropdownMenu()
