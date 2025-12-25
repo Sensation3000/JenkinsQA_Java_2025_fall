@@ -232,7 +232,7 @@ public class MultibranchPipelineTest extends BaseTest {
         Assert.assertEquals(name, MULTIBRANCH_PIPELINE_DISPLAY_NAME);
     }
 
-    @Test(dependsOnMethods = "testDisplayNameIsSetOnCreation")
+    @Test (dependsOnMethods = "testCreateMultibranchPipeline")
     public void testChangeDescription() {
 
         String name = new HomePage(getDriver())
