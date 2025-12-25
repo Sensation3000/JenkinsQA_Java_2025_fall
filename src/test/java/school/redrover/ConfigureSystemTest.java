@@ -153,18 +153,18 @@ public class ConfigureSystemTest extends BaseTest {
 
     @Test
     public void testChangeComputerRetentionCheckIntervalPositive() {
-        final String expectedIntervalValue = "59";
+        final String testIntervalValue = "59";
 
         String actualIntervalValue = new HomePage(getDriver())
                 .clickManageJenkinsGear()
                 .clickConfigurationSystem()
-                .setInputComputerRetentionCheckIntervalValue("59")
+                .setInputComputerRetentionCheckIntervalValue(testIntervalValue)
                 .clickSaveButton()
                 .clickManageJenkinsGear()
                 .clickConfigurationSystem()
                 .getInputComputerRetentionCheckIntervalValue();
 
-        Assert.assertEquals(actualIntervalValue, expectedIntervalValue);
+        Assert.assertEquals(actualIntervalValue, testIntervalValue);
     }
 
     @Test
