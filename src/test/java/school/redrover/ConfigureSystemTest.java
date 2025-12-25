@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Ignore;
@@ -151,41 +150,21 @@ public class ConfigureSystemTest extends BaseTest {
         Assert.assertEquals(input.getAttribute("value"), defaultValue);
     }
 
-    @Test
-    public void testUserOptionSelectCheck() {
-
-        final List<String> expectedUsageOptions = List.of("Use this node as much as possible",
-                "Only build jobs with label expressions matching this node");
-
-        getSystemConfigurePage();
-
-        Select usageOptionSelect = new Select(getDriver().findElement(By.cssSelector("select[name = 'builtin.mode']")));
-        List<String> actualUsageOptions = usageOptionSelect.getOptions().stream()
-                .map(WebElement::getText).toList();
-
-        Assert.assertEquals(actualUsageOptions, expectedUsageOptions);
-        Assert.assertEquals(
-                usageOptionSelect.getFirstSelectedOption().getText(),
-                expectedUsageOptions.get(0));
-    }
 
     @Test
     public void testChangeComputerRetentionCheckIntervalPositive() {
+        final String testIntervalValue = "59";
 
-        final String testInterval = "59";
-        final By intervalInputSelector = By.cssSelector("input[name = '_.computerRetentionCheckInterval']");
+        String actualIntervalValue = new HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .setInputComputerRetentionCheckIntervalValue(testIntervalValue)
+                .clickSaveButton()
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .getInputComputerRetentionCheckIntervalValue();
 
-        getSystemConfigurePage();
-
-        WebElement intervalInput = getDriver().findElement(intervalInputSelector);
-        intervalInput.clear();
-        intervalInput.sendKeys(testInterval);
-        getDriver().findElement(By.name("Submit")).click();
-
-        getSystemConfigurePage();
-
-        String actualInterval = getDriver().findElement(intervalInputSelector).getAttribute("value");
-        Assert.assertEquals(actualInterval, testInterval);
+        Assert.assertEquals(actualIntervalValue, testIntervalValue);
     }
 
     @Test

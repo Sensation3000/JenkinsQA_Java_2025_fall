@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import school.redrover.common.BasePage;
 import java.util.List;
-import java.util.stream.Collectors;
-
 
 
 public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
@@ -30,6 +28,9 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
 
     @FindBy(name = "builtin.mode")
     private WebElement usageModeDropdown;
+
+    @FindBy(name = "_.computerRetentionCheckInterval")
+    private WebElement inputComputerRetentionCheckInterval;
 
 
     public SystemConfigurationPage(WebDriver driver) {
@@ -136,6 +137,19 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
                 .map(WebElement::getText)
                 .toList();
     }
+
+    public String getInputComputerRetentionCheckIntervalValue() {
+        return inputComputerRetentionCheckInterval.getAttribute("value");
+
+    }
+
+    public SystemConfigurationPage setInputComputerRetentionCheckIntervalValue(String intervalValue) {
+        inputComputerRetentionCheckInterval.clear();
+        inputComputerRetentionCheckInterval.sendKeys(intervalValue);
+
+        return this;
+    }
 }
+
 
 
