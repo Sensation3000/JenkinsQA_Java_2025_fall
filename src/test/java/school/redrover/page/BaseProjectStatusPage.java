@@ -42,7 +42,7 @@ public abstract class BaseProjectStatusPage<ProjectStatusPage> extends BasePage<
     public <RenamingPage extends BasePage<RenamingPage>> RenamingPage clickRenameInSideMenu(RenamingPage renamingPage) {
         renameMenuItem.click();
 
-        return renamingPage.waitUntilPageLoad();
+        return renamingPage.waitUntilPageLoadJS();
     }
 
     public HomePage clickDeleteInSideMenu() {

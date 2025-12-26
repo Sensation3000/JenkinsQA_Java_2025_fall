@@ -15,10 +15,13 @@ import java.util.List;
 public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
 
     @FindBy(name = "Submit")
-    private WebElement clickSaveButton;
+    private WebElement saveButton;
+
+    @FindBy(xpath = "//label[text()='Disable deferred wipeout on this node']")
+    private WebElement globalPropertiesDisableWipeoutCheckboxToClick;
 
     @FindBy(id = "cb3")
-    private WebElement globalPropertiesDisableWipeoutCheckbox;
+    private WebElement globalPropertiesDisableWipeoutCheckboxIsEnabled;
 
     @FindBy(xpath = "//a[contains(@tooltip,'Disable deferred wipeout on this node')]")
     private WebElement globalPropertiesDisableWipeoutCheckboxQuestion;
@@ -53,6 +56,12 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
         getWait5().until(ExpectedConditions.elementToBeClickable(globalPropertiesDisableWipeoutCheckboxQuestion));
 
         return this;
+    }
+
+    public HomePage clickSave() {
+        saveButton.click();
+
+        return new HomePage(getDriver()).waitUntilPageLoadJS();
     }
 
     public SystemConfigurationPage setSystemMessage(String systemMessage) {
@@ -96,38 +105,20 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
         return this;
     }
 
-    public void clickSave() {
-        WebElement saveButton = getDriver().findElement(By.name("Submit"));
-        saveButton.click();
-    }
-
     public SystemConfigurationPage checkGlobalPropertiesDisableWipeoutCheckbox() {
-        if (!globalPropertiesDisableWipeoutCheckbox.isEnabled()) {
+        if (!globalPropertiesDisableWipeoutCheckboxIsEnabled.isSelected()) {
             new Actions(getDriver())
                     .moveToElement(metrics)
                     .perform();
 
-            new Actions(getDriver())
-                    .moveToElement(globalPropertiesDisableWipeoutCheckbox)
-                    .click()
-                    .perform();
+            globalPropertiesDisableWipeoutCheckboxToClick.click();
         }
 
         return this;
     }
 
-    public HomePage clickSaveButton() {
-        clickSaveButton.click();
-
-        return new HomePage(getDriver()).waitUntilPageLoad();
-    }
-
     public boolean isGlobalPropertiesDisableWipeoutCheckboxSelected() {
-        new Actions(getDriver())
-                .moveToElement(metrics)
-                .perform();
-
-        return globalPropertiesDisableWipeoutCheckbox.isSelected();
+        return globalPropertiesDisableWipeoutCheckboxIsEnabled.isSelected();
     }
 
     public WebElement getGlobalPropertiesDisableWipeoutCheckboxTooltipOnHover() {

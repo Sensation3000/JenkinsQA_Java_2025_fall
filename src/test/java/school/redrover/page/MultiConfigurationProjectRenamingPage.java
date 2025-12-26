@@ -36,10 +36,10 @@ public class MultiConfigurationProjectRenamingPage extends BasePage<MultiConfigu
         return this;
     }
 
-    public MultiConfigurationProjectStatusPage setNewProjectName(String jobName) {
+    public MultiConfigurationProjectStatusPage sendNewProjectName(String jobName) {
         nameField.sendKeys(jobName + Keys.ENTER);
 
-        return new MultiConfigurationProjectStatusPage(getDriver()).waitUntilPageLoad();
+        return new MultiConfigurationProjectStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 
 }

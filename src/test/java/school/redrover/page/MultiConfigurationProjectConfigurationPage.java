@@ -51,10 +51,8 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
 
     public MultiConfigurationProjectStatusPage clickSubmit() {
         submitButton.click();
-        getWait5().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                By.className("permalinks-header")));
 
-        return new MultiConfigurationProjectStatusPage(getDriver()).waitUntilPageLoad();
+        return new MultiConfigurationProjectStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public String getConfigurationMatrixText() {

@@ -2,7 +2,6 @@ package school.redrover;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.HomePage;
@@ -33,14 +32,13 @@ public class JenkinsManagementTest extends BaseTest {
         };
     }
 
-    @Ignore
     @Test
     public void testDeferredWipeoutSettingIsSaved() {
         boolean globalPropertiesDisableWipeoutCheckbox = new HomePage(getDriver())
                 .clickManageJenkinsGear()
                 .clickConfigurationSystem()
                 .checkGlobalPropertiesDisableWipeoutCheckbox()
-                .clickSaveButton()
+                .clickSave()
                 .clickManageJenkinsGear()
                 .clickConfigurationSystem()
                 .isGlobalPropertiesDisableWipeoutCheckboxSelected();

@@ -61,7 +61,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .clickSubmit()
                 .clickRenameInSideMenu(new MultiConfigurationProjectRenamingPage(getDriver()))
                 .clearNameField()
-                .setNewProjectName(RENAMED_PROJECT)
+                .sendNewProjectName(RENAMED_PROJECT)
                 .getHeader()
                 .getText();
 
@@ -77,7 +77,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .clickSubmit()
                 .clickRenameViaDashboardDropDownMenu()
                 .clearNameField()
-                .setNewProjectName(RENAMED_PROJECT)
+                .sendNewProjectName(RENAMED_PROJECT)
                 .getHeader()
                 .getText();
 

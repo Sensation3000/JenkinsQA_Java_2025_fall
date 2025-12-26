@@ -159,7 +159,7 @@ public class ConfigureSystemTest extends BaseTest {
                 .clickManageJenkinsGear()
                 .clickConfigurationSystem()
                 .setInputComputerRetentionCheckIntervalValue(testIntervalValue)
-                .clickSaveButton()
+                .clickSave()
                 .clickManageJenkinsGear()
                 .clickConfigurationSystem()
                 .getInputComputerRetentionCheckIntervalValue();
