@@ -225,21 +225,19 @@ public class ConfigureSystemTest extends BaseTest {
 
     @Test
     public void testChangeQuietPeriodPositive() {
+        final String setSecondsQuietPeriod = "10";
 
-        final String testQuietPeriod = "10";
-        final By quietPeriodInputSelector = By.cssSelector("input[name = '_.quietPeriod']");
+        String actualQuietPeriod = new HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .clearQuietPeriod()
+                .setQuietPeriod(setSecondsQuietPeriod)
+                .clickSave()
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .getInputQuietPeriodValue();
 
-        getSystemConfigurePage();
-
-        WebElement quietPeriodInput = getDriver().findElement(quietPeriodInputSelector);
-        quietPeriodInput.clear();
-        quietPeriodInput.sendKeys(testQuietPeriod);
-        getDriver().findElement(By.name("Submit")).click();
-
-        getSystemConfigurePage();
-
-        String actualQuietPeriod = getDriver().findElement(quietPeriodInputSelector).getAttribute("value");
-        Assert.assertEquals(actualQuietPeriod, testQuietPeriod);
+        Assert.assertEquals(actualQuietPeriod, setSecondsQuietPeriod);
     }
 
     @Ignore
