@@ -9,6 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import school.redrover.common.BasePage;
+import school.redrover.common.TestUtils;
+
 import java.util.List;
 
 
@@ -40,6 +42,9 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
 
     @FindBy(name = "_.computerRetentionCheckInterval")
     private WebElement inputComputerRetentionCheckInterval;
+
+    @FindBy(name = "_.quietPeriod")
+    private WebElement quietPeriodInput;
 
 
     public SystemConfigurationPage(WebDriver driver) {
@@ -162,6 +167,24 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
 
         return this;
     }
+
+    public SystemConfigurationPage clearQuietPeriod() {
+        TestUtils.scrollToElement(getDriver(), quietPeriodInput);
+        quietPeriodInput.clear();
+
+        return this;
+    }
+
+    public SystemConfigurationPage setQuietPeriod(String seconds) {
+        quietPeriodInput.sendKeys(seconds);
+
+        return this;
+    }
+
+    public String getInputQuietPeriodValue() {
+        return quietPeriodInput.getAttribute("value");
+    }
+
 }
 
 
