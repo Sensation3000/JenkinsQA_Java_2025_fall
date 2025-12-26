@@ -115,7 +115,8 @@ public class PipelineStatusPage extends BaseProjectStatusPage<PipelineStatusPage
 
     public PipelineStatusPage clickDeletePipeline() {
         deletePipeline.click();
-        return this;
+
+        return this.waitUntilPageLoadJS();
     }
 
     public PipelineSyntaxPage clickPipelineSyntax() {
@@ -132,10 +133,9 @@ public class PipelineStatusPage extends BaseProjectStatusPage<PipelineStatusPage
     }
 
     public HomePage confirmDeleteAtJobPage() {
-        getDriver().findElement(By.cssSelector("[data-id='ok']"))
-                .click();
+        getDriver().findElement(By.cssSelector("[data-id='ok']")).click();
 
-        return new HomePage(getDriver());
+        return new HomePage(getDriver()).waitUntilPageLoadJS();
     }
 
     public PipelineStatusPage cancelDelete() {

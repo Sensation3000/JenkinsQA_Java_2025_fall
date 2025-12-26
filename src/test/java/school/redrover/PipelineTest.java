@@ -187,7 +187,8 @@ public class PipelineTest extends BaseTest {
                 .openDropdownMenu(PIPELINE_NAME)
                 .clickDeleteItemInDropdownMenu()
                 .confirmDelete()
-                .getHeaderText();
+                .getHeader()
+                .getText();
 
         Assert.assertEquals(actualHomePageHeading, expectedHomePageHeading);
     }
@@ -201,7 +202,8 @@ public class PipelineTest extends BaseTest {
         String actualHomePageHeading = new PipelineStatusPage(getDriver())
                 .clickDeletePipeline()
                 .confirmDeleteAtJobPage()
-                .getHeaderText();
+                .getHeader()
+                .getText();
 
         Assert.assertEquals(actualHomePageHeading, expectedHomePageHeading);
     }

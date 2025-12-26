@@ -60,10 +60,6 @@ public abstract class BasePage<Page> extends BaseModel {
         return getWait5().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.tagName("h1"))));
     }
 
-    public String getHeaderText() {
-        return getHeader().getText().trim();
-    }
-
     public HomePage gotoHomePage() {
         getWait5().until(ExpectedConditions.elementToBeClickable(By.className("app-jenkins-logo"))).click();
 
@@ -121,10 +117,9 @@ public abstract class BasePage<Page> extends BaseModel {
     }
 
     public RestApiPage clickRestApiLink() {
-        restApiLink.click();
-        getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
+        TestUtils.clickJS(getDriver(), restApiLink);
 
-        return new RestApiPage(getDriver());
+        return new RestApiPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public String getCurrentUrl() {

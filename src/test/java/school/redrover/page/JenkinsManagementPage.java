@@ -68,11 +68,7 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
     public SystemConfigurationPage clickConfigurationSystem() {
         clickConfigurationSystem.click();
 
-        new Actions(getDriver())
-                .scrollByAmount(0, 1500)
-                .perform();
-
-        return new SystemConfigurationPage(getDriver());
+        return new SystemConfigurationPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public String getHTMLAttributeThemeText() {

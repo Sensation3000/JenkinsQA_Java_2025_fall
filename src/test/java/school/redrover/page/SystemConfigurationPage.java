@@ -17,17 +17,23 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
     @FindBy(name = "Submit")
     private WebElement clickSaveButton;
 
-    @FindBy(css = "[id='cb3'] + label")
-    private WebElement globalProperties;
+    @FindBy(id = "cb3")
+    private WebElement globalPropertiesDisableWipeoutCheckbox;
 
     @FindBy(xpath = "//a[contains(@tooltip,'Disable deferred wipeout on this node')]")
-    private WebElement checkboxTooltip;
+    private WebElement globalPropertiesDisableWipeoutCheckboxQuestion;
+
+    @FindBy(css = "[data-tippy-root]")
+    private WebElement globalPropertiesDisableWipeoutCheckboxTooltip;
 
     @FindBy(xpath = "//div[@nameref='cb3']//div[@class='help']/div[1]")
     private WebElement hintText;
 
     @FindBy(name = "builtin.mode")
     private WebElement usageModeDropdown;
+
+    @FindBy(id = "metrics")
+    private WebElement metrics;
 
     @FindBy(name = "_.computerRetentionCheckInterval")
     private WebElement inputComputerRetentionCheckInterval;
@@ -44,7 +50,7 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
 
     @Override
     public SystemConfigurationPage waitUntilPageLoad() {
-        getWait5().until(ExpectedConditions.elementToBeClickable(checkboxTooltip));
+        getWait5().until(ExpectedConditions.elementToBeClickable(globalPropertiesDisableWipeoutCheckboxQuestion));
 
         return this;
     }
@@ -95,10 +101,18 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
         saveButton.click();
     }
 
-    public SystemConfigurationPage clickCheckboxGlobalProperties() {
-        if (!getDriver().findElement(By.cssSelector("[id='cb3'] + label")).isSelected()) {
-            globalProperties.click();
-    }
+    public SystemConfigurationPage checkGlobalPropertiesDisableWipeoutCheckbox() {
+        if (!globalPropertiesDisableWipeoutCheckbox.isEnabled()) {
+            new Actions(getDriver())
+                    .moveToElement(metrics)
+                    .perform();
+
+            new Actions(getDriver())
+                    .moveToElement(globalPropertiesDisableWipeoutCheckbox)
+                    .click()
+                    .perform();
+        }
+
         return this;
     }
 
@@ -108,19 +122,27 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
         return new HomePage(getDriver()).waitUntilPageLoad();
     }
 
-    public boolean checkCheckboxSelected() {
-        return getDriver().findElement(By.cssSelector("[id='cb3']")).isSelected();
+    public boolean isGlobalPropertiesDisableWipeoutCheckboxSelected() {
+        new Actions(getDriver())
+                .moveToElement(metrics)
+                .perform();
+
+        return globalPropertiesDisableWipeoutCheckbox.isSelected();
     }
 
-    public String getCheckboxTooltipTextOnHover() {
-        new Actions(getDriver()).moveToElement(checkboxTooltip).perform();
+    public WebElement getGlobalPropertiesDisableWipeoutCheckboxTooltipOnHover() {
+        new Actions(getDriver()).moveToElement(metrics).perform();
+        new Actions(getDriver()).moveToElement(globalPropertiesDisableWipeoutCheckboxQuestion).perform();
 
-        return getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.className("tippy-content")))
-                .getText();
+        return getWait5().until(ExpectedConditions.visibilityOf(globalPropertiesDisableWipeoutCheckboxTooltip));
     }
 
     public SystemConfigurationPage clickCheckboxTooltip() {
-        checkboxTooltip.click();
+        new Actions(getDriver()).moveToElement(metrics).perform();
+        new Actions(getDriver())
+                .moveToElement(globalPropertiesDisableWipeoutCheckboxQuestion)
+                .click()
+                .perform();
 
         return this;
     }

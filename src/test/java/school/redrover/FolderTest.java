@@ -82,7 +82,8 @@ public class FolderTest extends BaseTest {
                 .clickSidebarNewItem()
                 .sendName(SUB_FOLDER_NAME)
                 .selectFolder()
-                .getDuplicateOrUnsafeCharacterErrorMessage();
+                .getErrorMessage()
+                .getText();
 
         Assert.assertEquals(
                 duplicateErrorMessage,
@@ -209,7 +210,8 @@ public class FolderTest extends BaseTest {
                 .clearName()
                 .sendNewName(NEW_FOLDER_NAME)
                 .renameButtonClick()
-                .getHeaderText();
+                .getHeader()
+                .getText();
 
         Assert.assertEquals(newNameFolder, NEW_FOLDER_NAME);
     }

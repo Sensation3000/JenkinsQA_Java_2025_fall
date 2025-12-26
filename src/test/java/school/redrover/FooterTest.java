@@ -1,7 +1,6 @@
 package school.redrover;
 
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.common.TestUtils;
@@ -11,27 +10,24 @@ import java.util.List;
 
 public class FooterTest extends BaseTest {
 
- final String namePage = "REST API";
+ private static final String NAME_PAGE = "REST API";
 
     @Test
     public void testRestApiLink() {
         String linkText = new HomePage(getDriver())
                 .getRestApiLinkText();
 
-        Assert.assertEquals(
-                linkText,
-                namePage);
+        Assert.assertEquals(linkText, NAME_PAGE);
     }
 
     @Test
     public void testApiPageHeading() {
         String actualHeading = new HomePage(getDriver())
                 .clickRestApiLink()
-                .getHeaderText();
+                .getHeader()
+                .getText();
 
-        Assert.assertEquals(
-                actualHeading,
-                namePage);
+        Assert.assertEquals(actualHeading, NAME_PAGE);
     }
 
     @Test
@@ -46,9 +42,7 @@ public class FooterTest extends BaseTest {
                 .clickRestApiLink()
                 .getXmlJsonPythonApiLinksText();
 
-        Assert.assertEquals(
-                actualLinks,
-                expectedLinks);
+        Assert.assertEquals(actualLinks, expectedLinks);
     }
 
     @Test
@@ -75,9 +69,7 @@ public class FooterTest extends BaseTest {
         String version = new HomePage(getDriver())
                 .getJenkinsVersion();
 
-        Assert.assertEquals(
-                version,
-                "Jenkins 2.516.3");
+        Assert.assertEquals(version,"Jenkins 2.516.3");
     }
 
     @Test
@@ -92,9 +84,7 @@ public class FooterTest extends BaseTest {
                 .clickJenkinsVersion()
                 .getDropdownList();
 
-        Assert.assertEquals(
-                actualDropdownItems,
-                expectedDropdownItems);
+        Assert.assertEquals(actualDropdownItems, expectedDropdownItems);
     }
 
     @Test
@@ -102,23 +92,21 @@ public class FooterTest extends BaseTest {
         String actualHeading = new HomePage(getDriver())
                 .clickUserAccountIcon()
                 .clickRestApiLink()
-                .getNamePage();
+                .getHeader()
+                .getText();
 
-       Assert.assertEquals(
-                actualHeading,
-                namePage);
+       Assert.assertEquals(actualHeading, NAME_PAGE);
     }
-@Ignore
+
     @Test
     public void testRestApiNewItemPage() {
         String actualHeading = new HomePage(getDriver())
                 .clickNewItemOnLeftMenu()
                 .clickRestApiLink()
-                .getNamePage();
+                .getHeader()
+                .getText();
 
-        Assert.assertEquals(
-                actualHeading,
-                namePage);
+        Assert.assertEquals(actualHeading, NAME_PAGE);
     }
 
     @Test
@@ -126,11 +114,10 @@ public class FooterTest extends BaseTest {
         String actualHeading = new HomePage(getDriver())
                 .clickSetUpAnAgent()
                 .clickRestApiLink()
-                .getNamePage();
+                .getHeader()
+                .getText();
 
-        Assert.assertEquals(
-                actualHeading,
-                namePage);
+        Assert.assertEquals(actualHeading, NAME_PAGE);
     }
 
     @Test
@@ -138,11 +125,10 @@ public class FooterTest extends BaseTest {
         String actualHeading = new HomePage(getDriver())
                .clickBuildExecutorStatus()
                .clickRestApiLink()
-               .getNamePage();
+                .getHeader()
+                .getText();
 
-        Assert.assertEquals(
-                actualHeading,
-                namePage);
+        Assert.assertEquals(actualHeading, NAME_PAGE);
     }
 
     @Test
@@ -150,10 +136,9 @@ public class FooterTest extends BaseTest {
         String actualHeading = new HomePage(getDriver())
                 .clickBuildHistory()
                 .clickRestApiLink()
-                .getNamePage();
+                .getHeader()
+                .getText();
 
-        Assert.assertEquals(
-                actualHeading,
-                namePage);
+        Assert.assertEquals(actualHeading, NAME_PAGE);
     }
 }

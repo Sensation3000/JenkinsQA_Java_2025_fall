@@ -24,7 +24,8 @@ public class CreateNewItemTest extends BaseTest {
     public void testNewItemPageByClickingCreateAJobLink() {
         String result = new HomePage(getDriver())
                 .clickCreateJob()
-                .getHeaderText();
+                .getHeader()
+                .getText();
 
         Assert.assertEquals(result, "New Item");
     }
@@ -33,7 +34,8 @@ public class CreateNewItemTest extends BaseTest {
     public void testNewItemPageByClickingNewItemLink() {
         String result = new HomePage(getDriver())
                 .clickNewItemOnLeftMenu()
-                .getHeaderText();
+                .getHeader()
+                .getText();
 
         Assert.assertEquals(result, "New Item");
     }
@@ -112,7 +114,8 @@ public class CreateNewItemTest extends BaseTest {
                 .clickNewItemOnLeftMenu()
                 .sendName(PROJECT_NAME)
                 .selectFolder()
-                .getDuplicateOrUnsafeCharacterErrorMessage();
+                .getErrorMessage()
+                .getText();
 
         Assert.assertEquals(errorMessage, "» A job already exists with the name ‘New Project’");
     }

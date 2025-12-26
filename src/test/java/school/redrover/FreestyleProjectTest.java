@@ -264,7 +264,7 @@ public class FreestyleProjectTest extends BaseTest {
                 .clickDeleteItemInDropdownMenu()
                 .confirmDelete();
 
-        Assert.assertEquals(homePage.getHeaderText(), expectedHeadingText);
+        Assert.assertEquals(homePage.getHeader().getText(), expectedHeadingText);
     }
 
     @Test

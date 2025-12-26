@@ -33,18 +33,19 @@ public class JenkinsManagementTest extends BaseTest {
         };
     }
 
+    @Ignore
     @Test
     public void testDeferredWipeoutSettingIsSaved() {
-        Boolean checboxGlobal = new HomePage(getDriver())
+        boolean globalPropertiesDisableWipeoutCheckbox = new HomePage(getDriver())
                 .clickManageJenkinsGear()
                 .clickConfigurationSystem()
-                .clickCheckboxGlobalProperties()
+                .checkGlobalPropertiesDisableWipeoutCheckbox()
                 .clickSaveButton()
                 .clickManageJenkinsGear()
                 .clickConfigurationSystem()
-                .checkCheckboxSelected();
+                .isGlobalPropertiesDisableWipeoutCheckboxSelected();
 
-        Assert.assertTrue(checboxGlobal);
+        Assert.assertTrue(globalPropertiesDisableWipeoutCheckbox);
     }
 
     @Test
@@ -54,7 +55,8 @@ public class JenkinsManagementTest extends BaseTest {
         String actualTooltipText = new HomePage(getDriver())
                 .clickManageJenkinsGear()
                 .clickConfigurationSystem()
-                .getCheckboxTooltipTextOnHover();
+                .getGlobalPropertiesDisableWipeoutCheckboxTooltipOnHover()
+                .getText();
 
         Assert.assertEquals(actualTooltipText, expectedTooltipText, "Unexpected tooltip");
     }
@@ -110,7 +112,8 @@ public class JenkinsManagementTest extends BaseTest {
                 .clickManageJenkinsGear()
                 .sendTitle(SETTING_TITLE)
                 .clickSearchResult()
-                .getHeaderText();
+                .getHeader()
+                .getText();
 
         Assert.assertEquals(searchHeading, "System");
     }

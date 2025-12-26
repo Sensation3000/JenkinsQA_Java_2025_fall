@@ -44,7 +44,7 @@ public class DashboardTest extends BaseTest {
     @Test
     public void testHomePageHeading() {
         Assert.assertEquals(
-                new HomePage(getDriver()).getHeaderText(),
+                new HomePage(getDriver()).waitUntilPageLoadJS().getHeader().getText(),
                 "Welcome to Jenkins!"
         );
     }
@@ -87,7 +87,8 @@ public class DashboardTest extends BaseTest {
                 .clickSearchButton()
                 .searchFor(CREATED_JOBS_NAME.get(0))
                 .moveAndClickResult()
-                .getHeaderText();
+                .getHeader()
+                .getText();
 
         Assert.assertEquals(searchResults, CREATED_JOBS_NAME.get(0));
     }
@@ -140,7 +141,8 @@ public class DashboardTest extends BaseTest {
 
         String actualTitle = new HomePage(getDriver())
                 .clickManageJenkinsGear()
-                .getHeaderText();
+                .getHeader()
+                .getText();
 
         Assert.assertEquals(actualTitle, expectedTitle);
     }
@@ -214,7 +216,7 @@ public class DashboardTest extends BaseTest {
         NewNodePage newNodePage = new HomePage(getDriver())
                 .clickSetUpAnAgent();
 
-        Assert.assertEquals(newNodePage.getHeaderText(), "New node");
+        Assert.assertEquals(newNodePage.getHeader().getText(),"New node");
         Assert.assertTrue(newNodePage.isFormDisplayed(), "New Node form is not visible");
     }
 
@@ -223,7 +225,7 @@ public class DashboardTest extends BaseTest {
         CloudsPage cloudsPage = new HomePage(getDriver())
                 .clickConfigureCloud();
 
-        Assert.assertEquals(cloudsPage.getHeaderText(), "Clouds");
+        Assert.assertEquals(cloudsPage.getHeader().getText(), "Clouds");
         Assert.assertEquals(cloudsPage.getParagraphText(), "There is no plugin installed that supports clouds.");
     }
 }

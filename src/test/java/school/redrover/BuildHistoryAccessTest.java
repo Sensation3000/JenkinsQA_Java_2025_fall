@@ -15,7 +15,8 @@ public class BuildHistoryAccessTest extends BaseTest {
     public void testQuickAccessBuildHistory() {
         String actualHeading = new HomePage(getDriver())
                 .clickBuildHistory()
-                .getHeaderText();
+                .getHeader()
+                .getText();
 
         Assert.assertEquals(actualHeading, "Build History of Jenkins");
     }

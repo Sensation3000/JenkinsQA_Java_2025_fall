@@ -30,8 +30,4 @@ public class RestApiPage extends BasePage<RestApiPage> {
                 .map(WebElement::getText)
                 .toList();
     }
-
-    public String getNamePage(){
-        return getWait5().until(ExpectedConditions.elementToBeClickable(By.cssSelector("h1"))).getText();
-    }
 }

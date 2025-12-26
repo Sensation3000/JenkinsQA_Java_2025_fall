@@ -71,7 +71,7 @@ public class HomePage extends BasePage<HomePage> {
     public NewItemPage clickNewItemOnLeftMenu() {
         sidebarNewItem.click();
 
-        return new NewItemPage(getDriver()).waitUntilPageLoad();
+        return new NewItemPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public List<String> getProjectList() {
@@ -106,13 +106,6 @@ public class HomePage extends BasePage<HomePage> {
 
         getWait2().until(ExpectedConditions.visibilityOfElementLocated(By.id("name")));
         return new NewItemPage(getDriver());
-    }
-
-    @Override
-    public String getHeaderText() {
-        return getWait2()
-                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".empty-state-block > h1")))
-                .getText().trim();
     }
 
     public String getProjectName() {
@@ -321,7 +314,7 @@ public class HomePage extends BasePage<HomePage> {
     public NewNodePage clickSetUpAnAgent() {
         setUpAnAgentButton.click();
 
-        return new NewNodePage(getDriver()).waitUntilPageLoad();
+        return new NewNodePage(getDriver()).waitUntilPageLoadJS();
     }
 
     public NodesPage clickBuildExecutorStatus() {

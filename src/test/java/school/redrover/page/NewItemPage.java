@@ -54,7 +54,7 @@ public class NewItemPage extends BasePage<NewItemPage> {
     public NewItemPage sendName(String name) {
         nameField.sendKeys(name);
 
-        return this;
+        return this.waitUntilPageLoadJS();
     }
 
     public NewItemPage clearSendName() {
@@ -101,11 +101,8 @@ public class NewItemPage extends BasePage<NewItemPage> {
         return new PipelineConfigurationPage(getDriver());
     }
 
-    public String getDuplicateOrUnsafeCharacterErrorMessage() {
-        WebElement errorMessage = getWait10().until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("itemname-invalid")));
-
-        return errorMessage.getText();
+    public WebElement getErrorMessage() {
+        return getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.id("itemname-invalid")));
     }
 
     // дизайн сделан так, что нельзя использовать <T extends BaseConfigurationPage>

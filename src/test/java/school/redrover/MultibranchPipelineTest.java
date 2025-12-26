@@ -89,13 +89,14 @@ public class MultibranchPipelineTest extends BaseTest {
     public void testTryCreateProjectExistName() {
         final String errorMessage = "» A job already exists with the name ‘%s’".formatted(MULTIBRANCH_PIPELINE_NAME);
 
-        String dublicateProject = new HomePage(getDriver())
+        String duplicateProject = new HomePage(getDriver())
                 .clickNewItemOnLeftMenu()
                 .selectMultibranchPipeline()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
-                .getDuplicateOrUnsafeCharacterErrorMessage();
+                .getErrorMessage()
+                .getText();
 
-        Assert.assertEquals(dublicateProject, errorMessage, "Incorrect error message");
+        Assert.assertEquals(duplicateProject, errorMessage, "Incorrect error message");
     }
 
     @Test
@@ -159,7 +160,8 @@ public class MultibranchPipelineTest extends BaseTest {
                 .clickNewItemOnLeftMenu()
                 .clearSendName()
                 .sendName("multib" + specialCharacters + "ranch")
-                .getDuplicateOrUnsafeCharacterErrorMessage();
+                .getErrorMessage()
+                .getText();
 
         Assert.assertEquals(actualErrorMessage,
                 "» ‘%s’ is an unsafe character".formatted(specialCharacters),
@@ -198,16 +200,21 @@ public class MultibranchPipelineTest extends BaseTest {
                 .clickSaveButton()
                 .clickRenameInSideMenu(new MultibranchPipelineRenamingPage(getDriver()))
                 .renameMultibranchPipeline(RENAMED_MULTIBRANCH_PIPELINE)
-                .getHeaderText();
+                .getHeader()
+                .getText();
 
         Assert.assertEquals(actualRenamedMultibranchPipeline, RENAMED_MULTIBRANCH_PIPELINE);
     }
 
-    @Test(dependsOnMethods = "testCreateMultibranchPipeline")
+    @Test
     public void testRenameJobNameUsingDotAtTheEnd() {
         final String expectedErrorMessage = "A name cannot end with ‘.’";
 
         String actualErrorMessage = new HomePage(getDriver())
+                .clickSidebarNewItem()
+                .sendName(MULTIBRANCH_PIPELINE_NAME)
+                .selectMultibranchPipelineAndSubmit()
+                .gotoHomePage()
                 .openProject(MULTIBRANCH_PIPELINE_NAME, new MultibranchPipelineProjectStatusPage(getDriver()))
                 .clickRenameInSideMenu(new MultibranchPipelineRenamingPage(getDriver()))
                 .renameJob(MULTIBRANCH_PIPELINE_NAME + ".")
