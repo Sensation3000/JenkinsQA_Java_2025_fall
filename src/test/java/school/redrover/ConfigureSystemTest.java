@@ -168,23 +168,19 @@ public class ConfigureSystemTest extends BaseTest {
     }
 
     @Test
-    public void testChangeComputerRetentionCheckIntervalNegative() {
+    public void testSaveInvalidComputerRetentionCheckIntervalShowsError() {
 
-        final String incorrectInterval = "61";
-        final By intervalInputSelector = By.cssSelector("input[name = '_.computerRetentionCheckInterval']");
+        final String invalidIntervalValue = "61";
+        final String expectedErrorMassage = "java.lang.IllegalArgumentException: interval must be below or equal 60s";
 
-        getSystemConfigurePage();
+        String actualErrorMessage = new HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .setInputComputerRetentionCheckIntervalValue(invalidIntervalValue)
+                .clickSaveButtonWithInvalidValue()
+                .getErrorMessage();
 
-        WebElement intervalInput = getDriver().findElement(intervalInputSelector);
-        String oldValue = intervalInput.getAttribute("value");
-        intervalInput.clear();
-        intervalInput.sendKeys(incorrectInterval);
-        getDriver().findElement(By.name("Submit")).click();
-
-        getSystemConfigurePage();
-
-        String actualInterval = getDriver().findElement(intervalInputSelector).getAttribute("value");
-        Assert.assertEquals(actualInterval, oldValue);
+        Assert.assertEquals(actualErrorMessage, expectedErrorMassage);
     }
 
     @Ignore
@@ -192,6 +188,7 @@ public class ConfigureSystemTest extends BaseTest {
     public void testHintOfComputerRetentionCheckInterval() {
 
         final String incorrectInterval = "61";
+        final String expectedErrorMassage = "This value should be between 1 and 60";
 
         getSystemConfigurePage();
 

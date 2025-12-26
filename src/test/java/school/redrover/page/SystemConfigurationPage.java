@@ -185,7 +185,9 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
         return quietPeriodInput.getAttribute("value");
     }
 
+    public ErrorPage clickSaveButtonWithInvalidValue() {
+        saveButton.click();
+
+        return new ErrorPage(getDriver());
+    }
 }
-
-
-
