@@ -9,7 +9,7 @@ import school.redrover.trait.BaseTrait;
 public interface SidebarWorkspaceTrait extends BaseTrait {
 
     default <ProjectWorkspacePage extends BasePage<ProjectWorkspacePage>> ProjectWorkspacePage clickSidebarWorkspace(ProjectWorkspacePage page) {
-        getDriver().findElement(By.xpath("//a[contains(., 'Changes')]")).click();
+        getDriver().findElement(By.xpath("//a[contains(., 'Workspace')]")).click();
 
         return page.waitUntilPageLoadJS();
     }
