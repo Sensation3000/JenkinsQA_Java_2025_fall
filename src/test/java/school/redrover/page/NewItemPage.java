@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
-import school.redrover.common.TestUtils;
+import school.redrover.common.PageUtils;
 import java.util.Objects;
 
 
@@ -85,7 +85,7 @@ public class NewItemPage extends BasePage<NewItemPage> {
     }
 
     public MultibranchPipelineConfigurationPage selectMultibranchPipelineAndSubmit() {
-        TestUtils.clickJS(getDriver(), multibranchPipelineOption);
+        PageUtils.clickJS(getDriver(), multibranchPipelineOption);
 
         getWait2().until(ExpectedConditions.elementToBeClickable(okButton)).click();
 
@@ -136,7 +136,7 @@ public class NewItemPage extends BasePage<NewItemPage> {
     }
 
     public MultibranchPipelineConfigurationPage selectMultiConfigurationAndSubmit() {
-        TestUtils.clickJS(getDriver(), By.xpath("//span[text()='Multi-configuration project']"));
+        PageUtils.clickJS(getDriver(), By.xpath("//span[text()='Multi-configuration project']"));
 
         getWait2().until(ExpectedConditions.elementToBeClickable(By.id("ok-button"))).click();
         getWait2().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(), 'General')]")));
@@ -145,7 +145,7 @@ public class NewItemPage extends BasePage<NewItemPage> {
     }
 
     public OrganizationFolderConfigurationPage selectOrganizationFolderAndSubmit() {
-        TestUtils.clickJS(getDriver(), By.xpath("//span[text()='Organization Folder']"));
+        PageUtils.clickJS(getDriver(), By.xpath("//span[text()='Organization Folder']"));
 
         getWait2().until(ExpectedConditions.elementToBeClickable(By.id("ok-button"))).click();
         getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(), 'General')]")));

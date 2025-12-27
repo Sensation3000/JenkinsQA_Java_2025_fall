@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import school.redrover.common.BasePage;
-import school.redrover.common.TestUtils;
+import school.redrover.common.PageUtils;
 import java.util.List;
 
 
@@ -66,8 +66,8 @@ public class EditViewPage extends BasePage<EditViewPage> {
             String columnName = element.getText().trim();
 
             if (!currentColumnList.contains(columnName)) {
-                TestUtils.mouseEnterJS(getDriver(), element);
-                TestUtils.clickJS(getDriver(), element);
+                PageUtils.mouseEnterJS(getDriver(), element);
+                PageUtils.clickJS(getDriver(), element);
             }
         }
         return this;

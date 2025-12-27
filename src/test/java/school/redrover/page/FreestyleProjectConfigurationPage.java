@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import school.redrover.common.TestUtils;
+import school.redrover.common.PageUtils;
 
 import java.time.Duration;
 import java.util.List;
@@ -294,8 +294,8 @@ public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationP
         Assert.assertNotEquals(addParameterList.size(), 0);
         for (WebElement element : addParameterList) {
             if (parameterList.contains(parameterName)) {
-                TestUtils.mouseEnterJS(getDriver(), element);
-                TestUtils.clickJS(getDriver(), element);
+                PageUtils.mouseEnterJS(getDriver(), element);
+                PageUtils.clickJS(getDriver(), element);
                 break;
             } else
                 System.out.println("Параметр " + parameterName + " не найден");

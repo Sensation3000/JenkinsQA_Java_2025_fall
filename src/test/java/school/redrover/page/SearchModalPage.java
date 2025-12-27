@@ -4,7 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
-import school.redrover.common.TestUtils;
+import school.redrover.common.PageUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +90,7 @@ public class SearchModalPage extends BasePage<SearchModalPage> {
     }
 
     public FreestyleProjectStatusPage moveAndClickResult(){
-        TestUtils.clickJS(getDriver(), getDriver().findElement(searchResults));
+        PageUtils.clickJS(getDriver(), getDriver().findElement(searchResults));
 
         return new FreestyleProjectStatusPage(getDriver()).waitUntilPageLoadJS();
     }

@@ -8,7 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
-import school.redrover.common.TestUtils;
+import school.redrover.common.PageUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -90,13 +90,13 @@ public class HomePage extends BasePage<HomePage> {
     public <ProjectStatusPage extends BaseProjectStatusPage<ProjectStatusPage>>
     ProjectStatusPage openProject(String jobName, ProjectStatusPage projectStatusPage) {
 
-        TestUtils.clickJS(getDriver(), By.xpath("//span[text()='%s']".formatted(jobName.trim())));
+        PageUtils.clickJS(getDriver(), By.xpath("//span[text()='%s']".formatted(jobName.trim())));
 
         return projectStatusPage.waitUntilPageLoad();
     }
 
     public CloudsPage clickConfigureCloud() {
-        TestUtils.clickJS(getDriver(), configureCloudLink);
+        PageUtils.clickJS(getDriver(), configureCloudLink);
 
         return new CloudsPage(getDriver()).waitUntilPageLoad();
     }
@@ -127,8 +127,8 @@ public class HomePage extends BasePage<HomePage> {
                 ExpectedConditions.visibilityOfElementLocated(By.xpath(
                         "//a[.//span[text()='%s']]//button[@class='jenkins-menu-dropdown-chevron']".formatted(itemName))));
 
-        TestUtils.mouseEnterJS(getDriver(), dropdownButton);
-        TestUtils.clickJS(getDriver(), dropdownButton);
+        PageUtils.mouseEnterJS(getDriver(), dropdownButton);
+        PageUtils.clickJS(getDriver(), dropdownButton);
 
         return this;
     }

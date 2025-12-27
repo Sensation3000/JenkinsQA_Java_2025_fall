@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import school.redrover.common.TestUtils;
+import school.redrover.common.PageUtils;
 import school.redrover.trait.project_sidebar.SidebarBuildHistoryTrait;
 import school.redrover.trait.project_sidebar.SidebarCredentialsTrait;
 
@@ -137,8 +137,8 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage>
                 ExpectedConditions.visibilityOfElementLocated(By.xpath(
                         "//a[.//span[text()='%s']]//button[@class='jenkins-menu-dropdown-chevron']".formatted(itemName))));
 
-        TestUtils.mouseEnterJS(getDriver(), dropdownButton);
-        TestUtils.clickJS(getDriver(), dropdownButton);
+        PageUtils.mouseEnterJS(getDriver(), dropdownButton);
+        PageUtils.clickJS(getDriver(), dropdownButton);
 
         return this.waitUntilPageLoadJS();
     }
@@ -257,8 +257,8 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage>
                 .xpath("//a[contains(@href, '/%s')]/button[@class='jenkins-menu-dropdown-chevron']"
                         .formatted(itemName))));
 
-        TestUtils.mouseEnterJS(getDriver(), dropdownButton);
-        TestUtils.clickJS(getDriver(), dropdownButton);
+        PageUtils.mouseEnterJS(getDriver(), dropdownButton);
+        PageUtils.clickJS(getDriver(), dropdownButton);
 
         return this.waitUntilPageLoadJS();
     }
@@ -272,7 +272,7 @@ public class FolderStatusPage extends BaseProjectStatusPage<FolderStatusPage>
     public <ProjectStatusPage extends BaseProjectStatusPage<ProjectStatusPage>>
     ProjectStatusPage openSubItemPage(String itemName, ProjectStatusPage projectStatusPage) {
 
-        TestUtils.clickJS(getDriver(), By.xpath("//span[text()='%s']".formatted(itemName.trim())));
+        PageUtils.clickJS(getDriver(), By.xpath("//span[text()='%s']".formatted(itemName.trim())));
 
         return projectStatusPage.waitUntilPageLoadJS();
     }

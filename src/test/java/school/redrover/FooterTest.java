@@ -3,7 +3,7 @@ package school.redrover;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
-import school.redrover.common.TestUtils;
+import school.redrover.common.PageUtils;
 import school.redrover.page.HomePage;
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class FooterTest extends BaseTest {
 
     @Test
     public void testRestApiLinkByFocusAndEnter() {
-        TestUtils.focusAndEnterByKeyboard(getDriver(), new HomePage(getDriver()).getRestApiLink());
+        PageUtils.focusAndEnterByKeyboard(getDriver(), new HomePage(getDriver()).getRestApiLink());
 
         Assert.assertEquals(
                 getDriver().getTitle(),

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import school.redrover.common.BasePage;
-import school.redrover.common.TestUtils;
+import school.redrover.common.PageUtils;
 
 import java.util.List;
 
@@ -169,7 +169,7 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
     }
 
     public SystemConfigurationPage clearQuietPeriod() {
-        TestUtils.scrollToElement(getDriver(), quietPeriodInput);
+        PageUtils.scrollToElement(getDriver(), quietPeriodInput);
         quietPeriodInput.clear();
 
         return this;

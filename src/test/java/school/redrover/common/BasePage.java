@@ -75,11 +75,11 @@ public abstract class BasePage<Page> extends BaseModel {
     public UserStatusPage clickUserAccountViaDropDownMenu(String userName) {
         WebElement userIcon = getWait10().until(ExpectedConditions.visibilityOfElementLocated(
                 By.id("root-action-UserAction")));
-        TestUtils.mouseEnterJS(getDriver(), userIcon);
+        PageUtils.mouseEnterJS(getDriver(), userIcon);
 
         WebElement userInDropDown = getWait10().until(ExpectedConditions.visibilityOfElementLocated(By
                 .xpath("//a[contains(@class, 'jenkins-dropdown__item') and contains(., '%s')]".formatted(userName))));
-        TestUtils.clickJS(getDriver(), userInDropDown);
+        PageUtils.clickJS(getDriver(), userInDropDown);
 
         return new UserStatusPage(getDriver());
     }
@@ -117,7 +117,7 @@ public abstract class BasePage<Page> extends BaseModel {
     }
 
     public RestApiPage clickRestApiLink() {
-        TestUtils.clickJS(getDriver(), restApiLink);
+        PageUtils.clickJS(getDriver(), restApiLink);
 
         return new RestApiPage(getDriver()).waitUntilPageLoadJS();
     }
@@ -135,12 +135,12 @@ public abstract class BasePage<Page> extends BaseModel {
 
     public String getUserNameFromDropDownMenu() {
         WebElement userIcon = getWait10().until(ExpectedConditions.visibilityOfElementLocated(By.id("root-action-UserAction")));
-        TestUtils.mouseEnterJS(getDriver(), userIcon);
+        PageUtils.mouseEnterJS(getDriver(), userIcon);
 
         WebElement userInDropDown = getWait10().until(ExpectedConditions.visibilityOfElementLocated(By
                 .cssSelector(".jenkins-dropdown__item:first-child")));
 
-        return TestUtils.getTextJS(getDriver(), userInDropDown);
+        return PageUtils.getTextJS(getDriver(), userInDropDown);
     }
 
     public String getLogoText() {
