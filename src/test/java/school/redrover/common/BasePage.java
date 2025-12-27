@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import school.redrover.component.SearchComponent;
 import school.redrover.page.*;
 
 import java.util.Objects;
@@ -84,10 +85,10 @@ public abstract class BasePage<Page> extends BaseModel {
         return new UserStatusPage(getDriver());
     }
 
-    public SearchModalPage clickSearchButton() {
+    public SearchComponent clickSearchButton() {
         getDriver().findElement(By.id("root-action-SearchAction")).click();
 
-        return new SearchModalPage(getDriver()).waitUntilPageLoadJS();
+        return new SearchComponent(getDriver()).waitUntilComponentLoadJS();
     }
 
     public LoginPage clickSignOut() {

@@ -1,49 +1,53 @@
-package school.redrover.page;
+package school.redrover.component;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import school.redrover.common.BasePage;
 import school.redrover.common.PageUtils;
+import school.redrover.page.FreestyleProjectStatusPage;
+import school.redrover.page.UserStatusPage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SearchModalPage extends BasePage<SearchModalPage> {
+public class SearchComponent extends BaseComponent<SearchComponent> {
 
-    private final By inputField = By.id("command-bar");
-    private final By searchResults = By.xpath("//div[@id='search-results']//a");
+    @FindBy(id = "command-bar")
+    private WebElement searchField;
 
-    public SearchModalPage(WebDriver driver) {
+    @FindBy(xpath = "//div[@id='search-results']//a")
+    private List<WebElement> searchResults;
+
+
+    public SearchComponent(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public SearchModalPage getPage() {
+    public SearchComponent getComponent() {
         return this;
     }
 
     @Override
-    public SearchModalPage waitUntilPageLoad() {
+    public SearchComponent waitUntilComponentLoad() {
         return null;
     }
 
-    public SearchModalPage searchFor(String jobName) {
-        WebElement input = getWait2().until(ExpectedConditions.elementToBeClickable(inputField));
-        input.sendKeys(jobName);
+    public SearchComponent searchFor(String jobName) {
+        searchField.sendKeys(jobName);
 
-        return this.waitUntilPageLoadJS();
+        return this.waitUntilComponentLoadJS();
     }
 
-    public SearchModalPage searchFor(String jobName, String previousItemName) {
-        WebElement input = getWait2().until(ExpectedConditions.elementToBeClickable(inputField));
-        input.clear();
-        input.sendKeys(jobName);
+    public SearchComponent searchFor(String jobName, String previousItemName) {
+        searchField.clear();
+        searchField.sendKeys(jobName);
 
         if (previousItemName != null && !previousItemName.isEmpty()) {
             getWait5().until(driver ->
-                    !driver.findElement(searchResults).getText().contains(previousItemName));
+                    !searchResults.get(0).getText().contains(previousItemName));
         }
 
         return this;
@@ -62,20 +66,23 @@ public class SearchModalPage extends BasePage<SearchModalPage> {
     public List<String> getSearchResultsAndClose() {
         getWait5().until(ExpectedConditions.presenceOfElementLocated(By.className("jenkins-command-palette__results__heading")));
         List<String> searchResultsTexts = new ArrayList<>();
-        for (WebElement element : getDriver().findElements(searchResults)) {
+
+        for (WebElement element : searchResults) {
             searchResultsTexts.add(element.getText());
         }
+
         new Actions(getDriver())
-                .moveToElement(getDriver().findElement(inputField), 0, -50)
+                .moveToElement((searchField), 0, -50)
                 .click()
                 .perform();
+
         return searchResultsTexts;
     }
 
     public UserStatusPage searchForUser(String userName) {
         getDriver().findElement(By.id("command-bar")).sendKeys(userName);
 
-        this.waitUntilPageLoadJS();
+        this.waitUntilComponentLoadJS();
         getDriver().findElement(By.id("command-bar")).sendKeys(Keys.ENTER);
 
         return new UserStatusPage(getDriver()).waitUntilPageLoadJS();
@@ -84,13 +91,15 @@ public class SearchModalPage extends BasePage<SearchModalPage> {
     public List<String> searchResults() {
         List<String> textOfResults = new ArrayList<>();
         getWait5().until(ExpectedConditions.presenceOfElementLocated(By.className("jenkins-command-palette__results__heading")));
-        List<WebElement> searchResultsItems = getDriver().findElements(searchResults);
+
+        List<WebElement> searchResultsItems = searchResults;
         searchResultsItems.forEach(el -> textOfResults.add(el.getText()));
+
         return textOfResults;
     }
 
     public FreestyleProjectStatusPage moveAndClickResult(){
-        PageUtils.clickJS(getDriver(), getDriver().findElement(searchResults));
+        PageUtils.clickJS(getDriver(), searchResults.get(0));
 
         return new FreestyleProjectStatusPage(getDriver()).waitUntilPageLoadJS();
     }
