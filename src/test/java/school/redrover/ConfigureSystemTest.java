@@ -183,24 +183,22 @@ public class ConfigureSystemTest extends BaseTest {
         Assert.assertEquals(actualErrorMessage, expectedErrorMassage);
     }
 
-    @Ignore
-    @Test
-    public void testHintOfComputerRetentionCheckInterval() {
 
+    @Test
+    public void testHintAppearsForInvalidComputerRetentionCheckInterval() {
         final String incorrectInterval = "61";
         final String expectedErrorMassage = "This value should be between 1 and 60";
 
-        getSystemConfigurePage();
+        String actualErrorMessage = new HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .setInputComputerRetentionCheckIntervalValue(incorrectInterval)
+                .clickApply()
+                .getHintForInvalidComputerRetentionCheckInterval();
 
-        WebElement intervalInput = getDriver().findElement(By.cssSelector("input[name = '_.computerRetentionCheckInterval']"));
-        intervalInput.clear();
-        intervalInput.sendKeys(incorrectInterval);
-        intervalInput.sendKeys(Keys.TAB);
-
-        WebElement hint = getDriver().findElement(
-                By.xpath("//div[text()='This value should be between 1 and 60']/.."));
-        Assert.assertTrue(hint.getAttribute("class").contains("--visible"));
+        Assert.assertEquals(actualErrorMessage, expectedErrorMassage);
     }
+
 
     @Ignore
     @Test
