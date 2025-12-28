@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 import school.redrover.common.PageUtils;
+
+import java.util.List;
 import java.util.Objects;
 
 
@@ -34,6 +36,8 @@ public class NewItemPage extends BasePage<NewItemPage> {
     @FindBy(xpath = "//*[contains(@class, 'WorkflowJob')]")
     private WebElement pipelineTypeCheck;
 
+    @FindBy(className = "input-validation-message")
+    private List<WebElement> validationMessages;
 
     public NewItemPage(WebDriver driver) {
         super(driver);
@@ -231,5 +235,10 @@ public class NewItemPage extends BasePage<NewItemPage> {
 
     public String getErrorDisplayedForEmptyItemName() {
         return getDriver().findElement(By.id("itemname-required")).getText();
+    }
+
+    public Boolean areValidationMessagesDisabled() {
+        return validationMessages.stream()
+                .allMatch(msg -> msg.getAttribute("class").contains("input-message-disabled"));
     }
 }

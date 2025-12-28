@@ -49,18 +49,14 @@ public class CreateNewItemTest extends BaseTest {
           Assert.assertFalse(result);
     }
 
-    // === Добавлено из CreateNewItem4Test ===
     @Test
     public void testItemNameInput() {
-        new HomePage(getDriver()).clickCreateJob();
-        getDriver().findElement(By.id("name")).sendKeys(PROJECT_NAME);
+        Boolean validationMessageDisabled = new HomePage(getDriver())
+                .clickCreateJob()
+                .sendName(PROJECT_NAME)
+                .areValidationMessagesDisabled();
 
-        List<WebElement> validationMessages = getDriver().findElements(By.className("input-validation-message"));
-
-        boolean allValidationMessagesDisabled = validationMessages.stream()
-                .allMatch(msg -> msg.getAttribute("class").contains("input-message-disabled"));
-
-        Assert.assertTrue(allValidationMessagesDisabled,
+        Assert.assertTrue(validationMessageDisabled,
                 "All validation messages should be disabled for valid input");
     }
 
@@ -134,18 +130,16 @@ public class CreateNewItemTest extends BaseTest {
         Assert.assertEquals(projectList.get(0), PROJECT_NAME);
     }
 
-    // === Добавлено из удаленного CreateNewItem1Test ===
     @Test
     public void testConfigurationPageIsVisible() {
-        new HomePage(getDriver())
+        String headingText = new HomePage(getDriver())
                 .clickCreateJob()
                 .sendName(PROJECT_NAME)
-                .selectFreestyleProjectAndSubmit();
+                .selectFreestyleProjectAndSubmit()
+                .getHeader()
+                .getText();
 
-        getWait2().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//span[text()='Configuration']"), "Configuration"));
-
-        String heading = getDriver().findElement(By.xpath("//span[text()='Configuration']")).getText();
-        Assert.assertEquals(heading, "Configuration");
+        Assert.assertEquals(headingText, "Configure");
     }
     @Test
     public void testBuildStepsFilterNames() {
@@ -181,22 +175,19 @@ public class CreateNewItemTest extends BaseTest {
         }
     }
 
-    // === Добавлено из CreateNewItem7Test ===
     @Test
     public void createNewFreeStyleProjectTest() {
-        new HomePage(getDriver())
+        String projectTitle = new HomePage(getDriver())
                 .clickCreateJob()
                 .sendName(PROJECT_NAME)
                 .selectFreestyleProjectAndSubmit()
-                .clickSave();
+                .clickSave()
+                .getHeader()
+                .getText();
 
-        getWait2().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//h1"), PROJECT_NAME));
-
-        WebElement projectTitle = getDriver().findElement(By.xpath("//h1"));
-        Assert.assertEquals(projectTitle.getText(), PROJECT_NAME);
+        Assert.assertEquals(projectTitle, PROJECT_NAME);
     }
 
-    // === Добавлено из CreateNewItem8Test ===
     @Test
     public void createMultibranchPipelineProjectItemTest() {
         final String jobName = "NEW_TEST_JOB";
@@ -253,8 +244,6 @@ public class CreateNewItemTest extends BaseTest {
                 .getErrorDisplayedForEmptyItemName();
 
         Assert.assertEquals(errorMessage, "» This field cannot be empty, please enter a valid name");
-
-
     }
 }
 
