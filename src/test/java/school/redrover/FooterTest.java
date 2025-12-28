@@ -14,8 +14,7 @@ public class FooterTest extends BaseTest {
 
     @Test
     public void testRestApiLink() {
-        String linkText = new HomePage(getDriver())
-                .getRestApiLinkText();
+        String linkText = new HomePage(getDriver()).getRestApiLink().getText();
 
         Assert.assertEquals(linkText, NAME_PAGE);
     }
@@ -46,16 +45,6 @@ public class FooterTest extends BaseTest {
     }
 
     @Test
-    public void testRestApiLinkByTabAndEnter() {
-        new HomePage(getDriver())
-                .pressTabAndEnter(new HomePage(getDriver()).getRestApiLink());
-
-        Assert.assertEquals(
-                getDriver().getTitle(),
-                "Remote API - Jenkins");
-    }
-
-    @Test
     public void testRestApiLinkByFocusAndEnter() {
         PageUtils.focusAndEnterByKeyboard(getDriver(), new HomePage(getDriver()).getRestApiLink());
 
@@ -66,8 +55,7 @@ public class FooterTest extends BaseTest {
 
     @Test
     public void testJenkinsVersion() {
-        String version = new HomePage(getDriver())
-                .getJenkinsVersion();
+        String version = new HomePage(getDriver()).getJenkinsVersionButton().getText();
 
         Assert.assertEquals(version,"Jenkins 2.516.3");
     }
@@ -82,7 +70,7 @@ public class FooterTest extends BaseTest {
 
         List<String> actualDropdownItems = new HomePage(getDriver())
                 .clickJenkinsVersion()
-                .getDropdownList();
+                .getDropdownElementsTextList();
 
         Assert.assertEquals(actualDropdownItems, expectedDropdownItems);
     }

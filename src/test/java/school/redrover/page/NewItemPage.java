@@ -136,7 +136,7 @@ public class NewItemPage extends BasePage<NewItemPage> {
 
         getDriver().findElement(By.id("ok-button")).click();
 
-        return this;
+        return this.waitUntilPageLoadJS();
     }
 
     public MultibranchPipelineConfigurationPage selectMultiConfigurationAndSubmit() {

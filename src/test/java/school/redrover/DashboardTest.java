@@ -129,8 +129,7 @@ public class DashboardTest extends BaseTest {
 
     @Test
     public void testLogo() {
-        String logoText = new HomePage(getDriver())
-                .getLogoText();
+        String logoText = new HomePage(getDriver()).getLogo().getText();
 
         Assert.assertEquals(logoText, "Jenkins", "Надпись рядом с логотипом должна быть 'Jenkins'");
     }

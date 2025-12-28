@@ -1,36 +1,44 @@
 package school.redrover.common;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import school.redrover.component.SearchComponent;
-import school.redrover.page.*;
+
+import school.redrover.page.HomePage;
+import school.redrover.page.JenkinsManagementPage;
+import school.redrover.page.RestApiPage;
+import school.redrover.page.UserStatusPage;
+
+import school.redrover.component.*;
 
 import java.util.Objects;
 
 
 public abstract class BasePage<Page> extends BaseModel {
 
+    @FindBy(className = "app-jenkins-logo")
+    private WebElement logo;
+
+    @FindBy(id = "root-action-SearchAction")
+    private WebElement searchButton;
+
     @FindBy(id = "root-action-ManageJenkinsAction")
-    private WebElement manageJenkinsButton;
+    private WebElement manageJenkinsGear;
 
     @FindBy(id = "root-action-UserAction")
     private WebElement userAccountIcon;
+
+    @FindBy(tagName = "h1")
+    private WebElement pageHeader;
 
     @FindBy(xpath = "//a[@href='api/']")
     private WebElement restApiLink;
 
     @FindBy(css = ".page-footer__links > button")
-    private WebElement jenkinsVersion;
-
-    @FindBy(css = ".jenkins-dropdown__item:last-child")
-    private WebElement signOutButton;
+    private WebElement jenkinsVersionButton;
 
 
     public BasePage(WebDriver driver) {
@@ -57,95 +65,65 @@ public abstract class BasePage<Page> extends BaseModel {
         return getPage();
     }
 
-    public WebElement getHeader() {
-        return getWait5().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.tagName("h1"))));
-    }
-
     public HomePage gotoHomePage() {
-        getWait5().until(ExpectedConditions.elementToBeClickable(By.className("app-jenkins-logo"))).click();
+        logo.click();
 
-        return new HomePage(getDriver());
+        return new HomePage(getDriver()).waitUntilPageLoad();
     }
 
-    public JenkinsManagementPage clickManageJenkinsGear() {
-        manageJenkinsButton.click();
-
-        return new JenkinsManagementPage(getDriver()).waitUntilPageLoad();
-    }
-
-    public UserStatusPage clickUserAccountViaDropDownMenu(String userName) {
-        WebElement userIcon = getWait10().until(ExpectedConditions.visibilityOfElementLocated(
-                By.id("root-action-UserAction")));
-        PageUtils.mouseEnterJS(getDriver(), userIcon);
-
-        WebElement userInDropDown = getWait10().until(ExpectedConditions.visibilityOfElementLocated(By
-                .xpath("//a[contains(@class, 'jenkins-dropdown__item') and contains(., '%s')]".formatted(userName))));
-        PageUtils.clickJS(getDriver(), userInDropDown);
-
-        return new UserStatusPage(getDriver());
+    public WebElement getLogo() {
+        return logo;
     }
 
     public SearchComponent clickSearchButton() {
-        getDriver().findElement(By.id("root-action-SearchAction")).click();
+        searchButton.click();
 
         return new SearchComponent(getDriver()).waitUntilComponentLoadJS();
     }
 
-    public LoginPage clickSignOut() {
-        Actions actions = new Actions(getDriver());
+    public JenkinsManagementPage clickManageJenkinsGear() {
+        manageJenkinsGear.click();
 
-        actions.moveToElement(userAccountIcon).perform();
-        signOutButton.click();
-
-        return new LoginPage(getDriver());
+        return new JenkinsManagementPage(getDriver()).waitUntilPageLoad();
     }
 
-    public String getJenkinsVersion() {
-        return jenkinsVersion.getText();
+    public UserStatusPage clickUserAccountIcon() {
+        userAccountIcon.click();
+
+        return new UserStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 
-    public FooterDropdownPage clickJenkinsVersion() {
-        getDriver().findElement(By.cssSelector(".page-footer__links > button")).click();
-        getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.className("jenkins-dropdown")));
+    public UserAccountIconDropdown hoverUserAccountIcon() {
+        PageUtils.mouseEnterJS(getDriver(), userAccountIcon);
 
-        return new FooterDropdownPage(getDriver());
+        return new UserAccountIconDropdown(getDriver()).waitUntilComponentLoad();
     }
 
-    public String getRestApiLinkText() {
-        WebElement footer = getDriver().findElement(By.tagName("footer"));
+    public String getCurrentUrl() {
+        return getDriver().getCurrentUrl();
+    }
 
-        return footer.findElement(By.linkText("REST API")).getText();
+    public WebElement getHeader() {
+        return pageHeader;
+    }
+
+    public WebElement getJenkinsVersionButton() {
+        return jenkinsVersionButton;
+    }
+
+    public JenkinsVersionFooterDropdown clickJenkinsVersion() {
+        jenkinsVersionButton.click();
+
+        return new JenkinsVersionFooterDropdown(getDriver()).waitUntilComponentLoad();
+    }
+
+    public WebElement getRestApiLink() {
+        return restApiLink;
     }
 
     public RestApiPage clickRestApiLink() {
         PageUtils.clickJS(getDriver(), restApiLink);
 
         return new RestApiPage(getDriver()).waitUntilPageLoadJS();
-    }
-
-    public String getCurrentUrl() {
-
-        return getDriver().getCurrentUrl();
-    }
-
-    public UserStatusPage clickUserAccountIcon() {
-        userAccountIcon.click();
-
-        return new UserStatusPage(getDriver()).waitUntilPageLoad();
-    }
-
-    public String getUserNameFromDropDownMenu() {
-        WebElement userIcon = getWait10().until(ExpectedConditions.visibilityOfElementLocated(By.id("root-action-UserAction")));
-        PageUtils.mouseEnterJS(getDriver(), userIcon);
-
-        WebElement userInDropDown = getWait10().until(ExpectedConditions.visibilityOfElementLocated(By
-                .cssSelector(".jenkins-dropdown__item:first-child")));
-
-        return PageUtils.getTextJS(getDriver(), userInDropDown);
-    }
-
-    public String getLogoText() {
-        return getWait5().until(ExpectedConditions.
-                visibilityOfElementLocated(By.className("app-jenkins-logo"))).getText();
     }
 }
