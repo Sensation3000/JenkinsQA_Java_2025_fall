@@ -32,6 +32,12 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
     @FindBy(name = "quiet_period")
     private WebElement quietPeriodInput;
 
+    @FindBy (xpath = "//label[@class='jenkins-toggle-switch__label ']")
+    private WebElement enabled;
+
+    @FindBy (xpath = "//span[@class='jenkins-toggle-switch__label__unchecked-title']")
+    private WebElement disabled;
+
     public MultiConfigurationProjectConfigurationPage(WebDriver driver) {
         super(driver);
     }
@@ -90,4 +96,14 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
 
         return this;
     }
+
+    public MultiConfigurationProjectConfigurationPage disableProject(){
+        getWait2().until(ExpectedConditions.elementToBeClickable(enabled)).click();
+        return this;
+    }
+
+    public boolean isDisabled(){
+        return getWait2().until(ExpectedConditions.elementToBeClickable(disabled)).isDisplayed();
+    }
+
 }

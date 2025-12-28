@@ -46,6 +46,12 @@ public class HomePage extends BasePage<HomePage> {
     @FindBy(xpath = "//span[text()='Configure a cloud']")
     private WebElement configureCloudLink;
 
+    @FindBy (linkText = "ProjectName")
+    private WebElement project;
+
+    @FindBy (css = "svg[title='Disabled']")
+    private WebElement iconDisabled;
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -375,5 +381,14 @@ public class HomePage extends BasePage<HomePage> {
     public String checkIconSize() {
         String result = getDriver().findElement(By.cssSelector(".jenkins-icon-size > :nth-child(1) > ol > li[tooltip]")).getAttribute("title");
         return result;
+    }
+
+    public JobPage projectName(){
+        project.click();
+        return new JobPage(getDriver());
+    }
+
+    public boolean disabledIconIsDisplayed (){
+        return iconDisabled.isDisplayed();
     }
 }
