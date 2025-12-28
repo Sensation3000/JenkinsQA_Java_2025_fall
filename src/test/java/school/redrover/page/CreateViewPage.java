@@ -53,7 +53,7 @@ public class CreateViewPage extends BasePage<CreateViewPage> {
     public HomePage clickCreateButtonForNewView() {
         getWait2().until(ExpectedConditions.elementToBeClickable(By.id("ok"))).click();
 
-        return new HomePage(getDriver());
+        return new HomePage(getDriver()).waitUntilPageLoadJS();
     }
 
     public List<String> getTypeViewList(){
@@ -67,9 +67,7 @@ public class CreateViewPage extends BasePage<CreateViewPage> {
         getWait5().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[text() = 'List View']"))).click();
 
         getWait2().until(ExpectedConditions.elementToBeClickable(By.id("ok"))).click();
-        getWait2().until(ExpectedConditions.presenceOfElementLocated(By.
-                xpath(".//div[@id='main-panel']/descendant::h1[contains(text(),'Edit View')]")));
 
-        return new EditViewPage(getDriver());
+        return new EditViewPage(getDriver()).waitUntilPageLoadJS();
     }
 }
