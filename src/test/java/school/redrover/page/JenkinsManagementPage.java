@@ -93,7 +93,7 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
 
     public SystemConfigurationPage clickSearchResult() {
         new Actions(getDriver())
-                .moveToElement(getDriver().findElement(searchResults), 0, 0)
+                .moveToElement(getWait2().until(ExpectedConditions.elementToBeClickable(searchResults)))
                 .click()
                 .perform();
 
