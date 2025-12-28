@@ -316,8 +316,6 @@ public class HomePage extends BasePage<HomePage> {
         Object[] windowHandles = getDriver().getWindowHandles().toArray();
         getDriver().switchTo().window((String) windowHandles[1]);
 
-        getWait2().until(ExpectedConditions.urlContains("architecting-for-scale"));
-
         return new ArchitectingForScalePage(getDriver()).waitUntilPageLoadJS();
     }
 

@@ -58,7 +58,7 @@ public class NewItemPage extends BasePage<NewItemPage> {
     public NewItemPage sendName(String name) {
         nameField.sendKeys(name);
 
-        return this.waitUntilPageLoadJS();
+        return this;
     }
 
     public NewItemPage clearSendName() {

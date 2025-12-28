@@ -88,7 +88,7 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
     public JenkinsManagementPage sendTitle(String settingTitle) {
         sendTitle.sendKeys(settingTitle);
 
-        return this.waitUntilPageLoadJS();
+        return this;
     }
 
     public SystemConfigurationPage clickSearchResult() {
