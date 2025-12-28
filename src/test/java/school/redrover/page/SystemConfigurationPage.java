@@ -203,7 +203,7 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
         return this;
     }
 
-    public String getHintForInvalidComputerRetentionCheckInterval() {
-       return hintForInvalidComputerRetentionCheckInterval.getText();
+    public WebElement getHintForInvalidComputerRetentionCheckIntervalElement() {
+        return hintForInvalidComputerRetentionCheckInterval;
     }
 }

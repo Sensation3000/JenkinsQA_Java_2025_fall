@@ -173,6 +173,7 @@ public class ConfigureSystemTest extends BaseTest {
         final String invalidIntervalValue = "61";
         final String expectedErrorMassage = "java.lang.IllegalArgumentException: interval must be below or equal 60s";
 
+
         String actualErrorMessage = new HomePage(getDriver())
                 .clickManageJenkinsGear()
                 .clickConfigurationSystem()
@@ -194,11 +195,11 @@ public class ConfigureSystemTest extends BaseTest {
                 .clickConfigurationSystem()
                 .setInputComputerRetentionCheckIntervalValue(incorrectInterval)
                 .clickApply()
-                .getHintForInvalidComputerRetentionCheckInterval();
+                .getHintForInvalidComputerRetentionCheckIntervalElement()
+                .getText();
 
         Assert.assertEquals(actualErrorMessage, expectedErrorMassage);
     }
-
 
     @Ignore
     @Test
