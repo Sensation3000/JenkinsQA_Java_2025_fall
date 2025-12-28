@@ -120,11 +120,6 @@ public class ConfigureSystemTest extends BaseTest {
         return data.iterator();
     }
 
-    private void moveToSystem() {
-        getDriver().findElement(By.id("root-action-ManageJenkinsAction")).click();
-        getDriver().findElement(By.xpath("//a[@href='configure']")).click();
-    }
-
     @Test
     public void testUsageVariants() {
         final List<String> expectedVariants = List.of(
@@ -140,18 +135,18 @@ public class ConfigureSystemTest extends BaseTest {
     }
 
     @Test
-    @Ignore
     public void testIntervalDefaultValue() {
         final String defaultValue = "60";
-        moveToSystem();
 
-        WebElement input = getDriver().findElement(By.name("_.computerRetentionCheckInterval"));
+        String actualIntervalValue = new HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .getInputComputerRetentionCheckIntervalValue();
 
-        Assert.assertEquals(input.getAttribute("value"), defaultValue);
+        Assert.assertEquals(actualIntervalValue, defaultValue);
     }
 
-
-    @Test
+    @Test(dependsOnMethods = "testIntervalDefaultValue")
     public void testChangeComputerRetentionCheckIntervalPositive() {
         final String testIntervalValue = "59";
 
