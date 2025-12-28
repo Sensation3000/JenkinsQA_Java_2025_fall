@@ -49,7 +49,6 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
     @FindBy(name = "Apply")
     private WebElement applyButton;
 
-//    @FindBy(xpath = "//div[contains(text(), 'should be between 1 and 60')]")
     @FindBy(xpath = "//div[text()='This value should be between 1 and 60']/..")
     private WebElement hintForInvalidComputerRetentionCheckInterval;
 
