@@ -88,6 +88,7 @@ public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<M
     }
 
     public boolean isWarningVisible() {
+        waitUntilPageLoad();
         return warning.isDisplayed();
     }
 
