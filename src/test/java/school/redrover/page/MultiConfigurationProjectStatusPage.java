@@ -36,7 +36,7 @@ public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<M
     @FindBy(css = "[href$='confirm-rename']")
     private WebElement dropdownMenuRenameLink;
 
-    @FindBy (id = "enable-project")
+    @FindBy (xpath = "//*[@id='enable-project']")
     private WebElement warning;
 
     public MultiConfigurationProjectStatusPage(WebDriver driver) {
