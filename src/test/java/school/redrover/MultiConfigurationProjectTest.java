@@ -2,6 +2,7 @@ package school.redrover;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.*;
@@ -110,19 +111,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = "testCreateProject")
-    public void testWarningWhenDisable() {
-        boolean hasWarning = new HomePage(getDriver())
-                .clickProjectName()
-                .clickConfigureInSideMenu(new MultiConfigurationProjectConfigurationPage(getDriver()))
-                .enableDisableProject()
-                .clickSubmit()
-                .isWarningVisible();
-
-        Assert.assertTrue(hasWarning, "Warning text should contain 'This project is currently disabled'");
-    }
-
-    @Test(dependsOnMethods = "testCreateProject")
-   public void testIconWhenDisable() {
+    public void testIconWhenDisable() {
         boolean disabledIconDisplayed = new HomePage(getDriver())
                 .clickProjectName()
                 .clickConfigureInSideMenu(new MultiConfigurationProjectConfigurationPage(getDriver()))
@@ -132,5 +121,14 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .isDisabledIconDisplayed();
 
         Assert.assertTrue(disabledIconDisplayed);
+    }
+
+    @Test(dependsOnMethods = {"testIconWhenDisable", "testCreateProject"})
+    public void testWarningWhenDisable() {
+        boolean hasWarning = new HomePage(getDriver())
+                .clickProjectName()
+                .isWarningVisible();
+
+        Assert.assertTrue(hasWarning, "Warning text should contain 'This project is currently disabled'");
     }
 }
