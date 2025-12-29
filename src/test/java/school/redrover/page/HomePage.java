@@ -395,5 +395,4 @@ public class HomePage extends BasePage<HomePage> {
 
         return iconDisabled.isDisplayed();
     }
-
 }
