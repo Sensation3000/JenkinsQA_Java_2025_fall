@@ -1,0 +1,64 @@
+package school.redrover.component;
+
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import school.redrover.common.PageUtils;
+import school.redrover.page.LoginPage;
+import school.redrover.page.UserStatusPage;
+
+import java.util.function.Consumer;
+
+
+public class UserAccountIconDropdown extends BaseComponent<UserAccountIconDropdown> {
+
+    @FindBy(css = ".jenkins-dropdown__item:first-child")
+    private WebElement userName;
+
+    @FindBy(xpath = "//a[contains(., 'Account')]")
+    private WebElement account;
+
+    @FindBy(css = ".jenkins-dropdown__item:last-child")
+    private WebElement signOut;
+
+
+    public UserAccountIconDropdown(WebDriver driver) {
+        super(driver);
+    }
+
+    @Override
+    public UserAccountIconDropdown getComponent() {
+        return this;
+    }
+
+    @Override
+    public UserAccountIconDropdown waitUntilComponentLoad() {
+        getWait5().until(ExpectedConditions.elementToBeClickable(account));
+
+        return this;
+    }
+
+    public UserStatusPage clickUserName() {
+        PageUtils.clickJS(getDriver(), userName);
+
+        return new UserStatusPage(getDriver()).waitUntilPageLoadJS();
+    }
+
+    public WebElement getUserName() {
+        return userName;
+    }
+
+    public UserAccountIconDropdown getUserName(Consumer<String> stringConsumer) {
+        stringConsumer.accept(getUserName().getText());
+
+        return this;
+    }
+
+    public LoginPage clickSignOut() {
+        signOut.click();
+
+        return new LoginPage(getDriver()).waitUntilPageLoadJS();
+    }
+}

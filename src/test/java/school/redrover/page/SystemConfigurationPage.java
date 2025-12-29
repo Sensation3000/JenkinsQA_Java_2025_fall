@@ -46,6 +46,12 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
     @FindBy(name = "_.quietPeriod")
     private WebElement quietPeriodInput;
 
+    @FindBy(name = "Apply")
+    private WebElement applyButton;
+
+    @FindBy(xpath = "//div[text()='This value should be between 1 and 60']/..")
+    private WebElement hintForInvalidComputerRetentionCheckInterval;
+
 
     public SystemConfigurationPage(WebDriver driver) {
         super(driver);
@@ -188,6 +194,16 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
         saveButton.click();
 
         return new ErrorPage(getDriver());
+    }
+
+    public SystemConfigurationPage clickApply() {
+        applyButton.click();
+
+        return this;
+    }
+
+    public WebElement getHintForInvalidComputerRetentionCheckIntervalElement() {
+        return hintForInvalidComputerRetentionCheckInterval;
     }
 
     public SystemConfigurationPage setDefaultInputComputerRetentionCheckInterval() {

@@ -7,8 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
-import java.util.function.Consumer;
-
 
 public class UserStatusPage extends BasePage<UserStatusPage> {
 
@@ -58,18 +56,11 @@ public class UserStatusPage extends BasePage<UserStatusPage> {
         return getDriver().findElement(By.xpath("//a[@href='/user/%s/']".formatted(userName))).getText();
     }
 
-    public UserStatusPage getUserNameFromDropDownMenu(Consumer<String> stringConsumer) {
-        stringConsumer.accept(getUserNameFromDropDownMenu());
-
-        return this;
-    }
-
     public String getAdminNameInBreadcrumbs() {
         return adminNameInBreadcrumbs.getText();
     }
 
     public String getUserID() {
-
         return userId.getText().substring(17);
     }
 

@@ -13,6 +13,7 @@ public class SignInOutTest extends BaseTest {
     public void testSignOutByClickUserMenu() {
 
         String title = new HomePage(getDriver())
+                .hoverUserAccountIcon()
                 .clickSignOut()
                 .getTitle();
 

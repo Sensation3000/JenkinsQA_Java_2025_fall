@@ -242,26 +242,6 @@ public class HomePage extends BasePage<HomePage> {
         return this;
     }
 
-    public WebElement getRestApiLink() {
-
-        return getDriver().findElement(By.xpath("//a[@href='api/']"));
-    }
-
-    public void pressTabAndEnter(WebElement element) {
-        WebElement body = getDriver().findElement(By.tagName("body"));
-
-        int max_tabs = 50;
-
-        for (int i = 0; i < max_tabs; i++) {
-            body.sendKeys(Keys.TAB);
-            WebElement activeElement = getDriver().switchTo().activeElement();
-            if (activeElement.equals(element)) {
-                activeElement.sendKeys(Keys.ENTER);
-                break;
-            }
-        }
-    }
-
     public String getProjectStatus(String projectName) {
         new Actions(getDriver())
                 .moveToElement(getDriver().findElement(By.xpath("//*[@id='job_%s']/td[1]/div".formatted(projectName))))

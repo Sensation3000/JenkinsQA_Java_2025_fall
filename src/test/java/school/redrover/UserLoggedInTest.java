@@ -14,7 +14,8 @@ public class UserLoggedInTest extends BaseTest {
     @Test
     public void testLoggedInUserNameInUserAccountBreadcrumbs() {
         String actualUserName = new HomePage(getDriver())
-                .clickUserAccountViaDropDownMenu(EXP_USER_NAME)
+                .hoverUserAccountIcon()
+                .clickUserName()
                 .getUserNameInBreadcrumbs(EXP_USER_NAME);
 
         Assert.assertTrue(actualUserName.contains(EXP_USER_NAME));
@@ -23,7 +24,8 @@ public class UserLoggedInTest extends BaseTest {
     @Test
     public void testAccessLoggedInUserAccountFromHome() {
         String actualUserName = new HomePage(getDriver())
-                .clickUserAccountViaDropDownMenu(EXP_USER_NAME)
+                .hoverUserAccountIcon()
+                .clickUserName()
                 .getUserName();
 
         Assert.assertEquals(actualUserName, EXP_USER_NAME);
@@ -46,7 +48,8 @@ public class UserLoggedInTest extends BaseTest {
     @Test
     public void testUserNameInUserStatusBreadcrumbs() {
         String actualUserName = new HomePage(getDriver())
-                .clickUserAccountViaDropDownMenu(EXP_USER_NAME)
+                .hoverUserAccountIcon()
+                .clickUserName()
                 .getUserNameInBreadcrumbs(EXP_USER_NAME);
 
         Assert.assertEquals(actualUserName, EXP_USER_NAME);
