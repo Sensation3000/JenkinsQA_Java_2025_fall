@@ -134,6 +134,11 @@ public class ConfigureSystemTest extends BaseTest {
         Assert.assertEquals(actualVariants, expectedVariants);
     }
 
+    /**
+     * Этот тест проходит только при первом запуске, в "чистом" Jenkins.
+     * Между тестами это значение не сбрасывается автоматически.
+     * Если вы пишете новый тест, который изменяет это поле - то → сделайте его зависимым от этого теста
+     */
     @Test
     public void testIntervalDefaultValue() {
         final String defaultIntervalValue = "60";
@@ -141,7 +146,6 @@ public class ConfigureSystemTest extends BaseTest {
         String actualIntervalValue = new HomePage(getDriver())
                 .clickManageJenkinsGear()
                 .clickConfigurationSystem()
-                .setDefaultInputComputerRetentionCheckInterval()
                 .getInputComputerRetentionCheckIntervalValue();
 
         Assert.assertEquals(actualIntervalValue, defaultIntervalValue);

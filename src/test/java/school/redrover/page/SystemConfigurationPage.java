@@ -205,17 +205,4 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
     public WebElement getHintForInvalidComputerRetentionCheckIntervalElement() {
         return hintForInvalidComputerRetentionCheckInterval;
     }
-
-    public SystemConfigurationPage setDefaultInputComputerRetentionCheckInterval() {
-        final String defaultIntervalValue = "60";
-
-        if (!getInputComputerRetentionCheckIntervalValue().equals(defaultIntervalValue)) {
-            setInputComputerRetentionCheckIntervalValue(defaultIntervalValue)
-                    .clickSave()
-                    .clickManageJenkinsGear()
-                    .clickConfigurationSystem();
-        }
-
-        return this;
-    }
 }
