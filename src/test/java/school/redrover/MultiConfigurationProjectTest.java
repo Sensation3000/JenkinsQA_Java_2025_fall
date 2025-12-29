@@ -6,10 +6,8 @@ import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.*;
 
-
-
 public class MultiConfigurationProjectTest extends BaseTest {
-    private static final String PROJECT_NAME = "Multiconfiguration project name";
+    private static final String PROJECT_NAME = "ProjectName";
     private static final String RENAMED_PROJECT = "Renamed multiconfiguration project";
     private static final String PROJECT_DESCRIPTION = "Project description...";
 
@@ -98,5 +96,41 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .getText();
 
         Assert.assertEquals(configPage, PROJECT_NAME);
+    }
+
+    @Test(dependsOnMethods = "testCreateProject")
+    public void testDisableProject() {
+        boolean isProjectEnabled = new HomePage(getDriver())
+                .clickProjectName()
+                .clickConfigureInSideMenu(new MultiConfigurationProjectConfigurationPage(getDriver()))
+                .enableDisableProject()
+                .isEnableDisableToggleSelected();
+
+        Assert.assertFalse(isProjectEnabled, "'Disabled' must be shown");
+    }
+
+    @Test(dependsOnMethods = "testCreateProject")
+    public void testWarningWhenDisable() {
+        boolean hasWarning = new HomePage(getDriver())
+                .clickProjectName()
+                .clickConfigureInSideMenu(new MultiConfigurationProjectConfigurationPage(getDriver()))
+                .enableDisableProject()
+                .clickSubmit()
+                .isWarningVisible();
+
+        Assert.assertTrue(hasWarning, "Warning text should contain 'This project is currently disabled'");
+    }
+
+    @Test(dependsOnMethods = "testCreateProject")
+   public void testIconWhenDisable() {
+        boolean disabledIconDisplayed = new HomePage(getDriver())
+                .clickProjectName()
+                .clickConfigureInSideMenu(new MultiConfigurationProjectConfigurationPage(getDriver()))
+                .enableDisableProject()
+                .clickSubmit()
+                .gotoHomePage()
+                .isDisabledIconDisplayed();
+
+        Assert.assertTrue(disabledIconDisplayed);
     }
 }

@@ -357,9 +357,9 @@ public class HomePage extends BasePage<HomePage> {
         return getWait5().until((ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#job_%s > td:nth-child(1)".formatted(projectName))))).isDisplayed();
     }
 
-    public JobPage clickJob(String projectName) {
+    public MultiConfigurationProjectStatusPage clickJob(String projectName) {
         getDriver().findElement(By.cssSelector("#job_%s > td:nth-child(3) > a".formatted(projectName))).click();
-        return new JobPage(getDriver());
+        return new MultiConfigurationProjectStatusPage(getDriver());
     }
 
     public String getNameColumnText() {
@@ -383,12 +383,15 @@ public class HomePage extends BasePage<HomePage> {
         return result;
     }
 
-    public JobPage projectName(){
+    public MultiConfigurationProjectStatusPage clickProjectName(){
+        waitUntilPageLoad();
         project.click();
-        return new JobPage(getDriver());
+
+        return new MultiConfigurationProjectStatusPage(getDriver());
     }
 
-    public boolean disabledIconIsDisplayed (){
+    public boolean isDisabledIconDisplayed(){
+
         return iconDisabled.isDisplayed();
     }
 }

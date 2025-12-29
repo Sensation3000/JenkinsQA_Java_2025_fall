@@ -39,8 +39,6 @@ public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<M
     @FindBy (id = "enable-project")
     private WebElement warning;
 
-
-
     public MultiConfigurationProjectStatusPage(WebDriver driver) {
         super(driver);
     }
@@ -88,8 +86,13 @@ public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<M
         return getWait10().until(ExpectedConditions.visibilityOfElementLocated(By
                 .xpath("//span[contains(text(),'Configuration')]"))).getText();
     }
-    public boolean warningIsVisible() {
+
+    public boolean isWarningVisible() {
         return warning.isDisplayed();
+    }
+
+    public String checkUrlContains(String projectName) {
+        return getDriver().findElement(By.cssSelector("#main-panel > div.jenkins-app-bar > div.jenkins-app-bar__content.jenkins-build-caption > h1")).getText();
     }
 
 }
