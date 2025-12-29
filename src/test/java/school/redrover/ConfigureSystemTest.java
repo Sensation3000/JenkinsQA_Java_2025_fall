@@ -120,11 +120,6 @@ public class ConfigureSystemTest extends BaseTest {
         return data.iterator();
     }
 
-    private void moveToSystem() {
-        getDriver().findElement(By.id("root-action-ManageJenkinsAction")).click();
-        getDriver().findElement(By.xpath("//a[@href='configure']")).click();
-    }
-
     @Test
     public void testUsageVariants() {
         final List<String> expectedVariants = List.of(
@@ -139,19 +134,24 @@ public class ConfigureSystemTest extends BaseTest {
         Assert.assertEquals(actualVariants, expectedVariants);
     }
 
+    /**
+     * Этот тест проходит только при первом запуске, в "чистом" Jenkins.
+     * Между тестами это значение не сбрасывается автоматически.
+     * Если вы пишете новый тест, который изменяет это поле - то → сделайте его зависимым от этого теста
+     */
     @Test
-    @Ignore
     public void testIntervalDefaultValue() {
-        final String defaultValue = "60";
-        moveToSystem();
+        final String defaultIntervalValue = "60";
 
-        WebElement input = getDriver().findElement(By.name("_.computerRetentionCheckInterval"));
+        String actualIntervalValue = new HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .getInputComputerRetentionCheckIntervalValue();
 
-        Assert.assertEquals(input.getAttribute("value"), defaultValue);
+        Assert.assertEquals(actualIntervalValue, defaultIntervalValue);
     }
 
-
-    @Test
+    @Test(dependsOnMethods = "testIntervalDefaultValue")
     public void testChangeComputerRetentionCheckIntervalPositive() {
         final String testIntervalValue = "59";
 
