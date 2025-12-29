@@ -136,14 +136,15 @@ public class ConfigureSystemTest extends BaseTest {
 
     @Test
     public void testIntervalDefaultValue() {
-        final String defaultValue = "60";
+        final String defaultIntervalValue = "60";
 
         String actualIntervalValue = new HomePage(getDriver())
                 .clickManageJenkinsGear()
                 .clickConfigurationSystem()
+                .setDefaultInputComputerRetentionCheckInterval()
                 .getInputComputerRetentionCheckIntervalValue();
 
-        Assert.assertEquals(actualIntervalValue, defaultValue);
+        Assert.assertEquals(actualIntervalValue, defaultIntervalValue);
     }
 
     @Test(dependsOnMethods = "testIntervalDefaultValue")

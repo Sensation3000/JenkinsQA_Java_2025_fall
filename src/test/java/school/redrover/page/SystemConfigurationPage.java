@@ -158,7 +158,6 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
 
     public String getInputComputerRetentionCheckIntervalValue() {
         return inputComputerRetentionCheckInterval.getAttribute("value");
-
     }
 
     public SystemConfigurationPage setInputComputerRetentionCheckIntervalValue(String intervalValue) {
@@ -189,5 +188,18 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
         saveButton.click();
 
         return new ErrorPage(getDriver());
+    }
+
+    public SystemConfigurationPage setDefaultInputComputerRetentionCheckInterval() {
+        final String defaultIntervalValue = "60";
+
+        if (!getInputComputerRetentionCheckIntervalValue().equals(defaultIntervalValue)) {
+            setInputComputerRetentionCheckIntervalValue(defaultIntervalValue)
+                    .clickSave()
+                    .clickManageJenkinsGear()
+                    .clickConfigurationSystem();
+        }
+
+        return this;
     }
 }
