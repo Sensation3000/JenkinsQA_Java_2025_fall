@@ -391,6 +391,7 @@ public class HomePage extends BasePage<HomePage> {
     }
 
     public boolean isDisabledIconDisplayed(){
+        waitUntilPageLoad();
 
         return iconDisabled.isDisplayed();
     }
