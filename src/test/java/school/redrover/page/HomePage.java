@@ -49,7 +49,7 @@ public class HomePage extends BasePage<HomePage> {
     @FindBy (linkText = "ProjectName")
     private WebElement project;
 
-    @FindBy (css = "svg[title='Disabled']")
+    @FindBy (css = "svg[tooltip='Disabled']")
     private WebElement iconDisabled;
 
     public HomePage(WebDriver driver) {
