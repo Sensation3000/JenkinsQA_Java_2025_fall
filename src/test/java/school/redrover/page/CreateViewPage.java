@@ -21,6 +21,8 @@ public class CreateViewPage extends BasePage<CreateViewPage> {
     @FindBy(tagName = "h1")
     private WebElement header;
 
+    @FindBy(id = "ok")
+    private WebElement okButton;
 
     public CreateViewPage(WebDriver driver) {
         super(driver);
@@ -51,9 +53,9 @@ public class CreateViewPage extends BasePage<CreateViewPage> {
     }
 
     public HomePage clickCreateButtonForNewView() {
-        getWait2().until(ExpectedConditions.elementToBeClickable(By.id("ok"))).click();
+        okButton.click();
 
-        return new HomePage(getDriver());
+        return new HomePage(getDriver()).waitUntilPageLoadJS();
     }
 
     public List<String> getTypeViewList(){
@@ -64,12 +66,10 @@ public class CreateViewPage extends BasePage<CreateViewPage> {
     }
 
     public EditViewPage selectListViewRadioAndCreate(){
-        getWait5().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[text() = 'List View']"))).click();
+        getDriver().findElement(By.xpath("//label[text() = 'List View']")).click();
 
-        getWait2().until(ExpectedConditions.elementToBeClickable(By.id("ok"))).click();
-        getWait2().until(ExpectedConditions.presenceOfElementLocated(By.
-                xpath(".//div[@id='main-panel']/descendant::h1[contains(text(),'Edit View')]")));
+        okButton.click();
 
-        return new EditViewPage(getDriver());
+        return new EditViewPage(getDriver()).waitUntilPageLoadJS();
     }
 }

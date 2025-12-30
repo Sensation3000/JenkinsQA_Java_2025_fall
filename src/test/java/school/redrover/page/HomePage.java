@@ -65,7 +65,7 @@ public class HomePage extends BasePage<HomePage> {
     public NewItemPage clickCreateJob() {
         createJobButton.click();
 
-        return new NewItemPage(getDriver()).waitUntilPageLoad();
+        return new NewItemPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public NewItemPage clickNewItemOnLeftMenu() {
@@ -98,14 +98,13 @@ public class HomePage extends BasePage<HomePage> {
     public CloudsPage clickConfigureCloud() {
         PageUtils.clickJS(getDriver(), configureCloudLink);
 
-        return new CloudsPage(getDriver()).waitUntilPageLoad();
+        return new CloudsPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public NewItemPage clickSidebarNewItem() {
         sidebarNewItem.click();
 
-        getWait2().until(ExpectedConditions.visibilityOfElementLocated(By.id("name")));
-        return new NewItemPage(getDriver());
+        return new NewItemPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public String getProjectName() {
@@ -180,7 +179,7 @@ public class HomePage extends BasePage<HomePage> {
     public CreateViewPage clickPlusToCreateView() {
         createNewItemOnPageWithJob.click();
 
-        return new CreateViewPage(getDriver()).waitUntilPageLoad();
+        return new CreateViewPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public HomePage clickViewName(String viewName) {
@@ -204,7 +203,7 @@ public class HomePage extends BasePage<HomePage> {
 
         getWait5().until(ExpectedConditions.not(ExpectedConditions.urlToBe(urlBeforeDelete)));
 
-        return new HomePage(getDriver());
+        return new HomePage(getDriver()).waitUntilPageLoadJS();
     }
 
     public int getSizeOfViewNameList() {
@@ -284,7 +283,7 @@ public class HomePage extends BasePage<HomePage> {
         getWait10().until(ExpectedConditions.elementToBeClickable(By
                 .xpath(".//a[@href='/view/%s/configure']".formatted(listViewName)))).click();
 
-        return new EditViewPage(getDriver());
+        return new EditViewPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public String getTitle() {
@@ -317,9 +316,7 @@ public class HomePage extends BasePage<HomePage> {
         Object[] windowHandles = getDriver().getWindowHandles().toArray();
         getDriver().switchTo().window((String) windowHandles[1]);
 
-        getWait2().until(ExpectedConditions.urlContains("architecting-for-scale"));
-
-        return new ArchitectingForScalePage(getDriver());
+        return new ArchitectingForScalePage(getDriver()).waitUntilPageLoadJS();
     }
 
     public boolean isBuildButtonVisible(String projectName) {

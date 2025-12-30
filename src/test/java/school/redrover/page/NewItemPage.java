@@ -58,7 +58,7 @@ public class NewItemPage extends BasePage<NewItemPage> {
     public NewItemPage sendName(String name) {
         nameField.sendKeys(name);
 
-        return this.waitUntilPageLoadJS();
+        return this;
     }
 
     public NewItemPage clearSendName() {
@@ -93,7 +93,7 @@ public class NewItemPage extends BasePage<NewItemPage> {
 
         getWait2().until(ExpectedConditions.elementToBeClickable(okButton)).click();
 
-        return new MultibranchPipelineConfigurationPage(getDriver()).waitUntilPageLoad();
+        return new MultibranchPipelineConfigurationPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public PipelineConfigurationPage selectPipelineAndSubmit() {
@@ -128,7 +128,7 @@ public class NewItemPage extends BasePage<NewItemPage> {
 
         getWait2().until(ExpectedConditions.elementToBeClickable(okButton)).click();
 
-        return new FreestyleProjectConfigurationPage(getDriver()).waitUntilPageLoad();
+        return new FreestyleProjectConfigurationPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public NewItemPage sendNameToCopyFromAndSubmit(String name) {
@@ -180,7 +180,7 @@ public class NewItemPage extends BasePage<NewItemPage> {
             default:
                 throw new IllegalArgumentException("Unknown item type: " + itemType);
         }
-        return new HomePage(getDriver());
+        return new HomePage(getDriver()).waitUntilPageLoadJS();
     }
 
     public NewItemPage selectPipeline() {

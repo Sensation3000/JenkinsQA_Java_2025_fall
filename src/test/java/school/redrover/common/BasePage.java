@@ -68,7 +68,7 @@ public abstract class BasePage<Page> extends BaseModel {
     public HomePage gotoHomePage() {
         logo.click();
 
-        return new HomePage(getDriver()).waitUntilPageLoad();
+        return new HomePage(getDriver()).waitUntilPageLoadJS();
     }
 
     public WebElement getLogo() {
@@ -84,7 +84,7 @@ public abstract class BasePage<Page> extends BaseModel {
     public JenkinsManagementPage clickManageJenkinsGear() {
         manageJenkinsGear.click();
 
-        return new JenkinsManagementPage(getDriver()).waitUntilPageLoad();
+        return new JenkinsManagementPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public UserStatusPage clickUserAccountIcon() {

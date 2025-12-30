@@ -48,8 +48,6 @@ public class MultibranchPipelineRenamingPage extends BasePage<MultibranchPipelin
         renameField.clear();
         renameField.sendKeys(jobName + Keys.ENTER);
 
-        getWait5().until(ExpectedConditions.not(ExpectedConditions.urlContains("confirm-rename")));
-
-        return new MultibranchPipelineProjectStatusPage(getDriver());
+        return new MultibranchPipelineProjectStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 }

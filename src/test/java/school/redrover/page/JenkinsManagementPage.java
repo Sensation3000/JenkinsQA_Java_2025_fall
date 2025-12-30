@@ -88,12 +88,12 @@ public class JenkinsManagementPage extends BasePage<JenkinsManagementPage> {
     public JenkinsManagementPage sendTitle(String settingTitle) {
         sendTitle.sendKeys(settingTitle);
 
-        return this.waitUntilPageLoadJS();
+        return this;
     }
 
     public SystemConfigurationPage clickSearchResult() {
         new Actions(getDriver())
-                .moveToElement(getDriver().findElement(searchResults), 0, 0)
+                .moveToElement(getWait2().until(ExpectedConditions.elementToBeClickable(searchResults)))
                 .click()
                 .perform();
 
