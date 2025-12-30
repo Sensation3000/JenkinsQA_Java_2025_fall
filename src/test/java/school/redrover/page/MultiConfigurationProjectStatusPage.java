@@ -39,6 +39,9 @@ public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<M
     @FindBy (xpath = "//*[@id='enable-project']")
     private WebElement warning;
 
+    @FindBy (css = "h1.job-index-headline.page-headline")
+    private WebElement projectName;
+
     public MultiConfigurationProjectStatusPage(WebDriver driver) {
         super(driver);
     }
@@ -92,9 +95,10 @@ public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<M
         return warning.isDisplayed();
     }
 
-    public String getProjectName(String projectName) {
+    public String getProjectName(String project) {
+        getWait10().until(ExpectedConditions.visibilityOf(projectName));
 
-        return getDriver().findElement(By.cssSelector("h1.job-index-headline.page-headline")).getText();
+        return projectName.getText();
     }
 
 }
