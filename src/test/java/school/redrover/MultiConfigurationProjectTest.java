@@ -130,4 +130,5 @@ public class MultiConfigurationProjectTest extends BaseTest {
 
         Assert.assertTrue(hasWarning, "Warning text should contain 'This project is currently disabled'");
     }
+
 }
