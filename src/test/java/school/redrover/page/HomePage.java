@@ -46,9 +46,6 @@ public class HomePage extends BasePage<HomePage> {
     @FindBy(xpath = "//span[text()='Configure a cloud']")
     private WebElement configureCloudLink;
 
-    @FindBy (linkText = "ProjectName")
-    private WebElement project;
-
     @FindBy (css = "svg[tooltip='Disabled']")
     private WebElement iconDisabled;
 
@@ -357,8 +354,10 @@ public class HomePage extends BasePage<HomePage> {
         return getWait5().until((ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#job_%s > td:nth-child(1)".formatted(projectName))))).isDisplayed();
     }
 
-    public MultiConfigurationProjectStatusPage clickJob(String projectName) {
+    public MultiConfigurationProjectStatusPage clickProject(String projectName) {
         getDriver().findElement(By.cssSelector("#job_%s > td:nth-child(3) > a".formatted(projectName))).click();
+        waitUntilPageLoadJS();
+
         return new MultiConfigurationProjectStatusPage(getDriver());
     }
 
@@ -383,15 +382,7 @@ public class HomePage extends BasePage<HomePage> {
         return result;
     }
 
-    public MultiConfigurationProjectStatusPage clickProjectName(){
-        waitUntilPageLoad();
-        project.click();
-
-        return new MultiConfigurationProjectStatusPage(getDriver());
-    }
-
     public boolean isDisabledIconDisplayed(){
-        waitUntilPageLoad();
 
         return iconDisabled.isDisplayed();
     }

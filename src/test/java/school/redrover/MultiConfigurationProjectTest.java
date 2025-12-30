@@ -2,7 +2,6 @@ package school.redrover;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.*;
@@ -102,10 +101,10 @@ public class MultiConfigurationProjectTest extends BaseTest {
     @Test(dependsOnMethods = "testCreateProject")
     public void testDisableProject() {
         boolean isProjectEnabled = new HomePage(getDriver())
-                .clickProjectName()
+                .clickProject(PROJECT_NAME)
                 .clickConfigureInSideMenu(new MultiConfigurationProjectConfigurationPage(getDriver()))
-                .enableDisableProject()
-                .isEnableDisableToggleSelected();
+                .clickProjectToggle()
+                .isProjectToggleSelected();
 
         Assert.assertFalse(isProjectEnabled, "'Disabled' must be shown");
     }
@@ -113,9 +112,9 @@ public class MultiConfigurationProjectTest extends BaseTest {
     @Test(dependsOnMethods = "testCreateProject")
     public void testIconWhenDisable() {
         boolean disabledIconDisplayed = new HomePage(getDriver())
-                .clickProjectName()
+                .clickProject(PROJECT_NAME)
                 .clickConfigureInSideMenu(new MultiConfigurationProjectConfigurationPage(getDriver()))
-                .enableDisableProject()
+                .clickProjectToggle()
                 .clickSubmit()
                 .gotoHomePage()
                 .isDisabledIconDisplayed();
@@ -126,7 +125,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
     @Test(dependsOnMethods = {"testIconWhenDisable", "testCreateProject"})
     public void testWarningWhenDisable() {
         boolean hasWarning = new HomePage(getDriver())
-                .clickProjectName()
+                .clickProject(PROJECT_NAME)
                 .isWarningVisible();
 
         Assert.assertTrue(hasWarning, "Warning text should contain 'This project is currently disabled'");

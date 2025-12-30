@@ -88,13 +88,13 @@ public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<M
     }
 
     public boolean isWarningVisible() {
-        waitUntilPageLoad();
 
         return warning.isDisplayed();
     }
 
-    public String checkUrlContains(String projectName) {
-        return getDriver().findElement(By.cssSelector("#main-panel > div.jenkins-app-bar > div.jenkins-app-bar__content.jenkins-build-caption > h1")).getText();
+    public String getProjectName(String projectName) {
+
+        return getDriver().findElement(By.cssSelector("h1.job-index-headline.page-headline")).getText();
     }
 
 }

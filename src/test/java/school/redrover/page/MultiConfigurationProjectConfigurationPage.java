@@ -33,7 +33,7 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
     private WebElement quietPeriodInput;
 
     @FindBy (css = "label[for='enable-disable-project']")
-    private WebElement enableDisableToggle;
+    private WebElement projectToggle;
 
     public MultiConfigurationProjectConfigurationPage(WebDriver driver) {
         super(driver);
@@ -94,12 +94,14 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
         return this;
     }
 
-    public MultiConfigurationProjectConfigurationPage enableDisableProject(){
-        enableDisableToggle.click();
+    public MultiConfigurationProjectConfigurationPage clickProjectToggle(){
+        projectToggle.click();
+
         return this;
     }
 
-    public boolean isEnableDisableToggleSelected(){
-        return enableDisableToggle.isSelected();
+    public boolean isProjectToggleSelected(){
+
+        return projectToggle.isSelected();
     }
 }

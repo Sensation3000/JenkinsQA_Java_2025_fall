@@ -34,14 +34,14 @@ public class NavigateToDashboardTest extends BaseTest {
     public void testVerifyNavigationBehavior() {
         List<String> createdProjects = new HomePage(getDriver()).getProjectList();
 
-        for (String checks : createdProjects) {
+        for (String project : createdProjects) {
             String check = new HomePage(getDriver())
                     .gotoHomePage()
-                    .clickJob(checks)
-                    .checkUrlContains(checks);
+                    .clickProject(project)
+                    .getProjectName(project);
             String check2 = new HomePage(getDriver()).gotoHomePage().clickNewItemOnLeftMenu().getHeader().getText();
 
-            Assert.assertEquals(check, checks);
+            Assert.assertEquals(check, project);
             Assert.assertEquals(check2, "New Item");
         }
     }
