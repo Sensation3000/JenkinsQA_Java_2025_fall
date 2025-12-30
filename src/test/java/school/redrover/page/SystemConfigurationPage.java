@@ -164,7 +164,6 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
 
     public String getInputComputerRetentionCheckIntervalValue() {
         return inputComputerRetentionCheckInterval.getAttribute("value");
-
     }
 
     public SystemConfigurationPage setInputComputerRetentionCheckIntervalValue(String intervalValue) {
