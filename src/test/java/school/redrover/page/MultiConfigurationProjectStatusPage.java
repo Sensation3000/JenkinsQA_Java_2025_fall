@@ -99,5 +99,4 @@ public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<M
 
         return projectName.getText();
     }
-
 }
