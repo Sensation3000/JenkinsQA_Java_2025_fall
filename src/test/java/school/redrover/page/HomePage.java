@@ -356,9 +356,8 @@ public class HomePage extends BasePage<HomePage> {
 
     public MultiConfigurationProjectStatusPage clickProject(String projectName) {
         getDriver().findElement(By.cssSelector("#job_%s > td:nth-child(3) > a".formatted(projectName))).click();
-        waitUntilPageLoadJS();
 
-        return new MultiConfigurationProjectStatusPage(getDriver());
+        return new MultiConfigurationProjectStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public String getNameColumnText() {
