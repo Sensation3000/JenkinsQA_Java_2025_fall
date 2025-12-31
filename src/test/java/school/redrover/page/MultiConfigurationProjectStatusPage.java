@@ -96,7 +96,6 @@ public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<M
     }
 
     public String getProjectName(String project) {
-        getWait10().until(ExpectedConditions.visibilityOf(projectName));
 
         return projectName.getText();
     }
