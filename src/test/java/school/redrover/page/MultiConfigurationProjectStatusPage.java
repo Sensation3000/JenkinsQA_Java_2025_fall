@@ -36,7 +36,11 @@ public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<M
     @FindBy(css = "[href$='confirm-rename']")
     private WebElement dropdownMenuRenameLink;
 
+    @FindBy (xpath = "//*[@id='enable-project']")
+    private WebElement warning;
 
+    @FindBy (css = "h1.job-index-headline.page-headline")
+    private WebElement projectName;
 
     public MultiConfigurationProjectStatusPage(WebDriver driver) {
         super(driver);
@@ -84,5 +88,15 @@ public class MultiConfigurationProjectStatusPage extends BaseProjectStatusPage<M
     public String getBreadcrumbItem() {
         return getWait10().until(ExpectedConditions.visibilityOfElementLocated(By
                 .xpath("//span[contains(text(),'Configuration')]"))).getText();
+    }
+
+    public boolean isWarningVisible() {
+
+        return warning.isDisplayed();
+    }
+
+    public String getProjectName(String project) {
+
+        return projectName.getText();
     }
 }

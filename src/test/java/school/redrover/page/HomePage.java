@@ -46,6 +46,9 @@ public class HomePage extends BasePage<HomePage> {
     @FindBy(xpath = "//span[text()='Configure a cloud']")
     private WebElement configureCloudLink;
 
+    @FindBy (css = "svg[tooltip='Disabled']")
+    private WebElement iconDisabled;
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -328,9 +331,10 @@ public class HomePage extends BasePage<HomePage> {
         return getWait5().until((ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#job_%s > td:nth-child(1)".formatted(projectName))))).isDisplayed();
     }
 
-    public JobPage clickJob(String projectName) {
+    public MultiConfigurationProjectStatusPage clickProject(String projectName) {
         getDriver().findElement(By.cssSelector("#job_%s > td:nth-child(3) > a".formatted(projectName))).click();
-        return new JobPage(getDriver());
+
+        return new MultiConfigurationProjectStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public String getNameColumnText() {
@@ -352,5 +356,10 @@ public class HomePage extends BasePage<HomePage> {
     public String checkIconSize() {
         String result = getDriver().findElement(By.cssSelector(".jenkins-icon-size > :nth-child(1) > ol > li[tooltip]")).getAttribute("title");
         return result;
+    }
+
+    public boolean isDisabledIconDisplayed(){
+
+        return iconDisabled.isDisplayed();
     }
 }

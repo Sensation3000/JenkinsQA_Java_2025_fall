@@ -32,6 +32,9 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
     @FindBy(name = "quiet_period")
     private WebElement quietPeriodInput;
 
+    @FindBy (css = "label[for='enable-disable-project']")
+    private WebElement projectToggle;
+
     public MultiConfigurationProjectConfigurationPage(WebDriver driver) {
         super(driver);
     }
@@ -89,5 +92,16 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
         quietPeriodInput.sendKeys(seconds);
 
         return this;
+    }
+
+    public MultiConfigurationProjectConfigurationPage clickProjectToggle(){
+        projectToggle.click();
+
+        return this;
+    }
+
+    public boolean isProjectToggleSelected(){
+
+        return projectToggle.isSelected();
     }
 }
