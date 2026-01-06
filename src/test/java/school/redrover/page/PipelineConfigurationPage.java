@@ -246,6 +246,7 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage<Pipe
     }
 
     public String getTextAreaValidationMessage() {
+        getWait5().until(ExpectedConditions.visibilityOf(textAreaValidationMessage));
         return textAreaValidationMessage.getText();
     }
 
