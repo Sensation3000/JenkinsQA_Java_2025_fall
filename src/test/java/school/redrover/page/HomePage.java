@@ -104,12 +104,6 @@ public class HomePage extends BasePage<HomePage> {
         return new CloudsPage(getDriver()).waitUntilPageLoadJS();
     }
 
-    public NewItemPage clickSidebarNewItem() {
-        sidebarNewItem.click();
-
-        return new NewItemPage(getDriver()).waitUntilPageLoadJS();
-    }
-
     public String getProjectName() {
         return getWait2().until(ExpectedConditions.presenceOfElementLocated(
                 By.cssSelector(".jenkins-table__link >span:first-child"))).getText();

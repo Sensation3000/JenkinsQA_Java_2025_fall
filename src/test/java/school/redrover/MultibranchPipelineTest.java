@@ -211,7 +211,7 @@ public class MultibranchPipelineTest extends BaseTest {
         final String expectedErrorMessage = "A name cannot end with ‘.’";
 
         String actualErrorMessage = new HomePage(getDriver())
-                .clickSidebarNewItem()
+                .clickNewItemOnLeftMenu()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .gotoHomePage()
