@@ -131,10 +131,12 @@ public class PipelineTest extends BaseTest {
 
     }
 
-    @Ignore //Test failed on CI again
-    @Test(dependsOnMethods = "testCreateNewPipeline")
+    //@Ignore //Test failed on CI again
+    @Test //(dependsOnMethods = "testCreateNewPipeline")
     public void testAddDescription() {
         final String textDescription = "@0*8nFP'cRU0k.|6Gz-wO*se h~OtJ4kz0!)cl0ZAE3vN>q";
+
+        createPipeline(PIPELINE_NAME);
 
         String descriptionText = new HomePage(getDriver())
                 .gotoHomePage()
@@ -146,8 +148,8 @@ public class PipelineTest extends BaseTest {
         Assert.assertEquals(descriptionText, textDescription);
     }
 
-    @Ignore //Test failed on CI again
-    @Test(dependsOnMethods = "testAddDescription")
+    //@Ignore //Test failed on CI again
+    @Test (dependsOnMethods = "testAddDescription")
     public void testEditDescription() {
         final String textDescription = "D0XVcGo8k(=D7myr/.YC6umm>]\"gY)?X_E|#HPku6T5im[oYHD-\\|B`";
 
