@@ -2,7 +2,6 @@ package school.redrover;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.HomePage;
@@ -131,8 +130,7 @@ public class PipelineTest extends BaseTest {
 
     }
 
-    //@Ignore //Test failed on CI again
-    @Test //(dependsOnMethods = "testCreateNewPipeline")
+    @Test
     public void testAddDescription() {
         final String textDescription = "@0*8nFP'cRU0k.|6Gz-wO*se h~OtJ4kz0!)cl0ZAE3vN>q";
 
@@ -148,7 +146,6 @@ public class PipelineTest extends BaseTest {
         Assert.assertEquals(descriptionText, textDescription);
     }
 
-    //@Ignore //Test failed on CI again
     @Test (dependsOnMethods = "testAddDescription")
     public void testEditDescription() {
         final String textDescription = "D0XVcGo8k(=D7myr/.YC6umm>]\"gY)?X_E|#HPku6T5im[oYHD-\\|B`";
@@ -210,7 +207,6 @@ public class PipelineTest extends BaseTest {
         Assert.assertEquals(actualHomePageHeading, expectedHomePageHeading);
     }
 
-    @Ignore
     @Test(dataProvider = "validAliases")
     public void testScheduleWithValidData(String validTimePeriod) {
         createPipeline(PIPELINE_NAME);
@@ -230,7 +226,6 @@ public class PipelineTest extends BaseTest {
                 "Alias " + validTimePeriod + " не прошёл валидацию");
     }
 
-    @Ignore
     @Test(dataProvider = "invalidCronSyntaxAndAliases")
     public void testScheduleWithInvalidData(String invalidTimePeriod, String expectedErrorMessage) {
         createPipeline(PIPELINE_NAME);
