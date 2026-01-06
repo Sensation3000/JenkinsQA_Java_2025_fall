@@ -2,6 +2,7 @@ package school.redrover.page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -52,6 +53,8 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
     @FindBy(xpath = "//div[text()='This value should be between 1 and 60']/..")
     private WebElement hintForInvalidComputerRetentionCheckInterval;
 
+    @FindBy(css = "div.validation-error-area--visible div.error")
+    private WebElement hintForQuietPeriod;
 
     public SystemConfigurationPage(WebDriver driver) {
         super(driver);
@@ -181,7 +184,7 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
     }
 
     public SystemConfigurationPage setQuietPeriod(String seconds) {
-        quietPeriodInput.sendKeys(seconds);
+        quietPeriodInput.sendKeys(seconds, Keys.TAB);
 
         return this;
     }
@@ -204,5 +207,9 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
 
     public WebElement getHintForInvalidComputerRetentionCheckIntervalElement() {
         return hintForInvalidComputerRetentionCheckInterval;
+    }
+
+    public WebElement getQuietPeriodHint(){
+        return getWait5().until(ExpectedConditions.visibilityOf(hintForQuietPeriod));
     }
 }

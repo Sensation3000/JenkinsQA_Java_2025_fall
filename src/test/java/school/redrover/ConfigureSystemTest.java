@@ -2,7 +2,6 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -201,22 +200,21 @@ public class ConfigureSystemTest extends BaseTest {
         Assert.assertEquals(actualErrorMessage, expectedErrorMassage);
     }
 
-    @Ignore
     @Test
-    public void testHintOfQuietPeriod() {
+    public void testQuietPeriodHint() {
 
         final String incorrectQuietPeriod = "-2";
+        final String expectedErrorMassage = "This value should be larger than 0";
 
-        getSystemConfigurePage();
+        String actualErrorMessage = new HomePage(getDriver())
+                .clickManageJenkinsGear()
+                .clickConfigurationSystem()
+                .clearQuietPeriod()
+                .setQuietPeriod(incorrectQuietPeriod)
+                .getQuietPeriodHint()
+                .getText();
 
-        WebElement intervalInput = getDriver().findElement(By.cssSelector("input[name = '_.quietPeriod']"));
-        intervalInput.clear();
-        intervalInput.sendKeys(incorrectQuietPeriod);
-        intervalInput.sendKeys(Keys.TAB);
-
-        WebElement hint = getDriver().findElement(
-                By.xpath("//div[text()='This value should be larger than 0']/.."));
-        Assert.assertTrue(hint.getAttribute("class").contains("--visible"));
+        Assert.assertEquals(actualErrorMessage, expectedErrorMassage);
     }
 
     @Test
