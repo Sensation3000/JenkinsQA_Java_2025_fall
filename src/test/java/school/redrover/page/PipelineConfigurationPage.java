@@ -56,6 +56,9 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage<Pipe
     @FindBy(xpath = "//label[contains(text(), 'Build periodically')]")
     private WebElement buildPeriodicallyLabel;
 
+    @FindBy(xpath = " //*[@id='cb9']")
+    private WebElement buildPeriodicallyCheckBox;
+
     @FindBy(xpath = "//textarea[@name = '_.spec']")
     private WebElement scheduleTextarea;
 
@@ -228,12 +231,14 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage<Pipe
     }
 
     public PipelineConfigurationPage selectBuildPeriodicallyCheckbox() {
-        buildPeriodicallyLabel.click();
-
+        if (!buildPeriodicallyCheckBox.isSelected()) {
+            buildPeriodicallyLabel.click();
+        }
         return this;
     }
 
     public PipelineConfigurationPage sendScheduleText(String validTimePeriod) {
+        scheduleTextarea.clear();
         scheduleTextarea.sendKeys(validTimePeriod);
 
         getDriver().findElement(By.tagName("body")).click();
@@ -245,13 +250,13 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage<Pipe
                 .xpath("//span[text() = 'Saved']"))).getText();
     }
 
-    public String getTextAreaValidationMessage() {
+    public WebElement getTextAreaValidationMessage() {
         getWait5().until(ExpectedConditions.visibilityOf(textAreaValidationMessage));
-        return textAreaValidationMessage.getText();
+        return textAreaValidationMessage;
     }
 
-    public String getTextErrorMessage() {
-        return textErrorMessage.getText();
+    public WebElement getErrorMessage() {
+        return textErrorMessage;
     }
 
     public String getErrorDescriptionModalWindow() {

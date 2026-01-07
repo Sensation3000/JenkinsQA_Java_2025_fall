@@ -40,14 +40,6 @@ public class PipelineTest extends BaseTest {
         };
     }
 
-    private void createPipeline(String name) {
-        new HomePage(getDriver())
-                .clickCreateJob()
-                .sendName(name)
-                .selectPipelineAndSubmit()
-                .clickSubmitButton();
-    }
-
     @Test
     public void testCreateNewPipeline() {
         createPipeline(PIPELINE_NAME);
@@ -127,14 +119,11 @@ public class PipelineTest extends BaseTest {
 
         Assert.assertTrue(consoleOutput.contains("Finished:"),
                 "Build output should contain 'Finished:'");
-
     }
 
-    @Test
+    @Test(dependsOnMethods = "testCreateNewPipeline")
     public void testAddDescription() {
         final String textDescription = "@0*8nFP'cRU0k.|6Gz-wO*se h~OtJ4kz0!)cl0ZAE3vN>q";
-
-        createPipeline(PIPELINE_NAME);
 
         String descriptionText = new HomePage(getDriver())
                 .gotoHomePage()
@@ -146,7 +135,7 @@ public class PipelineTest extends BaseTest {
         Assert.assertEquals(descriptionText, textDescription);
     }
 
-    @Test (dependsOnMethods = "testAddDescription")
+    @Test(dependsOnMethods = "testAddDescription")
     public void testEditDescription() {
         final String textDescription = "D0XVcGo8k(=D7myr/.YC6umm>]\"gY)?X_E|#HPku6T5im[oYHD-\\|B`";
 
@@ -207,17 +196,18 @@ public class PipelineTest extends BaseTest {
         Assert.assertEquals(actualHomePageHeading, expectedHomePageHeading);
     }
 
-    @Test(dataProvider = "validAliases")
+    @Test(dependsOnMethods = "testCreateNewPipeline", dataProvider = "validAliases")
     public void testScheduleWithValidData(String validTimePeriod) {
-        createPipeline(PIPELINE_NAME);
 
-        String textAreaValidationMessage = new PipelineStatusPage(getDriver())
+        String textAreaValidationMessage = new HomePage(getDriver())
+                .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickConfigureInSideMenu(new PipelineConfigurationPage(getDriver()))
                 .clickTriggersSectionButton()
                 .selectBuildPeriodicallyCheckbox()
                 .sendScheduleText(validTimePeriod)
                 .clickApplyButton()
-                .getTextAreaValidationMessage();
+                .getTextAreaValidationMessage()
+                .getText();
 
         Assert.assertEquals(new PipelineConfigurationPage(getDriver()).getNotificationSaveMessage(),
                 "Saved");
@@ -226,17 +216,18 @@ public class PipelineTest extends BaseTest {
                 "Alias " + validTimePeriod + " не прошёл валидацию");
     }
 
-    @Test(dataProvider = "invalidCronSyntaxAndAliases")
+    @Test(dependsOnMethods = "testCreateNewPipeline", dataProvider = "invalidCronSyntaxAndAliases")
     public void testScheduleWithInvalidData(String invalidTimePeriod, String expectedErrorMessage) {
-        createPipeline(PIPELINE_NAME);
 
-        String actualTextErrorMessage = new PipelineStatusPage(getDriver())
+        String actualTextErrorMessage = new HomePage(getDriver())
+                .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickConfigureInSideMenu(new PipelineConfigurationPage(getDriver()))
                 .clickTriggersSectionButton()
                 .selectBuildPeriodicallyCheckbox()
                 .sendScheduleText(invalidTimePeriod)
                 .clickApplyButton()
-                .getTextErrorMessage();
+                .getErrorMessage()
+                .getText();
 
         Assert.assertTrue(actualTextErrorMessage.contains(expectedErrorMessage),
                 String.format("Сообщение: '%s', не содержит ожидаемую ключевую информацию об ошибке: '%s'",
@@ -254,5 +245,13 @@ public class PipelineTest extends BaseTest {
                 .getSizeBuildsList();
 
         Assert.assertEquals(size, 1);
+    }
+
+    private void createPipeline(String name) {
+        new HomePage(getDriver())
+                .clickCreateJob()
+                .sendName(name)
+                .selectPipelineAndSubmit()
+                .clickSubmitButton();
     }
 }
