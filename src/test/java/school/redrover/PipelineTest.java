@@ -207,7 +207,7 @@ public class PipelineTest extends BaseTest {
                 .getTextAreaValidationMessage()
                 .getText();
 
-        Assert.assertEquals(new PipelineConfigurationPage(getDriver()).getNotificationSaveMessage(),
+        Assert.assertEquals(new PipelineConfigurationPage(getDriver()).getSavedMessage(),
                 "Saved");
         Assert.assertTrue(textAreaValidationMessage.matches(
                         "(?s)Would last have run at .*; would next run at .*"),
