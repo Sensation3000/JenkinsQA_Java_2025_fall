@@ -256,6 +256,7 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage<Pipe
     }
 
     public WebElement getErrorMessage() {
+        getWait5().until(ExpectedConditions.visibilityOf(textErrorMessage));
         return textErrorMessage;
     }
 

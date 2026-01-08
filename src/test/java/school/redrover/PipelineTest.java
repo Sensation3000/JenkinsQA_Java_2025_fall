@@ -43,8 +43,7 @@ public class PipelineTest extends BaseTest {
     @Test
     public void testCreateNewPipeline() {
         createPipeline(PIPELINE_NAME);
-        List<String> actualProjectList = new PipelineStatusPage(getDriver())
-                .gotoHomePage()
+        List<String> actualProjectList = new HomePage(getDriver())
                 .getProjectList();
 
         Assert.assertTrue(actualProjectList.contains(PIPELINE_NAME),
@@ -126,7 +125,6 @@ public class PipelineTest extends BaseTest {
         final String textDescription = "@0*8nFP'cRU0k.|6Gz-wO*se h~OtJ4kz0!)cl0ZAE3vN>q";
 
         String descriptionText = new HomePage(getDriver())
-                .gotoHomePage()
                 .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickAddDescriptionButton()
                 .addDescriptionAndSave(textDescription)
@@ -155,7 +153,6 @@ public class PipelineTest extends BaseTest {
     @Test(dependsOnMethods = "testCreateNewPipeline")
     public void testCancelDeletePipelineViaDropDownMenu() {
         List<String> actualProjectList = new HomePage(getDriver())
-                .gotoHomePage()
                 .openDropdownMenu(PIPELINE_NAME)
                 .clickDeleteItemInDropdownMenu()
                 .cancelDelete()
@@ -171,7 +168,6 @@ public class PipelineTest extends BaseTest {
         createPipeline(PIPELINE_NAME);
 
         String actualHomePageHeading = new HomePage(getDriver())
-                .gotoHomePage()
                 .openDropdownMenu(PIPELINE_NAME)
                 .clickDeleteItemInDropdownMenu()
                 .confirmDelete()
@@ -187,7 +183,8 @@ public class PipelineTest extends BaseTest {
 
         createPipeline(PIPELINE_NAME);
 
-        String actualHomePageHeading = new PipelineStatusPage(getDriver())
+        String actualHomePageHeading = new HomePage(getDriver())
+                .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickDeletePipeline()
                 .confirmDeleteAtJobPage()
                 .getHeader()
@@ -254,6 +251,6 @@ public class PipelineTest extends BaseTest {
                 .clickCreateJob()
                 .sendName(name)
                 .selectPipelineAndSubmit()
-                .clickSubmitButton();
+                .gotoHomePage();
     }
 }
