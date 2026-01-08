@@ -32,7 +32,7 @@ public class ViewSteps {
 
     @When("Go to New Item via Create a job")
     public void goToNewItemViaCreateAJob() {
-        newItemPage = new HomePage(CucumberDriver.getDriver()).clickNewItemOnLeftMenu();
+        newItemPage = new HomePage(CucumberDriver.getDriver()).clickSidebarNewItem();
     }
 
     @And("Enter Item name {string}")
@@ -58,7 +58,7 @@ public class ViewSteps {
 
     @And("Go to New Job to create another item")
     public void goToNewJobToCreateAnotherItem() {
-        newItemPage = homePage.clickNewItemOnLeftMenu();
+        newItemPage = homePage.clickSidebarNewItem();
     }
 
     @And("Set Item type as Pipeline, click Ok and go to Configure page")

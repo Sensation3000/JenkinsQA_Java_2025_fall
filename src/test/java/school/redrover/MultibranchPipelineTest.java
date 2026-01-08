@@ -29,9 +29,10 @@ public class MultibranchPipelineTest extends BaseTest {
     }
 
     @Test
+
     public void testCreateMultibranchPipeline() {
         List<String> projectList = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .clickSave(new MultibranchPipelineProjectStatusPage(getDriver()))
@@ -47,7 +48,7 @@ public class MultibranchPipelineTest extends BaseTest {
         final String expectedDescription = "AddedDescription";
 
         String actualDescription = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .sendDescription(expectedDescription)
@@ -90,7 +91,7 @@ public class MultibranchPipelineTest extends BaseTest {
         final String errorMessage = "» A job already exists with the name ‘%s’".formatted(MULTIBRANCH_PIPELINE_NAME);
 
         String duplicateProject = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .selectMultibranchPipeline()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .getErrorMessage()
@@ -104,7 +105,7 @@ public class MultibranchPipelineTest extends BaseTest {
         final String disableText = "This Multibranch Pipeline is currently disabled";
 
         String actualDisableText = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .clickToggle()
@@ -120,7 +121,7 @@ public class MultibranchPipelineTest extends BaseTest {
                 "(No new builds within this Multibranch Pipeline will be executed until it is re-enabled)";
 
         String actualTooltip = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .getToggleTooltipTextOnHover();
@@ -144,7 +145,7 @@ public class MultibranchPipelineTest extends BaseTest {
     @Test
     public void testVerifyAppearSaveMessage() {
         String actualSavedMessage = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .clickToggle()
@@ -157,7 +158,7 @@ public class MultibranchPipelineTest extends BaseTest {
     @Test(dataProvider = "providerSpecialCharacters")
     public void testCreateItemWithSpecialCharacters(String specialCharacters) {
         String actualErrorMessage = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .clearSendName()
                 .sendName("multib" + specialCharacters + "ranch")
                 .getErrorMessage()
@@ -171,7 +172,7 @@ public class MultibranchPipelineTest extends BaseTest {
     @Test
     public void testAddDescriptionLinkIsEnabled() {
       boolean isAddDescriptionLinkEnabled = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .clickSave(new MultibranchPipelineProjectStatusPage(getDriver()))
@@ -194,7 +195,7 @@ public class MultibranchPipelineTest extends BaseTest {
     @Test
     public void testRenameViaSidebar() {
         String actualRenamedMultibranchPipeline = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .clickSave(new MultibranchPipelineProjectStatusPage(getDriver()))
@@ -227,7 +228,7 @@ public class MultibranchPipelineTest extends BaseTest {
     @Test
     public void testDisplayNameIsSetOnCreation() {
         String name = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .sendDisplayName(MULTIBRANCH_PIPELINE_DISPLAY_NAME)
@@ -271,7 +272,7 @@ public class MultibranchPipelineTest extends BaseTest {
 
     private void createMultibranchPipeline() {
         new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .clickSave(new MultibranchPipelineProjectStatusPage(getDriver()))

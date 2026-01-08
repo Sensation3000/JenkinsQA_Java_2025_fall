@@ -41,19 +41,10 @@ public class PipelineTest extends BaseTest {
         };
     }
 
-    private void createPipeline(String name) {
-        new HomePage(getDriver())
-                .clickCreateJob()
-                .sendName(name)
-                .selectPipelineAndSubmit()
-                .clickSave(new PipelineStatusPage(getDriver()));
-    }
-
     @Test
     public void testCreateNewPipeline() {
         createPipeline(PIPELINE_NAME);
-        List<String> actualProjectList = new PipelineStatusPage(getDriver())
-                .gotoHomePage()
+        List<String> actualProjectList = new HomePage(getDriver())
                 .getProjectList();
 
         Assert.assertTrue(actualProjectList.contains(PIPELINE_NAME),
@@ -128,16 +119,13 @@ public class PipelineTest extends BaseTest {
 
         Assert.assertTrue(consoleOutput.contains("Finished:"),
                 "Build output should contain 'Finished:'");
-
     }
 
-    @Ignore //Test failed on CI again
     @Test(dependsOnMethods = "testCreateNewPipeline")
     public void testAddDescription() {
         final String textDescription = "@0*8nFP'cRU0k.|6Gz-wO*se h~OtJ4kz0!)cl0ZAE3vN>q";
 
         String descriptionText = new HomePage(getDriver())
-                .gotoHomePage()
                 .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickAddDescriptionButton()
                 .addDescriptionAndSave(textDescription)
@@ -146,7 +134,6 @@ public class PipelineTest extends BaseTest {
         Assert.assertEquals(descriptionText, textDescription);
     }
 
-    @Ignore //Test failed on CI again
     @Test(dependsOnMethods = "testAddDescription")
     public void testEditDescription() {
         final String textDescription = "D0XVcGo8k(=D7myr/.YC6umm>]\"gY)?X_E|#HPku6T5im[oYHD-\\|B`";
@@ -167,7 +154,6 @@ public class PipelineTest extends BaseTest {
     @Test(dependsOnMethods = "testCreateNewPipeline")
     public void testCancelDeletePipelineViaDropDownMenu() {
         List<String> actualProjectList = new HomePage(getDriver())
-                .gotoHomePage()
                 .openDropdownMenu(PIPELINE_NAME)
                 .clickDeleteItemInDropdownMenu()
                 .cancelDelete()
@@ -183,7 +169,6 @@ public class PipelineTest extends BaseTest {
         createPipeline(PIPELINE_NAME);
 
         String actualHomePageHeading = new HomePage(getDriver())
-                .gotoHomePage()
                 .openDropdownMenu(PIPELINE_NAME)
                 .clickDeleteItemInDropdownMenu()
                 .confirmDelete()
@@ -199,7 +184,8 @@ public class PipelineTest extends BaseTest {
 
         createPipeline(PIPELINE_NAME);
 
-        String actualHomePageHeading = new PipelineStatusPage(getDriver())
+        String actualHomePageHeading = new HomePage(getDriver())
+                .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickDeletePipeline()
                 .confirmDeleteAtJobPage()
                 .getHeader()
@@ -208,36 +194,40 @@ public class PipelineTest extends BaseTest {
         Assert.assertEquals(actualHomePageHeading, expectedHomePageHeading);
     }
 
-    @Test(dataProvider = "validAliases")
+    @Test(dependsOnMethods = "testCreateNewPipeline", dataProvider = "validAliases")
     public void testScheduleWithValidData(String validTimePeriod) {
-        createPipeline(PIPELINE_NAME);
 
-        String textAreaValidationMessage = new PipelineStatusPage(getDriver())
+        String textAreaValidationMessage = new HomePage(getDriver())
+                .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickConfigureInSideMenu(new PipelineConfigurationPage(getDriver()))
                 .clickTriggersSectionButton()
                 .selectBuildPeriodicallyCheckbox()
                 .sendScheduleText(validTimePeriod)
                 .clickApply()
-                .getTextAreaValidationMessage();
+                .getTextAreaValidationMessage()
+                .getText();
 
-        Assert.assertEquals(new PipelineConfigurationPage(getDriver()).getSavedMessage(),
+        Assert.assertEquals(new PipelineConfigurationPage(getDriver()).getNotificationSaveMessage(),
                 "Saved");
         Assert.assertTrue(textAreaValidationMessage.matches(
                         "(?s)Would last have run at .*; would next run at .*"),
                 "Alias " + validTimePeriod + " не прошёл валидацию");
     }
 
-    @Test(dataProvider = "invalidCronSyntaxAndAliases")
+    @Test(dependsOnMethods = "testCreateNewPipeline", dataProvider = "invalidCronSyntaxAndAliases")
     public void testScheduleWithInvalidData(String invalidTimePeriod, String expectedErrorMessage) {
-        createPipeline(PIPELINE_NAME);
 
-        String actualTextErrorMessage = new PipelineStatusPage(getDriver())
+        String actualTextErrorMessage = new HomePage(getDriver())
+                .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickConfigureInSideMenu(new PipelineConfigurationPage(getDriver()))
                 .clickTriggersSectionButton()
                 .selectBuildPeriodicallyCheckbox()
                 .sendScheduleText(invalidTimePeriod)
                 .clickApply()
-                .getTextErrorMessage();
+                .getErrorMessage()
+                .getText();
+
+        new PipelineConfigurationPage(getDriver()).closeModalWindow();
 
         Assert.assertTrue(actualTextErrorMessage.contains(expectedErrorMessage),
                 String.format("Сообщение: '%s', не содержит ожидаемую ключевую информацию об ошибке: '%s'",
@@ -255,5 +245,13 @@ public class PipelineTest extends BaseTest {
                 .getSizeBuildsList();
 
         Assert.assertEquals(size, 1);
+    }
+
+    private void createPipeline(String name) {
+        new HomePage(getDriver())
+                .clickCreateJob()
+                .sendName(name)
+                .selectPipelineAndSubmit()
+                .gotoHomePage();
     }
 }

@@ -10,19 +10,20 @@ public class ConfigureAppearanceTest extends BaseTest {
     private final String THEME = "dark";
 
    @Test
-    public void testDarkSystemThemeAndApplyButtonPopUp() {
+    public void testSystemThemeAndApplyButtonPopUp() {
         String expectedText = "Saved";
         String popUpApplyButtonText = new HomePage(getDriver())
                 .clickManageJenkinsGear()
                 .clickAppearanceLink()
-                .clickDarkSystemTheme()
+                .clickSystemTheme()
                 .clickApplyButton()
-                .getPopUpApplyButtonText();
+                .getApplyPopUp()
+                .getText();
 
         Assert.assertEquals(popUpApplyButtonText, expectedText);
     }
 
-   @Test(dependsOnMethods = "testDarkSystemThemeAndApplyButtonPopUp")
+   @Test(dependsOnMethods = "testSystemThemeAndApplyButtonPopUp")
     public void testChangeDarkThemeAndSaveButton() {
         String expectedTeg = "dark";
         String themaHtmlText = new HomePage(getDriver())
@@ -58,7 +59,8 @@ public class ConfigureAppearanceTest extends BaseTest {
                 .clickLightTheme()
                 .checkAllowTheme()
                 .clickApplyButton()
-                .getPopUpApplyButtonText();
+                .getApplyPopUp()
+                .getText();
 
         Assert.assertEquals(checkingLight, finalTheme);
     }

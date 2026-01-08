@@ -194,7 +194,7 @@ public class ConfigureSystemTest extends BaseTest {
                 .clickConfigurationSystem()
                 .setInputComputerRetentionCheckIntervalValue(incorrectInterval)
                 .clickApply()
-                .getHintForInvalidComputerRetentionCheckIntervalElement()
+                .getInvalidComputerRetentionCheckIntervalHint()
                 .getText();
 
         Assert.assertEquals(actualErrorMessage, expectedErrorMassage);

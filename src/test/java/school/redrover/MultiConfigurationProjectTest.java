@@ -28,7 +28,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
     @Test
     public void testCreateProject() {
         String actualProjectName = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
                 .clickSave(new MultiConfigurationProjectStatusPage(getDriver()))
@@ -53,7 +53,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
     @Test
     public void testRenameViaSidebar() {
         String actualProjectName = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
                 .clickSave(new MultiConfigurationProjectStatusPage(getDriver()))
@@ -69,7 +69,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
     @Test
     public void testRenameViaDashboardDropdownMenu() {
         String actualProjectName = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
                 .clickSave(new MultiConfigurationProjectStatusPage(getDriver()))
@@ -85,7 +85,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
     @Test(dataProvider = "validQuietPeriodValues")
     public void testValidQuietPeriodValues(String seconds) {
         String configPage = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
                 .clickAdvancedDropdownButton()

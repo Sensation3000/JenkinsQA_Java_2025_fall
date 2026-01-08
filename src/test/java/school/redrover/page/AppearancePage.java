@@ -12,16 +12,19 @@ import school.redrover.common.BasePage;
 public class AppearancePage extends BasePage<AppearancePage> {
 
     @FindBy(xpath = "//label[span[text() = 'Light']]")
-    private WebElement lightTheme;
+    private WebElement lightThemeRadioButton;
 
     @FindBy(xpath = "//label[span[text() = 'Dark (System)']]")
-    private WebElement darkSystemTheme;
+    private WebElement systemThemeRadioButton;
 
     @FindBy(xpath = "//label[span[text() = 'Dark']]")
-    private WebElement darkTheme;
+    private WebElement darkThemeRadioButton;
 
     @FindBy(xpath = "//label[contains(., 'Do not allow users to select a different theme')]")
-    private WebElement checkBoxAllowDifferentTheme;
+    private WebElement doNotAllowDifferentThemeCheckbox;
+
+    @FindBy(css = "input[name='_.disableUserThemes']")
+    private WebElement disableUserThemesInput;
 
     @FindBy(css = "button.jenkins-button.apply-button")
     private WebElement applyButton;
@@ -30,7 +33,10 @@ public class AppearancePage extends BasePage<AppearancePage> {
     private WebElement saveButton;
 
     @FindBy(xpath = "//a[contains(text(), 'Find plugins')]")
-    private WebElement FindPluginsButton;
+    private WebElement findPluginsButton;
+
+    @FindBy(xpath = "//*[@id='notification-bar']")
+    private WebElement applyPopUp;
 
     public AppearancePage(WebDriver driver) {
         super(driver);
@@ -43,37 +49,37 @@ public class AppearancePage extends BasePage<AppearancePage> {
 
     @Override
     public AppearancePage waitUntilPageLoad() {
-        getWait5().until(ExpectedConditions.elementToBeClickable(FindPluginsButton));
+        getWait5().until(ExpectedConditions.elementToBeClickable(findPluginsButton));
         return this;
     }
 
     public AppearancePage clickLightTheme() {
-        lightTheme.click();
+        lightThemeRadioButton.click();
 
         return this;
     }
 
-    public AppearancePage clickDarkSystemTheme() {
-        darkSystemTheme.click();
+    public AppearancePage clickSystemTheme() {
+        systemThemeRadioButton.click();
 
         return this;
     }
 
     public AppearancePage clickDarkTheme() {
-        darkTheme.click();
+        darkThemeRadioButton.click();
 
         return this;
     }
 
     public AppearancePage clickDoNotAllowDifferentTheme() {
-        checkBoxAllowDifferentTheme.click();
+        doNotAllowDifferentThemeCheckbox.click();
 
         return this;
     }
 
     public AppearancePage checkAllowTheme() {
-        if (!getDriver().findElement(By.cssSelector("input[name='_.disableUserThemes']")).isSelected()) {
-            checkBoxAllowDifferentTheme.click();
+        if (!disableUserThemesInput.isSelected()) {
+            doNotAllowDifferentThemeCheckbox.click();
         }
 
         return this;
@@ -85,9 +91,8 @@ public class AppearancePage extends BasePage<AppearancePage> {
         return this;
     }
 
-    public String getPopUpApplyButtonText() {
-        return getWait10().until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                "//*[@id='notification-bar']"))).getText();
+    public WebElement getApplyPopUp() {
+        return getWait10().until(ExpectedConditions.visibilityOf(applyPopUp));
     }
 
     public JenkinsManagementPage clickSaveButton() {
@@ -97,7 +102,7 @@ public class AppearancePage extends BasePage<AppearancePage> {
     }
 
     public AppearancePage changeTheme(String theme) {
-        getDriver().findElement(By.cssSelector("label:has(> div[data-theme='%s'])".formatted(theme))).click();
+        getDriver().findElement(By.xpath("//label[.//div[@data-theme='%s']]".formatted(theme))).click();
 
         return this;
     }
@@ -117,3 +122,4 @@ public class AppearancePage extends BasePage<AppearancePage> {
         }
     }
 }
+

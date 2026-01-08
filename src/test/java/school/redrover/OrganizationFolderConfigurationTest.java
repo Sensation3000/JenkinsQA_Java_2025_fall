@@ -18,7 +18,7 @@ public class OrganizationFolderConfigurationTest extends BaseTest {
         String expectedDescription = "New Description";
 
         OrganizationFolderStatusPage organizationFolderPage = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(FOLDER_NAME)
                 .selectOrganizationFolderAndSubmit()
                 .inputDisplayName(expectedDisplayName)

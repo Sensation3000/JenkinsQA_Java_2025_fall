@@ -51,10 +51,10 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
     private WebElement applyButton;
 
     @FindBy(xpath = "//div[text()='This value should be between 1 and 60']/..")
-    private WebElement hintForInvalidComputerRetentionCheckInterval;
+    private WebElement invalidComputerRetentionCheckIntervalHint;
 
     @FindBy(css = "div.validation-error-area--visible div.error")
-    private WebElement hintForQuietPeriod;
+    private WebElement quietPeriodHint;
 
     public SystemConfigurationPage(WebDriver driver) {
         super(driver);
@@ -205,11 +205,11 @@ public class SystemConfigurationPage extends BasePage<SystemConfigurationPage> {
         return this;
     }
 
-    public WebElement getHintForInvalidComputerRetentionCheckIntervalElement() {
-        return hintForInvalidComputerRetentionCheckInterval;
+    public WebElement getInvalidComputerRetentionCheckIntervalHint() {
+        return invalidComputerRetentionCheckIntervalHint;
     }
 
     public WebElement getQuietPeriodHint(){
-        return getWait5().until(ExpectedConditions.visibilityOf(hintForQuietPeriod));
+        return getWait5().until(ExpectedConditions.visibilityOf(quietPeriodHint));
     }
 }

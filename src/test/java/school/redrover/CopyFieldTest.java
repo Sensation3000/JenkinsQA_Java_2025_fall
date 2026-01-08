@@ -31,7 +31,7 @@ public class CopyFieldTest extends BaseTest {
     public void testLocateTextHintAndCopyFromField() {
 
         String textHintExists = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .findCopyFromField()
                 .getTextHintFromCopyField();
 

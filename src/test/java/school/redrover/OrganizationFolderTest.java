@@ -29,7 +29,7 @@ public class OrganizationFolderTest extends BaseTest {
         String expectedDescription = "New Description";
 
         OrganizationFolderStatusPage organizationFolderPage = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(FOLDER_NAME)
                 .selectOrganizationFolderAndSubmit()
                 .inputDisplayName(expectedDisplayName)
@@ -45,7 +45,7 @@ public class OrganizationFolderTest extends BaseTest {
     @Test
     public void testDeleteOrganizationFolder() {
         List<String> actualListOfItems = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(FOLDER_NAME)
                 .selectOrganizationFolderAndSubmit()
                 .clickSave(new OrganizationFolderStatusPage(getDriver()))

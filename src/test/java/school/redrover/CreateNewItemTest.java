@@ -33,7 +33,7 @@ public class CreateNewItemTest extends BaseTest {
     @Test
     public void testNewItemPageByClickingNewItemLink() {
         String result = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .getHeader()
                 .getText();
 
@@ -107,7 +107,7 @@ public class CreateNewItemTest extends BaseTest {
                 .sendName(PROJECT_NAME)
                 .selectFreestyleProjectAndSubmit()
                 .gotoHomePage()
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(PROJECT_NAME)
                 .selectFolder()
                 .getErrorMessage()
@@ -226,7 +226,7 @@ public class CreateNewItemTest extends BaseTest {
                 .setCheckBoxTriggerBuildsAndSendUrl(buildsUrl)
                 .clickSave(new FreestyleProjectStatusPage(getDriver()))
                 .gotoHomePage()
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(newName)
                 .sendNameToCopyFromAndSubmit(originalName)
                 .gotoHomePage()
@@ -239,7 +239,7 @@ public class CreateNewItemTest extends BaseTest {
     @Test
     public void testErrorDisplayedForEmptyItemName(){
         String errorMessage = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .clickOkButton()
                 .getErrorDisplayedForEmptyItemName();
 
