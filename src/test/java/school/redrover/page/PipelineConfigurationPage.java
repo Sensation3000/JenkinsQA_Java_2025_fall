@@ -266,6 +266,11 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage<Pipe
         return errorDescriptionModalWindow.getText();
     }
 
+    public void closeModalWindow() {
+
+        getWait5().until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='jenkins']/dialog[2]/button"))).click();
+    }
+
     public WebElement[] selectAllTriggers() {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
 

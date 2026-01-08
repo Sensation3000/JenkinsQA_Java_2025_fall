@@ -229,6 +229,8 @@ public class PipelineTest extends BaseTest {
                 .getErrorMessage()
                 .getText();
 
+        new PipelineConfigurationPage(getDriver()).closeModalWindow();
+
         Assert.assertTrue(actualTextErrorMessage.contains(expectedErrorMessage),
                 String.format("Сообщение: '%s', не содержит ожидаемую ключевую информацию об ошибке: '%s'",
                         actualTextErrorMessage, expectedErrorMessage));
