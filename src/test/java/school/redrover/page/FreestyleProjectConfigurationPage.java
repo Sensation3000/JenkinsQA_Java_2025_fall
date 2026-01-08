@@ -19,9 +19,6 @@ import java.util.stream.Collectors;
 
 public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationPage<FreestyleProjectConfigurationPage> {
 
-    @FindBy(name = "description")
-    private WebElement descriptionInput;
-
     @FindBy(xpath = "//label[text()='Discard old builds']")
     private WebElement oldBuildsCheck;
 
@@ -58,10 +55,6 @@ public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationP
     @FindBy(xpath = "//div[@name ='parameterDefinitions']//div[@class= 'repeated-chunk__header']")
     private List<WebElement> selectedParameterList;
 
-    @FindBy(name = "Submit")
-    private WebElement submitButton;
-
-
     public FreestyleProjectConfigurationPage(WebDriver driver) {
         super(driver);
     }
@@ -74,12 +67,6 @@ public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationP
     @Override
     public FreestyleProjectConfigurationPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.visibilityOf(oldBuildsCheck));
-
-        return this;
-    }
-
-    public FreestyleProjectConfigurationPage setDescription(String description) {
-        descriptionInput.sendKeys(description);
 
         return this;
     }
@@ -116,17 +103,6 @@ public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationP
         getDriver().findElement(By.name("authToken")).sendKeys(url);
 
         return this;
-    }
-
-    public FreestyleProjectStatusPage clickSave() {
-        submitButton.click();
-
-        getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
-        return new FreestyleProjectStatusPage(getDriver()).waitUntilPageLoadJS();
-    }
-
-    public boolean isSaveButtonDisplayed() {
-        return getWait2().until(ExpectedConditions.elementToBeClickable(By.name("Submit"))).isDisplayed();
     }
 
     public List<String> getSettingsToList() {

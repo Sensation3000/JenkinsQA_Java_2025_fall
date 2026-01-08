@@ -2,6 +2,7 @@ package school.redrover;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
 import school.redrover.page.HomePage;
@@ -202,11 +203,11 @@ public class PipelineTest extends BaseTest {
                 .clickTriggersSectionButton()
                 .selectBuildPeriodicallyCheckbox()
                 .sendScheduleText(validTimePeriod)
-                .clickApplyButton()
+                .clickApply()
                 .getTextAreaValidationMessage()
                 .getText();
 
-        Assert.assertEquals(new PipelineConfigurationPage(getDriver()).getNotificationSaveMessage(),
+        Assert.assertEquals(new PipelineConfigurationPage(getDriver()).getSavedMessage(),
                 "Saved");
         Assert.assertTrue(textAreaValidationMessage.matches(
                         "(?s)Would last have run at .*; would next run at .*"),
@@ -222,7 +223,7 @@ public class PipelineTest extends BaseTest {
                 .clickTriggersSectionButton()
                 .selectBuildPeriodicallyCheckbox()
                 .sendScheduleText(invalidTimePeriod)
-                .clickApplyButton()
+                .clickApply()
                 .getErrorMessage()
                 .getText();
 

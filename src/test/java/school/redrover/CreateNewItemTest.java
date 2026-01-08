@@ -181,7 +181,7 @@ public class CreateNewItemTest extends BaseTest {
                 .clickCreateJob()
                 .sendName(PROJECT_NAME)
                 .selectFreestyleProjectAndSubmit()
-                .clickSave()
+                .clickSave(new FreestyleProjectStatusPage(getDriver()))
                 .getHeader()
                 .getText();
 
@@ -220,11 +220,11 @@ public class CreateNewItemTest extends BaseTest {
                 .clickCreateJob()
                 .sendName(originalName)
                 .selectFreestyleProjectAndSubmit()
-                .setDescription(descriptionText)
+                .sendDescription(descriptionText)
                 .setCheckBoxDiscardAndSetDaysNum(daysToKeepText, maxOfBuildsText)
                 .setCheckBoxGitHubAndSendUrl(gitHubUrl)
                 .setCheckBoxTriggerBuildsAndSendUrl(buildsUrl)
-                .clickSave()
+                .clickSave(new FreestyleProjectStatusPage(getDriver()))
                 .gotoHomePage()
                 .clickSidebarNewItem()
                 .sendName(newName)

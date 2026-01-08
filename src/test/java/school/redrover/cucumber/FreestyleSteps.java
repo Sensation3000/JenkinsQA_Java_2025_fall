@@ -66,7 +66,7 @@ public class FreestyleSteps {
     @And("Save config and go to Freestyle job")
     public void saveConfigAndGoToFreestyleJob() {
         freestyleProjectPage = freestyleProjectConfigurationPage
-                .clickSave();
+                .clickSave(new FreestyleProjectStatusPage(CucumberDriver.getDriver()));
     }
 
     @Then("Freestyle job name is {string}")
@@ -88,7 +88,7 @@ public class FreestyleSteps {
 
     @And("Type Freestyle job description as {string}")
     public void setFreestyleJobDescription(String jobDescription) {
-        freestyleProjectConfigurationPage.setDescription(jobDescription);
+        freestyleProjectConfigurationPage.sendDescription(jobDescription);
     }
 
     @Then("Job description is {string}")

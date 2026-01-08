@@ -1,12 +1,74 @@
 package school.redrover.page;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
 
 public abstract class BaseProjectConfigurationPage<ConfigurationPage> extends BasePage<ConfigurationPage> {
 
+    @FindBy(xpath = "//button[contains(., 'General')]")
+    private WebElement generalMenuItem;
+
+    @FindBy(xpath ="//*[contains(@name,'description')]")
+    private WebElement description;
+
+    @FindBy(name = "Submit")
+    private WebElement submitButton;
+
+    @FindBy(name = "Apply")
+    private WebElement applyButton;
+
+    @FindBy(className = "textarea-show-preview")
+    private WebElement previewButton;
+
     public BaseProjectConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    public ConfigurationPage clickGeneralInSideMenu() {
+        generalMenuItem.click();
+
+        return this.waitUntilPageLoadJS();
+    }
+
+    public <ProjectStatusPage extends BaseProjectStatusPage<ProjectStatusPage>>
+    ProjectStatusPage clickSave(ProjectStatusPage projectStatusPage) {
+        submitButton.click();
+
+        return projectStatusPage.waitUntilPageLoadJS();
+    }
+
+    public String getSavedMessage() {
+        return getWait5().until(ExpectedConditions.visibilityOfElementLocated(By
+                         .xpath("//span[text() = 'Saved']"))).getText();
+    }
+
+    public ConfigurationPage clickApply() {
+        applyButton.click();
+
+        return this.waitUntilPageLoadJS();
+    }
+
+    public boolean isSaveButtonDisplayed() {
+        return getWait2().until(ExpectedConditions.elementToBeClickable(By.name("Submit"))).isDisplayed();
+    }
+
+    public ConfigurationPage sendDescription(String text) {
+        description.clear();
+        description.sendKeys(text);
+
+        return this.waitUntilPageLoadJS();
+    }
+
+    public String getJobDescriptionPreviewText() {
+        previewButton.click();
+
+        return getWait5().until(ExpectedConditions.visibilityOfElementLocated(By
+                        .className("textarea-preview")))
+                .getText();
     }
 }

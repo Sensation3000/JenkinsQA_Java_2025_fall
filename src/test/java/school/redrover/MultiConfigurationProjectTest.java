@@ -31,7 +31,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .clickSidebarNewItem()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
-                .clickSubmit()
+                .clickSave(new MultiConfigurationProjectStatusPage(getDriver()))
                 .getHeader()
                 .getText();
 
@@ -56,7 +56,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .clickSidebarNewItem()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
-                .clickSubmit()
+                .clickSave(new MultiConfigurationProjectStatusPage(getDriver()))
                 .clickRenameInSideMenu(new MultiConfigurationProjectRenamingPage(getDriver()))
                 .clearNameField()
                 .sendNewProjectName(RENAMED_PROJECT)
@@ -72,7 +72,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .clickSidebarNewItem()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
-                .clickSubmit()
+                .clickSave(new MultiConfigurationProjectStatusPage(getDriver()))
                 .clickRenameViaDashboardDropDownMenu()
                 .clearNameField()
                 .sendNewProjectName(RENAMED_PROJECT)
@@ -91,7 +91,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .clickAdvancedDropdownButton()
                 .clickQuietPeriodCheckbox()
                 .setQuietPeriodInput(seconds)
-                .clickSubmit()
+                .clickSave(new MultiConfigurationProjectStatusPage(getDriver()))
                 .getHeader()
                 .getText();
 
@@ -115,7 +115,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .clickProject(PROJECT_NAME)
                 .clickConfigureInSideMenu(new MultiConfigurationProjectConfigurationPage(getDriver()))
                 .clickProjectToggle()
-                .clickSubmit()
+                .clickSave(new MultiConfigurationProjectStatusPage(getDriver()))
                 .gotoHomePage()
                 .isDisabledIconDisplayed();
 
@@ -130,5 +130,4 @@ public class MultiConfigurationProjectTest extends BaseTest {
 
         Assert.assertTrue(hasWarning, "Warning text should contain 'This project is currently disabled'");
     }
-
 }
