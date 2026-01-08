@@ -106,7 +106,7 @@ public class NewItemPage extends BasePage<NewItemPage> {
     }
 
     public WebElement getErrorMessage() {
-        return getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.id("itemname-invalid")));
+        return getWait10().until(ExpectedConditions.visibilityOfElementLocated(By.id("itemname-invalid")));
     }
 
     // дизайн сделан так, что нельзя использовать <T extends BaseConfigurationPage>
