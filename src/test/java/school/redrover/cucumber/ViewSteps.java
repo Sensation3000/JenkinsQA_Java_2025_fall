@@ -47,7 +47,7 @@ public class ViewSteps {
 
     @And("Save configuration and go to Freestyle project page")
     public void saveConfigAndGoToFreestyleProject() {
-        freestyleProjectPage = freestyleProjectConfigurationPage.clickSave();
+        freestyleProjectPage = freestyleProjectConfigurationPage.clickSave(new FreestyleProjectStatusPage(CucumberDriver.getDriver()));
     }
 
     @And("Go to home page")
@@ -68,7 +68,7 @@ public class ViewSteps {
 
     @And("Save configuration and go to Pipeline project page")
     public void saveConfigAndGoToPipelinePage() {
-        pipelinePage = pipelineConfigurationPage.clickSubmitButton();
+        pipelinePage = pipelineConfigurationPage.clickSave(new PipelineStatusPage(CucumberDriver.getDriver()));
     }
 
     @And("Set Item type as Organization Folder, click Ok and go to Configure page")
@@ -78,7 +78,7 @@ public class ViewSteps {
 
     @And("Save configuration and go to Organization Folder page")
     public void saveConfigAndGoToOrganizationFolderPage() {
-        organizationFolderPage = organizationFolderConfigurationPage.clickSave();
+        organizationFolderPage = organizationFolderConfigurationPage.clickSave(new OrganizationFolderStatusPage(CucumberDriver.getDriver()));
     }
 
     @And("Click '+' to create New View")

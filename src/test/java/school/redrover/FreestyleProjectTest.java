@@ -66,8 +66,8 @@ public class FreestyleProjectTest extends BaseTest {
         String actualDescriptionText = new HomePage(getDriver())
                 .openProject(PROJECT_NAME, new FreestyleProjectStatusPage(getDriver()))
                 .clickConfigureInSideMenu(new FreestyleProjectConfigurationPage(getDriver()))
-                .setDescription(PROJECT_DESCRIPTION_EXPECTED)
-                .clickSave()
+                .sendDescription(PROJECT_DESCRIPTION_EXPECTED)
+                .clickSave(new FreestyleProjectStatusPage(getDriver()))
                 .getDescription();
 
         Assert.assertEquals(actualDescriptionText, PROJECT_DESCRIPTION_EXPECTED);
@@ -79,7 +79,7 @@ public class FreestyleProjectTest extends BaseTest {
                 .openDropdownMenu(PROJECT_NAME)
                 .clickConfigureInDropdownMenu()
                 .clickEnableDisableProject()
-                .clickSave()
+                .clickSave(new FreestyleProjectStatusPage(getDriver()))
                 .getDisableProjectMessage();
 
         Assert.assertEquals(disableProjectMessage, "This project is currently disabled");
@@ -91,7 +91,7 @@ public class FreestyleProjectTest extends BaseTest {
                 .openProject(PROJECT_NAME, new FreestyleProjectStatusPage(getDriver()))
                 .clickConfigureInSideMenu(new FreestyleProjectConfigurationPage(getDriver()))
                 .clickEnableDisableProject()
-                .clickSave()
+                .clickSave(new FreestyleProjectStatusPage(getDriver()))
                 .gotoHomePage()
                 .isBuildButtonVisible(PROJECT_NAME);
 

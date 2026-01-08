@@ -23,7 +23,7 @@ public class FolderSettingsTest extends BaseTest {
                 .sendName(FOLDER_NAME)
                 .selectFolderAndSubmit()
                 .setDisplayName(DISPLAY_NAME)
-                .clickSave()
+                .clickSave(new FolderStatusPage(getDriver()))
                 .gotoHomePage()
                 .getProjectList();
 
@@ -39,8 +39,8 @@ public class FolderSettingsTest extends BaseTest {
         FolderStatusPage.FolderInfo actualInfo = new HomePage(getDriver())
                 .clickFolder(DISPLAY_NAME)
                 .clickConfigureInSideMenu(new FolderConfigurationPage(getDriver()))
-                .setDescription(description)
-                .clickSave()
+                .sendDescription(description)
+                .clickSave(new FolderStatusPage(getDriver()))
                 .getInfo();
 
         Assert.assertTrue(expectedInfo.containsAll(List.of(actualInfo.getDisplayName(), actualInfo.getDescription())));

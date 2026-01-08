@@ -10,18 +10,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MultibranchPipelineConfigurationPage extends BaseProjectConfigurationPage<MultibranchPipelineConfigurationPage> {
 
-    @FindBy(name = "_.description")
-    private WebElement descriptionField;
-
-    @FindBy(name = "Submit")
-    private WebElement submitButton;
-
     @FindBy(css = "[data-title='Disabled']")
     private WebElement toggleSwitcher;
 
     @FindBy(id = "toggle-switch-enable-disable-project")
     private WebElement toggleTooltipOnHover;
-
 
     public MultibranchPipelineConfigurationPage(WebDriver driver) {
         super(driver);
@@ -45,23 +38,6 @@ public class MultibranchPipelineConfigurationPage extends BaseProjectConfigurati
         return this;
     }
 
-    public MultibranchPipelineProjectStatusPage clickSaveButton() {
-        submitButton.click();
-
-        return new MultibranchPipelineProjectStatusPage(getDriver()).waitUntilPageLoadJS();
-    }
-
-    public MultibranchPipelineConfigurationPage clickApply() {
-        getWait2().until(ExpectedConditions.visibilityOfElementLocated(By.name("Apply"))).click();
-
-        return this;
-    }
-
-    public String getSavedMessage() {
-        return getWait5().until(ExpectedConditions.
-                visibilityOfElementLocated(By.xpath("//span[text() = 'Saved']"))).getText();
-    }
-
     public MultibranchPipelineConfigurationPage clickToggle() {
         toggleSwitcher.click();
 
@@ -82,20 +58,6 @@ public class MultibranchPipelineConfigurationPage extends BaseProjectConfigurati
         new Actions(getDriver()).moveToElement(toggleTooltipOnHover).perform();
 
         return getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.className("tippy-content")))
-                .getText();
-    }
-
-    public MultibranchPipelineConfigurationPage sendDescription(String description) {
-        descriptionField.clear();
-        descriptionField.sendKeys(description);
-
-        return this;
-    }
-
-    public String getJobDescriptionPreviewText() {
-        getDriver().findElement(By.className("textarea-show-preview")).click();
-
-        return getWait5().until(ExpectedConditions.visibilityOfElementLocated(By.className("textarea-preview")))
                 .getText();
     }
 

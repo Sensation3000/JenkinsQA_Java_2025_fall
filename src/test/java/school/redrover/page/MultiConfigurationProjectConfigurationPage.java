@@ -11,9 +11,6 @@ import java.util.List;
 
 public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfigurationPage<MultiConfigurationProjectConfigurationPage> {
 
-    @FindBy(name = "Submit")
-    private WebElement submitButton;
-
     @FindBy(id = "configuration-matrix")
     private WebElement configurationMatrix;
 
@@ -51,12 +48,6 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
         return this;
     }
 
-    public MultiConfigurationProjectStatusPage clickSubmit() {
-        submitButton.click();
-
-        return new MultiConfigurationProjectStatusPage(getDriver()).waitUntilPageLoadJS();
-    }
-
     public String getConfigurationMatrixText() {
         return getWait5().until(ExpectedConditions.visibilityOf(configurationMatrix)).getText().trim();
     }
@@ -82,6 +73,7 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
     }
 
     public MultiConfigurationProjectConfigurationPage clickQuietPeriodCheckbox() {
+        PageUtils.scrollToElement(getDriver(), quietPeriodCheckbox);
         quietPeriodCheckbox.click();
 
         return this;

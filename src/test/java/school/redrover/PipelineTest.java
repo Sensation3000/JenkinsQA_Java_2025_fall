@@ -46,7 +46,7 @@ public class PipelineTest extends BaseTest {
                 .clickCreateJob()
                 .sendName(name)
                 .selectPipelineAndSubmit()
-                .clickSubmitButton();
+                .clickSave(new PipelineStatusPage(getDriver()));
     }
 
     @Test
@@ -208,7 +208,6 @@ public class PipelineTest extends BaseTest {
         Assert.assertEquals(actualHomePageHeading, expectedHomePageHeading);
     }
 
-    @Ignore
     @Test(dataProvider = "validAliases")
     public void testScheduleWithValidData(String validTimePeriod) {
         createPipeline(PIPELINE_NAME);
@@ -218,17 +217,16 @@ public class PipelineTest extends BaseTest {
                 .clickTriggersSectionButton()
                 .selectBuildPeriodicallyCheckbox()
                 .sendScheduleText(validTimePeriod)
-                .clickApplyButton()
+                .clickApply()
                 .getTextAreaValidationMessage();
 
-        Assert.assertEquals(new PipelineConfigurationPage(getDriver()).getNotificationSaveMessage(),
+        Assert.assertEquals(new PipelineConfigurationPage(getDriver()).getSavedMessage(),
                 "Saved");
         Assert.assertTrue(textAreaValidationMessage.matches(
                         "(?s)Would last have run at .*; would next run at .*"),
                 "Alias " + validTimePeriod + " не прошёл валидацию");
     }
 
-    @Ignore
     @Test(dataProvider = "invalidCronSyntaxAndAliases")
     public void testScheduleWithInvalidData(String invalidTimePeriod, String expectedErrorMessage) {
         createPipeline(PIPELINE_NAME);
@@ -238,7 +236,7 @@ public class PipelineTest extends BaseTest {
                 .clickTriggersSectionButton()
                 .selectBuildPeriodicallyCheckbox()
                 .sendScheduleText(invalidTimePeriod)
-                .clickApplyButton()
+                .clickApply()
                 .getTextErrorMessage();
 
         Assert.assertTrue(actualTextErrorMessage.contains(expectedErrorMessage),

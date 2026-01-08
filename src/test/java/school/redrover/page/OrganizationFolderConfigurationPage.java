@@ -9,21 +9,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 
 
-public class OrganizationFolderConfigurationPage extends BaseProjectConfigurationPage {
-
-    @FindBy(name = "Submit")
-    private WebElement submitButton;
+public class OrganizationFolderConfigurationPage extends BaseProjectConfigurationPage<OrganizationFolderConfigurationPage> {
 
     @FindBy(xpath = "//span[text()='Delete Organization Folder']/ancestor::a")
     private WebElement deleteMenuItem;
-
 
     public OrganizationFolderConfigurationPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public Object getPage() {
+    public OrganizationFolderConfigurationPage getPage() {
         return this;
     }
 
@@ -32,13 +28,6 @@ public class OrganizationFolderConfigurationPage extends BaseProjectConfiguratio
         getWait10().until(ExpectedConditions.elementToBeClickable(deleteMenuItem));
 
         return this;
-    }
-
-    public OrganizationFolderStatusPage clickSave() {
-        submitButton.click();
-        getWait10().until(ExpectedConditions.visibilityOf(deleteMenuItem));
-
-        return new OrganizationFolderStatusPage(getDriver());
     }
 
     public OrganizationFolderConfigurationPage inputDisplayName(String name) {

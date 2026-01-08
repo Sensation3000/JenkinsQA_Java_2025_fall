@@ -17,9 +17,6 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage<Pipe
     @FindBy(id = "advanced")
     private WebElement advancedTitle;
 
-    @FindBy(name = "Submit")
-    private WebElement submitButton;
-
     @FindBy(xpath = "//button[text() = 'Apply']")
     private WebElement applyButton;
 
@@ -65,7 +62,6 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage<Pipe
     @FindBy(xpath = "//div[contains(text(), 'Schedule')]/following-sibling::div" + "//div[@class = 'error']")
     private WebElement textErrorMessage;
 
-
     public PipelineConfigurationPage(WebDriver driver) {
         super(driver);
     }
@@ -78,19 +74,6 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage<Pipe
     @Override
     public PipelineConfigurationPage waitUntilPageLoad() {
         getWait5().until(ExpectedConditions.elementToBeClickable(buildPeriodicallyLabel));
-
-        return this;
-    }
-
-    public PipelineStatusPage clickSubmitButton() {
-        submitButton.click();
-
-        getWait5().until(ExpectedConditions.presenceOfElementLocated(By.tagName("h1")));
-        return new PipelineStatusPage(getDriver());
-    }
-
-    public PipelineConfigurationPage clickApplyButton() {
-        applyButton.click();
 
         return this;
     }
@@ -238,11 +221,6 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage<Pipe
 
         getDriver().findElement(By.tagName("body")).click();
         return this;
-    }
-
-    public String getNotificationSaveMessage() {
-        return getWait10().until(ExpectedConditions.visibilityOfElementLocated(By
-                .xpath("//span[text() = 'Saved']"))).getText();
     }
 
     public String getTextAreaValidationMessage() {

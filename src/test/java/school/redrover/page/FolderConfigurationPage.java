@@ -64,13 +64,6 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
     @FindBy(name ="_.displayNameOrNull")
     private WebElement displayName;
 
-    @FindBy(name ="_.description")
-    private WebElement description;
-
-    @FindBy(name = "Submit")
-    private WebElement submitButton;
-
-
     public FolderConfigurationPage(WebDriver driver) {
         super(driver);
     }
@@ -91,20 +84,6 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
         displayName.sendKeys(name);
 
         return this;
-    }
-
-    public FolderConfigurationPage setDescription(String text) {
-        description.sendKeys(text);
-
-        return this;
-    }
-
-    public FolderStatusPage clickSave() {
-        WebElement submitButton = getWait5().until(
-                ExpectedConditions.elementToBeClickable(By.name("Submit")));
-        submitButton.click();
-
-        return new FolderStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 
     public String getHealthMetricsSidebarLink() {

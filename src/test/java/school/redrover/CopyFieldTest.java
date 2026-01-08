@@ -3,6 +3,7 @@ package school.redrover;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.common.BaseTest;
+import school.redrover.page.FolderStatusPage;
 import school.redrover.page.HomePage;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class CopyFieldTest extends BaseTest {
                 .clickCreateJob()
                 .sendName(FOLDER_NAME)
                 .selectFolderAndSubmit()
-                .clickSave()
+                .clickSave(new FolderStatusPage(getDriver()))
                 .gotoHomePage()
                 .getProjectList();
 

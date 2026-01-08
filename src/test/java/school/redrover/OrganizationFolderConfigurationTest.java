@@ -23,7 +23,7 @@ public class OrganizationFolderConfigurationTest extends BaseTest {
                 .selectOrganizationFolderAndSubmit()
                 .inputDisplayName(expectedDisplayName)
                 .inputDescription(expectedDescription)
-                .clickSave();
+                .clickSave(new OrganizationFolderStatusPage(getDriver()));
 
         String actualDisplayName = organizationFolderPage.getDisplayNameOrganizationFolder();
         String actualDescription = organizationFolderPage.getDescriptionOrganizationFolder();

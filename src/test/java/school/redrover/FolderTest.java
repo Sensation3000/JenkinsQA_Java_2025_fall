@@ -52,7 +52,7 @@ public class FolderTest extends BaseTest {
                 .clickNewItemOnLeftMenu()
                 .sendName(FOLDER_NAME_2)
                 .selectFolderAndSubmit()
-                .clickSave()
+                .clickSave(new FolderStatusPage(getDriver()))
                 .gotoHomePage();
 
         for (Object[] item : ITEMS) {
