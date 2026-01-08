@@ -13,7 +13,7 @@ public class PipelineBuildTriggersTest extends BaseTest {
     @Test
     public void testSelectTriggers() {
         WebElement[] triggersSelected =
-                new HomePage(getDriver()).clickNewItemOnLeftMenu()
+                new HomePage(getDriver()).clickSidebarNewItem()
                 .sendName(pipelineName)
                 .selectPipelineAndSubmit()
                 .selectAllTriggers();

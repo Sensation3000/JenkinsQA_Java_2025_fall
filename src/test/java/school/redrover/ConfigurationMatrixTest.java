@@ -16,7 +16,7 @@ public class ConfigurationMatrixTest extends BaseTest {
     @Test
     public void testSectionDisplayed() {
         String configurationMatrixText = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
                 .getConfigurationMatrixText();
@@ -28,7 +28,7 @@ public class ConfigurationMatrixTest extends BaseTest {
     @Test
     public void testAddAxisMenuOnlyUserDefined() {
         List<String> configurationMatrixAddAxisList = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
                 .clickAddAxisButton()

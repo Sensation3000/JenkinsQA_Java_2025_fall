@@ -18,7 +18,7 @@ public class HeaderTest extends BaseTest {
 
         HomePage homePage = new HomePage(getDriver());
         for (String title : listOfTypes) {
-            homePage.clickNewItemOnLeftMenu()
+            homePage.clickSidebarNewItem()
                     .sendName(title)
                     .selectItemTypeAndSubmitAndGoHome(title);
         }

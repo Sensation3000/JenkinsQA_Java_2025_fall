@@ -89,7 +89,7 @@ public class FooterTest extends BaseTest {
     @Test
     public void testRestApiNewItemPage() {
         String actualHeading = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .clickRestApiLink()
                 .getHeader()
                 .getText();

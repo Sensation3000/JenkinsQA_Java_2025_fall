@@ -1,7 +1,6 @@
 package school.redrover.page;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -71,7 +70,7 @@ public class HomePage extends BasePage<HomePage> {
         return new NewItemPage(getDriver()).waitUntilPageLoadJS();
     }
 
-    public NewItemPage clickNewItemOnLeftMenu() {
+    public NewItemPage clickSidebarNewItem() {
         sidebarNewItem.click();
 
         return new NewItemPage(getDriver()).waitUntilPageLoadJS();
