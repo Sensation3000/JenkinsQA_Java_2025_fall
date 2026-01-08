@@ -15,7 +15,7 @@ public class NavigateToDashboardTest extends BaseTest {
     public void testVerifyDashboardDisplay() {
         for (int i = 1; i <= countOfItem; i++) {
             new HomePage(getDriver())
-                    .clickNewItemOnLeftMenu()
+                    .clickSidebarNewItem()
                     .sendName(freestyleName + i)
                     .selectFreestyleProjectAndSubmit()
                     .gotoHomePage();
@@ -39,7 +39,7 @@ public class NavigateToDashboardTest extends BaseTest {
                     .gotoHomePage()
                     .clickProject(project)
                     .getProjectName(project);
-            String check2 = new HomePage(getDriver()).gotoHomePage().clickNewItemOnLeftMenu().getHeader().getText();
+            String check2 = new HomePage(getDriver()).gotoHomePage().clickSidebarNewItem().getHeader().getText();
 
             Assert.assertEquals(check, project);
             Assert.assertEquals(check2, "New Item");

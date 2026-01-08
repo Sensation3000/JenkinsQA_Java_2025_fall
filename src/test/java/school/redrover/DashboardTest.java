@@ -35,7 +35,7 @@ public class DashboardTest extends BaseTest {
 
     public void createProject(String name) {
         new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(name)
                 .selectFreestyleProjectAndSubmit()
                 .gotoHomePage();
@@ -70,7 +70,7 @@ public class DashboardTest extends BaseTest {
     @Test(dataProvider = "projectsName")
     public void testCheckCreatedJobsOnDashboard(String projectName) {
         String actualJobs = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(projectName)
                 .selectFreestyleProjectAndSubmit()
                 .gotoHomePage()
@@ -98,7 +98,7 @@ public class DashboardTest extends BaseTest {
         final String viewName = "myView";
 
         int viewListSize = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(CREATED_JOBS_NAME.get(0))
                 .selectFreestyleProjectAndSubmit()
                 .gotoHomePage()
@@ -118,7 +118,7 @@ public class DashboardTest extends BaseTest {
         final String tooltipEnableText = "Not built";
 
         String actualStatusTooltip = new HomePage(getDriver())
-                .clickNewItemOnLeftMenu()
+                .clickSidebarNewItem()
                 .sendName(CREATED_JOBS_NAME.get(0))
                 .selectFreestyleProjectAndSubmit()
                 .gotoHomePage()
