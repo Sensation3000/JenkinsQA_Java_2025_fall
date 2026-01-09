@@ -19,7 +19,7 @@ public class CopyFieldTest extends BaseTest {
                 .clickCreateJob()
                 .sendName(FOLDER_NAME)
                 .selectFolderAndSubmit()
-                .clickSave(new FolderStatusPage(getDriver()))
+                .clickSave()
                 .gotoHomePage()
                 .getProjectList();
 

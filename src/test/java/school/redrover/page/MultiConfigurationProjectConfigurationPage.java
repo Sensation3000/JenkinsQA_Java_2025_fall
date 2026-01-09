@@ -9,7 +9,7 @@ import school.redrover.common.PageUtils;
 import java.util.List;
 
 
-public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfigurationPage<MultiConfigurationProjectConfigurationPage> {
+public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfigurationPage<MultiConfigurationProjectConfigurationPage, MultiConfigurationProjectStatusPage> {
 
     @FindBy(id = "configuration-matrix")
     private WebElement configurationMatrix;
@@ -34,6 +34,11 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
 
     public MultiConfigurationProjectConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    protected MultiConfigurationProjectStatusPage createProjectStatusPage() {
+        return new MultiConfigurationProjectStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 
     @Override

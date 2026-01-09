@@ -35,7 +35,7 @@ public class MultibranchPipelineTest extends BaseTest {
                 .clickSidebarNewItem()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
-                .clickSave(new MultibranchPipelineProjectStatusPage(getDriver()))
+                .clickSave()
                 .gotoHomePage()
                 .getProjectList();
 
@@ -52,7 +52,7 @@ public class MultibranchPipelineTest extends BaseTest {
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .sendDescription(expectedDescription)
-                .clickSave(new MultibranchPipelineProjectStatusPage(getDriver()))
+                .clickSave()
                 .getDescription();
 
         Assert.assertEquals(actualDescription, expectedDescription, actualDescription + " and " + expectedDescription + " don't match");
@@ -77,10 +77,10 @@ public class MultibranchPipelineTest extends BaseTest {
                 .openProject(MULTIBRANCH_PIPELINE_NAME, new MultibranchPipelineProjectStatusPage(getDriver()))
                 .clickConfigureInSideMenu(new MultibranchPipelineConfigurationPage(getDriver()))
                 .sendDescription(MULTIBRANCH_JOB_DESCRIPTION)
-                .clickSave(new MultibranchPipelineProjectStatusPage(getDriver()))
+                .clickSave()
                 .clickConfigureInSideMenu(new MultibranchPipelineConfigurationPage(getDriver()))
                 .sendDescription(updatedJobDescription)
-                .clickSave(new MultibranchPipelineProjectStatusPage(getDriver()))
+                .clickSave()
                 .getDescription();
 
         Assert.assertEquals(actualJobDescription, updatedJobDescription);
@@ -109,7 +109,7 @@ public class MultibranchPipelineTest extends BaseTest {
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .clickToggle()
-                .clickSave(new MultibranchPipelineProjectStatusPage(getDriver()))
+                .clickSave()
                 .getDisabledText();
 
         Assert.assertTrue(actualDisableText.contains(disableText));
@@ -175,7 +175,7 @@ public class MultibranchPipelineTest extends BaseTest {
                 .clickSidebarNewItem()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
-                .clickSave(new MultibranchPipelineProjectStatusPage(getDriver()))
+                .clickSave()
                 .isAddDescriptionLinkEnabled();
 
       Assert.assertTrue(isAddDescriptionLinkEnabled);
@@ -198,7 +198,7 @@ public class MultibranchPipelineTest extends BaseTest {
                 .clickSidebarNewItem()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
-                .clickSave(new MultibranchPipelineProjectStatusPage(getDriver()))
+                .clickSave()
                 .clickRenameInSideMenu(new MultibranchPipelineRenamingPage(getDriver()))
                 .renameMultibranchPipeline(RENAMED_MULTIBRANCH_PIPELINE)
                 .getHeader()
@@ -232,7 +232,7 @@ public class MultibranchPipelineTest extends BaseTest {
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
                 .sendDisplayName(MULTIBRANCH_PIPELINE_DISPLAY_NAME)
-                .clickSave(new MultibranchPipelineProjectStatusPage(getDriver()))
+                .clickSave()
                 .gotoHomePage()
                 .findItem(MULTIBRANCH_PIPELINE_NAME)
                 .getText();
@@ -275,7 +275,7 @@ public class MultibranchPipelineTest extends BaseTest {
                 .clickSidebarNewItem()
                 .sendName(MULTIBRANCH_PIPELINE_NAME)
                 .selectMultibranchPipelineAndSubmit()
-                .clickSave(new MultibranchPipelineProjectStatusPage(getDriver()))
+                .clickSave()
                 .gotoHomePage();
     }
 }

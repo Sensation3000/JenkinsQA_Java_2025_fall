@@ -25,7 +25,7 @@ public class BreadcrumbsDropDownTest extends BaseTest {
                 .clickNewItem()
                 .sendName(CHILD_FOLDER)
                 .selectFolderAndSubmit()
-                .clickSave(new FolderStatusPage(getDriver()))
+                .clickSave()
                 .getBreadcrumbTexts();
 
         Assert.assertNotEquals(breadcrumbTexts.size(), 0);

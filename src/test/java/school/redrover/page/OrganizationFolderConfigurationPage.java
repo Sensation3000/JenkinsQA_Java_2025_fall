@@ -9,13 +9,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 
 
-public class OrganizationFolderConfigurationPage extends BaseProjectConfigurationPage<OrganizationFolderConfigurationPage> {
+public class OrganizationFolderConfigurationPage extends BaseProjectConfigurationPage<OrganizationFolderConfigurationPage, OrganizationFolderStatusPage> {
 
     @FindBy(xpath = "//span[text()='Delete Organization Folder']/ancestor::a")
     private WebElement deleteMenuItem;
 
     public OrganizationFolderConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    protected OrganizationFolderStatusPage createProjectStatusPage() {
+        return new OrganizationFolderStatusPage(getDriver()).waitUntilPageLoadJS();
     }
 
     @Override

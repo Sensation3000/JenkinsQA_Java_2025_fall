@@ -8,7 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import school.redrover.common.BasePage;
 
 
-public abstract class BaseProjectConfigurationPage<ConfigurationPage> extends BasePage<ConfigurationPage> {
+public abstract class BaseProjectConfigurationPage<ConfigurationPage extends BaseProjectConfigurationPage<?,?>,
+        ProjectStatusPage extends BaseProjectStatusPage<ProjectStatusPage>> extends BasePage<ConfigurationPage> {
 
     @FindBy(xpath = "//button[contains(., 'General')]")
     private WebElement generalMenuItem;
@@ -35,11 +36,12 @@ public abstract class BaseProjectConfigurationPage<ConfigurationPage> extends Ba
         return this.waitUntilPageLoadJS();
     }
 
-    public <ProjectStatusPage extends BaseProjectStatusPage<ProjectStatusPage>>
-    ProjectStatusPage clickSave(ProjectStatusPage projectStatusPage) {
+    protected abstract ProjectStatusPage createProjectStatusPage();
+
+    public ProjectStatusPage clickSave(){
         submitButton.click();
 
-        return projectStatusPage.waitUntilPageLoadJS();
+        return createProjectStatusPage();
     }
 
     public String getSavedMessage() {
