@@ -22,7 +22,7 @@ public class MultibranchPipelineConfigurationPage extends BaseProjectConfigurati
 
     @Override
     protected MultibranchPipelineProjectStatusPage createProjectStatusPage() {
-        return new MultibranchPipelineProjectStatusPage(getDriver()).waitUntilPageLoadJS();
+        return new MultibranchPipelineProjectStatusPage(getDriver());
     }
 
     @Override

@@ -41,7 +41,7 @@ public abstract class BaseProjectConfigurationPage<ConfigurationPage extends Bas
     public ProjectStatusPage clickSave(){
         submitButton.click();
 
-        return createProjectStatusPage();
+        return createProjectStatusPage().waitUntilPageLoadJS();
     }
 
     public String getSavedMessage() {

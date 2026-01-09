@@ -38,7 +38,7 @@ public class MultiConfigurationProjectConfigurationPage extends BaseProjectConfi
 
     @Override
     protected MultiConfigurationProjectStatusPage createProjectStatusPage() {
-        return new MultiConfigurationProjectStatusPage(getDriver()).waitUntilPageLoadJS();
+        return new MultiConfigurationProjectStatusPage(getDriver());
     }
 
     @Override

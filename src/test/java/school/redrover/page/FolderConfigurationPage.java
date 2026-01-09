@@ -70,7 +70,7 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
 
     @Override
     protected FolderStatusPage createProjectStatusPage() {
-        return new FolderStatusPage(getDriver()).waitUntilPageLoadJS();
+        return new FolderStatusPage(getDriver());
     }
 
     @Override

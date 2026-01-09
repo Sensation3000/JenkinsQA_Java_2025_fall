@@ -61,7 +61,7 @@ public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationP
 
     @Override
     protected FreestyleProjectStatusPage createProjectStatusPage() {
-        return new FreestyleProjectStatusPage(getDriver()).waitUntilPageLoadJS();
+        return new FreestyleProjectStatusPage(getDriver());
     }
 
     @Override

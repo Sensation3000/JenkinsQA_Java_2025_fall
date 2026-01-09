@@ -72,7 +72,7 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage<Pipe
 
     @Override
     protected PipelineStatusPage createProjectStatusPage() {
-        return new PipelineStatusPage(getDriver()).waitUntilPageLoadJS();
+        return new PipelineStatusPage(getDriver());
     }
 
     @Override

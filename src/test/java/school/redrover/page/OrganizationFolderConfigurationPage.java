@@ -20,7 +20,7 @@ public class OrganizationFolderConfigurationPage extends BaseProjectConfiguratio
 
     @Override
     protected OrganizationFolderStatusPage createProjectStatusPage() {
-        return new OrganizationFolderStatusPage(getDriver()).waitUntilPageLoadJS();
+        return new OrganizationFolderStatusPage(getDriver());
     }
 
     @Override
