@@ -31,7 +31,7 @@ public abstract class BaseProjectStatusPage<ProjectStatusPage> extends BasePage<
         return this.waitUntilPageLoad();
     }
 
-    public <ConfigurationPage extends BaseProjectConfigurationPage<ConfigurationPage>>
+    public <ConfigurationPage extends BaseProjectConfigurationPage<ConfigurationPage, ?>>
         ConfigurationPage clickConfigureInSideMenu(ConfigurationPage configurationPage) {
 
         configureMenuItem.click();

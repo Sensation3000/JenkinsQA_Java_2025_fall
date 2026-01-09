@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
-public class MultibranchPipelineConfigurationPage extends BaseProjectConfigurationPage<MultibranchPipelineConfigurationPage> {
+public class MultibranchPipelineConfigurationPage extends BaseProjectConfigurationPage<MultibranchPipelineConfigurationPage, MultibranchPipelineProjectStatusPage> {
 
     @FindBy(css = "[data-title='Disabled']")
     private WebElement toggleSwitcher;
@@ -18,6 +18,11 @@ public class MultibranchPipelineConfigurationPage extends BaseProjectConfigurati
 
     public MultibranchPipelineConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    protected MultibranchPipelineProjectStatusPage createProjectStatusPage() {
+        return new MultibranchPipelineProjectStatusPage(getDriver());
     }
 
     @Override

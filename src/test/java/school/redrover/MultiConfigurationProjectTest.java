@@ -31,7 +31,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .clickSidebarNewItem()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
-                .clickSave(new MultiConfigurationProjectStatusPage(getDriver()))
+                .clickSave()
                 .getHeader()
                 .getText();
 
@@ -56,7 +56,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .clickSidebarNewItem()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
-                .clickSave(new MultiConfigurationProjectStatusPage(getDriver()))
+                .clickSave()
                 .clickRenameInSideMenu(new MultiConfigurationProjectRenamingPage(getDriver()))
                 .clearNameField()
                 .sendNewProjectName(RENAMED_PROJECT)
@@ -72,7 +72,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .clickSidebarNewItem()
                 .sendName(PROJECT_NAME)
                 .selectMultiConfigurationProjectAndSubmit()
-                .clickSave(new MultiConfigurationProjectStatusPage(getDriver()))
+                .clickSave()
                 .clickRenameViaDashboardDropDownMenu()
                 .clearNameField()
                 .sendNewProjectName(RENAMED_PROJECT)
@@ -91,7 +91,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .clickAdvancedDropdownButton()
                 .clickQuietPeriodCheckbox()
                 .setQuietPeriodInput(seconds)
-                .clickSave(new MultiConfigurationProjectStatusPage(getDriver()))
+                .clickSave()
                 .getHeader()
                 .getText();
 
@@ -115,7 +115,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
                 .clickProject(PROJECT_NAME)
                 .clickConfigureInSideMenu(new MultiConfigurationProjectConfigurationPage(getDriver()))
                 .clickProjectToggle()
-                .clickSave(new MultiConfigurationProjectStatusPage(getDriver()))
+                .clickSave()
                 .gotoHomePage()
                 .isDisabledIconDisplayed();
 

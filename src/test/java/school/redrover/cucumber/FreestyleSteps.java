@@ -66,7 +66,7 @@ public class FreestyleSteps {
     @And("Save config and go to Freestyle job")
     public void saveConfigAndGoToFreestyleJob() {
         freestyleProjectPage = freestyleProjectConfigurationPage
-                .clickSave(new FreestyleProjectStatusPage(CucumberDriver.getDriver()));
+                .clickSave();
     }
 
     @Then("Freestyle job name is {string}")

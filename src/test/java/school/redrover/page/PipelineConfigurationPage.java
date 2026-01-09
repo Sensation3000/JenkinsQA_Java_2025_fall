@@ -12,7 +12,7 @@ import org.testng.Assert;
 import java.util.List;
 
 
-public class PipelineConfigurationPage extends BaseProjectConfigurationPage<PipelineConfigurationPage> {
+public class PipelineConfigurationPage extends BaseProjectConfigurationPage<PipelineConfigurationPage, PipelineStatusPage> {
 
     @FindBy(id = "advanced")
     private WebElement advancedTitle;
@@ -68,6 +68,11 @@ public class PipelineConfigurationPage extends BaseProjectConfigurationPage<Pipe
 
     public PipelineConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    protected PipelineStatusPage createProjectStatusPage() {
+        return new PipelineStatusPage(getDriver());
     }
 
     @Override

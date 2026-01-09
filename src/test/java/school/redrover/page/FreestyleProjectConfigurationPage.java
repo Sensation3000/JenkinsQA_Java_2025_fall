@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 
-public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationPage<FreestyleProjectConfigurationPage> {
+public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationPage<FreestyleProjectConfigurationPage, FreestyleProjectStatusPage> {
 
     @FindBy(xpath = "//label[text()='Discard old builds']")
     private WebElement oldBuildsCheck;
@@ -57,6 +57,11 @@ public class FreestyleProjectConfigurationPage extends BaseProjectConfigurationP
 
     public FreestyleProjectConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    protected FreestyleProjectStatusPage createProjectStatusPage() {
+        return new FreestyleProjectStatusPage(getDriver());
     }
 
     @Override

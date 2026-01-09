@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 
 
-public class FolderConfigurationPage extends BaseProjectConfigurationPage<FolderConfigurationPage> {
+public class FolderConfigurationPage extends BaseProjectConfigurationPage<FolderConfigurationPage, FolderStatusPage> {
 
     @FindBy(css = "button[data-section-id='health-metrics']")
     private WebElement healthMetricSidebarLink;
@@ -66,6 +66,11 @@ public class FolderConfigurationPage extends BaseProjectConfigurationPage<Folder
 
     public FolderConfigurationPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    protected FolderStatusPage createProjectStatusPage() {
+        return new FolderStatusPage(getDriver());
     }
 
     @Override

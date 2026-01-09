@@ -17,7 +17,7 @@ public class OrganizationFolderTest extends BaseTest {
                 .clickCreateJob()
                 .sendName(FOLDER_NAME)
                 .selectOrganizationFolderAndSubmit()
-                .clickSave(new OrganizationFolderStatusPage(getDriver()))
+                .clickSave()
                 .getDisplayNameOrganizationFolder();
 
         Assert.assertEquals(OrganizationFolderName, FOLDER_NAME);
@@ -34,7 +34,7 @@ public class OrganizationFolderTest extends BaseTest {
                 .selectOrganizationFolderAndSubmit()
                 .inputDisplayName(expectedDisplayName)
                 .inputDescription(expectedDescription)
-                .clickSave(new OrganizationFolderStatusPage(getDriver()));
+                .clickSave();
 
         String actualDisplayName = organizationFolderPage.getDisplayNameOrganizationFolder();
         String actualDescription = organizationFolderPage.getDescriptionOrganizationFolder();
@@ -48,7 +48,7 @@ public class OrganizationFolderTest extends BaseTest {
                 .clickSidebarNewItem()
                 .sendName(FOLDER_NAME)
                 .selectOrganizationFolderAndSubmit()
-                .clickSave(new OrganizationFolderStatusPage(getDriver()))
+                .clickSave()
                 .clickDelete()
                 .clickYesConfirmationDelete()
                 .getProjectList();

@@ -45,7 +45,7 @@ public class PipelineConfigurationTest extends BaseTest {
                 .openProject(PIPELINE_NAME, new PipelineStatusPage(getDriver()))
                 .clickConfigureInSideMenu(new PipelineConfigurationPage(getDriver()))
                 .clickToggle()
-                .clickSave(new PipelineStatusPage(getDriver()))
+                .clickSave()
                 .gotoHomePage()
                 .getProjectStatus(PIPELINE_NAME);
 
@@ -60,7 +60,7 @@ public class PipelineConfigurationTest extends BaseTest {
                 .sendName(PIPELINE_NAME)
                 .selectPipelineAndSubmit()
                 .clickToggle()
-                .clickSave(new PipelineStatusPage(getDriver()))
+                .clickSave()
                 .getWarningMessage();
 
         Assert.assertEquals(warningMessage, "This project is currently disabled\n" +
@@ -143,7 +143,7 @@ public class PipelineConfigurationTest extends BaseTest {
                 .selectPipelineAndSubmit()
                 .clickAdvancedButton()
                 .sendDisplayName(displayName)
-                .clickSave(new PipelineStatusPage(getDriver()))
+                .clickSave()
                 .getDisplayNameInStatus();
 
         Assert.assertEquals(actualDisplayNameInStatus, displayName);
