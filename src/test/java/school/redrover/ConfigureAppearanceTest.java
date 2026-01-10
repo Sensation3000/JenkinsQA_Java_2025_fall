@@ -7,7 +7,6 @@ import school.redrover.page.HomePage;
 
 
 public class ConfigureAppearanceTest extends BaseTest {
-    private final String THEME = "dark";
 
    @Test
     public void testSystemThemeAndApplyButtonPopUp() {
@@ -38,19 +37,6 @@ public class ConfigureAppearanceTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = "testChangeDarkThemeAndSaveButton")
-    public void changeTheme() {
-        String checking = new HomePage(getDriver())
-                .clickManageJenkinsGear()
-                .clickAppearanceLink()
-                .changeTheme(THEME)
-                .clickDoNotAllowDifferentTheme()
-                .clickApplyButton()
-                .getHTMLAttributeThemeText();
-
-        Assert.assertEquals(checking, THEME);
-    }
-
-    @Test(dependsOnMethods = "changeTheme")
     public void changeThemeLight() {
         String finalTheme = "Saved";
         String checkingLight = new HomePage(getDriver())

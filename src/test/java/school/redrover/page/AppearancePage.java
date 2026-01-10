@@ -1,7 +1,5 @@
 package school.redrover.page;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -71,12 +69,6 @@ public class AppearancePage extends BasePage<AppearancePage> {
         return this;
     }
 
-    public AppearancePage clickDoNotAllowDifferentTheme() {
-        doNotAllowDifferentThemeCheckbox.click();
-
-        return this;
-    }
-
     public AppearancePage checkAllowTheme() {
         if (!disableUserThemesInput.isSelected()) {
             doNotAllowDifferentThemeCheckbox.click();
@@ -99,27 +91,6 @@ public class AppearancePage extends BasePage<AppearancePage> {
         saveButton.click();
 
         return new JenkinsManagementPage(getDriver()).waitUntilPageLoad();
-    }
-
-    public AppearancePage changeTheme(String theme) {
-        getDriver().findElement(By.xpath("//label[.//div[@data-theme='%s']]".formatted(theme))).click();
-
-        return this;
-    }
-
-    public String getHTMLAttributeThemeText() {
-        try {
-            getWait10().until(driver -> {
-                Object value = ((JavascriptExecutor) driver)
-                        .executeScript("return document.documentElement.getAttribute('data-theme');");
-                return value != null && !value.toString().isBlank();
-            });
-            Object result = ((JavascriptExecutor) getDriver())
-                    .executeScript("return document.documentElement.getAttribute('data-theme');");
-            return (result != null && !result.toString().isBlank()) ? result.toString() : "unknown";
-        } catch (Exception e) {
-            return "unknown";
-        }
     }
 }
 
